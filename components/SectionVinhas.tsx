@@ -65,7 +65,7 @@ export default function SectionVinhas() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Text block */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center pr-8 lg:pr-16">
             <h2
               className="reveal-vinhas font-display text-cn-text uppercase mb-8"
               style={{
@@ -78,7 +78,7 @@ export default function SectionVinhas() {
             </h2>
             <p
               className="reveal-vinhas font-body text-cn-text-muted mb-10"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.85 }}
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}
             >
               As vinhas da Casa de Nabais, situadas no Vale do Lima, são vinhas próprias, onde a uva é vindimada à mão e levada até à adega em poucos minutos, preservando a sua frescura e a sua origem. Aqui, a casta Loureiro encontra solo, tempo e rigor para se revelar com autenticidade.
             </p>
