@@ -65,7 +65,7 @@ export default function SectionVinhas() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Text block */}
-          <div className="flex flex-col justify-center pr-16 lg:pr-28">
+          <div className="flex flex-col justify-center pr-20 lg:pr-36">
             <h2
               className="reveal-vinhas font-display text-cn-text uppercase mb-8"
               style={{
