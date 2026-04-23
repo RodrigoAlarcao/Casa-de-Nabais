@@ -36,7 +36,7 @@ export default function Hero() {
       })
 
       gsap.to(imgWrapRef.current, {
-        yPercent: 12,
+        yPercent: 30,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
