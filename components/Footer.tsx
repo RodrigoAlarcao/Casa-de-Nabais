@@ -132,6 +132,7 @@ export default function Footer() {
             color: 'transparent',
             lineHeight: 0.85,
             marginTop: '0.5rem',
+            paddingBottom: '3rem',
             whiteSpace: 'nowrap',
           }}
         >
