@@ -50,7 +50,8 @@ export default function SectionVinhos() {
           <h2
             className="reveal-vinhos font-display uppercase text-cn-text mb-6"
             style={{
-              fontSize: 'clamp(2.25rem, 5vw, 4.25rem)',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+            whiteSpace: 'nowrap',
               lineHeight: 1.0,
               letterSpacing: '0.04em',
             }}
@@ -59,7 +60,7 @@ export default function SectionVinhos() {
           </h2>
           <p
             className="reveal-vinhos font-body text-cn-text-muted"
-            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.8 }}
+            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}
           >
             Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
           </p>

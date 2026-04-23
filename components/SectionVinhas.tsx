@@ -19,16 +19,15 @@ const carouselImages = [
   { src: '/images/homepage/vinhas/carousel-06.jpg', alt: 'Adega da Casa de Nabais' },
 ]
 
-// Image dimensions — same ratio on both main image and carousel
 const IMG_RATIO = '4/5'
-// Carousel slide width matches portrait image max-width exactly
-const SLIDE_W = 'clamp(240px, 36vw, 380px)'
 const SLIDE_GAP = 12 // px
 
 export default function SectionVinhas() {
   const sectionRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef = useRef<HTMLDivElement>(null)
   const [carouselLeft, setCarouselLeft] = useState('40px')
+  const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
 
   const maxIndex = carouselImages.length - 1
@@ -40,8 +39,9 @@ export default function SectionVinhas() {
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
-      if (portraitRef.current) {
-        setCarouselLeft(`${portraitRef.current.getBoundingClientRect().left}px`)
+      if (containerRef.current && portraitRef.current) {
+        setCarouselLeft(`${containerRef.current.getBoundingClientRect().left}px`)
+        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
       }
     }
     measure()
@@ -61,11 +61,11 @@ export default function SectionVinhas() {
     <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
       {/* Main content grid */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
+      <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Text block */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center px-10 lg:px-[4.5rem]">
             <h2
               className="reveal-vinhas font-display text-cn-text uppercase mb-8"
               style={{
@@ -78,7 +78,7 @@ export default function SectionVinhas() {
             </h2>
             <p
               className="reveal-vinhas font-body text-cn-text-muted mb-10"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.85 }}
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}
             >
               As vinhas da Casa de Nabais, situadas no Vale do Lima, são vinhas próprias, onde a uva é vindimada à mão e levada até à adega em poucos minutos, preservando a sua frescura e a sua origem. Aqui, a casta Loureiro encontra solo, tempo e rigor para se revelar com autenticidade.
             </p>
@@ -91,13 +91,12 @@ export default function SectionVinhas() {
             </Link>
           </div>
 
-          {/* Portrait image — constrained to avoid dominating the layout */}
-          <div className="reveal-vinhas flex justify-center lg:justify-end">
+          {/* Portrait image — fills the full right column (50% of the grid) */}
+          <div className="reveal-vinhas">
             <div
               ref={portraitRef}
               className="relative overflow-hidden w-full"
               style={{
-                maxWidth: 'clamp(240px, 36vw, 380px)',
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
               }}
@@ -107,7 +106,7 @@ export default function SectionVinhas() {
                 alt="Vinhas da Casa de Nabais"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 80vw, 38vw"
+                sizes="(max-width: 1024px) 90vw, 50vw"
               />
             </div>
           </div>
@@ -121,7 +120,7 @@ export default function SectionVinhas() {
           style={{
             gap: `${SLIDE_GAP}px`,
             paddingLeft: carouselLeft,
-            transform: `translateX(calc(-${index} * (${SLIDE_W} + ${SLIDE_GAP}px)))`,
+            transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
           }}
         >
           {carouselImages.map((img, i) => (
@@ -129,7 +128,7 @@ export default function SectionVinhas() {
               key={i}
               className="relative flex-shrink-0 overflow-hidden"
               style={{
-                width: SLIDE_W,
+                width: `${slideWidth}px`,
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
               }}
@@ -139,7 +138,7 @@ export default function SectionVinhas() {
                 alt={img.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 60vw, 28vw"
+                sizes="(max-width: 768px) 90vw, 50vw"
               />
             </div>
           ))}

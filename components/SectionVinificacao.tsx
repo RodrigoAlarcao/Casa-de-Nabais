@@ -48,7 +48,7 @@ export default function SectionVinificacao() {
   }, [])
 
   return (
-    <section ref={sectionRef} style={{ backgroundColor: '#031D1D' }}>
+    <section ref={sectionRef} style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 57%, #031D1D 100%)' }}>
       {/* Text block — two columns */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-20 md:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-20 items-center">
@@ -72,7 +72,7 @@ export default function SectionVinificacao() {
               className="reveal-above font-body mb-10"
               style={{
                 fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                lineHeight: 1.85,
+                lineHeight: 1.4,
                 color: 'rgba(255,249,237,0.72)',
               }}
             >

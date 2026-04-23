@@ -21,13 +21,15 @@ const carouselImages = [
   { src: '/images/homepage/casa/carousel-08.jpg', alt: 'Vista da varanda' },
 ]
 
-const SLIDE_W = 'clamp(240px, 36vw, 380px)'
+const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
 
 export default function SectionCasa() {
   const sectionRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef = useRef<HTMLDivElement>(null)
   const [carouselLeft, setCarouselLeft] = useState('40px')
+  const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
 
   const canPrev = index > 0
@@ -38,8 +40,9 @@ export default function SectionCasa() {
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
-      if (portraitRef.current) {
-        setCarouselLeft(`${portraitRef.current.getBoundingClientRect().left}px`)
+      if (containerRef.current && portraitRef.current) {
+        setCarouselLeft(`${containerRef.current.getBoundingClientRect().left}px`)
+        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
       }
     }
     measure()
@@ -58,11 +61,11 @@ export default function SectionCasa() {
   return (
     <section ref={sectionRef} className="pt-20 md:pt-28 pb-0">
       {/* Main grid */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Text — left */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center px-10 lg:px-[4.5rem]">
             <h2
               className="reveal-casa font-display uppercase mb-8"
               style={{
@@ -78,7 +81,7 @@ export default function SectionCasa() {
               className="reveal-casa font-body mb-10"
               style={{
                 fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                lineHeight: 1.85,
+                lineHeight: 1.4,
                 color: 'rgba(255,249,237,0.72)',
               }}
             >
@@ -106,18 +109,18 @@ export default function SectionCasa() {
             </div>
           </div>
 
-          {/* Portrait image — right */}
-          <div className="reveal-casa flex justify-center lg:justify-end">
+          {/* Portrait image — fills the full right column (50% of the grid) */}
+          <div className="reveal-casa">
             <div
               ref={portraitRef}
               className="relative overflow-hidden w-full"
-              style={{ maxWidth: 'clamp(240px, 36vw, 380px)', aspectRatio: '4/5', backgroundColor: '#0A3A39' }}
+              style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}
             >
               <Image
                 src="/images/homepage/casa/section-01.jpg"
                 alt="Fachada da Casa de Nabais"
                 fill className="object-cover"
-                sizes="(max-width: 1024px) 80vw, 38vw"
+                sizes="(max-width: 1024px) 90vw, 50vw"
               />
             </div>
           </div>
@@ -131,14 +134,14 @@ export default function SectionCasa() {
           style={{
             gap: `${SLIDE_GAP}px`,
             paddingLeft: carouselLeft,
-            transform: `translateX(calc(-${index} * (${SLIDE_W} + ${SLIDE_GAP}px)))`,
+            transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
           }}
         >
           {carouselImages.map((img, i) => (
             <div key={i} className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: SLIDE_W, aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
               <Image src={img.src} alt={img.alt} fill className="object-cover"
-                sizes="(max-width: 768px) 60vw, 28vw" />
+                sizes="(max-width: 768px) 90vw, 50vw" />
             </div>
           ))}
         </div>
@@ -161,7 +164,7 @@ export default function SectionCasa() {
       </div>
 
       {/* Centered quote */}
-      <div className="max-w-[900px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
+      <div className="max-w-[1050px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
           className="reveal-casa font-display"
           style={{
