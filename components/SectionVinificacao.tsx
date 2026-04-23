@@ -117,7 +117,7 @@ export default function SectionVinificacao() {
       </div>
 
       {/* Destaque */}
-      <div ref={destaqueRef} className="max-w-[720px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
+      <div ref={destaqueRef} className="max-w-[900px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
           className="font-display"
           style={{

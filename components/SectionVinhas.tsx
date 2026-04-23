@@ -21,12 +21,14 @@ const carouselImages = [
 
 // Image dimensions — same ratio on both main image and carousel
 const IMG_RATIO = '4/5'
-// Each carousel slide width (matches ~3 visible before bleeding off)
-const SLIDE_W = 'clamp(200px, 26vw, 340px)'
+// Carousel slide width matches portrait image max-width exactly
+const SLIDE_W = 'clamp(240px, 36vw, 380px)'
 const SLIDE_GAP = 12 // px
 
 export default function SectionVinhas() {
   const sectionRef = useRef<HTMLElement>(null)
+  const portraitRef = useRef<HTMLDivElement>(null)
+  const [carouselLeft, setCarouselLeft] = useState('40px')
   const [index, setIndex] = useState(0)
 
   const maxIndex = carouselImages.length - 1
@@ -37,6 +39,14 @@ export default function SectionVinhas() {
   function next() { if (canNext) setIndex((i) => i + 1) }
 
   useIsomorphicLayoutEffect(() => {
+    function measure() {
+      if (portraitRef.current) {
+        setCarouselLeft(`${portraitRef.current.getBoundingClientRect().left}px`)
+      }
+    }
+    measure()
+    window.addEventListener('resize', measure)
+
     const ctx = gsap.context(() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
       gsap.from('.reveal-vinhas', {
@@ -44,11 +54,8 @@ export default function SectionVinhas() {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
     }, sectionRef)
-    return () => ctx.revert()
+    return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
-
-  // Left padding that aligns with max-w-[1200px] mx-auto px-6 md:px-10 container
-  const leftPad = 'max(24px, calc((100vw - 1200px) / 2 + 40px))'
 
   return (
     <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
@@ -87,6 +94,7 @@ export default function SectionVinhas() {
           {/* Portrait image — constrained to avoid dominating the layout */}
           <div className="reveal-vinhas flex justify-center lg:justify-end">
             <div
+              ref={portraitRef}
               className="relative overflow-hidden w-full"
               style={{
                 maxWidth: 'clamp(240px, 36vw, 380px)',
@@ -112,7 +120,7 @@ export default function SectionVinhas() {
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
             gap: `${SLIDE_GAP}px`,
-            paddingLeft: leftPad,
+            paddingLeft: carouselLeft,
             transform: `translateX(calc(-${index} * (${SLIDE_W} + ${SLIDE_GAP}px)))`,
           }}
         >
@@ -141,7 +149,7 @@ export default function SectionVinhas() {
       {/* Navigation */}
       <div
         className="mt-5 flex items-center gap-5"
-        style={{ paddingLeft: leftPad }}
+        style={{ paddingLeft: carouselLeft }}
       >
         <button
           onClick={prev}

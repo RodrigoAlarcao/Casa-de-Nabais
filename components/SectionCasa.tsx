@@ -21,11 +21,13 @@ const carouselImages = [
   { src: '/images/homepage/casa/carousel-08.jpg', alt: 'Vista da varanda' },
 ]
 
-const SLIDE_W = 'clamp(200px, 26vw, 340px)'
+const SLIDE_W = 'clamp(240px, 36vw, 380px)'
 const SLIDE_GAP = 12
 
 export default function SectionCasa() {
   const sectionRef = useRef<HTMLElement>(null)
+  const portraitRef = useRef<HTMLDivElement>(null)
+  const [carouselLeft, setCarouselLeft] = useState('40px')
   const [index, setIndex] = useState(0)
 
   const canPrev = index > 0
@@ -35,6 +37,14 @@ export default function SectionCasa() {
   function next() { if (canNext) setIndex((i) => i + 1) }
 
   useIsomorphicLayoutEffect(() => {
+    function measure() {
+      if (portraitRef.current) {
+        setCarouselLeft(`${portraitRef.current.getBoundingClientRect().left}px`)
+      }
+    }
+    measure()
+    window.addEventListener('resize', measure)
+
     const ctx = gsap.context(() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
       gsap.from('.reveal-casa', {
@@ -42,10 +52,8 @@ export default function SectionCasa() {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
     }, sectionRef)
-    return () => ctx.revert()
+    return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
-
-  const leftPad = 'max(24px, calc((100vw - 1200px) / 2 + 40px))'
 
   return (
     <section ref={sectionRef} className="pt-20 md:pt-28 pb-0">
@@ -101,6 +109,7 @@ export default function SectionCasa() {
           {/* Portrait image — right */}
           <div className="reveal-casa flex justify-center lg:justify-end">
             <div
+              ref={portraitRef}
               className="relative overflow-hidden w-full"
               style={{ maxWidth: 'clamp(240px, 36vw, 380px)', aspectRatio: '4/5', backgroundColor: '#0A3A39' }}
             >
@@ -121,7 +130,7 @@ export default function SectionCasa() {
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
             gap: `${SLIDE_GAP}px`,
-            paddingLeft: leftPad,
+            paddingLeft: carouselLeft,
             transform: `translateX(calc(-${index} * (${SLIDE_W} + ${SLIDE_GAP}px)))`,
           }}
         >
@@ -136,7 +145,7 @@ export default function SectionCasa() {
       </div>
 
       {/* Navigation */}
-      <div className="mt-5 flex items-center gap-5" style={{ paddingLeft: leftPad }}>
+      <div className="mt-5 flex items-center gap-5" style={{ paddingLeft: carouselLeft }}>
         <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
           className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
           <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -152,7 +161,7 @@ export default function SectionCasa() {
       </div>
 
       {/* Centered quote */}
-      <div className="max-w-[720px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
+      <div className="max-w-[900px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
           className="reveal-casa font-display"
           style={{

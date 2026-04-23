@@ -29,7 +29,7 @@ export default function HomepageIntro() {
 
   return (
     <section ref={sectionRef} className="py-28 md:py-40">
-      <div className="max-w-[720px] mx-auto px-6 md:px-10 text-center">
+      <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
         <p
           className="reveal font-display text-cn-text-muted"
           style={{
