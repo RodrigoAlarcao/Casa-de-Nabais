@@ -120,25 +120,25 @@ export default function Footer() {
           2024 Casa de Nabais – Todos os direitos reservados
         </p>
 
-      </div>
+        <p
+          className="font-display uppercase text-center w-full select-none"
+          aria-hidden="true"
+          style={{
+            fontSize: 'min(10.3vw, 124px)',
+            letterSpacing: '0.04em',
+            backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            lineHeight: 0.85,
+            marginTop: '0.5rem',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Casa de Nabais
+        </p>
 
-      <p
-        className="font-display uppercase w-full select-none px-6 md:px-10"
-        aria-hidden="true"
-        style={{
-          fontSize: '13vw',
-          letterSpacing: '0.05em',
-          backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
-          color: 'transparent',
-          lineHeight: 0.85,
-          marginTop: '0.5rem',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        Casa de Nabais
-      </p>
+      </div>
     </footer>
   )
 }
