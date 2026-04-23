@@ -11,8 +11,10 @@ export default function Home() {
   return (
     <main style={{ backgroundColor: 'var(--color-bg)' }}>
       <Hero />
-      <HomepageIntro />
-      <SectionVinhas />
+      <div style={{ background: 'linear-gradient(180deg, #FFF3DE 6%, #FFF9ED 100%)' }}>
+        <HomepageIntro />
+        <SectionVinhas />
+      </div>
       <SectionVinificacao />
       <SectionVinhos />
       <SectionCasa />

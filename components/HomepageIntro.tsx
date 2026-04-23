@@ -28,7 +28,7 @@ export default function HomepageIntro() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-cn-bg">
+    <section ref={sectionRef} className="py-24 md:py-32">
       <div className="max-w-[720px] mx-auto px-6 md:px-10 text-center">
         <p
           className="reveal font-body text-cn-text-muted"
