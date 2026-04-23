@@ -13,17 +13,17 @@ gsap.registerPlugin(ScrollTrigger)
 const wines = [
   {
     slug: 'vinha-do-pomar',
+    brand: 'Casa de Nabais',
     name: 'Vinha do Pomar',
-    type: 'Loureiro · Vinho Verde',
-    description: 'Proveniente da vinha com mais história da quinta, revela aromas florais complexos e uma acidez viva que convida à mesa.',
-    image: '/images/homepage/vinhos/vinha-do-pomar-bottle.png',
+    image: '/images/homepage/vinhos/vinha-do-pomar-context.jpg',
+    buyUrl: null,
   },
   {
     slug: 'loureiro',
-    name: 'Casa de Nabais',
-    type: 'Loureiro · Vinho Verde',
-    description: 'O vinho de entrada da casa. Fresco, gastronómico, expressivo — pensado para beber jovem com o melhor da cozinha minhota.',
-    image: '/images/homepage/vinhos/loureiro-bottle.png',
+    brand: 'Casa de Nabais',
+    name: 'Loureiro',
+    image: '/images/homepage/vinhos/loureiro-context.jpg',
+    buyUrl: null,
   },
 ]
 
@@ -33,8 +33,8 @@ export default function SectionVinhos() {
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-      gsap.from('.reveal', {
-        y: 30, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power2.out',
+      gsap.from('.reveal-vinhos', {
+        y: 30, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
     }, sectionRef)
@@ -43,87 +43,107 @@ export default function SectionVinhos() {
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 bg-cn-bg">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-        <div className="max-w-[600px] mb-14 md:mb-16">
-          <p className="reveal font-display uppercase tracking-[0.18em] text-[11px] text-cn-text-muted mb-6">
-            Os Vinhos
-          </p>
+      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+
+        {/* Header — centered */}
+        <div className="text-center mb-14 md:mb-16 max-w-[640px] mx-auto">
           <h2
-            className="reveal font-display text-cn-text mb-5"
-            style={{ fontSize: 'clamp(1.875rem, 3.5vw, 3rem)', lineHeight: 1.15, letterSpacing: '0.02em' }}
+            className="reveal-vinhos font-display uppercase text-cn-text mb-6"
+            style={{
+              fontSize: 'clamp(2.25rem, 5vw, 4.25rem)',
+              lineHeight: 1.0,
+              letterSpacing: '0.04em',
+            }}
           >
             Os nossos vinhos
           </h2>
           <p
-            className="reveal font-body text-cn-text-muted"
-            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.85 }}
+            className="reveal-vinhos font-body text-cn-text-muted"
+            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.8 }}
           >
             Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px]">
+        {/* Wine cards — 2 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {wines.map((wine) => (
-            <div
-              key={wine.slug}
-              className="reveal flex flex-col"
-              style={{ backgroundColor: 'var(--color-bg-alt)', border: '1px solid var(--color-border)' }}
-            >
-              <div className="relative h-[220px] overflow-hidden" style={{ backgroundColor: '#E8E0D0' }}>
+            <div key={wine.slug} className="reveal-vinhos flex flex-col">
+
+              {/* Image — landscape */}
+              <div
+                className="relative w-full overflow-hidden"
+                style={{ aspectRatio: '4/3', backgroundColor: '#3A5B4F' }}
+              >
                 <Image
                   src={wine.image}
                   alt={wine.name}
                   fill
-                  className="object-contain p-8"
-                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
-              <div className="p-6 md:p-8 flex flex-col flex-1">
-                <p className="font-display uppercase tracking-[0.14em] text-[10px] text-cn-text-muted mb-2">
-                  {wine.type}
+
+              {/* Name block — centered */}
+              <div className="text-center py-8">
+                <p
+                  className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
+                  style={{ fontSize: '11px' }}
+                >
+                  {wine.brand}
                 </p>
                 <h3
-                  className="font-display text-cn-text mb-3"
-                  style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.375rem)', letterSpacing: '0.02em' }}
+                  className="font-display uppercase text-cn-text"
+                  style={{
+                    fontSize: 'clamp(1.625rem, 3vw, 2.5rem)',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1.05,
+                  }}
                 >
                   {wine.name}
                 </h3>
-                <p
-                  className="font-body text-cn-text-muted mb-6 flex-1"
-                  style={{ fontSize: '0.9375rem', lineHeight: 1.75 }}
+              </div>
+
+              {/* Buttons — side by side */}
+              <div className="grid grid-cols-2 gap-3">
+                <Link
+                  href={`/os-vinhos/${wine.slug}`}
+                  className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
+                  style={{
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-text)',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-text)'
+                    ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-bg)'
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent'
+                    ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text)'
+                  }}
                 >
-                  {wine.description}
-                </p>
-                <div className="flex items-center gap-6">
-                  <Link
-                    href={`/os-vinhos/${wine.slug}`}
-                    className="flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] text-cn-green hover:text-cn-text transition-colors duration-200"
-                  >
-                    Detalhes
-                    <ArrowRight size={11} strokeWidth={1.5} />
-                  </Link>
-                  <button
-                    disabled
-                    title="Em breve"
-                    className="font-display text-[11px] uppercase tracking-[0.14em] text-cn-text opacity-25 cursor-not-allowed"
-                  >
-                    Comprar
-                  </button>
-                </div>
+                  Detalhes
+                  <ArrowRight size={10} strokeWidth={1.5} />
+                </Link>
+                <button
+                  disabled={!wine.buyUrl}
+                  title={wine.buyUrl ? undefined : 'Em breve'}
+                  className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
+                  style={{
+                    backgroundColor: wine.buyUrl ? 'var(--color-green)' : 'var(--color-green)',
+                    color: '#FAE6C1',
+                    opacity: wine.buyUrl ? 1 : 0.55,
+                    cursor: wine.buyUrl ? 'pointer' : 'not-allowed',
+                  }}
+                >
+                  Comprar
+                  <ArrowRight size={10} strokeWidth={1.5} />
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-12">
-          <Link
-            href="/os-vinhos"
-            className="reveal flex items-center gap-2 font-display text-[12px] uppercase tracking-[0.14em] text-cn-green hover:text-cn-text transition-colors duration-200 w-fit"
-          >
-            Ver todos os vinhos
-            <ArrowRight size={13} strokeWidth={1.5} />
-          </Link>
-        </div>
       </div>
     </section>
   )

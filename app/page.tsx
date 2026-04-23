@@ -11,12 +11,16 @@ export default function Home() {
   return (
     <main style={{ backgroundColor: 'var(--color-bg)' }}>
       <Hero />
-      <HomepageIntro />
-      <SectionVinhas />
+      <div style={{ background: 'linear-gradient(180deg, #FFF3DE 6%, #FFF9ED 100%)' }}>
+        <HomepageIntro />
+        <SectionVinhas />
+      </div>
       <SectionVinificacao />
       <SectionVinhos />
-      <SectionCasa />
-      <SectionEnoturismo />
+      <div style={{ background: 'linear-gradient(180deg, #0C4544 0%, #052625 100%)' }}>
+        <SectionCasa />
+        <SectionEnoturismo />
+      </div>
       <SectionExplore />
     </main>
   )

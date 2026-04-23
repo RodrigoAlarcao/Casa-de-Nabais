@@ -93,12 +93,12 @@ export default function Hero() {
         }}
       />
 
-      {/* Gradient de transição para a secção seguinte */}
+      {/* Gradient de transição — funde para #FFF3DE, início exacto do gradiente da secção seguinte */}
       <div
         className="absolute bottom-0 left-0 right-0 z-10"
         style={{
-          height: '38%',
-          background: 'linear-gradient(to bottom, transparent 0%, #FFF9ED 100%)',
+          height: '40%',
+          background: 'linear-gradient(to bottom, transparent 0%, #FFF3DE 100%)',
         }}
       />
 
