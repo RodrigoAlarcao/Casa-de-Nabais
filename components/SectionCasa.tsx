@@ -164,7 +164,7 @@ export default function SectionCasa() {
       </div>
 
       {/* Centered quote */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
+      <div className="max-w-[1050px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
           className="reveal-casa font-display"
           style={{
