@@ -21,13 +21,15 @@ const carouselImages = [
   { src: '/images/homepage/enoturismo/carousel-08.jpg', alt: 'Cesta de produtos locais' },
 ]
 
-const SLIDE_W = 'clamp(240px, 36vw, 380px)'
+const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
 
 export default function SectionEnoturismo() {
   const sectionRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef = useRef<HTMLDivElement>(null)
   const [carouselLeft, setCarouselLeft] = useState('40px')
+  const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
 
   const canPrev = index > 0
@@ -38,8 +40,9 @@ export default function SectionEnoturismo() {
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
-      if (portraitRef.current) {
-        setCarouselLeft(`${portraitRef.current.getBoundingClientRect().left}px`)
+      if (containerRef.current && portraitRef.current) {
+        setCarouselLeft(`${containerRef.current.getBoundingClientRect().left}px`)
+        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
       }
     }
     measure()
@@ -58,27 +61,27 @@ export default function SectionEnoturismo() {
   return (
     <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
       {/* Main grid — image LEFT, text RIGHT */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-0">
+      <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          {/* Portrait image — left */}
-          <div className="reveal-eno flex justify-center lg:justify-start order-2 lg:order-1">
+          {/* Portrait image — fills the full left column (50% of the grid) */}
+          <div className="reveal-eno order-2 lg:order-1">
             <div
               ref={portraitRef}
               className="relative overflow-hidden w-full"
-              style={{ maxWidth: 'clamp(240px, 36vw, 380px)', aspectRatio: '4/5', backgroundColor: '#0A3A39' }}
+              style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}
             >
               <Image
                 src="/images/homepage/enoturismo/section-01.jpg"
                 alt="Enoturismo na Casa de Nabais"
                 fill className="object-cover"
-                sizes="(max-width: 1024px) 80vw, 38vw"
+                sizes="(max-width: 1024px) 90vw, 50vw"
               />
             </div>
           </div>
 
           {/* Text — right */}
-          <div className="flex flex-col justify-center order-1 lg:order-2">
+          <div className="flex flex-col justify-center px-10 lg:px-[4.5rem] order-1 lg:order-2">
             <h2
               className="reveal-eno font-display uppercase mb-8"
               style={{
@@ -94,7 +97,7 @@ export default function SectionEnoturismo() {
               className="reveal-eno font-body mb-10"
               style={{
                 fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                lineHeight: 1.85,
+                lineHeight: 1.4,
                 color: 'rgba(255,249,237,0.72)',
               }}
             >
@@ -131,14 +134,14 @@ export default function SectionEnoturismo() {
           style={{
             gap: `${SLIDE_GAP}px`,
             paddingLeft: carouselLeft,
-            transform: `translateX(calc(-${index} * (${SLIDE_W} + ${SLIDE_GAP}px)))`,
+            transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
           }}
         >
           {carouselImages.map((img, i) => (
             <div key={i} className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: SLIDE_W, aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
               <Image src={img.src} alt={img.alt} fill className="object-cover"
-                sizes="(max-width: 768px) 60vw, 28vw" />
+                sizes="(max-width: 768px) 90vw, 50vw" />
             </div>
           ))}
         </div>
