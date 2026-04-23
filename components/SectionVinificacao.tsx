@@ -72,7 +72,7 @@ export default function SectionVinificacao() {
               className="reveal-above font-body mb-10"
               style={{
                 fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                lineHeight: 1.85,
+                lineHeight: 1.4,
                 color: 'rgba(255,249,237,0.72)',
               }}
             >
