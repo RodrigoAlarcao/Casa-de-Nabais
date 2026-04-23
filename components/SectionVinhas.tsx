@@ -84,7 +84,7 @@ export default function SectionVinhas() {
             </p>
             <Link
               href="/as-vinhas"
-              className="reveal-vinhas inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200"
+              className="reveal-vinhas inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
             >
               Saber mais
               <ArrowRight size={11} strokeWidth={1.5} />
@@ -99,6 +99,7 @@ export default function SectionVinhas() {
               style={{
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
+                borderRadius: '4px',
               }}
             >
               <Image
@@ -131,6 +132,7 @@ export default function SectionVinhas() {
                 width: `${slideWidth}px`,
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
+                borderRadius: '4px',
               }}
             >
               <Image

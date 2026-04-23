@@ -62,6 +62,7 @@ export default function SectionExplore() {
                 flex: getFlex(i),
                 backgroundColor: item.bg,
                 transition: 'flex 0.5s cubic-bezier(0.4,0,0.2,1)',
+                borderRadius: '4px',
               }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
@@ -128,7 +129,7 @@ export default function SectionExplore() {
               key={item.href}
               href={item.href}
               className="reveal group relative overflow-hidden block"
-              style={{ aspectRatio: '3/4', backgroundColor: item.bg }}
+              style={{ aspectRatio: '3/4', backgroundColor: item.bg, borderRadius: '4px' }}
             >
               <Image
                 src={item.image}

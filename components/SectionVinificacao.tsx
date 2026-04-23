@@ -84,6 +84,7 @@ export default function SectionVinificacao() {
               style={{
                 color: '#FAE6C1',
                 border: '1px solid rgba(250,230,193,0.45)',
+                borderRadius: '8px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)'

@@ -74,7 +74,7 @@ export default function SectionVinhos() {
               {/* Image — landscape */}
               <div
                 className="relative w-full overflow-hidden"
-                style={{ aspectRatio: '4/3', backgroundColor: '#3A5B4F' }}
+                style={{ aspectRatio: '4/3', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
               >
                 <Image
                   src={wine.image}
@@ -113,6 +113,7 @@ export default function SectionVinhos() {
                   style={{
                     border: '1px solid var(--color-border)',
                     color: 'var(--color-text)',
+                    borderRadius: '8px',
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-text)'
@@ -135,6 +136,7 @@ export default function SectionVinhos() {
                     color: '#FAE6C1',
                     opacity: wine.buyUrl ? 1 : 0.55,
                     cursor: wine.buyUrl ? 'pointer' : 'not-allowed',
+                    borderRadius: '8px',
                   }}
                 >
                   Comprar

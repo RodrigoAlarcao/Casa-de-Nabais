@@ -69,7 +69,7 @@ export default function SectionEnoturismo() {
             <div
               ref={portraitRef}
               className="relative overflow-hidden w-full"
-              style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}
+              style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
             >
               <Image
                 src="/images/homepage/enoturismo/section-01.jpg"
@@ -107,7 +107,7 @@ export default function SectionEnoturismo() {
               <Link
                 href="/o-enoturismo"
                 className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
-                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)' }}
+                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}
               >
@@ -116,7 +116,7 @@ export default function SectionEnoturismo() {
               <Link
                 href="/ficar-na-casa"
                 className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
-                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)' }}
+                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}
               >
@@ -139,7 +139,7 @@ export default function SectionEnoturismo() {
         >
           {carouselImages.map((img, i) => (
             <div key={i} className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
+              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
               <Image src={img.src} alt={img.alt} fill className="object-cover"
                 sizes="(max-width: 768px) 90vw, 50vw" />
             </div>
