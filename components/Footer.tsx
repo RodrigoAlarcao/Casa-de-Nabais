@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 const quintaLinks = [
@@ -85,18 +84,9 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="flex flex-col items-start md:items-end">
-            <div className="relative w-28 h-20">
-              <Image
-                src="/images/shared/logo/estate-logo.png"
-                alt="Casa de Nabais — Estate Grown"
-                fill
-                className="object-contain"
-                onError={(e) => { e.currentTarget.style.display = 'none' }}
-              />
-            </div>
+          <div className="flex flex-col items-start md:items-end justify-end">
             <p
-              className="font-display uppercase tracking-[0.2em] text-[9px] mt-3"
+              className="font-display uppercase tracking-[0.2em] text-[9px]"
               style={{ color: 'rgba(250,230,193,0.35)' }}
             >
               Estate Grown
