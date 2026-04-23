@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Bespoke Serif — ficheiros locais em /public/fonts/ (download de fontshare.com) */
+@font-face {
+  font-family: 'Bespoke Serif';
+  src: url('/fonts/BespokeSerif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bespoke Serif';
+  src: url('/fonts/BespokeSerif-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bespoke Serif';
+  src: url('/fonts/BespokeSerif-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-bg: #FFF9ED;
+  --color-bg-alt: #FFF3DE;
+  --color-green: #0C4544;
+  --color-green-dark: #052625;
+  --color-green-deep: #031D1D;
+  --color-gold: #FAE6C1;
+  --color-text: #031D1D;
+  --color-text-muted: #3A5B4F;
+  --color-text-light: #FFF9ED;
+  --color-border: rgba(3, 29, 29, 0.12);
+  --color-border-light: rgba(250, 230, 193, 0.60);
+  --font-display: 'Joan', serif;
+  --font-body: 'Bespoke Serif', serif;
+}
+
+html {
+  background-color: #FFF9ED;
+  scroll-behavior: auto; /* Lenis gere o smooth scroll */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Desactivar animações para prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
