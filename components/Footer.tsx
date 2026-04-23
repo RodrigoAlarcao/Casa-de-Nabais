@@ -123,12 +123,12 @@ export default function Footer() {
       </div>
 
       <p
-        className="font-display uppercase text-center w-full select-none"
+        className="font-display uppercase w-full select-none px-6 md:px-10"
         aria-hidden="true"
         style={{
           fontSize: '13vw',
           letterSpacing: '0.05em',
-          backgroundImage: 'linear-gradient(to right, #3A5B4F 0%, #031312 100%)',
+          backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',
