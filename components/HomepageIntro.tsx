@@ -10,7 +10,7 @@ export default function HomepageIntro() {
           text={TEXT}
           className="font-display"
           style={{
-            fontSize: 'clamp(1.625rem, 2.6vw, 2.25rem)',
+            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
             lineHeight: 1.3,
             fontWeight: 400,
             color: 'var(--color-text-muted)',

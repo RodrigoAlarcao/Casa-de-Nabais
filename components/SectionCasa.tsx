@@ -170,7 +170,7 @@ export default function SectionCasa() {
           text="A Casa de Nabais é um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
           className="font-display"
           style={{
-            fontSize: 'clamp(1.625rem, 2.6vw, 2.25rem)',
+            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
             lineHeight: 1.3,
             fontWeight: 400,
             color: '#FAE6C1',

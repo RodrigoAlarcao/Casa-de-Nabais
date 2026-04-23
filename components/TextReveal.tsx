@@ -31,13 +31,13 @@ export default function TextReveal({ text, className, style, ghostOpacity = 0.2 
       gsap.to(activeWords, {
         opacity: 1,
         ease: 'none',
-        stagger: 0.6,
-        duration: 1,
+        stagger: 0.25,
+        duration: 0.4,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 82%',
-          end: 'bottom 22%',
-          scrub: 2,
+          start: 'top 75%',
+          end: 'bottom 55%',
+          scrub: 1,
         },
       })
     }, containerRef)
@@ -47,7 +47,7 @@ export default function TextReveal({ text, className, style, ghostOpacity = 0.2 
 
   return (
     <div ref={containerRef} className={className} style={style}>
-      <p className="flex flex-wrap" style={{ gap: '0.3em' }}>
+      <p className="flex flex-wrap justify-center" style={{ gap: '0.3em' }}>
         {words.map((word, i) => (
           <span key={i} style={{ position: 'relative', display: 'inline-block' }}>
             <span aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, opacity: ghostOpacity, userSelect: 'none' }}>
