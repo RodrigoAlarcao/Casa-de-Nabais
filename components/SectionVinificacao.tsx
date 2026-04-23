@@ -117,12 +117,17 @@ export default function SectionVinificacao() {
       </div>
 
       {/* Destaque */}
-      <div ref={destaqueRef} className="max-w-[640px] mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
+      <div ref={destaqueRef} className="max-w-[720px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
-          className="font-body italic"
-          style={{ fontSize: 'clamp(1.0625rem, 1.8vw, 1.3125rem)', lineHeight: 1.8, color: '#FAE6C1' }}
+          className="font-display"
+          style={{
+            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+            lineHeight: 1.3,
+            fontWeight: 400,
+            color: '#FAE6C1',
+          }}
         >
-          &ldquo;O nosso objetivo é criar equilíbrio desde o início, para que, mais tarde, o vinho necessite do mínimo de intervenção possível.&rdquo;
+          O nosso objetivo é criar equilíbrio desde o início, para que, mais tarde, o vinho necessite do mínimo de intervenção possível.
         </p>
       </div>
     </section>

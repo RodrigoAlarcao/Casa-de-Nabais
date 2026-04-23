@@ -152,10 +152,15 @@ export default function SectionEnoturismo() {
       </div>
 
       {/* Centered closing text */}
-      <div className="max-w-[560px] mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
+      <div className="max-w-[720px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
-          className="reveal-eno font-body italic"
-          style={{ fontSize: 'clamp(1rem, 1.6vw, 1.1875rem)', lineHeight: 1.85, color: '#FAE6C1' }}
+          className="reveal-eno font-display"
+          style={{
+            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+            lineHeight: 1.3,
+            fontWeight: 400,
+            color: '#FAE6C1',
+          }}
         >
           Entre solos graníticos e um raro veio de xisto, criamos vinhos com identidade e oferecemos uma experiência de enoturismo vivida com quem os faz.
         </p>

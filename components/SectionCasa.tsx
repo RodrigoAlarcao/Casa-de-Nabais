@@ -152,10 +152,15 @@ export default function SectionCasa() {
       </div>
 
       {/* Centered quote */}
-      <div className="max-w-[600px] mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
+      <div className="max-w-[720px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
         <p
-          className="reveal-casa font-body italic"
-          style={{ fontSize: 'clamp(1rem, 1.6vw, 1.1875rem)', lineHeight: 1.85, color: '#FAE6C1' }}
+          className="reveal-casa font-display"
+          style={{
+            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+            lineHeight: 1.3,
+            fontWeight: 400,
+            color: '#FAE6C1',
+          }}
         >
           A Casa de Nabais é um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo.
         </p>
