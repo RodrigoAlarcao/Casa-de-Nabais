@@ -2,7 +2,6 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -20,26 +19,22 @@ export default function Hero() {
   const imgWrapRef = useRef<HTMLDivElement>(null)
   const linesRef = useRef<HTMLSpanElement[]>([])
   const subRef = useRef<HTMLParagraphElement>(null)
-  const ctaRef = useRef<HTMLAnchorElement>(null)
 
   useIsomorphicLayoutEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const ctx = gsap.context(() => {
       if (prefersReduced) {
-        /* estado final imediato sem animação */
-        gsap.set([linesRef.current, subRef.current, ctaRef.current], { opacity: 1, y: 0 })
+        gsap.set([linesRef.current, subRef.current], { opacity: 1, y: 0 })
         return
       }
 
-      /* Ken Burns — escala subtil, muito lenta */
       gsap.to(imgWrapRef.current, {
         scale: 1.06,
         duration: 8,
         ease: 'none',
       })
 
-      /* Parallax ao scroll — máx yPercent:-12 conforme PRD */
       gsap.to(imgWrapRef.current, {
         yPercent: -12,
         ease: 'none',
@@ -51,26 +46,18 @@ export default function Hero() {
         },
       })
 
-      /* Timeline de entrada */
       const tl = gsap.timeline({ delay: 0.2 })
-
       tl.from(linesRef.current, {
         y: 40,
         opacity: 0,
         stagger: 0.08,
         duration: 1.0,
         ease: 'power2.out',
-      })
-        .from(
-          subRef.current,
-          { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' },
-          '-=0.4'
-        )
-        .from(
-          ctaRef.current,
-          { y: 15, opacity: 0, duration: 0.7, ease: 'power2.out' },
-          '-=0.3'
-        )
+      }).from(
+        subRef.current,
+        { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' },
+        '-=0.4'
+      )
     }, sectionRef)
 
     return () => ctx.revert()
@@ -79,7 +66,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-end overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Imagem de fundo */}
       <div
@@ -97,24 +84,33 @@ export default function Hero() {
         />
       </div>
 
-      {/* Overlay gradiente */}
+      {/* Overlay escuro subtil */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(3,29,29,0.10) 0%, rgba(3,29,29,0.18) 45%, rgba(3,29,29,0.60) 100%)',
+            'linear-gradient(to bottom, rgba(3,29,29,0.08) 0%, rgba(3,29,29,0.22) 60%, rgba(3,29,29,0.10) 100%)',
         }}
       />
 
-      {/* Conteúdo — ancorado em baixo */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-10 pb-20 md:pb-28">
-        {/* Headline */}
+      {/* Gradient de transição para a secção seguinte */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10"
+        style={{
+          height: '38%',
+          background: 'linear-gradient(to bottom, transparent 0%, #FFF9ED 100%)',
+        }}
+      />
+
+      {/* Conteúdo — centrado */}
+      <div className="relative z-20 w-full max-w-[900px] mx-auto px-6 md:px-10 text-center">
         <h1
-          className="font-display uppercase text-[#FFF9ED] mb-5 md:mb-6"
+          className="font-display uppercase mb-6 md:mb-8"
           style={{
-            fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-            letterSpacing: '0.06em',
-            lineHeight: 1.05,
+            fontSize: 'clamp(2.25rem, 5.5vw, 4.75rem)',
+            letterSpacing: '0.04em',
+            lineHeight: 1.0,
+            color: '#FAE6C1',
           }}
         >
           {HEADLINE_LINES.map((line, i) => (
@@ -128,27 +124,17 @@ export default function Hero() {
           ))}
         </h1>
 
-        {/* Subheadline */}
         <p
           ref={subRef}
-          className="font-body italic mb-10 md:mb-12"
+          className="font-body italic"
           style={{
-            fontSize: 'clamp(1.125rem, 2vw, 1.375rem)',
-            color: 'rgba(255, 249, 237, 0.78)',
+            fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
+            color: 'rgba(250, 230, 193, 0.80)',
             letterSpacing: '0.01em',
           }}
         >
           Assim nascem grandes vinhos
         </p>
-
-        {/* CTA */}
-        <Link
-          ref={ctaRef}
-          href="/ficar-na-casa"
-          className="inline-block font-display text-[13px] uppercase tracking-[0.12em] px-8 py-4 text-[#FAE6C1] border border-[#FAE6C1] hover:bg-[#FAE6C1] hover:text-[#031D1D] transition-colors duration-300"
-        >
-          Ficar na Casa
-        </Link>
       </div>
     </section>
   )

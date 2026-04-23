@@ -3,6 +3,7 @@ import { Joan } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 const joan = Joan({
   subsets: ['latin'],
@@ -36,6 +37,7 @@ export default function RootLayout({
         <SmoothScroll>
           <Navbar />
           {children}
+          <Footer />
         </SmoothScroll>
       </body>
     </html>
