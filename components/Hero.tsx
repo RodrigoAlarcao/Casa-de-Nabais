@@ -103,7 +103,7 @@ export default function Hero() {
       />
 
       {/* Conteúdo — centrado */}
-      <div className="relative z-20 w-full max-w-[900px] mx-auto px-6 md:px-10 text-center">
+      <div className="relative z-20 w-full max-w-[1100px] mx-auto px-6 md:px-10 text-center">
         <h1
           className="font-display uppercase mb-6 md:mb-8"
           style={{
@@ -118,6 +118,7 @@ export default function Hero() {
               key={i}
               ref={(el) => { if (el) linesRef.current[i] = el }}
               className="block"
+              style={{ whiteSpace: 'nowrap' }}
             >
               {line}
             </span>
