@@ -49,34 +49,54 @@ export default function SectionVinificacao() {
 
   return (
     <section ref={sectionRef} style={{ backgroundColor: '#031D1D' }}>
-      {/* Text block */}
-      <div className="max-w-[800px] mx-auto px-6 md:px-10 py-20 md:py-28">
-        <p
-          className="reveal-above font-display uppercase tracking-[0.18em] text-[11px] mb-6"
-          style={{ color: 'rgba(250,230,193,0.65)' }}
-        >
-          A Nossa Vinificação
-        </p>
-        <h2
-          className="reveal-above font-display text-cn-text-light mb-7"
-          style={{ fontSize: 'clamp(1.875rem, 3.5vw, 3rem)', lineHeight: 1.15, letterSpacing: '0.02em' }}
-        >
-          A nossa vinificação
-        </h2>
-        <p
-          className="reveal-above font-body mb-10"
-          style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.85, color: 'rgba(255,249,237,0.72)' }}
-        >
-          Na Casa de Nabais vinificação é sinónimo de investigação contínua. Começa na vinha, respeita a uva e intervém apenas quando necessário. Trabalhamos com precisão, ciência e curiosidade, para revelar a identidade e as singularidades da casta Loureiro.
-        </p>
-        <Link
-          href="/a-vinificacao"
-          className="reveal-above flex items-center gap-2 font-display text-[12px] uppercase tracking-[0.14em] transition-colors duration-200 w-fit"
-          style={{ color: '#FAE6C1' }}
-        >
-          Saber mais
-          <ArrowRight size={13} strokeWidth={1.5} />
-        </Link>
+      {/* Text block — two columns */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-20 items-center">
+
+          {/* Left — large headline */}
+          <h2
+            className="reveal-above font-display uppercase"
+            style={{
+              fontSize: 'clamp(2.5rem, 5.5vw, 5rem)',
+              lineHeight: 1.0,
+              letterSpacing: '0.04em',
+              color: '#FAE6C1',
+            }}
+          >
+            A nossa<br />vinificação
+          </h2>
+
+          {/* Right — body + CTA */}
+          <div>
+            <p
+              className="reveal-above font-body mb-10"
+              style={{
+                fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                lineHeight: 1.85,
+                color: 'rgba(255,249,237,0.72)',
+              }}
+            >
+              Na Casa de Nabais vinificação é sinónimo de investigação contínua. Começa na vinha, respeita a uva e intervém apenas quando necessário. Trabalhamos com precisão, ciência e curiosidade, para revelar a identidade e as singularidades da casta Loureiro.
+            </p>
+            <Link
+              href="/a-vinificacao"
+              className="reveal-above inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-fit transition-colors duration-200"
+              style={{
+                color: '#FAE6C1',
+                border: '1px solid rgba(250,230,193,0.45)',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)'
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent'
+              }}
+            >
+              Saber mais
+              <ArrowRight size={11} strokeWidth={1.5} />
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Full-bleed image */}
