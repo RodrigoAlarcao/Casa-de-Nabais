@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
+import TextReveal from './TextReveal'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -165,17 +166,17 @@ export default function SectionCasa() {
 
       {/* Centered quote */}
       <div className="max-w-[1050px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
-        <p
-          className="reveal-casa font-display"
+        <TextReveal
+          text="A Casa de Nabais é um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
+          className="font-display"
           style={{
-            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+            fontSize: 'clamp(1.625rem, 2.6vw, 2.25rem)',
             lineHeight: 1.3,
             fontWeight: 400,
             color: '#FAE6C1',
           }}
-        >
-          A Casa de Nabais é um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo.
-        </p>
+          ghostOpacity={0.18}
+        />
       </div>
     </section>
   )
