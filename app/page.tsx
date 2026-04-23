@@ -17,8 +17,10 @@ export default function Home() {
       </div>
       <SectionVinificacao />
       <SectionVinhos />
-      <SectionCasa />
-      <SectionEnoturismo />
+      <div style={{ background: 'linear-gradient(180deg, #0C4544 0%, #052625 100%)' }}>
+        <SectionCasa />
+        <SectionEnoturismo />
+      </div>
       <SectionExplore />
     </main>
   )
