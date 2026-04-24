@@ -27,6 +27,13 @@ export default function SectionExplore() {
         y: 25, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
       })
+
+      gsap.utils.toArray<HTMLElement>('.explore-img-wrap').forEach((wrap) => {
+        gsap.to(wrap, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: wrap.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -67,17 +74,19 @@ export default function SectionExplore() {
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              <Image
-                src={item.image}
-                alt={item.label}
-                fill
-                className="object-cover"
-                style={{
-                  transform: hovered === i ? 'scale(1.05)' : 'scale(1)',
-                  transition: 'transform 0.7s ease-out',
-                }}
-                sizes="30vw"
-              />
+              <div className="explore-img-wrap absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image
+                  src={item.image}
+                  alt={item.label}
+                  fill
+                  className="object-cover"
+                  style={{
+                    transform: hovered === i ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'transform 0.7s ease-out',
+                  }}
+                  sizes="30vw"
+                />
+              </div>
 
               {/* Dark overlay on non-hovered siblings */}
               <div
@@ -131,13 +140,15 @@ export default function SectionExplore() {
               className="reveal group relative overflow-hidden block"
               style={{ aspectRatio: '3/4', backgroundColor: item.bg, borderRadius: '4px' }}
             >
-              <Image
-                src={item.image}
-                alt={item.label}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                sizes="50vw"
-              />
+              <div className="explore-img-wrap absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image
+                  src={item.image}
+                  alt={item.label}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  sizes="50vw"
+                />
+              </div>
               <div
                 className="absolute inset-0"
                 style={{ background: 'linear-gradient(to top, rgba(3,29,29,0.72) 0%, rgba(3,29,29,0.08) 55%, transparent 100%)' }}

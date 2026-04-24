@@ -28,6 +28,7 @@ export default function SectionEnoturismo() {
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef = useRef<HTMLDivElement>(null)
+  const imgWrapRef = useRef<HTMLDivElement>(null)
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
@@ -69,6 +70,13 @@ export default function SectionEnoturismo() {
         y: 30, opacity: 0, stagger: 0.09, duration: 0.9, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
+
+      if (imgWrapRef.current && portraitRef.current) {
+        gsap.to(imgWrapRef.current, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: portraitRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
     }, sectionRef)
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
@@ -86,12 +94,14 @@ export default function SectionEnoturismo() {
               className="relative overflow-hidden w-full"
               style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
             >
-              <Image
-                src="/images/homepage/enoturismo/section-01.jpg"
-                alt="Enoturismo na Casa de Nabais"
-                fill className="object-cover"
-                sizes="(max-width: 1024px) 90vw, 50vw"
-              />
+              <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image
+                  src="/images/homepage/enoturismo/section-01.jpg"
+                  alt="Enoturismo na Casa de Nabais"
+                  fill className="object-cover"
+                  sizes="(max-width: 1024px) 90vw, 50vw"
+                />
+              </div>
             </div>
           </div>
 

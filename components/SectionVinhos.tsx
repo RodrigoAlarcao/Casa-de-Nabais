@@ -37,6 +37,13 @@ export default function SectionVinhos() {
         y: 30, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
+
+      gsap.utils.toArray<HTMLElement>('.vinhos-img-wrap').forEach((wrap) => {
+        gsap.to(wrap, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: wrap.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -71,18 +78,20 @@ export default function SectionVinhos() {
           {wines.map((wine) => (
             <div key={wine.slug} className="reveal-vinhos flex flex-col">
 
-              {/* Image — landscape */}
+              {/* Image */}
               <div
                 className="relative w-full overflow-hidden"
                 style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
               >
-                <Image
-                  src={wine.image}
-                  alt={wine.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                <div className="vinhos-img-wrap absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                  <Image
+                    src={wine.image}
+                    alt={wine.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </div>
 
               {/* Name block — centered */}
