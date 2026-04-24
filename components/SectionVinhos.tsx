@@ -74,7 +74,7 @@ export default function SectionVinhos() {
               {/* Image — landscape */}
               <div
                 className="relative w-full overflow-hidden"
-                style={{ aspectRatio: '4/3', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
+                style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
               >
                 <Image
                   src={wine.image}

@@ -101,7 +101,7 @@ export default function SectionVinificacao() {
       </div>
 
       {/* Full-bleed image */}
-      <div ref={imgContainerRef} className="relative overflow-hidden" style={{ height: '55vh' }}>
+      <div ref={imgContainerRef} className="relative overflow-hidden" style={{ height: '66vh' }}>
         <div
           ref={imgWrapRef}
           className="absolute will-change-transform"

@@ -41,10 +41,14 @@ export default function SectionCasa() {
   function prev() { if (canPrev) setIndex((i) => i - 1) }
   function next() { if (canNext) setIndex((i) => i + 1) }
 
-  function onDragStart(clientX: number) { dragStartX.current = clientX; setGrabbing(true) }
-  function onDragEnd(clientX: number) {
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    dragStartX.current = e.clientX
+    setGrabbing(true)
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+  function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
     setGrabbing(false)
-    const diff = dragStartX.current - clientX
+    const diff = dragStartX.current - e.clientX
     if (Math.abs(diff) < 8) return
     if (diff > 50 && canNext) next()
     else if (diff < -50 && canPrev) prev()
@@ -142,12 +146,10 @@ export default function SectionCasa() {
       {/* Carousel — bleed right */}
       <div
         className="mt-14 md:mt-16 py-2 select-none"
-        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab' }}
-        onMouseDown={(e) => onDragStart(e.clientX)}
-        onMouseUp={(e) => onDragEnd(e.clientX)}
-        onMouseLeave={() => setGrabbing(false)}
-        onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
-        onTouchEnd={(e) => onDragEnd(e.changedTouches[0].clientX)}
+        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => setGrabbing(false)}
       >
         <div
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
