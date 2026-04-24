@@ -143,7 +143,7 @@ export default function Hero() {
           ref={subRef}
           className="font-body italic"
           style={{
-            fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
+            fontSize: 'clamp(1.125rem, 2vw, 1.5rem)',
             color: 'rgba(250, 230, 193, 0.80)',
             letterSpacing: '0.01em',
           }}
