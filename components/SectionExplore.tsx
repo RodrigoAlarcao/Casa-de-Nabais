@@ -112,7 +112,7 @@ export default function SectionExplore() {
                   transition: 'opacity 0.35s ease',
                 }}
               >
-                <p className="font-display uppercase tracking-[0.18em] text-[26px] text-cn-text-light text-center px-4">
+                <p className="font-display uppercase tracking-[0.18em] text-[26px] text-center px-4" style={{ color: '#FAE6C1', textShadow: '0 2px 20px rgba(0,0,0,0.50)' }}>
                   {item.label}
                 </p>
               </div>
