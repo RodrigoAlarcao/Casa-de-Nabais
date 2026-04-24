@@ -15,14 +15,14 @@ const wines = [
     slug: 'vinha-do-pomar',
     brand: 'Casa de Nabais',
     name: 'Vinha do Pomar',
-    image: '/images/homepage/vinhos/vinha-do-pomar-context.jpg',
+    image: '/images/homepage/vinhos/vinha-do-pomar-context.webp',
     buyUrl: null,
   },
   {
     slug: 'loureiro',
     brand: 'Casa de Nabais',
     name: 'Loureiro',
-    image: '/images/homepage/vinhos/loureiro-context.jpg',
+    image: '/images/homepage/vinhos/loureiro-context.webp',
     buyUrl: null,
   },
 ]
@@ -37,6 +37,7 @@ export default function SectionVinhos() {
         y: 30, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
+
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -71,18 +72,20 @@ export default function SectionVinhos() {
           {wines.map((wine) => (
             <div key={wine.slug} className="reveal-vinhos flex flex-col">
 
-              {/* Image — landscape */}
+              {/* Image */}
               <div
                 className="relative w-full overflow-hidden"
-                style={{ aspectRatio: '4/3', backgroundColor: '#3A5B4F' }}
+                style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
               >
-                <Image
-                  src={wine.image}
-                  alt={wine.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                <div className="absolute inset-6">
+                  <Image
+                    src={wine.image}
+                    alt={wine.name}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </div>
 
               {/* Name block — centered */}
@@ -113,6 +116,7 @@ export default function SectionVinhos() {
                   style={{
                     border: '1px solid var(--color-border)',
                     color: 'var(--color-text)',
+                    borderRadius: '8px',
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-text)'
@@ -135,6 +139,7 @@ export default function SectionVinhos() {
                     color: '#FAE6C1',
                     opacity: wine.buyUrl ? 1 : 0.55,
                     cursor: wine.buyUrl ? 'pointer' : 'not-allowed',
+                    borderRadius: '8px',
                   }}
                 >
                   Comprar

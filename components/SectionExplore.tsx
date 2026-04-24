@@ -10,10 +10,10 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const items = [
-  { label: 'As Vinhas',      href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.jpg',      bg: '#3A5B4F' },
-  { label: 'A Vinificação',  href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.jpg', bg: '#2A4A3E' },
-  { label: 'Os Vinhos',      href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.jpg',      bg: '#1A3A2E' },
-  { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.jpg',  bg: '#0A2A1E' },
+  { label: 'As Vinhas',      href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.webp',      bg: '#3A5B4F' },
+  { label: 'A Vinificação',  href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.webp', bg: '#2A4A3E' },
+  { label: 'Os Vinhos',      href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.webp',      bg: '#1A3A2E' },
+  { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
 ]
 
 export default function SectionExplore() {
@@ -26,6 +26,13 @@ export default function SectionExplore() {
       gsap.from('.reveal', {
         y: 25, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+      })
+
+      gsap.utils.toArray<HTMLElement>('.explore-img-wrap').forEach((wrap) => {
+        gsap.to(wrap, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: wrap.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
       })
     }, sectionRef)
     return () => ctx.revert()
@@ -62,21 +69,24 @@ export default function SectionExplore() {
                 flex: getFlex(i),
                 backgroundColor: item.bg,
                 transition: 'flex 0.5s cubic-bezier(0.4,0,0.2,1)',
+                borderRadius: '4px',
               }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              <Image
-                src={item.image}
-                alt={item.label}
-                fill
-                className="object-cover"
-                style={{
-                  transform: hovered === i ? 'scale(1.05)' : 'scale(1)',
-                  transition: 'transform 0.7s ease-out',
-                }}
-                sizes="30vw"
-              />
+              <div className="explore-img-wrap absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image
+                  src={item.image}
+                  alt={item.label}
+                  fill
+                  className="object-cover"
+                  style={{
+                    transform: hovered === i ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'transform 0.7s ease-out',
+                  }}
+                  sizes="30vw"
+                />
+              </div>
 
               {/* Dark overlay on non-hovered siblings */}
               <div
@@ -102,7 +112,7 @@ export default function SectionExplore() {
                   transition: 'opacity 0.35s ease',
                 }}
               >
-                <p className="font-display uppercase tracking-[0.18em] text-[13px] text-cn-text-light text-center px-4">
+                <p className="font-display uppercase tracking-[0.18em] text-[26px] text-center px-4" style={{ color: '#FAE6C1', textShadow: '0 2px 20px rgba(0,0,0,0.50)' }}>
                   {item.label}
                 </p>
               </div>
@@ -128,15 +138,17 @@ export default function SectionExplore() {
               key={item.href}
               href={item.href}
               className="reveal group relative overflow-hidden block"
-              style={{ aspectRatio: '3/4', backgroundColor: item.bg }}
+              style={{ aspectRatio: '3/4', backgroundColor: item.bg, borderRadius: '4px' }}
             >
-              <Image
-                src={item.image}
-                alt={item.label}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                sizes="50vw"
-              />
+              <div className="explore-img-wrap absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image
+                  src={item.image}
+                  alt={item.label}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  sizes="50vw"
+                />
+              </div>
               <div
                 className="absolute inset-0"
                 style={{ background: 'linear-gradient(to top, rgba(3,29,29,0.72) 0%, rgba(3,29,29,0.08) 55%, transparent 100%)' }}

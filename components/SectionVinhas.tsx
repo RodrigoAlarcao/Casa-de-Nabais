@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
+import ImageLightbox from './ImageLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -11,12 +12,12 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/vinhas/carousel-01.jpg', alt: 'Vinha do Pomar em flor' },
-  { src: '/images/homepage/vinhas/carousel-02.jpg', alt: 'Vindima à mão' },
-  { src: '/images/homepage/vinhas/carousel-03.jpg', alt: 'Cachos de Loureiro' },
-  { src: '/images/homepage/vinhas/carousel-04.jpg', alt: 'Vale do Lima' },
-  { src: '/images/homepage/vinhas/carousel-05.jpg', alt: 'Ramada tradicional minhota' },
-  { src: '/images/homepage/vinhas/carousel-06.jpg', alt: 'Adega da Casa de Nabais' },
+  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Vinha do Pomar em flor' },
+  { src: '/images/homepage/vinhas/carousel-02.webp', alt: 'Vindima à mão' },
+  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Cachos de Loureiro' },
+  { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Vale do Lima' },
+  { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Ramada tradicional minhota' },
+  { src: '/images/homepage/vinhas/carousel-06.webp', alt: 'Adega da Casa de Nabais' },
 ]
 
 const IMG_RATIO = '4/5'
@@ -26,9 +27,14 @@ export default function SectionVinhas() {
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef = useRef<HTMLDivElement>(null)
+  const imgWrapRef = useRef<HTMLDivElement>(null)
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
+  const dragStartX = useRef(0)
+  const dragStartY = useRef(0)
+  const [grabbing, setGrabbing] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const maxIndex = carouselImages.length - 1
   const canPrev = index > 0
@@ -36,6 +42,25 @@ export default function SectionVinhas() {
 
   function prev() { if (canPrev) setIndex((i) => i - 1) }
   function next() { if (canNext) setIndex((i) => i + 1) }
+
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    dragStartX.current = e.clientX
+    dragStartY.current = e.clientY
+    setGrabbing(true)
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+  function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    setGrabbing(false)
+    const diff = dragStartX.current - e.clientX
+    if (Math.abs(diff) < 8) {
+      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      return
+    }
+    if (diff > 50 && canNext) next()
+    else if (diff < -50 && canPrev) prev()
+  }
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
@@ -53,11 +78,19 @@ export default function SectionVinhas() {
         y: 30, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
+
+      if (imgWrapRef.current && portraitRef.current) {
+        gsap.to(imgWrapRef.current, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: portraitRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
     }, sectionRef)
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
 
   return (
+    <>
     <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
       {/* Main content grid */}
@@ -84,7 +117,7 @@ export default function SectionVinhas() {
             </p>
             <Link
               href="/as-vinhas"
-              className="reveal-vinhas inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200"
+              className="reveal-vinhas inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
             >
               Saber mais
               <ArrowRight size={11} strokeWidth={1.5} />
@@ -99,22 +132,31 @@ export default function SectionVinhas() {
               style={{
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
+                borderRadius: '4px',
               }}
             >
-              <Image
-                src="/images/homepage/vinhas/section-01.jpg"
-                alt="Vinhas da Casa de Nabais"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 90vw, 50vw"
-              />
+              <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image
+                  src="/images/homepage/vinhas/section-01.webp"
+                  alt="Vinhas da Casa de Nabais"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 90vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Carousel — left-aligned with content, bleeds off the right edge */}
-      <div className="mt-14 md:mt-16 overflow-hidden">
+      <div
+        className="mt-14 md:mt-16 py-2 select-none"
+        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => setGrabbing(false)}
+      >
         <div
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
@@ -127,10 +169,14 @@ export default function SectionVinhas() {
             <div
               key={i}
               className="relative flex-shrink-0 overflow-hidden"
+              data-slide-index={i}
               style={{
                 width: `${slideWidth}px`,
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
+                borderRadius: '4px',
+                boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
+                cursor: grabbing ? 'grabbing' : 'zoom-in',
               }}
             >
               <Image
@@ -176,5 +222,16 @@ export default function SectionVinhas() {
       </div>
 
     </section>
+
+    {lightboxIndex !== null && (
+      <ImageLightbox
+        images={carouselImages}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onPrev={() => setLightboxIndex((i) => Math.max(0, (i ?? 0) - 1))}
+        onNext={() => setLightboxIndex((i) => Math.min(carouselImages.length - 1, (i ?? 0) + 1))}
+      />
+    )}
+    </>
   )
 }

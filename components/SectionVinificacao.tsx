@@ -27,12 +27,12 @@ export default function SectionVinificacao() {
 
       if (imgWrapRef.current && imgContainerRef.current) {
         gsap.to(imgWrapRef.current, {
-          yPercent: -10, ease: 'none',
+          yPercent: -20, ease: 'none',
           scrollTrigger: {
             trigger: imgContainerRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1.5,
+            scrub: 1,
           },
         })
       }
@@ -84,6 +84,7 @@ export default function SectionVinificacao() {
               style={{
                 color: '#FAE6C1',
                 border: '1px solid rgba(250,230,193,0.45)',
+                borderRadius: '8px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)'
@@ -100,14 +101,14 @@ export default function SectionVinificacao() {
       </div>
 
       {/* Full-bleed image */}
-      <div ref={imgContainerRef} className="relative overflow-hidden" style={{ height: '55vh' }}>
+      <div ref={imgContainerRef} className="relative overflow-hidden" style={{ height: '66vh' }}>
         <div
           ref={imgWrapRef}
           className="absolute will-change-transform"
-          style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+          style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/vinificacao/fullbleed-01.jpg"
+            src="/images/homepage/vinificacao/fullbleed-01.webp"
             alt="Adega da Casa de Nabais"
             fill
             className="object-cover"
