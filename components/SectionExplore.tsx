@@ -112,7 +112,7 @@ export default function SectionExplore() {
                   transition: 'opacity 0.35s ease',
                 }}
               >
-                <p className="font-display uppercase tracking-[0.18em] text-[13px] text-cn-text-light text-center px-4">
+                <p className="font-display uppercase tracking-[0.18em] text-[26px] text-cn-text-light text-center px-4">
                   {item.label}
                 </p>
               </div>

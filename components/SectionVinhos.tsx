@@ -75,7 +75,7 @@ export default function SectionVinhos() {
               {/* Image */}
               <div
                 className="relative w-full overflow-hidden"
-                style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
+                style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px' }}
               >
                 <div className="absolute inset-8">
                   <Image
