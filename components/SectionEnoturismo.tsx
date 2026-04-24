@@ -31,12 +31,23 @@ export default function SectionEnoturismo() {
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
+  const dragStartX = useRef(0)
+  const [grabbing, setGrabbing] = useState(false)
 
   const canPrev = index > 0
   const canNext = index < carouselImages.length - 1
 
   function prev() { if (canPrev) setIndex((i) => i - 1) }
   function next() { if (canNext) setIndex((i) => i + 1) }
+
+  function onDragStart(clientX: number) { dragStartX.current = clientX; setGrabbing(true) }
+  function onDragEnd(clientX: number) {
+    setGrabbing(false)
+    const diff = dragStartX.current - clientX
+    if (Math.abs(diff) < 8) return
+    if (diff > 50 && canNext) next()
+    else if (diff < -50 && canPrev) prev()
+  }
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
@@ -128,7 +139,15 @@ export default function SectionEnoturismo() {
       </div>
 
       {/* Carousel — bleed right */}
-      <div className="mt-14 md:mt-16 overflow-hidden">
+      <div
+        className="mt-14 md:mt-16 py-2 select-none"
+        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab' }}
+        onMouseDown={(e) => onDragStart(e.clientX)}
+        onMouseUp={(e) => onDragEnd(e.clientX)}
+        onMouseLeave={() => setGrabbing(false)}
+        onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
+        onTouchEnd={(e) => onDragEnd(e.changedTouches[0].clientX)}
+      >
         <div
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
@@ -139,7 +158,7 @@ export default function SectionEnoturismo() {
         >
           {carouselImages.map((img, i) => (
             <div key={i} className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
+              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px', boxShadow: '0 8px 28px rgba(0,0,0,0.22)' }}>
               <Image src={img.src} alt={img.alt} fill className="object-cover"
                 sizes="(max-width: 768px) 90vw, 50vw" />
             </div>

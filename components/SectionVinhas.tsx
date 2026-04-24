@@ -29,6 +29,8 @@ export default function SectionVinhas() {
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
+  const dragStartX = useRef(0)
+  const [grabbing, setGrabbing] = useState(false)
 
   const maxIndex = carouselImages.length - 1
   const canPrev = index > 0
@@ -36,6 +38,15 @@ export default function SectionVinhas() {
 
   function prev() { if (canPrev) setIndex((i) => i - 1) }
   function next() { if (canNext) setIndex((i) => i + 1) }
+
+  function onDragStart(clientX: number) { dragStartX.current = clientX; setGrabbing(true) }
+  function onDragEnd(clientX: number) {
+    setGrabbing(false)
+    const diff = dragStartX.current - clientX
+    if (Math.abs(diff) < 8) return
+    if (diff > 50 && canNext) next()
+    else if (diff < -50 && canPrev) prev()
+  }
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
@@ -115,7 +126,15 @@ export default function SectionVinhas() {
       </div>
 
       {/* Carousel — left-aligned with content, bleeds off the right edge */}
-      <div className="mt-14 md:mt-16 overflow-hidden">
+      <div
+        className="mt-14 md:mt-16 py-2 select-none"
+        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab' }}
+        onMouseDown={(e) => onDragStart(e.clientX)}
+        onMouseUp={(e) => onDragEnd(e.clientX)}
+        onMouseLeave={() => setGrabbing(false)}
+        onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
+        onTouchEnd={(e) => onDragEnd(e.changedTouches[0].clientX)}
+      >
         <div
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
@@ -133,6 +152,7 @@ export default function SectionVinhas() {
                 aspectRatio: IMG_RATIO,
                 backgroundColor: '#3A5B4F',
                 borderRadius: '4px',
+                boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
               }}
             >
               <Image
