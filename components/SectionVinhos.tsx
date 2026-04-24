@@ -38,12 +38,6 @@ export default function SectionVinhos() {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
 
-      gsap.utils.toArray<HTMLElement>('.vinhos-img-wrap').forEach((wrap) => {
-        gsap.to(wrap, {
-          yPercent: -20, ease: 'none',
-          scrollTrigger: { trigger: wrap.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
-        })
-      })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -83,12 +77,12 @@ export default function SectionVinhos() {
                 className="relative w-full overflow-hidden"
                 style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
               >
-                <div className="vinhos-img-wrap absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <div className="absolute inset-8">
                   <Image
                     src={wine.image}
                     alt={wine.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
