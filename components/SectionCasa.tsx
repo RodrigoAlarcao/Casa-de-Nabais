@@ -171,7 +171,7 @@ export default function SectionCasa() {
           className="font-display"
           style={{
             fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
-            lineHeight: 1.3,
+            lineHeight: 1.0,
             fontWeight: 400,
             color: '#FAE6C1',
           }}
