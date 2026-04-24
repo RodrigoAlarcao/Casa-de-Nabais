@@ -84,6 +84,7 @@ export default function SectionEnoturismo() {
   }, [])
 
   return (
+    <>
     <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
       {/* Main grid — image LEFT, text RIGHT */}
       <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-0">
@@ -222,5 +223,6 @@ export default function SectionEnoturismo() {
         onNext={() => setLightboxIndex((i) => Math.min(carouselImages.length - 1, (i ?? 0) + 1))}
       />
     )}
+    </>
   )
 }

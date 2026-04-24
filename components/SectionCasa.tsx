@@ -85,6 +85,7 @@ export default function SectionCasa() {
   }, [])
 
   return (
+    <>
     <section ref={sectionRef} className="pt-20 md:pt-28 pb-0">
       {/* Main grid */}
       <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10">
@@ -223,5 +224,6 @@ export default function SectionCasa() {
         onNext={() => setLightboxIndex((i) => Math.min(carouselImages.length - 1, (i ?? 0) + 1))}
       />
     )}
+    </>
   )
 }

@@ -83,6 +83,7 @@ export default function SectionVinhas() {
   }, [])
 
   return (
+    <>
     <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
       {/* Main content grid */}
@@ -224,5 +225,6 @@ export default function SectionVinhas() {
         onNext={() => setLightboxIndex((i) => Math.min(carouselImages.length - 1, (i ?? 0) + 1))}
       />
     )}
+    </>
   )
 }
