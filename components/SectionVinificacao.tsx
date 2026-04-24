@@ -108,7 +108,7 @@ export default function SectionVinificacao() {
           style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/vinificacao/fullbleed-01.jpg"
+            src="/images/homepage/vinificacao/fullbleed-01.webp"
             alt="Adega da Casa de Nabais"
             fill
             className="object-cover"

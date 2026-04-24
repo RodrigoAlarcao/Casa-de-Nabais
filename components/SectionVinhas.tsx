@@ -11,12 +11,12 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/vinhas/carousel-01.jpg', alt: 'Vinha do Pomar em flor' },
-  { src: '/images/homepage/vinhas/carousel-02.jpg', alt: 'Vindima à mão' },
-  { src: '/images/homepage/vinhas/carousel-03.jpg', alt: 'Cachos de Loureiro' },
-  { src: '/images/homepage/vinhas/carousel-04.jpg', alt: 'Vale do Lima' },
-  { src: '/images/homepage/vinhas/carousel-05.jpg', alt: 'Ramada tradicional minhota' },
-  { src: '/images/homepage/vinhas/carousel-06.jpg', alt: 'Adega da Casa de Nabais' },
+  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Vinha do Pomar em flor' },
+  { src: '/images/homepage/vinhas/carousel-02.webp', alt: 'Vindima à mão' },
+  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Cachos de Loureiro' },
+  { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Vale do Lima' },
+  { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Ramada tradicional minhota' },
+  { src: '/images/homepage/vinhas/carousel-06.webp', alt: 'Adega da Casa de Nabais' },
 ]
 
 const IMG_RATIO = '4/5'
@@ -127,7 +127,7 @@ export default function SectionVinhas() {
             >
               <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
                 <Image
-                  src="/images/homepage/vinhas/section-01.jpg"
+                  src="/images/homepage/vinhas/section-01.webp"
                   alt="Vinhas da Casa de Nabais"
                   fill
                   className="object-cover"

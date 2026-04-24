@@ -12,14 +12,14 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/casa/carousel-01.jpg', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.jpg', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.jpg', alt: 'Suite principal' },
-  { src: '/images/homepage/casa/carousel-04.jpg', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.jpg', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.jpg', alt: 'Mesa de refeições' },
-  { src: '/images/homepage/casa/carousel-07.jpg', alt: 'Lareira da sala' },
-  { src: '/images/homepage/casa/carousel-08.jpg', alt: 'Vista da varanda' },
+  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
+  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
+  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suite principal' },
+  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
+  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
+  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Mesa de refeições' },
+  { src: '/images/homepage/casa/carousel-07.webp', alt: 'Lareira da sala' },
+  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
 ]
 
 const IMG_RATIO = '4/5'
@@ -142,7 +142,7 @@ export default function SectionCasa() {
             >
               <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
                 <Image
-                  src="/images/homepage/casa/section-01.jpg"
+                  src="/images/homepage/casa/section-01.webp"
                   alt="Fachada da Casa de Nabais"
                   fill className="object-cover"
                   sizes="(max-width: 1024px) 90vw, 50vw"

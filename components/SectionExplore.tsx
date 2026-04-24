@@ -10,10 +10,10 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const items = [
-  { label: 'As Vinhas',      href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.jpg',      bg: '#3A5B4F' },
-  { label: 'A Vinificação',  href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.jpg', bg: '#2A4A3E' },
-  { label: 'Os Vinhos',      href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.jpg',      bg: '#1A3A2E' },
-  { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.jpg',  bg: '#0A2A1E' },
+  { label: 'As Vinhas',      href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.webp',      bg: '#3A5B4F' },
+  { label: 'A Vinificação',  href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.webp', bg: '#2A4A3E' },
+  { label: 'Os Vinhos',      href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.webp',      bg: '#1A3A2E' },
+  { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
 ]
 
 export default function SectionExplore() {

@@ -15,14 +15,14 @@ const wines = [
     slug: 'vinha-do-pomar',
     brand: 'Casa de Nabais',
     name: 'Vinha do Pomar',
-    image: '/images/homepage/vinhos/vinha-do-pomar-context.jpg',
+    image: '/images/homepage/vinhos/vinha-do-pomar-context.webp',
     buyUrl: null,
   },
   {
     slug: 'loureiro',
     brand: 'Casa de Nabais',
     name: 'Loureiro',
-    image: '/images/homepage/vinhos/loureiro-context.jpg',
+    image: '/images/homepage/vinhos/loureiro-context.webp',
     buyUrl: null,
   },
 ]

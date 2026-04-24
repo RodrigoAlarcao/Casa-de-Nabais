@@ -11,14 +11,14 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/enoturismo/carousel-01.jpg', alt: 'Prova de vinhos na adega' },
-  { src: '/images/homepage/enoturismo/carousel-02.jpg', alt: 'Visita guiada às vinhas' },
-  { src: '/images/homepage/enoturismo/carousel-03.jpg', alt: 'Almoço na quinta' },
-  { src: '/images/homepage/enoturismo/carousel-04.jpg', alt: 'Passeio na mata' },
-  { src: '/images/homepage/enoturismo/carousel-05.jpg', alt: 'Vindima' },
-  { src: '/images/homepage/enoturismo/carousel-06.jpg', alt: 'Pôr do sol no Vale do Lima' },
-  { src: '/images/homepage/enoturismo/carousel-07.jpg', alt: 'Terraço da casa' },
-  { src: '/images/homepage/enoturismo/carousel-08.jpg', alt: 'Cesta de produtos locais' },
+  { src: '/images/homepage/enoturismo/carousel-01.webp', alt: 'Prova de vinhos na adega' },
+  { src: '/images/homepage/enoturismo/carousel-02.webp', alt: 'Visita guiada às vinhas' },
+  { src: '/images/homepage/enoturismo/carousel-03.webp', alt: 'Almoço na quinta' },
+  { src: '/images/homepage/enoturismo/carousel-04.webp', alt: 'Passeio na mata' },
+  { src: '/images/homepage/enoturismo/carousel-05.webp', alt: 'Vindima' },
+  { src: '/images/homepage/enoturismo/carousel-06.webp', alt: 'Pôr do sol no Vale do Lima' },
+  { src: '/images/homepage/enoturismo/carousel-07.webp', alt: 'Terraço da casa' },
+  { src: '/images/homepage/enoturismo/carousel-08.webp', alt: 'Cesta de produtos locais' },
 ]
 
 const IMG_RATIO = '4/5'
@@ -96,7 +96,7 @@ export default function SectionEnoturismo() {
             >
               <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
                 <Image
-                  src="/images/homepage/enoturismo/section-01.jpg"
+                  src="/images/homepage/enoturismo/section-01.webp"
                   alt="Enoturismo na Casa de Nabais"
                   fill className="object-cover"
                   sizes="(max-width: 1024px) 90vw, 50vw"
