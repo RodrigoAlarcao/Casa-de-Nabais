@@ -30,6 +30,7 @@ export default function SectionVinhas() {
   const imgWrapRef = useRef<HTMLDivElement>(null)
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
+  const [isMobile, setIsMobile] = useState(true)
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
   const dragStartY = useRef(0)
@@ -64,9 +65,16 @@ export default function SectionVinhas() {
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
-      if (containerRef.current && portraitRef.current) {
-        setCarouselLeft(`${containerRef.current.getBoundingClientRect().left}px`)
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        setCarouselLeft(`${rect.left}px`)
+        const isLg = window.innerWidth >= 1024
+        setIsMobile(!isLg)
+        if (isLg && portraitRef.current) {
+          setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        } else {
+          setSlideWidth(rect.width)
+        }
       }
     }
     measure()
@@ -98,9 +106,9 @@ export default function SectionVinhas() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Text block */}
-          <div className="flex flex-col justify-center px-10 lg:px-[4.5rem]">
+          <div className="flex flex-col px-0 lg:px-[4.5rem]">
             <h2
-              className="reveal-vinhas font-display text-cn-text uppercase mb-8"
+              className="reveal-vinhas font-display text-cn-text uppercase mb-8 text-center lg:text-left"
               style={{
                 fontSize: 'clamp(2rem, 4vw, 3.25rem)',
                 lineHeight: 1.05,
@@ -110,22 +118,28 @@ export default function SectionVinhas() {
               As nossas<br />vinhas
             </h2>
             <p
-              className="reveal-vinhas font-body text-cn-text-muted mb-10"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}
+              className="reveal-vinhas font-body text-cn-text-muted mb-4 text-center lg:text-left"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
             >
-              As vinhas da Casa de Nabais, situadas no Vale do Lima, são vinhas próprias, onde a uva é vindimada à mão e levada até à adega em poucos minutos, preservando a sua frescura e a sua origem. Aqui, a casta Loureiro encontra solo, tempo e rigor para se revelar com autenticidade.
+              As vinhas da Casa de Nabais, situada no Vale do Lima, são vinhas próprias, onde a uva é vindimada à mão e levada até à adega em poucos minutos, preservando a sua frescura e a sua identidade.
+            </p>
+            <p
+              className="reveal-vinhas font-body text-cn-text-muted mb-0 lg:mb-10 text-center lg:text-left"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+            >
+              Aqui, a casta Loureiro encontra solo, tempo e rigor para se revelar com autenticidade.
             </p>
             <Link
               href="/as-vinhas"
-              className="reveal-vinhas inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
+              className="reveal-vinhas hidden lg:inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
             >
               Saber mais
               <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
           </div>
 
-          {/* Portrait image — fills the full right column (50% of the grid) */}
-          <div className="reveal-vinhas">
+          {/* Portrait image — desktop only */}
+          <div className="reveal-vinhas hidden lg:block">
             <div
               ref={portraitRef}
               className="relative overflow-hidden w-full"
@@ -151,7 +165,7 @@ export default function SectionVinhas() {
 
       {/* Carousel — left-aligned with content, bleeds off the right edge */}
       <div
-        className="mt-14 md:mt-16 py-2 select-none"
+        className="mt-10 md:mt-14 lg:mt-16 py-2 select-none"
         style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
@@ -193,8 +207,8 @@ export default function SectionVinhas() {
 
       {/* Navigation */}
       <div
-        className="mt-5 flex items-center gap-5"
-        style={{ paddingLeft: carouselLeft }}
+        className="mt-5 flex items-center gap-5 justify-center lg:justify-start"
+        style={isMobile ? {} : { paddingLeft: carouselLeft }}
       >
         <button
           onClick={prev}
@@ -219,6 +233,17 @@ export default function SectionVinhas() {
         >
           <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
         </button>
+      </div>
+
+      {/* CTA — mobile only, after carousel */}
+      <div className="mt-6 px-6 lg:hidden">
+        <Link
+          href="/as-vinhas"
+          className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-full hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
+        >
+          Saber mais
+          <ArrowRight size={11} strokeWidth={1.5} />
+        </Link>
       </div>
 
     </section>
