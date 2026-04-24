@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
+import ImageLightbox from './ImageLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -35,6 +36,7 @@ export default function SectionCasa() {
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
   const [grabbing, setGrabbing] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const canPrev = index > 0
   const canNext = index < carouselImages.length - 1
@@ -171,7 +173,8 @@ export default function SectionCasa() {
         >
           {carouselImages.map((img, i) => (
             <div key={i} className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px', boxShadow: '0 8px 28px rgba(0,0,0,0.22)' }}>
+              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px', boxShadow: '0 8px 28px rgba(0,0,0,0.22)', cursor: 'zoom-in' }}
+              onClick={() => setLightboxIndex(i)}>
               <Image src={img.src} alt={img.alt} fill className="object-cover"
                 sizes="(max-width: 768px) 90vw, 50vw" />
             </div>
@@ -210,5 +213,15 @@ export default function SectionCasa() {
         />
       </div>
     </section>
+
+    {lightboxIndex !== null && (
+      <ImageLightbox
+        images={carouselImages}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onPrev={() => setLightboxIndex((i) => Math.max(0, (i ?? 0) - 1))}
+        onNext={() => setLightboxIndex((i) => Math.min(carouselImages.length - 1, (i ?? 0) + 1))}
+      />
+    )}
   )
 }
