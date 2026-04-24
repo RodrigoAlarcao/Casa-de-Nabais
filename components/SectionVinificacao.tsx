@@ -27,12 +27,12 @@ export default function SectionVinificacao() {
 
       if (imgWrapRef.current && imgContainerRef.current) {
         gsap.to(imgWrapRef.current, {
-          yPercent: -10, ease: 'none',
+          yPercent: -20, ease: 'none',
           scrollTrigger: {
             trigger: imgContainerRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1.5,
+            scrub: 1,
           },
         })
       }
@@ -105,7 +105,7 @@ export default function SectionVinificacao() {
         <div
           ref={imgWrapRef}
           className="absolute will-change-transform"
-          style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+          style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
             src="/images/homepage/vinificacao/fullbleed-01.jpg"
