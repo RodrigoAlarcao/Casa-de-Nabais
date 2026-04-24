@@ -35,6 +35,7 @@ export default function SectionCasa() {
   const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
+  const dragStartY = useRef(0)
   const [grabbing, setGrabbing] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
@@ -46,13 +47,19 @@ export default function SectionCasa() {
 
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     dragStartX.current = e.clientX
+    dragStartY.current = e.clientY
     setGrabbing(true)
     e.currentTarget.setPointerCapture(e.pointerId)
   }
   function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
     setGrabbing(false)
     const diff = dragStartX.current - e.clientX
-    if (Math.abs(diff) < 8) return
+    if (Math.abs(diff) < 8) {
+      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      return
+    }
     if (diff > 50 && canNext) next()
     else if (diff < -50 && canPrev) prev()
   }
@@ -174,8 +181,8 @@ export default function SectionCasa() {
         >
           {carouselImages.map((img, i) => (
             <div key={i} className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px', boxShadow: '0 8px 28px rgba(0,0,0,0.22)', cursor: 'zoom-in' }}
-              onClick={() => setLightboxIndex(i)}>
+              data-slide-index={i}
+              style={{ width: `${slideWidth}px`, aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px', boxShadow: '0 8px 28px rgba(0,0,0,0.22)', cursor: grabbing ? 'grabbing' : 'zoom-in' }}>
               <Image src={img.src} alt={img.alt} fill className="object-cover"
                 sizes="(max-width: 768px) 90vw, 50vw" />
             </div>
