@@ -53,8 +53,8 @@ export default function SectionVinificacao() {
   return (
     <section ref={sectionRef} style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 57%, #031D1D 100%)' }}>
 
-      {/* ── MOBILE ── image hero + title overlay */}
-      <div className="relative lg:hidden overflow-hidden" style={{ height: '58vh' }}>
+      {/* ── MOBILE ── image, strictly clipped */}
+      <div className="relative lg:hidden overflow-hidden" style={{ height: '55vh' }}>
         <Image
           src="/images/homepage/vinificacao/fullbleed-01.webp"
           alt="Adega da Casa de Nabais"
@@ -63,27 +63,38 @@ export default function SectionVinificacao() {
           sizes="100vw"
           priority
         />
-        {/* gradient: image fades into the dark section background */}
+      </div>
+
+      {/* ── MOBILE ── text block overlaps image bottom — gradient bridges the two */}
+      <div
+        className="relative lg:hidden"
+        style={{ marginTop: '-100px', background: '#031D1D', zIndex: 1 }}
+      >
+        {/* Gradient: transparent at top (shows image through) → solid dark.
+            Spans the 100px overlap zone + extra, so the transition feels continuous. */}
         <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, rgba(3,29,29,0) 25%, rgba(3,29,29,0.6) 60%, #031D1D 100%)' }}
+          className="absolute top-0 left-0 right-0 pointer-events-none"
+          style={{
+            height: '160px',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.88) 55%, #031D1D 80%)',
+          }}
         />
-        {/* Title over the gradient */}
+        {/* Title floats in the gradient zone, over the image */}
         <h2
-          className="reveal-above absolute bottom-8 left-0 right-0 font-display uppercase text-center px-6"
+          className="reveal-above relative font-display uppercase text-center px-6 pt-7"
           style={{
             fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
             lineHeight: 1.05,
             letterSpacing: '0.04em',
             color: '#FAE6C1',
+            textShadow: '0 2px 24px rgba(3,29,29,0.9)',
+            zIndex: 2,
           }}
         >
           A nossa<br />vinificação
         </h2>
-      </div>
-
-      {/* ── MOBILE ── text block */}
-      <div className="lg:hidden px-6 pt-6 pb-16 text-center">
+        {/* Text content */}
+        <div className="relative px-6 pt-6 pb-16 text-center" style={{ zIndex: 2 }}>
         <p
           className="reveal-above font-body mb-8"
           style={{
@@ -106,6 +117,7 @@ export default function SectionVinificacao() {
           Saber mais
           <ArrowRight size={11} strokeWidth={1.5} />
         </Link>
+        </div>
       </div>
 
       {/* ── DESKTOP ── text columns */}
