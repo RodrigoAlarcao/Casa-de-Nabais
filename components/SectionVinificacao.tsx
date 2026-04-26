@@ -86,7 +86,7 @@ export default function SectionVinificacao() {
         <h2
           className="reveal-above absolute left-0 right-0 text-center px-6 font-display uppercase"
           style={{
-            bottom: '96px',
+            bottom: '36px',
             zIndex: 2,
             fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
             lineHeight: 1.05,
@@ -102,7 +102,7 @@ export default function SectionVinificacao() {
       {/* Text block: slides up 2px to close the seam; z-index 2 renders it above
           the gradient extension so the gradient colour merges with the background. */}
       <div
-        className="relative lg:hidden px-6 pt-8 pb-16 text-center"
+        className="relative lg:hidden px-6 pt-5 pb-16 text-center"
         style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}
       >
         <p
