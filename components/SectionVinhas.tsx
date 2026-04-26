@@ -73,7 +73,8 @@ export default function SectionVinhas() {
         if (isLg && portraitRef.current) {
           setSlideWidth(portraitRef.current.getBoundingClientRect().width)
         } else {
-          setSlideWidth(rect.width)
+          // Reserve space so the next slide peeks ~40px on the right
+          setSlideWidth(Math.round(window.innerWidth - rect.left - SLIDE_GAP - 40))
         }
       }
     }
