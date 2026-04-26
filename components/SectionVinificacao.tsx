@@ -18,6 +18,8 @@ export default function SectionVinificacao() {
   const imgContainerRef = useRef<HTMLDivElement>(null)
   const imgWrapRef = useRef<HTMLDivElement>(null)
   const destaqueRef = useRef<HTMLDivElement>(null)
+  const mobileOuterRef = useRef<HTMLDivElement>(null)
+  const mobileImgWrapRef = useRef<HTMLDivElement>(null)
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -33,6 +35,18 @@ export default function SectionVinificacao() {
           yPercent: -20, ease: 'none',
           scrollTrigger: {
             trigger: imgContainerRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        })
+      }
+
+      if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
+        gsap.to(mobileImgWrapRef.current, {
+          yPercent: -18, ease: 'none',
+          scrollTrigger: {
+            trigger: mobileOuterRef.current,
             start: 'top bottom',
             end: 'bottom top',
             scrub: 1,
@@ -56,18 +70,25 @@ export default function SectionVinificacao() {
       {/* ── MOBILE ──
           Outer wrapper: position relative, NO overflow-hidden, so the gradient
           child can visually bleed 60px below the image boundary. */}
-      <div className="relative lg:hidden" style={{ height: '55vh' }}>
+      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '55vh' }}>
 
-        {/* Inner image container: overflow-hidden required by Next.js Image fill */}
+        {/* Inner image container: overflow-hidden clips parallax overflow */}
         <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src="/images/homepage/vinificacao/fullbleed-01.webp"
-            alt="Adega da Casa de Nabais"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
+          {/* Parallax wrap: oversized so GSAP yPercent has room to move */}
+          <div
+            ref={mobileImgWrapRef}
+            className="absolute will-change-transform"
+            style={{ top: '-30%', bottom: '-30%', left: 0, right: 0 }}
+          >
+            <Image
+              src="/images/homepage/vinificacao/fullbleed-01.webp"
+              alt="Adega da Casa de Nabais"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          </div>
         </div>
 
         {/* Gradient: starts at 15% of image height, bleeds 60px below the wrapper.
@@ -189,8 +210,8 @@ export default function SectionVinificacao() {
         </div>
       </div>
 
-      {/* Destaque — both */}
-      <div ref={destaqueRef} className="max-w-[900px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
+      {/* Destaque — desktop only */}
+      <div ref={destaqueRef} className="hidden lg:block max-w-[900px] mx-auto px-10 py-28 text-center">
         <p
           className="font-display"
           style={{
