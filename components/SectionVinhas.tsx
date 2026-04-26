@@ -67,14 +67,15 @@ export default function SectionVinhas() {
     function measure() {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect()
-        setCarouselLeft(`${rect.left}px`)
         const isLg = window.innerWidth >= 1024
         setIsMobile(!isLg)
+        const leftOffset = isLg ? rect.left : 16
+        setCarouselLeft(`${leftOffset}px`)
         if (isLg && portraitRef.current) {
           setSlideWidth(portraitRef.current.getBoundingClientRect().width)
         } else {
           // Reserve space so the next slide peeks ~40px on the right
-          setSlideWidth(Math.round(window.innerWidth - rect.left - SLIDE_GAP - 40))
+          setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
         }
       }
     }

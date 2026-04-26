@@ -51,12 +51,12 @@ export default function ImageLightbox({ images, index, onClose, onPrev, onNext }
       <button
         onClick={onClose}
         aria-label="Fechar"
-        className="absolute top-5 right-5 z-10 p-2 transition-opacity duration-200"
-        style={{ color: '#FAE6C1', opacity: 0.7 }}
+        className="absolute top-4 right-4 z-10 p-3 rounded-full transition-opacity duration-200"
+        style={{ color: '#FAE6C1', opacity: 0.9, background: 'rgba(3,29,29,0.45)' }}
         onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.7' }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.9' }}
       >
-        <X size={22} strokeWidth={1.5} />
+        <X size={20} strokeWidth={1.5} />
       </button>
 
       {/* Image box */}
