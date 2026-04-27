@@ -199,7 +199,7 @@ export default function CasaHistoriaSection() {
 
       {/* Desktop */}
       <div className="hidden lg:block max-w-[1200px] mx-auto px-10 py-28">
-        <div className="grid grid-cols-[2fr_3fr] gap-20 items-center">
+        <div className="grid grid-cols-2 gap-20 items-center">
           <h2
             className="reveal-hist font-display uppercase"
             style={{
@@ -209,10 +209,10 @@ export default function CasaHistoriaSection() {
               color: '#FAE6C1',
             }}
           >
-            História<br />da Casa<br />de Nabais
+            História da<br />Casa de Nabais
           </h2>
           <p
-            className="reveal-hist font-body"
+            className="reveal-hist font-body px-10"
             style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4, color: 'rgba(255,249,237,0.72)' }}
           >
             {INTRO_TEXT}
