@@ -160,8 +160,8 @@ export default function SectionCasa() {
           </div>
         </div>
         <div className="absolute left-0 right-0 pointer-events-none"
-          style={{ top: '35%', bottom: '-60px', zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.55) 35%, rgba(3,29,29,0.92) 62%, #031D1D 80%)' }} />
+          style={{ top: '52%', bottom: '-60px', zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 78%)' }} />
         <h2 className="reveal-casa absolute left-0 right-0 text-center px-6 font-display uppercase"
           style={{ bottom: '36px', zIndex: 2,
             fontSize: 'clamp(1.875rem, 6vw, 2.5rem)', lineHeight: 1.05, letterSpacing: '0.04em',
