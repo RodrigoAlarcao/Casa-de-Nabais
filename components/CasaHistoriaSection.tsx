@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import ImageLightbox from './ImageLightbox'
+import TextReveal from './TextReveal'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -116,10 +117,6 @@ export default function CasaHistoriaSection() {
         })
       }
 
-      gsap.from('.reveal-hist-closing', {
-        y: 25, opacity: 0, duration: 1.0, ease: 'power2.out',
-        scrollTrigger: { trigger: '.hist-closing-wrap', start: 'top 80%' },
-      })
     }, sectionRef)
 
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
@@ -203,7 +200,7 @@ export default function CasaHistoriaSection() {
           <h2
             className="reveal-hist font-display uppercase"
             style={{
-              fontSize: 'clamp(2.5rem, 5.5vw, 5rem)',
+              fontSize: 'clamp(1.875rem, 3.2vw, 3.5rem)',
               lineHeight: 1.0,
               letterSpacing: '0.04em',
               color: '#FAE6C1',
@@ -273,10 +270,11 @@ export default function CasaHistoriaSection() {
         </div>
 
         <div className="px-6 py-16 text-center">
-          <p className="reveal-hist-closing font-display"
-            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}>
-            {CLOSING_TEXT}
-          </p>
+          <TextReveal
+            text={CLOSING_TEXT}
+            className="font-display"
+            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+          />
         </div>
       </div>
 
@@ -336,18 +334,17 @@ export default function CasaHistoriaSection() {
       </div>
 
       {/* Desktop closing text — padrão Enoturismo */}
-      <div className="hist-closing-wrap hidden lg:block max-w-[1050px] mx-auto px-10 py-28 text-center">
-        <p
-          className="reveal-hist-closing font-display"
+      <div className="hidden lg:block max-w-[1050px] mx-auto px-10 py-28 text-center">
+        <TextReveal
+          text={CLOSING_TEXT}
+          className="font-display"
           style={{
             fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
             lineHeight: 1.3,
             fontWeight: 400,
             color: '#FAE6C1',
           }}
-        >
-          {CLOSING_TEXT}
-        </p>
+        />
       </div>
 
     </section>
