@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
+import TextReveal from './TextReveal'
 import ImageLightbox from './ImageLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -27,27 +28,29 @@ const BODY_PARAGRAPHS = [
   'A generosidade do conjunto e do que o rodeia dispensa encenações ou adornos em excesso. A casa, a vinha, o vinho e a mesa existem em continuidade. Tudo tem origem, intenção e função. Tudo foi pensado para durar, não para impressionar. Receber, na Casa de Nabais, é um ato simples e profundo: abrir a casa, partilhar o que se faz, explicar aquilo em que se acredita.',
 ]
 
+const CLOSING_TEXT = 'Mais do que um lugar para visitar e partir, a Casa de Nabais é um lugar para se ficar, oferecendo estadias em plena paisagem minhota e revelando-se como um refúgio para ser vivido com tempo — como verdadeira casa de campo que é, onde vinho, história e hospitalidade se unem para criar uma experiência rara e memorável no Minho.'
+
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
-const MOBILE_LEFT = 16
-const MOBILE_PEEK = 40
 
 export default function CasaPage() {
   const pageRef = useRef<HTMLDivElement>(null)
 
-  // 2-col section — for carousel alignment
+  // SectionVinhas-style refs
+  const sectionRef  = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef  = useRef<HTMLDivElement>(null)
   const imgWrapRef   = useRef<HTMLDivElement>(null)
 
-  // Carousel state
-  const [carouselLeft, setCarouselLeft] = useState('16px')
-  const [slideWidth,   setSlideWidth]   = useState(320)
+  // Carousel state — idêntico a SectionVinhas
+  const [carouselLeft, setCarouselLeft] = useState('40px')
+  const [slideWidth,   setSlideWidth]   = useState(380)
+  const [isMobile,     setIsMobile]     = useState(true)
   const [index,        setIndex]        = useState(0)
-  const [grabbing,     setGrabbing]     = useState(false)
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const dragStartX = useRef(0)
   const dragStartY = useRef(0)
+  const [grabbing,      setGrabbing]      = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const canPrev = index > 0
   const canNext = index < galleryImages.length - 1
@@ -77,14 +80,16 @@ export default function CasaPage() {
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
+      if (!containerRef.current) return
+      const rect = containerRef.current.getBoundingClientRect()
       const isLg = window.innerWidth >= 1024
-      if (isLg && containerRef.current && portraitRef.current) {
-        const rect = containerRef.current.getBoundingClientRect()
-        setCarouselLeft(`${rect.left}px`)
+      setIsMobile(!isLg)
+      const leftOffset = isLg ? rect.left : 16
+      setCarouselLeft(`${leftOffset}px`)
+      if (isLg && portraitRef.current) {
         setSlideWidth(portraitRef.current.getBoundingClientRect().width)
       } else {
-        setCarouselLeft(`${MOBILE_LEFT}px`)
-        setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
+        setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
       }
     }
     measure()
@@ -93,26 +98,15 @@ export default function CasaPage() {
     const ctx = gsap.context(() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-      gsap.from('.ca-hero', {
-        y: 22, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: '.ca-hero-wrap', start: 'top 85%' },
-      })
-      gsap.from('.ca-body', {
-        y: 28, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: '.ca-body-section', start: 'top 72%' },
-      })
-      gsap.from('.ca-closing', {
-        y: 22, opacity: 0, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: '.ca-closing-wrap', start: 'top 82%' },
+      gsap.from('.reveal-casa', {
+        y: 30, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
 
-      if (imgWrapRef.current && portraitRef.current && window.innerWidth >= 1024) {
+      if (imgWrapRef.current && portraitRef.current) {
         gsap.to(imgWrapRef.current, {
           yPercent: -20, ease: 'none',
-          scrollTrigger: {
-            trigger: portraitRef.current,
-            start: 'top bottom', end: 'bottom top', scrub: 1,
-          },
+          scrollTrigger: { trigger: portraitRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
     }, pageRef)
@@ -120,63 +114,16 @@ export default function CasaPage() {
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
 
-  function CarouselStrip() {
-    return (
-      <div
-        className="py-2 select-none"
-        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-        onPointerCancel={() => setGrabbing(false)}
-      >
-        <div
-          className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-          style={{
-            gap: `${SLIDE_GAP}px`,
-            paddingLeft: carouselLeft,
-            transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
-          }}
-        >
-          {galleryImages.map((img, i) => (
-            <div
-              key={i}
-              className="relative flex-shrink-0 overflow-hidden"
-              data-slide-index={i}
-              style={{
-                width: `${slideWidth}px`,
-                aspectRatio: IMG_RATIO,
-                backgroundColor: '#0A3A39',
-                borderRadius: '4px',
-                boxShadow: '0 4px 20px rgba(3,29,29,0.12)',
-                cursor: grabbing ? 'grabbing' : 'zoom-in',
-              }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 90vw, 40vw"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div ref={pageRef} style={{ backgroundColor: 'var(--color-bg)' }}>
 
-      {/* ════════════════════════════════════════
-          HERO TEXTUAL
-      ════════════════════════════════════════ */}
-      <div className="ca-hero-wrap max-w-[750px] mx-auto px-6 md:px-8 pt-10 md:pt-14 pb-10 md:pb-14">
-
-        {/* ← Voltar */}
+      {/* ══════════════════════════════════════
+          ← VOLTAR + TÍTULO
+      ══════════════════════════════════════ */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-10 md:pt-14">
         <Link
           href="/"
-          className="ca-hero inline-flex items-center gap-1.5 mb-10 md:mb-12 transition-opacity duration-200 hover:opacity-50"
+          className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
           style={{
             fontFamily: 'var(--font-display), serif',
             fontSize: '11px',
@@ -189,39 +136,42 @@ export default function CasaPage() {
           Voltar
         </Link>
 
-        {/* Título */}
         <h1
-          className="ca-hero font-display uppercase text-center"
+          className="font-display uppercase text-center mt-10 md:mt-12"
           style={{
-            fontSize: 'clamp(2rem, 5.5vw, 3rem)',
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             lineHeight: 1.0,
             letterSpacing: '0.05em',
             color: '#0C4544',
-            marginBottom: '1.5rem',
           }}
         >
           A Casa de Nabais
         </h1>
-
-        {/* Parágrafo introdutório */}
-        <p
-          className="ca-hero font-body text-center"
-          style={{
-            fontSize: 'clamp(1rem, 2vw, 1.125rem)',
-            lineHeight: 1.7,
-            color: '#3A5B4F',
-            maxWidth: '540px',
-            margin: '0 auto',
-          }}
-        >
-          Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
-        </p>
       </div>
 
-      {/* ════════════════════════════════════════
-          IMAGEM PANORÂMICA (16:7)
-      ════════════════════════════════════════ */}
-      <div className="max-w-[750px] mx-auto px-6 md:px-8 pb-14 md:pb-20">
+      {/* ══════════════════════════════════════
+          INTRO — estilo HomepageIntro, SEM animação
+      ══════════════════════════════════════ */}
+      <section className="py-28 md:py-40">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
+          <p
+            className="font-display"
+            style={{
+              fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+              lineHeight: 1.0,
+              fontWeight: 400,
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
+          </p>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          IMAGEM PANORÂMICA 16:7
+      ══════════════════════════════════════ */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
         <div
           className="relative overflow-hidden w-full"
           style={{ aspectRatio: '16/7', backgroundColor: '#0A3A39', borderRadius: '4px' }}
@@ -232,55 +182,46 @@ export default function CasaPage() {
             fill
             priority
             className="object-cover"
-            sizes="(max-width: 750px) 100vw, 750px"
+            sizes="(max-width: 1200px) 100vw, 1200px"
           />
         </div>
       </div>
 
-      {/* ════════════════════════════════════════
-          SECÇÃO EDITORIAL — retrato + corpo
-          (padrão Enoturismo, fundo claro, sem título)
-      ════════════════════════════════════════ */}
-      <section className="ca-body-section pb-12 md:pb-20">
+      {/* ══════════════════════════════════════
+          GRID + CARROSSEL
+          Padrão SectionVinhas: texto ESQ, retrato DIR
+      ══════════════════════════════════════ */}
+      <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
-        {/* MOBILE: retrato inline + texto abaixo */}
-        <div className="lg:hidden px-6">
-          <div
-            className="relative overflow-hidden mb-8"
-            style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
-          >
-            <Image
-              src="/images/homepage/casa/carousel-05.webp"
-              alt="Jardim histórico da Casa de Nabais"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div>
-          {BODY_PARAGRAPHS.map((para, i) => (
-            <p
-              key={i}
-              className="ca-body font-body mb-5 last:mb-0"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: '#3A5B4F' }}
-            >
-              {para}
-            </p>
-          ))}
-        </div>
+        <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-        {/* DESKTOP: retrato esquerda, texto direita */}
-        <div
-          ref={containerRef}
-          className="hidden lg:block max-w-[750px] mx-auto px-6 md:px-8"
-        >
-          <div className="grid grid-cols-[5fr_7fr] gap-10 items-start">
+            {/* Texto ESQUERDA */}
+            <div className="flex flex-col px-0 lg:px-[4.5rem]">
+              {BODY_PARAGRAPHS.map((para, i) => (
+                <p
+                  key={i}
+                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 lg:last:mb-10 text-center lg:text-left"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                >
+                  {para}
+                </p>
+              ))}
+              <Link
+                href="/ficar-na-casa"
+                className="reveal-casa hidden lg:inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
+              >
+                Ficar na Casa
+                <ArrowRight size={11} strokeWidth={1.5} />
+              </Link>
+            </div>
 
-            {/* Retrato com parallax */}
-            <div className="ca-body">
+            {/* Retrato DIREITA — só desktop */}
+            <div className="reveal-casa hidden lg:block">
               <div
                 ref={portraitRef}
                 className="relative overflow-hidden w-full"
-                style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
+                style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F', borderRadius: '4px' }}
               >
                 <div
                   ref={imgWrapRef}
@@ -288,44 +229,65 @@ export default function CasaPage() {
                   style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                 >
                   <Image
-                    src="/images/homepage/casa/carousel-05.webp"
-                    alt="Jardim histórico da Casa de Nabais"
+                    src="/images/homepage/casa/carousel-02.webp"
+                    alt="Casa de Nabais — interior"
                     fill
                     className="object-cover"
-                    sizes="35vw"
+                    sizes="(max-width: 1024px) 90vw, 50vw"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Parágrafos */}
-            <div className="flex flex-col justify-start pt-2">
-              {BODY_PARAGRAPHS.map((para, i) => (
-                <p
-                  key={i}
-                  className="ca-body font-body mb-6 last:mb-0"
-                  style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.75, color: '#3A5B4F' }}
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-
           </div>
         </div>
 
-      </section>
-
-      {/* ════════════════════════════════════════
-          GALERIA — carrossel full-bleed
-      ════════════════════════════════════════ */}
-      <div className="mt-4 md:mt-6">
-        <CarouselStrip />
-
-        {/* Nav */}
+        {/* Carrossel — alinhado à esquerda do container, sangra para a direita */}
         <div
-          className="mt-5 mb-16 md:mb-20 flex items-center gap-5"
-          style={{ paddingLeft: carouselLeft }}
+          className="mt-10 md:mt-14 lg:mt-16 py-2 select-none"
+          style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => setGrabbing(false)}
+        >
+          <div
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            style={{
+              gap: `${SLIDE_GAP}px`,
+              paddingLeft: carouselLeft,
+              transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
+            }}
+          >
+            {galleryImages.map((img, i) => (
+              <div
+                key={i}
+                className="relative flex-shrink-0 overflow-hidden"
+                data-slide-index={i}
+                style={{
+                  width: `${slideWidth}px`,
+                  aspectRatio: IMG_RATIO,
+                  backgroundColor: '#3A5B4F',
+                  borderRadius: '4px',
+                  boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
+                  cursor: grabbing ? 'grabbing' : 'zoom-in',
+                }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 90vw, 50vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navegação */}
+        <div
+          className="mt-5 flex items-center gap-5 justify-center lg:justify-start"
+          style={isMobile ? {} : { paddingLeft: carouselLeft }}
         >
           <button
             onClick={prev}
@@ -334,12 +296,9 @@ export default function CasaPage() {
             className="p-1 transition-opacity duration-200"
             style={{ opacity: canPrev ? 1 : 0.25 }}
           >
-            <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
+            <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
-          <span
-            className="font-display text-[10px] uppercase tracking-[0.16em]"
-            style={{ color: 'rgba(3,29,29,0.45)' }}
-          >
+          <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
             {index + 1} de {galleryImages.length}
           </span>
           <button
@@ -349,26 +308,40 @@ export default function CasaPage() {
             className="p-1 transition-opacity duration-200"
             style={{ opacity: canNext ? 1 : 0.25 }}
           >
-            <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
+            <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
         </div>
-      </div>
 
-      {/* ════════════════════════════════════════
-          PARÁGRAFO DE FECHO
-      ════════════════════════════════════════ */}
-      <div className="ca-closing-wrap max-w-[750px] mx-auto px-6 md:px-8 pb-24 md:pb-32 text-center">
-        <p
-          className="ca-closing font-body"
-          style={{
-            fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)',
-            lineHeight: 1.8,
-            color: '#3A5B4F',
-          }}
-        >
-          Mais do que um lugar para visitar e partir, a Casa de Nabais é um lugar para se ficar, oferecendo estadias em plena paisagem minhota e revelando-se como um refúgio para ser vivido com tempo — como verdadeira casa de campo que é, onde vinho, história e hospitalidade se unem para criar uma experiência rara e memorável no Minho.
-        </p>
-      </div>
+        {/* CTA — mobile only */}
+        <div className="mt-6 px-6 lg:hidden">
+          <Link
+            href="/ficar-na-casa"
+            className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-full hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
+          >
+            Ficar na Casa
+            <ArrowRight size={11} strokeWidth={1.5} />
+          </Link>
+        </div>
+
+      </section>
+
+      {/* ══════════════════════════════════════
+          FECHO — idêntico a HomepageIntro, COM animação TextReveal
+      ══════════════════════════════════════ */}
+      <section className="py-28 md:py-40">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
+          <TextReveal
+            text={CLOSING_TEXT}
+            className="font-display"
+            style={{
+              fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+              lineHeight: 1.0,
+              fontWeight: 400,
+              color: 'var(--color-text-muted)',
+            }}
+          />
+        </div>
+      </section>
 
       {lightboxIndex !== null && (
         <ImageLightbox
