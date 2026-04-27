@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
+import TextReveal from './TextReveal'
 import ImageLightbox from './ImageLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -24,18 +25,24 @@ const carouselImages = [
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
+const MOBILE_LEFT = 16
+const MOBILE_PEEK = 40
 
 export default function SectionEnoturismo() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const portraitRef = useRef<HTMLDivElement>(null)
-  const imgWrapRef = useRef<HTMLDivElement>(null)
+  const sectionRef       = useRef<HTMLElement>(null)
+  const containerRef     = useRef<HTMLDivElement>(null)
+  const portraitRef      = useRef<HTMLDivElement>(null)
+  const imgWrapRef       = useRef<HTMLDivElement>(null)
+  const mobileOuterRef   = useRef<HTMLDivElement>(null)
+  const mobileImgWrapRef = useRef<HTMLDivElement>(null)
+
   const [carouselLeft, setCarouselLeft] = useState('40px')
-  const [slideWidth, setSlideWidth] = useState(380)
-  const [index, setIndex] = useState(0)
+  const [slideWidth,   setSlideWidth]   = useState(380)
+  const [isMobile,     setIsMobile]     = useState(true)
+  const [index,        setIndex]        = useState(0)
   const dragStartX = useRef(0)
   const dragStartY = useRef(0)
-  const [grabbing, setGrabbing] = useState(false)
+  const [grabbing,      setGrabbing]    = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const canPrev = index > 0
@@ -65,9 +72,16 @@ export default function SectionEnoturismo() {
 
   useIsomorphicLayoutEffect(() => {
     function measure() {
-      if (containerRef.current && portraitRef.current) {
-        setCarouselLeft(`${containerRef.current.getBoundingClientRect().left}px`)
+      if (!containerRef.current) return
+      const rect = containerRef.current.getBoundingClientRect()
+      const isLg = window.innerWidth >= 1024
+      setIsMobile(!isLg)
+      if (isLg && portraitRef.current) {
+        setCarouselLeft(`${rect.left}px`)
         setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+      } else {
+        setCarouselLeft(`${MOBILE_LEFT}px`)
+        setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
       }
     }
     measure()
@@ -75,96 +89,34 @@ export default function SectionEnoturismo() {
 
     const ctx = gsap.context(() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
       gsap.from('.reveal-eno', {
         y: 30, opacity: 0, stagger: 0.09, duration: 0.9, ease: 'power2.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
       })
 
-      if (imgWrapRef.current && portraitRef.current) {
+      if (imgWrapRef.current && portraitRef.current && window.innerWidth >= 1024) {
         gsap.to(imgWrapRef.current, {
           yPercent: -20, ease: 'none',
           scrollTrigger: { trigger: portraitRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
+
+      if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
+        gsap.to(mobileImgWrapRef.current, {
+          yPercent: -18, ease: 'none',
+          scrollTrigger: { trigger: mobileOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
     }, sectionRef)
+
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
 
-  return (
-    <>
-    <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
-      {/* Main grid — image LEFT, text RIGHT */}
-      <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-          {/* Portrait image — fills the full left column (50% of the grid) */}
-          <div className="reveal-eno order-2 lg:order-1">
-            <div
-              ref={portraitRef}
-              className="relative overflow-hidden w-full"
-              style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
-            >
-              <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-                <Image
-                  src="/images/homepage/enoturismo/section-01.webp"
-                  alt="Enoturismo na Casa de Nabais"
-                  fill className="object-cover"
-                  sizes="(max-width: 1024px) 90vw, 50vw"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Text — right */}
-          <div className="flex flex-col justify-center px-10 lg:px-[4.5rem] order-1 lg:order-2">
-            <h2
-              className="reveal-eno font-display uppercase mb-8"
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 3.25rem)',
-                lineHeight: 1.0,
-                letterSpacing: '0.04em',
-                color: '#FAE6C1',
-              }}
-            >
-              Enoturismo
-            </h2>
-            <p
-              className="reveal-eno font-body mb-10"
-              style={{
-                fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                lineHeight: 1.4,
-                color: 'rgba(255,249,237,0.72)',
-              }}
-            >
-              Na Casa de Nabais, o enoturismo nasce da terra e tem as pessoas no centro. Entre solos graníticos e um raro veio de xisto, a cada experiência partilhamos a vida da quinta — a vinha, a adega, a mesa e os seus produtos — com autenticidade e cuidado de quem os faz.
-            </p>
-            <div className="reveal-eno flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <Link
-                href="/o-enoturismo"
-                className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
-                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}
-              >
-                Saiba mais <ArrowRight size={11} strokeWidth={1.5} />
-              </Link>
-              <Link
-                href="/ficar-na-casa"
-                className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
-                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}
-              >
-                Ficar na Casa <ArrowRight size={11} strokeWidth={1.5} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Carousel — bleed right */}
+  function CarouselStrip() {
+    return (
       <div
-        className="mt-14 md:mt-16 py-2 select-none"
+        className="py-2 select-none"
         style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
@@ -188,9 +140,143 @@ export default function SectionEnoturismo() {
           ))}
         </div>
       </div>
+    )
+  }
 
-      {/* Navigation */}
-      <div className="mt-5 flex items-center gap-5" style={{ paddingLeft: carouselLeft }}>
+  return (
+    <>
+    <section ref={sectionRef} className="pt-0 pb-0">
+
+      {/* ══ MOBILE ══ */}
+
+      {/* Hero image */}
+      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '55vh' }}>
+        <div className="absolute inset-0 overflow-hidden">
+          <div ref={mobileImgWrapRef} className="absolute will-change-transform"
+            style={{ top: '-30%', bottom: '-30%', left: 0, right: 0 }}>
+            <Image src="/images/homepage/enoturismo/section-01.webp" alt="Enoturismo na Casa de Nabais"
+              fill className="object-cover" sizes="100vw" priority />
+          </div>
+        </div>
+        <div className="absolute left-0 right-0 pointer-events-none"
+          style={{ top: '52%', bottom: '-60px', zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 78%)' }} />
+        <h2 className="reveal-eno absolute left-0 right-0 text-center px-6 font-display uppercase"
+          style={{ bottom: '36px', zIndex: 2,
+            fontSize: 'clamp(1.875rem, 6vw, 2.5rem)', lineHeight: 1.05, letterSpacing: '0.04em',
+            color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)' }}>
+          Enoturismo
+        </h2>
+      </div>
+
+      {/* Single dark wrapper — text + carousel + nav + CTAs + closing text */}
+      <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
+
+        {/* Body text */}
+        <div className="px-6 pt-5 pb-8 text-center">
+          <p className="reveal-eno font-body"
+            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}>
+            Na Casa de Nabais, o enoturismo nasce da terra e tem as pessoas no centro. Entre solos graníticos e um raro veio de xisto, a cada experiência partilhamos a vida da quinta — a vinha, a adega, a mesa e os seus produtos — com autenticidade e cuidado de quem os faz.
+          </p>
+        </div>
+
+        {/* Carousel */}
+        <div className="mt-2">
+          <CarouselStrip />
+        </div>
+
+        {/* Navigation */}
+        <div className="mt-5 flex items-center gap-5 justify-center">
+          <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
+            className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
+            <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+          </button>
+          <span className="font-display text-[10px] uppercase tracking-[0.16em]"
+            style={{ color: 'rgba(250,230,193,0.55)' }}>
+            {index + 1} de {carouselImages.length}
+          </span>
+          <button onClick={next} disabled={!canNext} aria-label="Seguinte"
+            className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
+            <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+          </button>
+        </div>
+
+        {/* CTAs */}
+        <div className="mt-6 px-6 pb-10 flex gap-3">
+          <Link href="/o-enoturismo"
+            className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
+            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
+            Saber mais <ArrowRight size={11} strokeWidth={1.5} />
+          </Link>
+          <Link href="/ficar-na-casa"
+            className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
+            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
+            Ficar na Casa <ArrowRight size={11} strokeWidth={1.5} />
+          </Link>
+        </div>
+
+        {/* TextReveal — mobile */}
+        <div className="px-6 pb-16 text-center">
+          <TextReveal
+            text="Entre solos graníticos e um raro veio de xisto, criamos vinhos com identidade e oferecemos uma experiência de enoturismo vivida com quem os faz."
+            className="font-display"
+            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+            ghostOpacity={0.18}
+          />
+        </div>
+      </div>
+
+      {/* ══ DESKTOP ══ image LEFT, text RIGHT */}
+      <div ref={containerRef} className="hidden lg:block max-w-[1200px] mx-auto px-10 pt-0 pb-28">
+        <div className="grid grid-cols-2 gap-16 items-center">
+
+          <div className="reveal-eno">
+            <div ref={portraitRef} className="relative overflow-hidden w-full"
+              style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
+              <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+                <Image src="/images/homepage/enoturismo/section-01.webp" alt="Enoturismo na Casa de Nabais"
+                  fill className="object-cover" sizes="50vw" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center px-[4.5rem]">
+            <h2 className="reveal-eno font-display uppercase mb-8"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', lineHeight: 1.0, letterSpacing: '0.04em', color: '#FAE6C1' }}>
+              Enoturismo
+            </h2>
+            <p className="reveal-eno font-body mb-10"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4, color: 'rgba(255,249,237,0.72)' }}>
+              Na Casa de Nabais, o enoturismo nasce da terra e tem as pessoas no centro. Entre solos graníticos e um raro veio de xisto, a cada experiência partilhamos a vida da quinta — a vinha, a adega, a mesa e os seus produtos — com autenticidade e cuidado de quem os faz.
+            </p>
+            <div className="reveal-eno flex items-center gap-4">
+              <Link href="/o-enoturismo"
+                className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
+                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}>
+                Saiba mais <ArrowRight size={11} strokeWidth={1.5} />
+              </Link>
+              <Link href="/ficar-na-casa"
+                className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
+                style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}>
+                Ficar na Casa <ArrowRight size={11} strokeWidth={1.5} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop carousel */}
+      <div className="hidden lg:block mt-0">
+        <CarouselStrip />
+      </div>
+
+      {/* Desktop navigation */}
+      <div className="hidden lg:block mt-5 flex items-center gap-5"
+        style={{ paddingLeft: carouselLeft }}>
         <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
           className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
           <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -205,20 +291,14 @@ export default function SectionEnoturismo() {
         </button>
       </div>
 
-      {/* Centered closing text */}
-      <div className="max-w-[1050px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
-        <p
-          className="reveal-eno font-display"
-          style={{
-            fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
-            lineHeight: 1.3,
-            fontWeight: 400,
-            color: '#FAE6C1',
-          }}
-        >
+      {/* Desktop closing text */}
+      <div className="hidden lg:block max-w-[1050px] mx-auto px-10 py-28 text-center">
+        <p className="reveal-eno font-display"
+          style={{ fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)', lineHeight: 1.3, fontWeight: 400, color: '#FAE6C1' }}>
           Entre solos graníticos e um raro veio de xisto, criamos vinhos com identidade e oferecemos uma experiência de enoturismo vivida com quem os faz.
         </p>
       </div>
+
     </section>
 
     {lightboxIndex !== null && (
