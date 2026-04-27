@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
 import ImageLightbox from './ImageLightbox'
+import CasaHistoriaSection from './CasaHistoriaSection'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -364,6 +365,8 @@ export default function CasaPage() {
           onNext={() => setLightboxIndex(i => Math.min(galleryImages.length - 1, (i ?? 0) + 1))}
         />
       )}
+
+      <CasaHistoriaSection />
 
     </div>
   )
