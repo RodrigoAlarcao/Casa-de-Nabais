@@ -121,7 +121,7 @@ export default function CasaPage() {
       {/* ══════════════════════════════════════
           ← VOLTAR + TÍTULO
       ══════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-10 md:pt-14">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
@@ -138,7 +138,7 @@ export default function CasaPage() {
         </Link>
 
         <h1
-          className="font-display uppercase text-center mt-10 md:mt-12"
+          className="font-display uppercase text-center mt-5 md:mt-6"
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             lineHeight: 1.0,
@@ -153,7 +153,7 @@ export default function CasaPage() {
       {/* ══════════════════════════════════════
           INTRO — estilo HomepageIntro, SEM animação
       ══════════════════════════════════════ */}
-      <section className="py-28 md:py-40">
+      <section className="pt-8 md:pt-10 pb-12 md:pb-16">
         <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
           <p
             className="font-display"
