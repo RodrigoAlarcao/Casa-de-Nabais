@@ -43,6 +43,10 @@ export default function CasaPage() {
   const portraitRef  = useRef<HTMLDivElement>(null)
   const imgWrapRef   = useRef<HTMLDivElement>(null)
 
+  // Panoramic image parallax refs
+  const panoramicContainerRef = useRef<HTMLDivElement>(null)
+  const panoramicImgRef       = useRef<HTMLDivElement>(null)
+
   // Carousel state — idêntico a SectionVinhas
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth,   setSlideWidth]   = useState(380)
@@ -110,6 +114,13 @@ export default function CasaPage() {
           scrollTrigger: { trigger: portraitRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
+
+      if (panoramicImgRef.current && panoramicContainerRef.current) {
+        gsap.to(panoramicImgRef.current, {
+          yPercent: -15, ease: 'none',
+          scrollTrigger: { trigger: panoramicContainerRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
     }, pageRef)
 
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
@@ -138,7 +149,7 @@ export default function CasaPage() {
         </Link>
 
         <h1
-          className="font-display uppercase text-center mt-5 md:mt-6"
+          className="font-display uppercase text-center mt-8 md:mt-10"
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             lineHeight: 1.0,
@@ -153,13 +164,13 @@ export default function CasaPage() {
       {/* ══════════════════════════════════════
           INTRO — estilo HomepageIntro, SEM animação
       ══════════════════════════════════════ */}
-      <section className="pt-8 md:pt-10 pb-12 md:pb-16">
+      <section className="pt-12 md:pt-14 pb-14 md:pb-20">
         <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
           <p
-            className="font-display"
+            className="font-body"
             style={{
-              fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
-              lineHeight: 1.0,
+              fontSize: 'clamp(1.0625rem, 1.5vw, 1.25rem)',
+              lineHeight: 1.3,
               fontWeight: 400,
               color: 'var(--color-text-muted)',
             }}
@@ -174,17 +185,24 @@ export default function CasaPage() {
       ══════════════════════════════════════ */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10">
         <div
+          ref={panoramicContainerRef}
           className="relative overflow-hidden w-full"
           style={{ aspectRatio: '16/7', backgroundColor: '#0A3A39', borderRadius: '4px' }}
         >
-          <Image
-            src="/images/homepage/casa/section-01.webp"
-            alt="Vista exterior da Casa de Nabais"
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1200px) 100vw, 1200px"
-          />
+          <div
+            ref={panoramicImgRef}
+            className="absolute will-change-transform"
+            style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+          >
+            <Image
+              src="/images/homepage/casa/section-01.webp"
+              alt="Vista exterior da Casa de Nabais"
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1200px) 100vw, 1200px"
+            />
+          </div>
         </div>
       </div>
 
