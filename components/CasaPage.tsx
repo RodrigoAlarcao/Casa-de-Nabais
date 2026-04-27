@@ -24,6 +24,7 @@ const galleryImages = [
 
 const BODY_PARAGRAPHS = [
   'A Casa de Nabais nasce da terra e volta a ela. Entre muros antigos, vinhas trabalhadas à mão, o pomar, a horta e a mesa, vive-se um Minho verdadeiro, onde o saber agrícola, o vinho e a hospitalidade formam uma mesma realidade.',
+  'Os nossos vinhos começam muito antes de chegarem à garrafa. Começam no subsolo granítico, atravessado por um raro veio de xisto. Continuam no cuidado diário da vinha, na espera paciente, na decisão de intervir pouco. E revelam-se no copo — frescos, precisos, coerentes com o lugar de onde vêm.',
   'Ficar na Casa de Nabais é entrar nesse ritmo: dormir num solar com séculos de história, acordar com a paisagem do Vale do Lima à nossa volta, provar o vinho na terra onde nasce, a mesma que nos dá os frutos, os legumes e as aromáticas que servimos. Entre as vinhas, a adega e a mesa, quem nos visita é convidado a compreender o vinho desde a sua origem, numa experiência próxima e autêntica, vivida com quem o faz.',
   'A generosidade do conjunto e do que o rodeia dispensa encenações ou adornos em excesso. A casa, a vinha, o vinho e a mesa existem em continuidade. Tudo tem origem, intenção e função. Tudo foi pensado para durar, não para impressionar. Receber, na Casa de Nabais, é um ato simples e profundo: abrir a casa, partilhar o que se faz, explicar aquilo em que se acredita.',
 ]
@@ -196,27 +197,7 @@ export default function CasaPage() {
         <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            {/* Texto ESQUERDA */}
-            <div className="flex flex-col px-0 lg:px-[4.5rem]">
-              {BODY_PARAGRAPHS.map((para, i) => (
-                <p
-                  key={i}
-                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 lg:last:mb-10 text-center lg:text-left"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
-                >
-                  {para}
-                </p>
-              ))}
-              <Link
-                href="/ficar-na-casa"
-                className="reveal-casa hidden lg:inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
-              >
-                Ficar na Casa
-                <ArrowRight size={11} strokeWidth={1.5} />
-              </Link>
-            </div>
-
-            {/* Retrato DIREITA — só desktop */}
+            {/* Retrato ESQUERDA — só desktop */}
             <div className="reveal-casa hidden lg:block">
               <div
                 ref={portraitRef}
@@ -237,6 +218,19 @@ export default function CasaPage() {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Texto DIREITA */}
+            <div className="flex flex-col px-0 lg:pl-10">
+              {BODY_PARAGRAPHS.map((para, i) => (
+                <p
+                  key={i}
+                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                >
+                  {para}
+                </p>
+              ))}
             </div>
 
           </div>
@@ -312,17 +306,6 @@ export default function CasaPage() {
           </button>
         </div>
 
-        {/* CTA — mobile only */}
-        <div className="mt-6 px-6 lg:hidden">
-          <Link
-            href="/ficar-na-casa"
-            className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-full hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
-          >
-            Ficar na Casa
-            <ArrowRight size={11} strokeWidth={1.5} />
-          </Link>
-        </div>
-
       </section>
 
       {/* ══════════════════════════════════════
@@ -340,6 +323,17 @@ export default function CasaPage() {
               color: 'var(--color-text-muted)',
             }}
           />
+        </div>
+
+        {/* CTA — centrado, depois do texto animado */}
+        <div className="flex justify-center mt-14 md:mt-16 px-6">
+          <Link
+            href="/ficar-na-casa"
+            className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
+          >
+            Ficar na Casa
+            <ArrowRight size={11} strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
 
