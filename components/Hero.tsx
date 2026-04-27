@@ -108,8 +108,9 @@ export default function Hero() {
 
       {/* Gradient de transição — funde para #FFF3DE, início exacto do gradiente da secção seguinte */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-10"
+        className="absolute left-0 right-0 z-10"
         style={{
+          bottom: '-2px',
           height: '40%',
           background: 'linear-gradient(to bottom, transparent 0%, #FFF3DE 100%)',
         }}
@@ -120,7 +121,7 @@ export default function Hero() {
         <h1
           className="font-display uppercase mb-6 md:mb-8"
           style={{
-            fontSize: 'clamp(2.25rem, 5.5vw, 3.5rem)',
+            fontSize: 'clamp(1.5rem, 5.5vw, 3.5rem)',
             letterSpacing: '0.04em',
             lineHeight: 1.0,
             color: '#FAE6C1',
@@ -132,7 +133,6 @@ export default function Hero() {
               key={i}
               ref={(el) => { if (el) linesRef.current[i] = el }}
               className="block"
-              style={{ whiteSpace: 'nowrap' }}
             >
               {line}
             </span>
