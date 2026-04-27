@@ -160,8 +160,8 @@ export default function SectionCasa() {
           </div>
         </div>
         <div className="absolute left-0 right-0 pointer-events-none"
-          style={{ top: '15%', bottom: '-60px', zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.45) 38%, rgba(3,29,29,0.9) 65%, #031D1D 82%)' }} />
+          style={{ top: '35%', bottom: '-60px', zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.55) 35%, rgba(3,29,29,0.92) 62%, #031D1D 80%)' }} />
         <h2 className="reveal-casa absolute left-0 right-0 text-center px-6 font-display uppercase"
           style={{ bottom: '36px', zIndex: 2,
             fontSize: 'clamp(1.875rem, 6vw, 2.5rem)', lineHeight: 1.05, letterSpacing: '0.04em',
@@ -203,7 +203,7 @@ export default function SectionCasa() {
         </div>
 
         {/* CTAs */}
-        <div className="mt-6 px-6 pb-16 flex gap-3">
+        <div className="mt-6 px-6 pb-10 flex gap-3">
           <Link href="/a-casa"
             className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
             style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
@@ -214,6 +214,16 @@ export default function SectionCasa() {
             style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
             Ficar na casa <ArrowRight size={11} strokeWidth={1.5} />
           </Link>
+        </div>
+
+        {/* TextReveal — mobile */}
+        <div className="px-6 pb-16 text-center">
+          <TextReveal
+            text="A Casa de Nabais é também um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
+            className="font-display"
+            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+            ghostOpacity={0.18}
+          />
         </div>
       </div>
 
