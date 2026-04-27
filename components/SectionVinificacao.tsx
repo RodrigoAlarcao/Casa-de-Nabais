@@ -44,7 +44,7 @@ export default function SectionVinificacao() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: -18, ease: 'none',
+          yPercent: 20, ease: 'none',
           scrollTrigger: {
             trigger: mobileOuterRef.current,
             start: 'top bottom',
@@ -78,7 +78,7 @@ export default function SectionVinificacao() {
           <div
             ref={mobileImgWrapRef}
             className="absolute will-change-transform"
-            style={{ top: '-30%', bottom: '-30%', left: 0, right: 0 }}
+            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
           >
             <Image
               src="/images/homepage/vinificacao/fullbleed-01.webp"

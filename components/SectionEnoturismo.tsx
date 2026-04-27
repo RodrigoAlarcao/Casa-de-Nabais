@@ -104,7 +104,7 @@ export default function SectionEnoturismo() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: -18, ease: 'none',
+          yPercent: 20, ease: 'none',
           scrollTrigger: { trigger: mobileOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
@@ -153,7 +153,7 @@ export default function SectionEnoturismo() {
       <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '55vh' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
-            style={{ top: '-30%', bottom: '-30%', left: 0, right: 0 }}>
+            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
             <Image src="/images/homepage/enoturismo/section-01.webp" alt="Enoturismo na Casa de Nabais"
               fill className="object-cover" sizes="100vw" priority />
           </div>
