@@ -140,45 +140,6 @@ export default function CasaPage() {
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
   }, [])
 
-  function CarouselStrip() {
-    return (
-      <div
-        className="py-2 select-none"
-        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-        onPointerCancel={() => setGrabbing(false)}
-      >
-        <div
-          className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-          style={{
-            gap: `${SLIDE_GAP}px`,
-            paddingLeft: carouselLeft,
-            transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
-          }}
-        >
-          {galleryImages.map((img, i) => (
-            <div
-              key={i}
-              className="relative flex-shrink-0 overflow-hidden"
-              data-slide-index={i}
-              style={{
-                width: `${slideWidth}px`,
-                aspectRatio: IMG_RATIO,
-                backgroundColor: '#3A5B4F',
-                borderRadius: '4px',
-                boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
-                cursor: grabbing ? 'grabbing' : 'zoom-in',
-              }}
-            >
-              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 90vw, 50vw" />
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div ref={pageRef} style={{ backgroundColor: 'var(--color-bg)' }}>
 
@@ -374,19 +335,10 @@ export default function CasaPage() {
 
             {/* Texto DIREITA */}
             <div className="flex flex-col px-0 lg:pl-10">
-              {BODY_PARAGRAPHS.slice(0, 2).map((para, i) => (
+              {BODY_PARAGRAPHS.map((para, i) => (
                 <p
                   key={i}
-                  className="reveal-casa font-body text-cn-text-muted mb-4 text-center lg:text-left"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
-                >
-                  {para}
-                </p>
-              ))}
-              {BODY_PARAGRAPHS.slice(2).map((para, i) => (
-                <p
-                  key={i + 2}
-                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left hidden lg:block"
+                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
                 >
                   {para}
@@ -397,52 +349,72 @@ export default function CasaPage() {
           </div>
         </div>
 
-        {/* ── Mobile: carrossel entre para 2 e 3 ── */}
-        <div className="lg:hidden mt-8">
-          <CarouselStrip />
-        </div>
-        <div className="lg:hidden mt-5 flex items-center gap-5 justify-center">
-          <button onClick={prev} disabled={!canPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
-            <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
-          </button>
-          <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
-            {index + 1} de {galleryImages.length}
-          </span>
-          <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
-            <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
-          </button>
-        </div>
-
-        {/* ── Mobile: parágrafos 3–4 após carrossel ── */}
-        <div className="lg:hidden max-w-[1200px] mx-auto px-6 mt-8">
-          {BODY_PARAGRAPHS.slice(2).map((para, i) => (
-            <p
-              key={i + 2}
-              className="font-body text-cn-text-muted mb-4 last:mb-0 text-center"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
-            >
-              {para}
-            </p>
-          ))}
-        </div>
-
-        {/* ── Desktop: carrossel ── */}
-        <div className="hidden lg:block mt-16">
-          <CarouselStrip />
-        </div>
-
-        {/* ── Desktop: navegação ── */}
+        {/* Carrossel — alinhado à esquerda do container, sangra para a direita */}
         <div
-          className="hidden lg:flex mt-5 items-center gap-5 justify-start"
-          style={{ paddingLeft: carouselLeft }}
+          className="mt-10 md:mt-14 lg:mt-16 py-2 select-none"
+          style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => setGrabbing(false)}
         >
-          <button onClick={prev} disabled={!canPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
+          <div
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            style={{
+              gap: `${SLIDE_GAP}px`,
+              paddingLeft: carouselLeft,
+              transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
+            }}
+          >
+            {galleryImages.map((img, i) => (
+              <div
+                key={i}
+                className="relative flex-shrink-0 overflow-hidden"
+                data-slide-index={i}
+                style={{
+                  width: `${slideWidth}px`,
+                  aspectRatio: IMG_RATIO,
+                  backgroundColor: '#3A5B4F',
+                  borderRadius: '4px',
+                  boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
+                  cursor: grabbing ? 'grabbing' : 'zoom-in',
+                }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 90vw, 50vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navegação */}
+        <div
+          className="mt-5 flex items-center gap-5 justify-center lg:justify-start"
+          style={isMobile ? {} : { paddingLeft: carouselLeft }}
+        >
+          <button
+            onClick={prev}
+            disabled={!canPrev}
+            aria-label="Anterior"
+            className="p-1 transition-opacity duration-200"
+            style={{ opacity: canPrev ? 1 : 0.25 }}
+          >
             <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
             {index + 1} de {galleryImages.length}
           </span>
-          <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
+          <button
+            onClick={next}
+            disabled={!canNext}
+            aria-label="Seguinte"
+            className="p-1 transition-opacity duration-200"
+            style={{ opacity: canNext ? 1 : 0.25 }}
+          >
             <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
         </div>
