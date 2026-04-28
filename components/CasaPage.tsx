@@ -146,7 +146,7 @@ export default function CasaPage() {
       {/* ══════════════════════════════════════
           MOBILE HERO — foto + gradiente
       ══════════════════════════════════════ */}
-      <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(100svh - 72px)' }}>
+      <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(85svh - 72px)' }}>
 
         <div className="absolute inset-0 overflow-hidden">
           <div
