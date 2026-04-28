@@ -335,10 +335,21 @@ export default function CasaPage() {
 
             {/* Texto DIREITA */}
             <div className="flex flex-col px-0 lg:pl-10">
-              {BODY_PARAGRAPHS.map((para, i) => (
+              {/* Parágrafos 1–2: sempre visíveis */}
+              {BODY_PARAGRAPHS.slice(0, 2).map((para, i) => (
                 <p
                   key={i}
-                  className={`reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left${i >= 2 ? ' hidden lg:block' : ''}`}
+                  className="reveal-casa font-body text-cn-text-muted mb-4 text-center lg:text-left"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                >
+                  {para}
+                </p>
+              ))}
+              {/* Parágrafos 3–4: apenas desktop */}
+              {BODY_PARAGRAPHS.slice(2).map((para, i) => (
+                <p
+                  key={i + 2}
+                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left hidden lg:block"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
                 >
                   {para}
