@@ -7,6 +7,7 @@ import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
 import ImageLightbox from './ImageLightbox'
 import CasaHistoriaSection from './CasaHistoriaSection'
+import CasaPessoasSection from './CasaPessoasSection'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -367,6 +368,7 @@ export default function CasaPage() {
       )}
 
       <CasaHistoriaSection />
+      <CasaPessoasSection />
 
     </div>
   )
