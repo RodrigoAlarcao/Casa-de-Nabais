@@ -53,6 +53,10 @@ export default function CasaPage() {
   const mobileHeroRef    = useRef<HTMLDivElement>(null)
   const mobileHeroImgRef = useRef<HTMLDivElement>(null)
 
+  // Mobile portrait parallax refs
+  const mobilePortraitOuterRef = useRef<HTMLDivElement>(null)
+  const mobilePortraitImgRef   = useRef<HTMLDivElement>(null)
+
   // Carousel state — idêntico a SectionVinhas
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth,   setSlideWidth]   = useState(380)
@@ -133,6 +137,13 @@ export default function CasaPage() {
         gsap.to(mobileHeroImgRef.current, {
           yPercent: 20, ease: 'none',
           scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
+
+      if (mobilePortraitImgRef.current && mobilePortraitOuterRef.current && window.innerWidth < 1024) {
+        gsap.to(mobilePortraitImgRef.current, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: mobilePortraitOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
     }, pageRef)
@@ -489,6 +500,27 @@ export default function CasaPage() {
         </div>
 
       </section>
+
+      {/* ── Mobile portrait image — carousel-02.webp, antes do TextReveal ── */}
+      <div
+        ref={mobilePortraitOuterRef}
+        className="relative lg:hidden mx-6 mt-10"
+        style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#3A5B4F' }}
+      >
+        <div
+          ref={mobilePortraitImgRef}
+          className="absolute will-change-transform"
+          style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+        >
+          <Image
+            src="/images/homepage/casa/carousel-02.webp"
+            alt="Casa de Nabais — interior"
+            fill
+            className="object-cover"
+            sizes="calc(100vw - 3rem)"
+          />
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════
           FECHO — idêntico a HomepageIntro, COM animação TextReveal
