@@ -88,14 +88,15 @@ export default function CasaPage() {
   useIsomorphicLayoutEffect(() => {
     function measure() {
       if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
       const isLg = window.innerWidth >= 1024
       setIsMobile(!isLg)
-      const leftOffset = isLg ? rect.left : 16
-      setCarouselLeft(`${leftOffset}px`)
       if (isLg && portraitRef.current) {
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        const portraitRect = portraitRef.current.getBoundingClientRect()
+        setCarouselLeft(`${portraitRect.left}px`)
+        setSlideWidth(portraitRect.width)
       } else {
+        const leftOffset = 16
+        setCarouselLeft(`${leftOffset}px`)
         setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
       }
     }
