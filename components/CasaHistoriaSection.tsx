@@ -85,8 +85,10 @@ export default function CasaHistoriaSection() {
       const isLg = window.innerWidth >= 1024
       setIsMobile(!isLg)
       if (isLg && portraitRef.current) {
-        setCarouselLeft(`${rect.left}px`)
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        const portraitRect = portraitRef.current.getBoundingClientRect()
+        const slideW = portraitRect.width
+        setSlideWidth(slideW)
+        setCarouselLeft(`${portraitRect.left - slideW - SLIDE_GAP}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
         setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
