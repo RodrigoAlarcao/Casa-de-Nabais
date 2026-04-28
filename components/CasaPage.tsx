@@ -49,6 +49,10 @@ export default function CasaPage() {
   const panoramicContainerRef = useRef<HTMLDivElement>(null)
   const panoramicImgRef       = useRef<HTMLDivElement>(null)
 
+  // Mobile hero parallax refs
+  const mobileHeroRef    = useRef<HTMLDivElement>(null)
+  const mobileHeroImgRef = useRef<HTMLDivElement>(null)
+
   // Carousel state — idêntico a SectionVinhas
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth,   setSlideWidth]   = useState(380)
@@ -124,6 +128,13 @@ export default function CasaPage() {
           scrollTrigger: { trigger: panoramicContainerRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
+
+      if (mobileHeroImgRef.current && mobileHeroRef.current && window.innerWidth < 1024) {
+        gsap.to(mobileHeroImgRef.current, {
+          yPercent: 20, ease: 'none',
+          scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
     }, pageRef)
 
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
@@ -133,9 +144,90 @@ export default function CasaPage() {
     <div ref={pageRef} style={{ backgroundColor: 'var(--color-bg)' }}>
 
       {/* ══════════════════════════════════════
-          ← VOLTAR + TÍTULO
+          MOBILE HERO — foto + gradiente
       ══════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
+      <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: '100svh' }}>
+
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            ref={mobileHeroImgRef}
+            className="absolute will-change-transform"
+            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+          >
+            <Image
+              src="/images/homepage/casa/section-01.webp"
+              alt="A Casa de Nabais"
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+        </div>
+
+        <div
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{
+            top: '15%',
+            bottom: '-60px',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.45) 38%, rgba(3,29,29,0.9) 65%, #031D1D 82%)',
+            zIndex: 1,
+          }}
+        />
+
+        <Link
+          href="/"
+          className="absolute top-8 left-6 inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
+          style={{
+            zIndex: 10,
+            fontFamily: 'var(--font-display), serif',
+            fontSize: '11px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'rgba(250,230,193,0.80)',
+          }}
+        >
+          <ArrowLeft size={11} strokeWidth={1.5} />
+          Voltar
+        </Link>
+
+        <h1
+          className="absolute left-0 right-0 text-center px-6 font-display uppercase"
+          style={{
+            bottom: '40px',
+            zIndex: 2,
+            fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
+            lineHeight: 1.0,
+            letterSpacing: '0.05em',
+            color: '#FAE6C1',
+            textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+          }}
+        >
+          A Casa<br />de Nabais
+        </h1>
+      </div>
+
+      {/* Mobile intro text */}
+      <div
+        className="relative lg:hidden px-6 pt-5 pb-16 text-center"
+        style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}
+      >
+        <p
+          className="font-body"
+          style={{
+            fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+            lineHeight: 1.6,
+            color: 'rgba(255,249,237,0.72)',
+          }}
+        >
+          Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
+        </p>
+      </div>
+
+      {/* ══════════════════════════════════════
+          ← VOLTAR + TÍTULO (desktop)
+      ══════════════════════════════════════ */}
+      <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
@@ -165,9 +257,9 @@ export default function CasaPage() {
       </div>
 
       {/* ══════════════════════════════════════
-          INTRO — estilo HomepageIntro, SEM animação
+          INTRO — desktop only
       ══════════════════════════════════════ */}
-      <section className="pt-12 md:pt-14 pb-14 md:pb-20">
+      <section className="hidden lg:block pt-12 md:pt-14 pb-14 md:pb-20">
         <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
           <p
             className="font-body"
@@ -184,9 +276,9 @@ export default function CasaPage() {
       </section>
 
       {/* ══════════════════════════════════════
-          IMAGEM PANORÂMICA 16:7
+          IMAGEM PANORÂMICA 16:7 — desktop only
       ══════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
         <div
           ref={panoramicContainerRef}
           className="relative overflow-hidden w-full"
