@@ -314,7 +314,7 @@ export default function CasaHistoriaSection() {
       </div>
 
       {/* Desktop carousel */}
-      <div className="hidden lg:block" style={{ marginTop: `${slideWidth}px` }}>
+      <div className="hidden lg:block mt-16">
         <CarouselStrip />
       </div>
 
