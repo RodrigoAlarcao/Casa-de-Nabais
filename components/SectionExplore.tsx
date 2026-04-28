@@ -16,7 +16,7 @@ const items = [
   { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
 ]
 
-export default function SectionExplore() {
+export default function SectionExplore({ noBg = false }: { noBg?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null)
   const [hovered, setHovered] = useState<number | null>(null)
 
@@ -44,7 +44,7 @@ export default function SectionExplore() {
   }
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-cn-bg">
+    <section ref={sectionRef} className={`py-20 md:py-28${noBg ? '' : ' bg-cn-bg'}`}>
       <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
         <h2
