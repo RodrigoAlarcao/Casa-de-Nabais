@@ -175,27 +175,6 @@ export default function CasaHistoriaSection() {
           TÍTULO — layout SectionVinificacao (desktop)
       ══════════════════════════════════════════ */}
 
-      {/* Mobile */}
-      <div className="lg:hidden px-6 pt-20 pb-10 text-center">
-        <h2
-          className="reveal-hist font-display uppercase mb-6"
-          style={{
-            fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
-            lineHeight: 1.05,
-            letterSpacing: '0.04em',
-            color: '#FAE6C1',
-          }}
-        >
-          História<br />da Casa<br />de Nabais
-        </h2>
-        <p
-          className="reveal-hist font-body"
-          style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
-        >
-          {INTRO_TEXT}
-        </p>
-      </div>
-
       {/* Desktop */}
       <div className="hidden lg:block max-w-[1200px] mx-auto px-10 py-28">
         <div className="grid grid-cols-2 gap-20 items-center">
@@ -223,7 +202,7 @@ export default function CasaHistoriaSection() {
           MOBILE: imagem hero + bloco de texto
       ══════════════════════════════════════════ */}
 
-      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '55vh' }}>
+      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '80vh' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
@@ -233,10 +212,29 @@ export default function CasaHistoriaSection() {
         </div>
         <div className="absolute left-0 right-0 pointer-events-none"
           style={{
-            top: '52%', bottom: '-60px', zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 78%)',
+            top: '25%', bottom: 0, zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.55) 35%, rgba(3,29,29,0.92) 58%, #031D1D 76%)',
           }}
         />
+        <div className="absolute left-0 right-0 bottom-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
+          <h2
+            className="reveal-hist font-display uppercase mb-6"
+            style={{
+              fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
+              lineHeight: 1.05,
+              letterSpacing: '0.04em',
+              color: '#FAE6C1',
+            }}
+          >
+            História<br />da Casa<br />de Nabais
+          </h2>
+          <p
+            className="reveal-hist font-body"
+            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+          >
+            {INTRO_TEXT}
+          </p>
+        </div>
       </div>
 
       <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
