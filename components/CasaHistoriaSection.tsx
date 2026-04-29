@@ -238,19 +238,7 @@ export default function CasaHistoriaSection() {
       </div>
 
       <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
-        <div className="px-6 pt-6 pb-10 text-center">
-          {BODY_PARAGRAPHS.map((para, i) => (
-            <p
-              key={i}
-              className="reveal-hist font-body mb-5 last:mb-0"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
-            >
-              {para}
-            </p>
-          ))}
-        </div>
-
-        <div className="mt-2">
+        <div className="mt-2 pt-6">
           <CarouselStrip />
         </div>
 
@@ -269,12 +257,24 @@ export default function CasaHistoriaSection() {
           </button>
         </div>
 
+        <div className="px-6 pt-10 pb-4 text-center">
+          {BODY_PARAGRAPHS.map((para, i) => (
+            <p
+              key={i}
+              className="reveal-hist font-body mb-5 last:mb-0"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+            >
+              {para}
+            </p>
+          ))}
+        </div>
+
         <div className="px-6 py-16 text-center">
           <TextReveal
             text={CLOSING_TEXT}
             className="font-display"
             style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
-            triggerStart="top 35%"
+            triggerStart="top 75%"
             triggerEnd="bottom 10%"
           />
         </div>

@@ -205,7 +205,7 @@ export default function CasaPage() {
         <h1
           className="absolute left-0 right-0 text-center px-6 font-display uppercase"
           style={{
-            bottom: '18%',
+            bottom: '8%',
             zIndex: 2,
             fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
             lineHeight: 1.0,
