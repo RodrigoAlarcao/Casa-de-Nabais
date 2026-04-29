@@ -226,7 +226,7 @@ export default function CasaHistoriaSection() {
               color: '#FAE6C1',
             }}
           >
-            História<br />da Casa<br />de Nabais
+            História da Casa<br />de Nabais
           </h2>
           <p
             className="reveal-hist font-body"

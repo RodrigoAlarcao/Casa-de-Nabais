@@ -205,7 +205,7 @@ export default function CasaPage() {
         <h1
           className="absolute left-0 right-0 text-center px-6 font-display uppercase"
           style={{
-            bottom: '8%',
+            bottom: '2%',
             zIndex: 2,
             fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
             lineHeight: 1.0,
@@ -220,7 +220,7 @@ export default function CasaPage() {
 
       {/* Mobile intro text */}
       <div
-        className="relative lg:hidden px-6 pt-5 pb-16 text-center"
+        className="relative lg:hidden px-6 pt-2 pb-16 text-center"
         style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}
       >
         <p
