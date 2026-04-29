@@ -274,7 +274,7 @@ export default function CasaHistoriaSection() {
             text={CLOSING_TEXT}
             className="font-display"
             style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
-            triggerStart="top 75%"
+            triggerStart="top 88%"
             triggerEnd="bottom 10%"
           />
         </div>
