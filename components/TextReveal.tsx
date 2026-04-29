@@ -12,9 +12,11 @@ interface TextRevealProps {
   className?: string
   style?: React.CSSProperties
   ghostOpacity?: number
+  triggerStart?: string
+  triggerEnd?: string
 }
 
-export default function TextReveal({ text, className, style, ghostOpacity = 0.2 }: TextRevealProps) {
+export default function TextReveal({ text, className, style, ghostOpacity = 0.2, triggerStart = 'top 75%', triggerEnd = 'bottom 55%' }: TextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const words = text.split(' ')
 
@@ -35,8 +37,8 @@ export default function TextReveal({ text, className, style, ghostOpacity = 0.2 
         duration: 0.4,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 75%',
-          end: 'bottom 55%',
+          start: triggerStart,
+          end: triggerEnd,
           scrub: 1,
         },
       })

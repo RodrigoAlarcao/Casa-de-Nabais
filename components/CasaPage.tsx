@@ -7,6 +7,7 @@ import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
 import ImageLightbox from './ImageLightbox'
 import CasaHistoriaSection from './CasaHistoriaSection'
+import CasaPessoasSection from './CasaPessoasSection'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -48,6 +49,14 @@ export default function CasaPage() {
   const panoramicContainerRef = useRef<HTMLDivElement>(null)
   const panoramicImgRef       = useRef<HTMLDivElement>(null)
 
+  // Mobile hero parallax refs
+  const mobileHeroRef    = useRef<HTMLDivElement>(null)
+  const mobileHeroImgRef = useRef<HTMLDivElement>(null)
+
+  // Mobile portrait parallax refs
+  const mobilePortraitOuterRef = useRef<HTMLDivElement>(null)
+  const mobilePortraitImgRef   = useRef<HTMLDivElement>(null)
+
   // Carousel state — idêntico a SectionVinhas
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth,   setSlideWidth]   = useState(380)
@@ -87,14 +96,15 @@ export default function CasaPage() {
   useIsomorphicLayoutEffect(() => {
     function measure() {
       if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
       const isLg = window.innerWidth >= 1024
       setIsMobile(!isLg)
-      const leftOffset = isLg ? rect.left : 16
-      setCarouselLeft(`${leftOffset}px`)
       if (isLg && portraitRef.current) {
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        const portraitRect = portraitRef.current.getBoundingClientRect()
+        setCarouselLeft(`${portraitRect.left}px`)
+        setSlideWidth(portraitRect.width)
       } else {
+        const leftOffset = 16
+        setCarouselLeft(`${leftOffset}px`)
         setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
       }
     }
@@ -122,6 +132,20 @@ export default function CasaPage() {
           scrollTrigger: { trigger: panoramicContainerRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
+
+      if (mobileHeroImgRef.current && mobileHeroRef.current && window.innerWidth < 1024) {
+        gsap.to(mobileHeroImgRef.current, {
+          yPercent: 20, ease: 'none',
+          scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
+
+      if (mobilePortraitImgRef.current && mobilePortraitOuterRef.current && window.innerWidth < 1024) {
+        gsap.to(mobilePortraitImgRef.current, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: mobilePortraitOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
     }, pageRef)
 
     return () => { ctx.revert(); window.removeEventListener('resize', measure) }
@@ -131,9 +155,90 @@ export default function CasaPage() {
     <div ref={pageRef} style={{ backgroundColor: 'var(--color-bg)' }}>
 
       {/* ══════════════════════════════════════
-          ← VOLTAR + TÍTULO
+          MOBILE HERO — foto + gradiente
       ══════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
+      <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(85svh - 72px)' }}>
+
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            ref={mobileHeroImgRef}
+            className="absolute will-change-transform"
+            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+          >
+            <Image
+              src="/images/homepage/casa/section-01.webp"
+              alt="A Casa de Nabais"
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+        </div>
+
+        <div
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{
+            top: '15%',
+            bottom: '-60px',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.45) 38%, rgba(3,29,29,0.9) 65%, #031D1D 82%)',
+            zIndex: 1,
+          }}
+        />
+
+        <Link
+          href="/"
+          className="absolute top-8 left-6 inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
+          style={{
+            zIndex: 10,
+            fontFamily: 'var(--font-display), serif',
+            fontSize: '11px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'rgba(250,230,193,0.80)',
+          }}
+        >
+          <ArrowLeft size={11} strokeWidth={1.5} />
+          Voltar
+        </Link>
+
+        <h1
+          className="absolute left-0 right-0 text-center px-6 font-display uppercase"
+          style={{
+            bottom: '40px',
+            zIndex: 2,
+            fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
+            lineHeight: 1.0,
+            letterSpacing: '0.05em',
+            color: '#FAE6C1',
+            textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+          }}
+        >
+          A Casa<br />de Nabais
+        </h1>
+      </div>
+
+      {/* Mobile intro text */}
+      <div
+        className="relative lg:hidden px-6 pt-5 pb-16 text-center"
+        style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}
+      >
+        <p
+          className="font-body"
+          style={{
+            fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+            lineHeight: 1.6,
+            color: 'rgba(255,249,237,0.72)',
+          }}
+        >
+          Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
+        </p>
+      </div>
+
+      {/* ══════════════════════════════════════
+          ← VOLTAR + TÍTULO (desktop)
+      ══════════════════════════════════════ */}
+      <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
@@ -163,9 +268,9 @@ export default function CasaPage() {
       </div>
 
       {/* ══════════════════════════════════════
-          INTRO — estilo HomepageIntro, SEM animação
+          INTRO — desktop only
       ══════════════════════════════════════ */}
-      <section className="pt-12 md:pt-14 pb-14 md:pb-20">
+      <section className="hidden lg:block pt-12 md:pt-14 pb-14 md:pb-20">
         <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
           <p
             className="font-body"
@@ -182,9 +287,9 @@ export default function CasaPage() {
       </section>
 
       {/* ══════════════════════════════════════
-          IMAGEM PANORÂMICA 16:7
+          IMAGEM PANORÂMICA 16:7 — desktop only
       ══════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
         <div
           ref={panoramicContainerRef}
           className="relative overflow-hidden w-full"
@@ -241,10 +346,21 @@ export default function CasaPage() {
 
             {/* Texto DIREITA */}
             <div className="flex flex-col px-0 lg:pl-10">
-              {BODY_PARAGRAPHS.map((para, i) => (
+              {/* Parágrafos 1–2: sempre visíveis */}
+              {BODY_PARAGRAPHS.slice(0, 2).map((para, i) => (
                 <p
                   key={i}
-                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left"
+                  className="reveal-casa font-body text-cn-text-muted mb-4 text-center lg:text-left"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                >
+                  {para}
+                </p>
+              ))}
+              {/* Parágrafos 3–4: apenas desktop */}
+              {BODY_PARAGRAPHS.slice(2).map((para, i) => (
+                <p
+                  key={i + 2}
+                  className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left hidden lg:block"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
                 >
                   {para}
@@ -255,9 +371,67 @@ export default function CasaPage() {
           </div>
         </div>
 
-        {/* Carrossel — alinhado à esquerda do container, sangra para a direita */}
+        {/* ── Mobile: carrossel entre parágrafo 2 e 3 ── */}
         <div
-          className="mt-10 md:mt-14 lg:mt-16 py-2 select-none"
+          className="lg:hidden mt-8 py-2 select-none"
+          style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => setGrabbing(false)}
+        >
+          <div
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            style={{
+              gap: `${SLIDE_GAP}px`,
+              paddingLeft: carouselLeft,
+              transform: `translateX(calc(-${index} * (${slideWidth}px + ${SLIDE_GAP}px)))`,
+            }}
+          >
+            {galleryImages.map((img, i) => (
+              <div
+                key={i}
+                className="relative flex-shrink-0 overflow-hidden"
+                data-slide-index={i}
+                style={{
+                  width: `${slideWidth}px`,
+                  aspectRatio: IMG_RATIO,
+                  backgroundColor: '#3A5B4F',
+                  borderRadius: '4px',
+                  boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
+                  cursor: grabbing ? 'grabbing' : 'zoom-in',
+                }}
+              >
+                <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="90vw" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="lg:hidden mt-5 flex items-center gap-5 justify-center">
+          <button onClick={prev} disabled={!canPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
+            <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
+          </button>
+          <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
+            {index + 1} de {galleryImages.length}
+          </span>
+          <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
+            <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
+          </button>
+        </div>
+        <div className="lg:hidden max-w-[1200px] mx-auto px-6 mt-8">
+          {BODY_PARAGRAPHS.slice(2).map((para, i) => (
+            <p
+              key={i + 2}
+              className="font-body text-cn-text-muted mb-4 last:mb-0 text-center"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+            >
+              {para}
+            </p>
+          ))}
+        </div>
+
+        {/* ── Desktop: carrossel (inalterado) ── */}
+        <div
+          className="hidden lg:block mt-16 py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
@@ -297,10 +471,10 @@ export default function CasaPage() {
           </div>
         </div>
 
-        {/* Navegação */}
+        {/* Navegação — desktop only */}
         <div
-          className="mt-5 flex items-center gap-5 justify-center lg:justify-start"
-          style={isMobile ? {} : { paddingLeft: carouselLeft }}
+          className="hidden lg:flex mt-5 items-center gap-5 justify-start"
+          style={{ paddingLeft: carouselLeft }}
         >
           <button
             onClick={prev}
@@ -326,6 +500,27 @@ export default function CasaPage() {
         </div>
 
       </section>
+
+      {/* ── Mobile portrait image — carousel-02.webp, antes do TextReveal ── */}
+      <div
+        ref={mobilePortraitOuterRef}
+        className="relative lg:hidden mx-6 mt-10"
+        style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#3A5B4F' }}
+      >
+        <div
+          ref={mobilePortraitImgRef}
+          className="absolute will-change-transform"
+          style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+        >
+          <Image
+            src="/images/homepage/casa/carousel-02.webp"
+            alt="Casa de Nabais — interior"
+            fill
+            className="object-cover"
+            sizes="calc(100vw - 3rem)"
+          />
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════
           FECHO — idêntico a HomepageIntro, COM animação TextReveal
@@ -367,6 +562,7 @@ export default function CasaPage() {
       )}
 
       <CasaHistoriaSection />
+      <CasaPessoasSection />
 
     </div>
   )

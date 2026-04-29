@@ -85,8 +85,10 @@ export default function CasaHistoriaSection() {
       const isLg = window.innerWidth >= 1024
       setIsMobile(!isLg)
       if (isLg && portraitRef.current) {
-        setCarouselLeft(`${rect.left}px`)
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        const portraitRect = portraitRef.current.getBoundingClientRect()
+        const slideW = portraitRect.width
+        setSlideWidth(slideW)
+        setCarouselLeft(`${portraitRect.left - slideW - SLIDE_GAP}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
         setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
@@ -274,6 +276,8 @@ export default function CasaHistoriaSection() {
             text={CLOSING_TEXT}
             className="font-display"
             style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+            triggerStart="top 35%"
+            triggerEnd="bottom 10%"
           />
         </div>
       </div>
@@ -344,6 +348,8 @@ export default function CasaHistoriaSection() {
             fontWeight: 400,
             color: '#FAE6C1',
           }}
+          triggerStart="top 35%"
+          triggerEnd="bottom 10%"
         />
       </div>
 
