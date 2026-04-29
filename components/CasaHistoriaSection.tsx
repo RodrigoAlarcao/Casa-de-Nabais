@@ -212,8 +212,8 @@ export default function CasaHistoriaSection() {
         </div>
         <div className="absolute left-0 right-0 pointer-events-none"
           style={{
-            top: '52%', bottom: '-40px', zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(56,103,102,0.52) 9%, rgba(25,79,78,1) 14%, #031D1D 100%)',
+            top: '25%', bottom: '-40px', zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.55) 35%, rgba(3,29,29,0.92) 58%, #031D1D 76%)',
           }}
         />
         <div className="absolute left-0 right-0 bottom-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
