@@ -202,7 +202,7 @@ export default function CasaHistoriaSection() {
           MOBILE: imagem hero + bloco de texto
       ══════════════════════════════════════════ */}
 
-      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '80vh' }}>
+      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '80vh', background: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
@@ -212,7 +212,7 @@ export default function CasaHistoriaSection() {
         </div>
         <div className="absolute left-0 right-0 pointer-events-none"
           style={{
-            top: '25%', bottom: 0, zIndex: 1,
+            top: '25%', bottom: '-40px', zIndex: 1,
             background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.55) 35%, rgba(3,29,29,0.92) 58%, #031D1D 76%)',
           }}
         />
