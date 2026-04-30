@@ -936,6 +936,25 @@ export default function VinificacaoPage() {
           </div>
         </section>
 
+        {/* ══════════════════════════════════════
+            TEXTO ANIMADO FINAL
+        ══════════════════════════════════════ */}
+        <section className="py-28 md:py-40">
+          <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
+            <TextReveal
+              text="Nada é feito por moda. Tudo é observado, testado e integrado apenas se servir a origem, o tempo e a singularidade do vinho."
+              className="font-display"
+              style={{
+                fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+                lineHeight: 1.3,
+                fontWeight: 400,
+                color: '#FAE6C1',
+              }}
+              ghostOpacity={0.15}
+            />
+          </div>
+        </section>
+
       </div>
       {/* ── end dark gradient wrapper ── */}
 
