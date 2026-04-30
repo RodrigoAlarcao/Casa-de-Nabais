@@ -639,11 +639,11 @@ export default function VinificacaoPage() {
               {/* Texto ESQUERDA */}
               <div className="flex flex-col">
                 <h2
-                  className="font-display mb-8 lg:mb-10 text-center lg:text-left"
+                  className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
                   style={{
-                    fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                    fontSize: 'clamp(2rem, 4vw, 3.25rem)',
                     lineHeight: 1.0,
-                    letterSpacing: '0.02em',
+                    letterSpacing: '0.04em',
                     color: '#FAE6C1',
                   }}
                 >
@@ -654,7 +654,7 @@ export default function VinificacaoPage() {
                   className="font-body mb-5 text-center lg:text-left"
                   style={{
                     fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                    lineHeight: 1.65,
+                    lineHeight: 1.4,
                     color: 'rgba(255,249,237,0.72)',
                   }}
                 >
@@ -665,7 +665,7 @@ export default function VinificacaoPage() {
                   className="mb-5 flex flex-col gap-2 text-center lg:text-left"
                   style={{
                     fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                    lineHeight: 1.65,
+                    lineHeight: 1.4,
                     color: 'rgba(255,249,237,0.72)',
                     listStyle: 'none',
                     padding: 0,
@@ -693,7 +693,7 @@ export default function VinificacaoPage() {
                     className="font-body mb-4 last:mb-0 text-center lg:text-left"
                     style={{
                       fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                      lineHeight: 1.65,
+                      lineHeight: 1.4,
                       color: 'rgba(255,249,237,0.72)',
                     }}
                   >
