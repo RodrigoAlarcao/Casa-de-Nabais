@@ -776,11 +776,10 @@ export default function VinificacaoPage() {
             {/* Título 1/3 + texto 2/3 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 items-start">
               <h2
-                className="font-display uppercase"
+                className="font-display"
                 style={{
-                  fontSize: 'clamp(2rem, 4vw, 3.25rem)',
-                  lineHeight: 1.0,
-                  letterSpacing: '0.04em',
+                  fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
+                  lineHeight: 1.1,
                   color: '#FAE6C1',
                 }}
               >
