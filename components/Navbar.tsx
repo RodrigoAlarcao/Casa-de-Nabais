@@ -91,7 +91,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-display text-[13px] uppercase tracking-[0.15em] text-[#FAE6C1] hover:opacity-80 transition-opacity duration-200"
+            className="font-display text-[16px] font-semibold uppercase tracking-[0.15em] text-[#FAE6C1] hover:opacity-80 transition-opacity duration-200"
           >
             Casa de Nabais
           </Link>
@@ -152,7 +152,7 @@ export default function Navbar() {
         >
           {/* Botão fechar */}
           <div className="flex justify-between items-center mb-16">
-            <span className="font-display text-[13px] uppercase tracking-[0.15em] text-[#FAE6C1]">
+            <span className="font-display text-[16px] font-semibold uppercase tracking-[0.15em] text-[#FAE6C1]">
               Casa de Nabais
             </span>
             <button
