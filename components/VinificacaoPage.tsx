@@ -527,7 +527,7 @@ export default function VinificacaoPage() {
             Grid: imagem ESQ + texto DIR
             + imagem panorâmica full-width abaixo
         ══════════════════════════════════════ */}
-        <section className="pb-28 md:pb-36">
+        <section className="pt-20 md:pt-28 pb-28 md:pb-36">
 
           {/* Grid desktop: imagem + texto */}
           <div className="max-w-[1200px] mx-auto px-6 md:px-10">
