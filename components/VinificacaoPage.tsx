@@ -527,9 +527,9 @@ export default function VinificacaoPage() {
         </section>
 
         {/* ══════════════════════════════════════
-            TEXTO ANIMADO (TextReveal)
+            TEXTO ANIMADO (TextReveal) — desktop apenas
         ══════════════════════════════════════ */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 hidden lg:block">
           <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
             <TextReveal
               text={CLOSING_TEXT}
@@ -551,6 +551,20 @@ export default function VinificacaoPage() {
             + imagem panorâmica full-width abaixo
         ══════════════════════════════════════ */}
         <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+
+          {/* Mobile: foto no início da secção */}
+          <div
+            className="relative lg:hidden mb-8 mx-6"
+            style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
+          >
+            <Image
+              src="/images/homepage/vinificacao/abordagem-portrait.webp"
+              alt="Abordagem experimental — microvinificações"
+              fill
+              className="object-cover"
+              sizes="calc(100vw - 3rem)"
+            />
+          </div>
 
           {/* Grid desktop: imagem + texto */}
           <div className="max-w-[1200px] mx-auto px-6 md:px-10">
@@ -633,20 +647,23 @@ export default function VinificacaoPage() {
             </div>
           </div>
 
-          {/* Mobile: portrait image */}
-          <div
-            className="relative lg:hidden mt-10 mx-6"
-            style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-          >
-            <Image
-              src="/images/homepage/vinificacao/fullbleed-01.webp"
-              alt="Abordagem experimental — microvinificações"
-              fill
-              className="object-cover"
-              sizes="calc(100vw - 3rem)"
+        </section>
+
+        {/* TextReveal — mobile apenas, depois do Abordagem */}
+        <section className="py-14 lg:hidden">
+          <div className="max-w-[900px] mx-auto px-6 text-center">
+            <TextReveal
+              text={CLOSING_TEXT}
+              className="font-display"
+              style={{
+                fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)',
+                lineHeight: 1.2,
+                fontWeight: 400,
+                color: '#FAE6C1',
+              }}
+              ghostOpacity={0.15}
             />
           </div>
-
         </section>
 
         {/* ══════════════════════════════════════
@@ -839,7 +856,7 @@ export default function VinificacaoPage() {
             {/* Título 1/3 + texto 2/3 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 items-start">
               <h2
-                className="font-display"
+                className="font-display text-center lg:text-left"
                 style={{
                   fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
                   lineHeight: 1.1,
