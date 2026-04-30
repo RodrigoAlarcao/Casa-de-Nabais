@@ -67,6 +67,10 @@ export default function VinificacaoPage() {
   const adegaFullbleedContainerRef = useRef<HTMLDivElement>(null)
   const adegaFullbleedImgRef = useRef<HTMLDivElement>(null)
 
+  // Uma adega — mobile hero refs
+  const mobileAdegaOuterRef = useRef<HTMLDivElement>(null)
+  const mobileAdegaImgRef   = useRef<HTMLDivElement>(null)
+
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
   const [index, setIndex] = useState(0)
@@ -166,6 +170,13 @@ export default function VinificacaoPage() {
         gsap.to(mobileHeroImgRef.current, {
           yPercent: 20, ease: 'none',
           scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
+
+      if (mobileAdegaImgRef.current && mobileAdegaOuterRef.current && window.innerWidth < 1024) {
+        gsap.to(mobileAdegaImgRef.current, {
+          yPercent: 20, ease: 'none',
+          scrollTrigger: { trigger: mobileAdegaOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
     }, pageRef)
@@ -380,19 +391,21 @@ export default function VinificacaoPage() {
                   A casta Loureiro<br />como centro de estudo
                 </h2>
 
-                {LOUREIRO_PARAS.map((para, i) => (
-                  <p
-                    key={i}
-                    className="reveal-vinif font-body mb-5 last:mb-0 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                      lineHeight: 1.65,
-                      color: 'rgba(255,249,237,0.72)',
-                    }}
-                  >
-                    {para}
-                  </p>
-                ))}
+                {/* Para 0 — sempre visível */}
+                <p
+                  className="reveal-vinif font-body mb-5 text-center lg:text-left"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                >
+                  {LOUREIRO_PARAS[0]}
+                </p>
+
+                {/* Para 1 — desktop apenas (no mobile aparece depois do carousel) */}
+                <p
+                  className="reveal-vinif font-body hidden lg:block"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                >
+                  {LOUREIRO_PARAS[1]}
+                </p>
               </div>
 
             </div>
@@ -442,6 +455,16 @@ export default function VinificacaoPage() {
             <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
               <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
+          </div>
+
+          {/* Para 1 — mobile apenas, depois do carousel */}
+          <div className="lg:hidden px-6 mt-8">
+            <p
+              className="font-body text-center"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+            >
+              {LOUREIRO_PARAS[1]}
+            </p>
           </div>
 
           {/* ── Desktop: carrossel ── */}
@@ -631,7 +654,47 @@ export default function VinificacaoPage() {
             Layout invertido: texto ESQ, imagem DIR
             + imagem panorâmica full-width abaixo
         ══════════════════════════════════════ */}
-        <section className="pb-28 md:pb-36">
+
+        {/* Mobile hero — "Uma adega" */}
+        <div ref={mobileAdegaOuterRef} className="relative lg:hidden" style={{ height: '55vh' }}>
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              ref={mobileAdegaImgRef}
+              className="absolute will-change-transform"
+              style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+            >
+              <Image
+                src="/images/homepage/vinificacao/adega-portrait.webp"
+                alt="Uma adega à frente do seu tempo"
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            </div>
+          </div>
+          <div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{
+              top: '52%', bottom: '-60px', zIndex: 1,
+              background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 78%)',
+            }}
+          />
+          <h2
+            className="absolute left-0 right-0 text-center px-6 font-display uppercase"
+            style={{
+              bottom: '36px', zIndex: 2,
+              fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
+              lineHeight: 1.05,
+              letterSpacing: '0.04em',
+              color: '#FAE6C1',
+              textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+            }}
+          >
+            Uma adega<br />à frente do seu tempo
+          </h2>
+        </div>
+
+        <section className="pt-8 lg:pt-0 pb-28 md:pb-36">
 
           <div className="max-w-[1200px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
@@ -639,7 +702,7 @@ export default function VinificacaoPage() {
               {/* Texto ESQUERDA */}
               <div className="flex flex-col">
                 <h2
-                  className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
+                  className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left hidden lg:block"
                   style={{
                     fontSize: 'clamp(2rem, 4vw, 3.25rem)',
                     lineHeight: 1.0,
@@ -797,8 +860,8 @@ export default function VinificacaoPage() {
               </p>
             </div>
 
-            {/* 3 fotos quadradas */}
-            <div className="grid grid-cols-3 gap-3 md:gap-4 mt-16 md:mt-20">
+            {/* 3 fotos — verticais em mobile, horizontais em desktop */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 md:mt-20">
               {[
                 { src: '/images/homepage/vinificacao/rigor-01.webp', alt: 'Vinha — alinhamento de cordas' },
                 { src: '/images/homepage/vinificacao/rigor-02.webp', alt: 'Poda — detalhe manual' },
@@ -814,7 +877,7 @@ export default function VinificacaoPage() {
                     alt={img.alt}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 33vw, 400px"
+                    sizes="(max-width: 768px) 100vw, 400px"
                   />
                 </div>
               ))}
