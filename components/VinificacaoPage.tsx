@@ -690,10 +690,10 @@ export default function VinificacaoPage() {
             </div>
           </div>
           <div
-            className="absolute left-0 right-0 pointer-events-none"
+            className="absolute left-0 right-0 bottom-0 pointer-events-none"
             style={{
-              top: '52%', bottom: '-60px', zIndex: 1,
-              background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 78%)',
+              top: '52%', zIndex: 1,
+              background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 100%)',
             }}
           />
           <h2
@@ -711,7 +711,37 @@ export default function VinificacaoPage() {
           </h2>
         </div>
 
-        <section className="pt-8 lg:pt-0 pb-28 md:pb-36">
+        {/* Mobile — dark wrapper conectado ao hero */}
+        <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2, paddingTop: '1.5rem', paddingBottom: '2.5rem' }}>
+          <div className="px-6 text-center">
+            <p className="font-body mb-5" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}>
+              Na adega, utilizamos diferentes materiais como ferramentas ao serviço do vinho.
+            </p>
+            <ul className="mb-5 flex flex-col gap-2" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', listStyle: 'none', padding: 0 }}>
+              {[
+                'O inox ajuda a preservar a frescura e a pureza dos aromas.',
+                'O cimento contribui para uma textura mais equilibrada, sem alterar o aroma do vinho.',
+                'As barricas de carvalho são usadas com moderação, para suavizar o vinho e dar-lhe maior profundidade.',
+              ].map((item, i) => (
+                <li key={i} className="font-body flex gap-2 justify-center">
+                  <span style={{ opacity: 0.45, flexShrink: 0 }}>—</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            {[
+              'Cada material funciona como um tempero: só é usado quando realmente faz sentido e acrescenta valor ao vinho.',
+              'Projetada pelo Arquiteto André Tavares, a nossa adega foi construída no meio da vinha, estando parcialmente enterrada, sem luz natural direta.',
+              'Esta escolha garante proximidade absoluta à colheita e uma grande estabilidade térmica, essencial para uma evolução lenta e elegante dos vinhos, em depósito e em garrafa.',
+            ].map((para, i) => (
+              <p key={i} className="font-body mb-4 last:mb-0" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}>
+                {para}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <section className="hidden lg:block pb-36">
 
           <div className="max-w-[1200px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
@@ -719,7 +749,7 @@ export default function VinificacaoPage() {
               {/* Texto ESQUERDA */}
               <div className="flex flex-col">
                 <h2
-                  className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left hidden lg:block"
+                  className="font-display uppercase mb-10 text-left"
                   style={{
                     fontSize: 'clamp(2rem, 4vw, 3.25rem)',
                     lineHeight: 1.0,
@@ -863,10 +893,10 @@ export default function VinificacaoPage() {
                   color: '#FAE6C1',
                 }}
               >
-                Rigor, dados<br />e tempo
+                Rigor, dados<br className="hidden lg:block" />e tempo
               </h2>
               <p
-                className="lg:col-span-2 font-body"
+                className="lg:col-span-2 font-body text-center lg:text-left"
                 style={{
                   fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
                   lineHeight: 1.4,
