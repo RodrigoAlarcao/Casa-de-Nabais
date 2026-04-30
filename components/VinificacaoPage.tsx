@@ -767,6 +767,63 @@ export default function VinificacaoPage() {
 
         </section>
 
+        {/* ══════════════════════════════════════
+            RIGOR, DADOS E TEMPO
+        ══════════════════════════════════════ */}
+        <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+
+            {/* Título 1/3 + texto 2/3 */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 items-start">
+              <h2
+                className="font-display uppercase"
+                style={{
+                  fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+                  lineHeight: 1.0,
+                  letterSpacing: '0.04em',
+                  color: '#FAE6C1',
+                }}
+              >
+                Rigor, dados<br />e tempo
+              </h2>
+              <p
+                className="lg:col-span-2 font-body"
+                style={{
+                  fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                  lineHeight: 1.4,
+                  color: 'rgba(255,249,237,0.72)',
+                }}
+              >
+                A nossa estação meteorológica própria, ímpar na região, recolhe dados contínuos de temperatura, humidade, precipitação, vento e radiação solar. Estes dados ajudam a ajustar as decisões que afetam a vinha e a aprofundar o conhecimento do ecossistema.
+              </p>
+            </div>
+
+            {/* 3 fotos quadradas */}
+            <div className="grid grid-cols-3 gap-3 md:gap-4 mt-16 md:mt-20">
+              {[
+                { src: '/images/homepage/vinificacao/rigor-01.webp', alt: 'Vinha — alinhamento de cordas' },
+                { src: '/images/homepage/vinificacao/rigor-02.webp', alt: 'Poda — detalhe manual' },
+                { src: '/images/homepage/vinificacao/rigor-03.webp', alt: 'Trabalho na vinha' },
+              ].map((img, i) => (
+                <div
+                  key={i}
+                  className="relative overflow-hidden w-full"
+                  style={{ aspectRatio: '1/1', backgroundColor: '#0A3A39', borderRadius: '4px' }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 33vw, 400px"
+                  />
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
       </div>
       {/* ── end dark gradient wrapper ── */}
 
