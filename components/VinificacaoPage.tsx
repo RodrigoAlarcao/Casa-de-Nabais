@@ -823,6 +823,119 @@ export default function VinificacaoPage() {
           </div>
         </section>
 
+        {/* ══════════════════════════════════════
+            PERFIL DO ENÓLOGO
+        ══════════════════════════════════════ */}
+        <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+
+            {/* Título centrado */}
+            <h2
+              className="font-display uppercase text-center mb-16 md:mb-20"
+              style={{
+                fontSize: 'clamp(1.875rem, 3.2vw, 3.5rem)',
+                lineHeight: 1.0,
+                letterSpacing: '0.04em',
+                color: '#FAE6C1',
+              }}
+            >
+              Perfil do Enólogo
+            </h2>
+
+            {/* Desktop: foto + card sobrepostos */}
+            <div className="hidden lg:block relative" style={{ paddingBottom: '18%' }}>
+
+              {/* Foto quadrada — esquerda */}
+              <div
+                className="relative overflow-hidden"
+                style={{ width: '56%', aspectRatio: '1/1', borderRadius: '4px', backgroundColor: '#0A3A39' }}
+              >
+                <Image
+                  src="/images/homepage/vinificacao/enologo-portrait.webp"
+                  alt="Constantino Ramos — Enólogo"
+                  fill
+                  className="object-cover"
+                  sizes="660px"
+                />
+              </div>
+
+              {/* Card glassmorphism — sobreposto dir/baixo */}
+              <div
+                className="absolute"
+                style={{
+                  left: '43%',
+                  top: '28%',
+                  width: '50%',
+                  background: 'rgba(232, 224, 210, 0.80)',
+                  backdropFilter: 'blur(18px)',
+                  WebkitBackdropFilter: 'blur(18px)',
+                  border: '1px solid rgba(232, 224, 210, 0.45)',
+                  borderRadius: '8px',
+                  padding: '2rem 2.25rem',
+                }}
+              >
+                <p
+                  className="font-display"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', color: '#0C4544', lineHeight: 1.2, marginBottom: '2px' }}
+                >
+                  Constantino Ramos
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: 'clamp(0.75rem, 0.85vw, 0.8125rem)', color: 'rgba(12,69,68,0.60)', letterSpacing: '0.04em', marginBottom: '1rem' }}
+                >
+                  Enólogo
+                </p>
+                <div style={{ fontSize: 'clamp(0.8125rem, 0.88vw, 0.9375rem)', lineHeight: 1.6, color: 'rgba(12,69,68,0.78)' }}>
+                  <p className="font-body mb-3">Constantino Ramos dedica-se à Região dos Vinhos Verdes há quase 15 anos, tendo vindo a construir uma relação próxima à vinha e à casta Loureiro. Enólogo de escuta atenta e gesto preciso, acredita que o vinho nasce como uma ideia e ganha forma com paciência, respeito e atenção à natureza. Trabalha em escala humana, acompanhando cada parcela como um ecossistema vivo e defende a intervenção humana apenas na medida em que contribui para preservar o equilíbrio e a frescura dos vinhos, respeitando a uva, decidindo o momento certo e dando espaço à identidade de cada vinho.</p>
+                  <p className="font-body mb-3">O seu foco está em vinhos frescos, gastronómicos e com identidade, pensados para evoluir e contar uma história autêntica.</p>
+                  <p className="font-body">Assume-se como vigneron, aceitando os riscos e tomando as decisões que começam no campo e culminam na vindima, o momento-chave do ano. Vê o vinho como um processo que começa muito antes da colheita, sendo moldado pelo terroir e pela visão pessoal do enólogo.</p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Mobile: foto + card empilhados */}
+            <div className="lg:hidden flex flex-col gap-6">
+              <div
+                className="relative overflow-hidden w-full"
+                style={{ aspectRatio: '1/1', borderRadius: '4px', backgroundColor: '#0A3A39' }}
+              >
+                <Image
+                  src="/images/homepage/vinificacao/enologo-portrait.webp"
+                  alt="Constantino Ramos — Enólogo"
+                  fill
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
+                />
+              </div>
+              <div
+                style={{
+                  background: 'rgba(232, 224, 210, 0.80)',
+                  backdropFilter: 'blur(18px)',
+                  WebkitBackdropFilter: 'blur(18px)',
+                  border: '1px solid rgba(232, 224, 210, 0.45)',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                }}
+              >
+                <p className="font-display" style={{ fontSize: '1.0625rem', color: '#0C4544', lineHeight: 1.2, marginBottom: '2px' }}>
+                  Constantino Ramos
+                </p>
+                <p className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(12,69,68,0.60)', letterSpacing: '0.04em', marginBottom: '0.875rem' }}>
+                  Enólogo
+                </p>
+                <div className="font-body" style={{ fontSize: '0.9375rem', lineHeight: 1.6, color: 'rgba(12,69,68,0.78)' }}>
+                  <p className="mb-3">Constantino Ramos dedica-se à Região dos Vinhos Verdes há quase 15 anos, tendo vindo a construir uma relação próxima à vinha e à casta Loureiro. Enólogo de escuta atenta e gesto preciso, acredita que o vinho nasce como uma ideia e ganha forma com paciência, respeito e atenção à natureza. Trabalha em escala humana, acompanhando cada parcela como um ecossistema vivo e defende a intervenção humana apenas na medida em que contribui para preservar o equilíbrio e a frescura dos vinhos, respeitando a uva, decidindo o momento certo e dando espaço à identidade de cada vinho.</p>
+                  <p className="mb-3">O seu foco está em vinhos frescos, gastronómicos e com identidade, pensados para evoluir e contar uma história autêntica.</p>
+                  <p>Assume-se como vigneron, aceitando os riscos e tomando as decisões que começam no campo e culminam na vindima, o momento-chave do ano. Vê o vinho como um processo que começa muito antes da colheita, sendo moldado pelo terroir e pela visão pessoal do enólogo.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
       </div>
       {/* ── end dark gradient wrapper ── */}
 
