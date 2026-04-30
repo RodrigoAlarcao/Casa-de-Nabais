@@ -16,7 +16,7 @@ const items = [
   { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
 ]
 
-export default function SectionExplore({ noBg = false }: { noBg?: boolean }) {
+export default function SectionExplore({ noBg = false, dark = false }: { noBg?: boolean; dark?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null)
   const [hovered, setHovered] = useState<number | null>(null)
 
@@ -48,11 +48,12 @@ export default function SectionExplore({ noBg = false }: { noBg?: boolean }) {
       <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
         <h2
-          className="reveal font-display uppercase text-cn-text mb-12 md:mb-16 text-center"
+          className="reveal font-display uppercase mb-12 md:mb-16 text-center"
           style={{
             fontSize: 'clamp(2rem, 3.5vw, 3rem)',
             lineHeight: 1.0,
             letterSpacing: '0.04em',
+            color: dark ? '#FAE6C1' : 'var(--color-text)',
           }}
         >
           Explore também
