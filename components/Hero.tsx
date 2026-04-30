@@ -149,7 +149,7 @@ export default function Hero() {
             textShadow: '0 2px 12px rgba(0,0,0,0.60), 0 4px 32px rgba(0,0,0,0.45)',
           }}
         >
-          Assim nascem<br className="md:hidden" /> grandes vinhos
+          Assim nascem grandes vinhos
         </p>
       </div>
     </section>
