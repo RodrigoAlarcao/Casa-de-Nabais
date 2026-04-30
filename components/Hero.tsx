@@ -102,7 +102,7 @@ export default function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(3,29,29,0.08) 0%, rgba(3,29,29,0.22) 60%, rgba(3,29,29,0.10) 100%)',
+            'linear-gradient(to bottom, rgba(3,29,29,0.18) 0%, rgba(3,29,29,0.48) 60%, rgba(3,29,29,0.20) 100%)',
         }}
       />
 
@@ -125,7 +125,7 @@ export default function Hero() {
             letterSpacing: '0.04em',
             lineHeight: 1.0,
             color: '#FAE6C1',
-            textShadow: '0 4px 32px rgba(0,0,0,0.40)',
+            textShadow: '0 2px 12px rgba(0,0,0,0.65), 0 6px 40px rgba(0,0,0,0.55)',
           }}
         >
           {HEADLINE_LINES.map((line, i) => (
@@ -143,12 +143,13 @@ export default function Hero() {
           ref={subRef}
           className="font-body italic"
           style={{
-            fontSize: 'clamp(1.125rem, 2vw, 1.5rem)',
-            color: 'rgba(250, 230, 193, 0.80)',
+            fontSize: 'clamp(1.375rem, 2.5vw, 1.875rem)',
+            color: 'rgba(250, 230, 193, 0.90)',
             letterSpacing: '0.01em',
+            textShadow: '0 2px 12px rgba(0,0,0,0.60), 0 4px 32px rgba(0,0,0,0.45)',
           }}
         >
-          Assim nascem grandes vinhos
+          Assim nascem<br className="md:hidden" /> grandes vinhos
         </p>
       </div>
     </section>
