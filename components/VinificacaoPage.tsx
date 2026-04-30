@@ -506,7 +506,7 @@ export default function VinificacaoPage() {
         {/* ══════════════════════════════════════
             TEXTO ANIMADO (TextReveal)
         ══════════════════════════════════════ */}
-        <section className="py-28 md:py-40">
+        <section className="py-16 md:py-24">
           <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
             <TextReveal
               text={CLOSING_TEXT}
@@ -826,7 +826,7 @@ export default function VinificacaoPage() {
         {/* ══════════════════════════════════════
             PERFIL DO ENÓLOGO
         ══════════════════════════════════════ */}
-        <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+        <section className="pt-20 md:pt-28 pb-0">
           <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
             {/* Título centrado */}
@@ -939,7 +939,7 @@ export default function VinificacaoPage() {
         {/* ══════════════════════════════════════
             TEXTO ANIMADO FINAL
         ══════════════════════════════════════ */}
-        <section className="py-28 md:py-40">
+        <section className="py-20 md:py-28">
           <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
             <TextReveal
               text="Nada é feito por moda. Tudo é observado, testado e integrado apenas se servir a origem, o tempo e a singularidade do vinho."
