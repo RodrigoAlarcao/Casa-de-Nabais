@@ -39,10 +39,7 @@ const EXPERIMENTAL_PARAS = [
   'Na adega trabalhamos com pequenos depósitos, o que nos permite fazer vinificações muito precisas. Assim, conseguimos compreender melhor a influência de fatores como o solo, a forma como a vinha é cuidada e a quantidade de uvas produzidas em cada parcela.',
 ]
 
-const RIGOR_TEXT = [
-  'Cada detalhe do processo é medido, registado e avaliado. Desde o momento em que a uva entra na adega até ao dia do engarrafamento, trabalhamos com dados precisos que nos permitem tomar melhores decisões — ano após ano.',
-  'A temperatura de fermentação, o tempo de maceração, o pH, a acidez total: todos os parâmetros são acompanhados de perto. Não para controlar o vinho, mas para o compreender melhor e intervir apenas quando necessário.',
-]
+const RIGOR_TEXT = 'A nossa estação meteorológica própria, ímpar na região, recolhe dados contínuos de temperatura, humidade, precipitação, vento e radiação solar. Estes dados ajudam a ajustar as decisões que afetam a vinha e a aprofundar o conhecimento do ecossistema.'
 
 const RIGOR_IMAGES = [
   { src: '/images/homepage/vinificacao/fullbleed-01.webp', alt: 'Controlo de temperatura — adega' },
@@ -790,69 +787,55 @@ export default function VinificacaoPage() {
           <section className="pt-0 pb-20 md:pb-28">
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
-              {/* Linha divisória */}
-              <div
-                className="mb-16 md:mb-20"
-                style={{ height: '1px', backgroundColor: 'rgba(3,29,29,0.12)' }}
-              />
-
               {/* Título 1/3 + Texto 2/3 — desktop */}
               <div className="hidden lg:grid lg:grid-cols-[1fr_2fr] gap-16 mb-14">
                 <h2
-                  className="font-display uppercase"
+                  className="font-display"
                   style={{
                     fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
                     lineHeight: 1.1,
-                    letterSpacing: '0.04em',
                     color: '#031D1D',
                   }}
                 >
-                  Rigor,<br />dados<br />e tempo
+                  Rigor, dados<br />e tempo
                 </h2>
 
                 <div className="flex flex-col justify-center">
-                  {RIGOR_TEXT.map((para, i) => (
-                    <p
-                      key={i}
-                      className="font-body mb-5 last:mb-0"
-                      style={{
-                        fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                        lineHeight: 1.65,
-                        color: 'rgba(3,29,29,0.65)',
-                      }}
-                    >
-                      {para}
-                    </p>
-                  ))}
+                  <p
+                    className="font-body"
+                    style={{
+                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      lineHeight: 1.65,
+                      color: 'rgba(3,29,29,0.65)',
+                    }}
+                  >
+                    {RIGOR_TEXT}
+                  </p>
                 </div>
               </div>
 
               {/* Título + Texto — mobile */}
               <div className="lg:hidden mb-10 text-center">
                 <h2
-                  className="font-display uppercase mb-6"
+                  className="font-display mb-6"
                   style={{
                     fontSize: 'clamp(1.75rem, 8vw, 2.5rem)',
                     lineHeight: 1.1,
-                    letterSpacing: '0.04em',
                     color: '#031D1D',
                   }}
                 >
-                  Rigor, dados e tempo
+                  Rigor, dados<br />e tempo
                 </h2>
-                {RIGOR_TEXT.map((para, i) => (
-                  <p
-                    key={i}
-                    className="font-body mb-4 last:mb-0"
-                    style={{
-                      fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
-                      lineHeight: 1.65,
-                      color: 'rgba(3,29,29,0.65)',
-                    }}
-                  >
-                    {para}
-                  </p>
-                ))}
+                <p
+                  className="font-body"
+                  style={{
+                    fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+                    lineHeight: 1.65,
+                    color: 'rgba(3,29,29,0.65)',
+                  }}
+                >
+                  {RIGOR_TEXT}
+                </p>
               </div>
 
               {/* 3 imagens quadradas */}
