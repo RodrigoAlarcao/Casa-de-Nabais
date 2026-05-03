@@ -545,29 +545,7 @@ export default function VinificacaoPage() {
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-                <div className="hidden lg:block">
-                  <div
-                    ref={expPortraitRef}
-                    className="relative overflow-hidden w-full"
-                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
-                  >
-                    <div
-                      ref={expImgWrapRef}
-                      className="absolute will-change-transform"
-                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
-                    >
-                      <Image
-                        src="/images/homepage/vinificacao/fullbleed-01.webp"
-                        alt="Abordagem experimental — microvinificações"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 90vw, 50vw"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col px-0 lg:pl-10">
+                <div className="flex flex-col px-0 lg:pr-10">
                   <h2
                     className="font-display mb-8 lg:mb-10 text-center lg:text-left"
                     style={{
@@ -592,6 +570,28 @@ export default function VinificacaoPage() {
                       {para}
                     </p>
                   ))}
+                </div>
+
+                <div className="hidden lg:block">
+                  <div
+                    ref={expPortraitRef}
+                    className="relative overflow-hidden w-full"
+                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
+                  >
+                    <div
+                      ref={expImgWrapRef}
+                      className="absolute will-change-transform"
+                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+                    >
+                      <Image
+                        src="/images/homepage/vinificacao/fullbleed-01.webp"
+                        alt="Abordagem experimental — microvinificações"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 90vw, 50vw"
+                      />
+                    </div>
+                  </div>
                 </div>
 
               </div>
