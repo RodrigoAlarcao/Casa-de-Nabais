@@ -12,13 +12,13 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/casa/historia-01.webp', alt: 'Detalhe arquitectónico' },
-  { src: '/images/homepage/casa/historia-02.webp', alt: 'Interior histórico' },
-  { src: '/images/homepage/casa/historia-03.webp', alt: 'Adegas antigas' },
-  { src: '/images/homepage/casa/historia-04.webp', alt: 'Terreiro da quinta' },
-  { src: '/images/homepage/casa/historia-05.webp', alt: 'Vista da quinta' },
-  { src: '/images/homepage/casa/historia-06.webp', alt: 'Vinha histórica' },
-  { src: '/images/homepage/casa/historia-07.webp', alt: 'Detalhe da casa' },
+  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Detalhe arquitectónico' },
+  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Interior histórico' },
+  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Adegas antigas' },
+  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Terreiro da quinta' },
+  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Vista da quinta' },
+  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Vinha histórica' },
+  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Detalhe da casa' },
 ]
 
 const INTRO_TEXT = 'A Casa de Nabais nasceu da paisagem fértil da freguesia da Seara, em pleno Vale do Lima, e da longa história das grandes casas do Minho.'
@@ -206,7 +206,7 @@ export default function CasaHistoriaSection() {
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-            <Image src="/images/homepage/casa/historia-portrait.webp" alt="Fachada histórica da Casa de Nabais"
+            <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
               fill className="object-cover" sizes="100vw" />
           </div>
         </div>
@@ -304,7 +304,7 @@ export default function CasaHistoriaSection() {
               style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
               <div ref={imgWrapRef} className="absolute will-change-transform"
                 style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-                <Image src="/images/homepage/casa/historia-portrait.webp" alt="Fachada histórica da Casa de Nabais"
+                <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
                   fill className="object-cover" sizes="50vw" />
               </div>
             </div>

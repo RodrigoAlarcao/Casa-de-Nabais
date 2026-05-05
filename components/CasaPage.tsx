@@ -15,13 +15,13 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 const galleryImages = [
-  { src: '/images/homepage/casa/galeria-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/galeria-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/galeria-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/galeria-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/galeria-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/galeria-06.webp', alt: 'Mesa de refeições' },
-  { src: '/images/homepage/casa/galeria-07.webp', alt: 'Vista da varanda' },
+  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
+  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
+  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
+  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
+  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
+  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Mesa de refeições' },
+  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
 ]
 
 const BODY_PARAGRAPHS = [
@@ -166,7 +166,7 @@ export default function CasaPage() {
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/casa/hero.webp"
+              src="/images/homepage/casa/section-01.webp"
               alt="A Casa de Nabais"
               fill
               priority
@@ -324,7 +324,7 @@ export default function CasaPage() {
             style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/casa/hero.webp"
+              src="/images/homepage/casa/section-01.webp"
               alt="Vista exterior da Casa de Nabais"
               fill
               priority
@@ -357,7 +357,7 @@ export default function CasaPage() {
                   style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                 >
                   <Image
-                    src="/images/homepage/casa/galeria-portrait.webp"
+                    src="/images/homepage/casa/carousel-01.webp"
                     alt="Casa de Nabais — interior"
                     fill
                     className="object-cover"
@@ -536,7 +536,7 @@ export default function CasaPage() {
           style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/casa/galeria-portrait.webp"
+            src="/images/homepage/casa/carousel-01.webp"
             alt="Casa de Nabais — interior"
             fill
             className="object-cover"
