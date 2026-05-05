@@ -78,6 +78,7 @@ export default function FicarNaCasaPage() {
 
   /* form */
   const [formState, setFormState] = useState<FormState>('idle')
+  const [formStep, setFormStep] = useState<1 | 2>(1)
   const [form, setForm] = useState({
     nome: '', email: '', telefone: '',
     checkIn: '', checkOut: '', pessoas: '2', mensagem: '',
@@ -122,97 +123,209 @@ export default function FicarNaCasaPage() {
     return () => ctx.revert()
   }, [])
 
-  /* ── Shared input style ─────────────────────────────────────── */
-  const inputCls = [
-    'w-full font-body text-[0.9375rem] text-cn-text',
-    'bg-[#FFF9ED] border border-[rgba(3,29,29,0.18)] rounded-[6px]',
-    'px-4 py-3 outline-none',
-    'focus:border-cn-green transition-colors duration-200',
-    'placeholder:text-cn-text-muted/50',
-  ].join(' ')
+  /* ── Booking widget (dark card, two-step) ── */
+  function renderBookingWidget() {
+    const pill = {
+      backgroundColor: 'rgba(255,249,237,0.07)',
+      border: '1px solid rgba(250,230,193,0.16)',
+      borderRadius: '12px',
+      padding: '14px 18px',
+    }
 
-  /* ── Booking form (called as function to avoid re-mount issues) ── */
-  function renderBookingForm() {
+    const labelStyle: React.CSSProperties = {
+      fontFamily: 'var(--font-display), serif',
+      fontSize: '10px',
+      letterSpacing: '0.12em',
+      textTransform: 'uppercase',
+      color: 'rgba(250,230,193,0.55)',
+      marginBottom: '4px',
+      display: 'block',
+    }
+
+    const valueStyle: React.CSSProperties = {
+      fontFamily: 'var(--font-display), serif',
+      fontSize: '1.0625rem',
+      color: '#FAE6C1',
+      background: 'transparent',
+      border: 'none',
+      outline: 'none',
+      width: '100%',
+    }
+
     if (formState === 'success') {
       return (
-        <div className="flex flex-col items-center text-center py-8 gap-4">
-          <div
-            className="w-12 h-12 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: '#0C4544' }}
-          >
+        <div className="flex flex-col items-center text-center py-10 gap-4">
+          <div className="w-12 h-12 rounded-full flex items-center justify-center"
+            style={{ border: '1px solid rgba(250,230,193,0.30)' }}>
             <Check size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </div>
-          <p className="font-body" style={{ fontSize: '1.0625rem', lineHeight: 1.6, color: 'var(--color-text-muted)' }}>
+          <p className="font-body" style={{ fontSize: '1rem', lineHeight: 1.55, color: 'rgba(255,249,237,0.75)' }}>
             Pedido enviado. Entraremos em contacto brevemente para confirmar a sua estadia.
           </p>
         </div>
       )
     }
 
+    /* ── Step 1: datas + hóspedes ── */
+    if (formStep === 1) {
+      return (
+        <div className="flex flex-col gap-3">
+          {/* Price */}
+          <div className="text-center mb-2">
+            <p className="font-display" style={{ fontSize: 'clamp(1.625rem, 2.2vw, 2.25rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+              €1,000 to €2,500/night
+            </p>
+            <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.9375rem', color: 'rgba(255,249,237,0.50)', marginTop: '6px' }}>
+              Enter dates for seasonal pricing
+            </p>
+          </div>
+
+          {/* Datas */}
+          <div className="grid grid-cols-2 gap-2">
+            <div style={pill}>
+              <span style={labelStyle}>Check In</span>
+              <input
+                type="date"
+                value={form.checkIn}
+                onChange={setField('checkIn')}
+                min={new Date().toISOString().split('T')[0]}
+                style={{ ...valueStyle, colorScheme: 'dark' }}
+              />
+            </div>
+            <div style={pill}>
+              <span style={labelStyle}>Check Out</span>
+              <input
+                type="date"
+                value={form.checkOut}
+                onChange={setField('checkOut')}
+                min={form.checkIn || new Date().toISOString().split('T')[0]}
+                style={{ ...valueStyle, colorScheme: 'dark' }}
+              />
+            </div>
+          </div>
+
+          {/* Hóspedes */}
+          <div style={pill}>
+            <span style={labelStyle}>Who</span>
+            <select
+              value={form.pessoas}
+              onChange={setField('pessoas')}
+              style={{ ...valueStyle, appearance: 'none', cursor: 'pointer' }}
+            >
+              {[...Array(12)].map((_, i) => (
+                <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
+                  {i + 1} {i === 0 ? 'Guest' : 'Guests'}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* CTA */}
+          <button
+            onClick={() => setFormStep(2)}
+            className="w-full font-display tracking-[0.06em] transition-all duration-200"
+            style={{
+              fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
+              backgroundColor: 'rgba(255,249,237,0.12)',
+              border: '1px solid rgba(250,230,193,0.20)',
+              borderRadius: '12px',
+              color: 'rgba(250,230,193,0.80)',
+              padding: '18px',
+              marginTop: '4px',
+            }}
+          >
+            Reservar
+          </button>
+
+          <p className="text-center font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.35)', marginTop: '2px' }}>
+            You won&apos;t be charged yet.
+          </p>
+        </div>
+      )
+    }
+
+    /* ── Step 2: dados de contacto ── */
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex flex-col gap-1">
-            <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Check‑in</label>
-            <input type="date" required value={form.checkIn} onChange={setField('checkIn')}
-              min={new Date().toISOString().split('T')[0]} className={inputCls} />
+        <button
+          type="button"
+          onClick={() => setFormStep(1)}
+          className="flex items-center gap-1.5 font-display uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-70 mb-1"
+          style={{ fontSize: '10px', color: 'rgba(250,230,193,0.55)' }}
+        >
+          <ChevronLeft size={12} strokeWidth={1.5} />
+          Alterar datas
+        </button>
+
+        {/* Resumo datas */}
+        <div className="grid grid-cols-2 gap-2 mb-1">
+          <div style={{ ...pill, opacity: 0.75 }}>
+            <span style={labelStyle}>Check In</span>
+            <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkIn || '—'}</p>
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Check‑out</label>
-            <input type="date" required value={form.checkOut} onChange={setField('checkOut')}
-              min={form.checkIn || new Date().toISOString().split('T')[0]} className={inputCls} />
+          <div style={{ ...pill, opacity: 0.75 }}>
+            <span style={labelStyle}>Check Out</span>
+            <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkOut || '—'}</p>
           </div>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Hóspedes</label>
-          <select value={form.pessoas} onChange={setField('pessoas')} className={inputCls} style={{ appearance: 'none' }}>
-            {[...Array(12)].map((_, i) => (
-              <option key={i + 1} value={String(i + 1)}>{i + 1} {i === 0 ? 'pessoa' : 'pessoas'}</option>
-            ))}
-          </select>
-        </div>
+        {[
+          { key: 'nome', label: 'Nome *', type: 'text', placeholder: 'O seu nome', required: true },
+          { key: 'email', label: 'Email *', type: 'email', placeholder: 'email@exemplo.pt', required: true },
+          { key: 'telefone', label: 'Telefone', type: 'tel', placeholder: '+351 — opcional', required: false },
+        ].map(({ key, label, type, placeholder, required }) => (
+          <div key={key} style={pill}>
+            <span style={labelStyle}>{label}</span>
+            <input
+              type={type}
+              required={required}
+              placeholder={placeholder}
+              value={form[key as keyof typeof form]}
+              onChange={setField(key as keyof typeof form)}
+              style={{ ...valueStyle, fontSize: '0.9375rem' }}
+            />
+          </div>
+        ))}
 
-        <div className="flex flex-col gap-1">
-          <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Nome *</label>
-          <input type="text" required placeholder="O seu nome" value={form.nome} onChange={setField('nome')} className={inputCls} />
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Email *</label>
-          <input type="email" required placeholder="email@exemplo.pt" value={form.email} onChange={setField('email')} className={inputCls} />
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Telefone</label>
-          <input type="tel" placeholder="+351 — opcional" value={form.telefone} onChange={setField('telefone')} className={inputCls} />
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <label className="font-display uppercase tracking-[0.1em] text-cn-text-muted" style={{ fontSize: '10px' }}>Mensagem</label>
-          <textarea rows={3} placeholder="Pedidos especiais, perguntas…" value={form.mensagem} onChange={setField('mensagem')} className={inputCls + ' resize-none'} />
+        <div style={pill}>
+          <span style={labelStyle}>Mensagem</span>
+          <textarea
+            rows={2}
+            placeholder="Pedidos especiais…"
+            value={form.mensagem}
+            onChange={setField('mensagem')}
+            style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
+          />
         </div>
 
         <button
           type="submit"
           disabled={formState === 'loading'}
-          className="w-full font-display uppercase tracking-[0.14em] text-[12px] py-4 rounded-[6px] transition-colors duration-200 mt-1"
-          style={{ backgroundColor: '#0C4544', color: '#FAE6C1', opacity: formState === 'loading' ? 0.65 : 1 }}
+          className="w-full font-display tracking-[0.06em] transition-all duration-200"
+          style={{
+            fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
+            backgroundColor: 'rgba(255,249,237,0.12)',
+            border: '1px solid rgba(250,230,193,0.20)',
+            borderRadius: '12px',
+            color: 'rgba(250,230,193,0.80)',
+            padding: '18px',
+            opacity: formState === 'loading' ? 0.55 : 1,
+          }}
         >
-          {formState === 'loading' ? 'A enviar…' : 'Reservar'}
+          {formState === 'loading' ? 'A enviar…' : 'Enviar pedido'}
         </button>
 
         {formState === 'error' && (
-          <p className="font-body text-center" style={{ fontSize: '0.875rem', color: '#8B2020' }}>
-            Ocorreu um erro. Por favor tente novamente.
+          <p className="font-body text-center" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
+            Ocorreu um erro. Tente novamente.
           </p>
         )}
 
-        <div className="flex items-center justify-center gap-2 mt-1">
-          <Phone size={12} strokeWidth={1.5} style={{ color: 'var(--color-text-muted)' }} />
-          <span className="font-body" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
-            Ou ligue-nos para{' '}
-            <a href="tel:+351258000000" className="underline underline-offset-2 hover:text-cn-green transition-colors duration-200">
+        <div className="flex items-center justify-center gap-2">
+          <Phone size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.40)' }} />
+          <span className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.40)' }}>
+            Ou ligue{' '}
+            <a href="tel:+351258000000" className="underline underline-offset-2" style={{ color: 'rgba(250,230,193,0.60)' }}>
               +351 258 000 000
             </a>
           </span>
@@ -388,20 +501,21 @@ export default function FicarNaCasaPage() {
 
               {/* Preço mobile callout */}
               <div
-                className="lg:hidden mb-8 p-5 rounded-[8px]"
-                style={{ border: '1px solid rgba(250,230,193,0.18)', backgroundColor: 'rgba(250,230,193,0.06)' }}
+                className="lg:hidden mb-8 p-5 rounded-[12px]"
+                style={{ border: '1px solid rgba(250,230,193,0.18)', backgroundColor: 'rgba(255,249,237,0.05)' }}
               >
-                <p className="font-display" style={{ fontSize: '0.8125rem', color: 'rgba(250,230,193,0.55)', marginBottom: '2px' }}>A partir de</p>
-                <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 4vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-                  €1.000 — €2.500
-                  <span className="font-body" style={{ fontSize: '0.875rem', color: 'rgba(250,230,193,0.60)', marginLeft: '4px' }}>/ noite</span>
+                <p className="font-display text-center" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+                  €1,000 to €2,500/night
+                </p>
+                <p className="font-body text-center mt-1" style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(255,249,237,0.45)' }}>
+                  Enter dates for seasonal pricing
                 </p>
                 <button
-                  onClick={() => setMobileOpen(true)}
-                  className="mt-4 w-full font-display uppercase tracking-[0.14em] text-[12px] py-3.5 rounded-[6px]"
-                  style={{ backgroundColor: 'rgba(250,230,193,0.14)', color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.30)' }}
+                  onClick={() => { setFormStep(1); setMobileOpen(true) }}
+                  className="mt-4 w-full font-display tracking-[0.04em] py-4 rounded-[12px]"
+                  style={{ backgroundColor: 'rgba(255,249,237,0.12)', color: 'rgba(250,230,193,0.80)', border: '1px solid rgba(250,230,193,0.20)', fontSize: '1rem' }}
                 >
-                  Verificar disponibilidade
+                  Reservar
                 </button>
               </div>
 
@@ -516,28 +630,16 @@ export default function FicarNaCasaPage() {
             </div>
 
             {/* RIGHT — sticky booking widget */}
-            <div className="hidden lg:block w-full lg:w-[380px] xl:w-[420px] flex-shrink-0">
+            <div className="hidden lg:block w-full lg:w-[380px] xl:w-[400px] flex-shrink-0">
               <div
-                className="sticky rounded-[10px] overflow-hidden"
+                className="sticky rounded-[16px] p-6"
                 style={{
                   top: '90px',
-                  backgroundColor: '#FFFDF5',
-                  boxShadow: '0 0 0 1px rgba(250,230,193,0.18), 0 24px 48px rgba(3,13,13,0.40)',
+                  backgroundColor: 'rgba(255,249,237,0.05)',
+                  border: '1px solid rgba(250,230,193,0.18)',
                 }}
               >
-                <div className="px-6 pt-6 pb-5 border-b border-[rgba(3,29,29,0.08)]">
-                  <p className="font-display" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '4px' }}>A partir de</p>
-                  <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 2vw, 1.75rem)', color: 'var(--color-text)', lineHeight: 1.1 }}>
-                    €1.000 — €2.500
-                    <span className="font-body" style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginLeft: '5px' }}>/ noite</span>
-                  </p>
-                  <p className="font-body mt-1.5" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', opacity: 0.65 }}>
-                    Introduza as datas para verificar disponibilidade
-                  </p>
-                </div>
-                <div className="px-6 py-5">
-                  {renderBookingForm()}
-                </div>
+                {renderBookingWidget()}
               </div>
             </div>
 
@@ -546,53 +648,78 @@ export default function FicarNaCasaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          COMPRAR VINHOS
+          OS NOSSOS VINHOS — igual a SectionVinhos da homepage
       ══════════════════════════════════════════════════════ */}
-      <section
-        className="py-16 md:py-20 reveal-section"
-        style={{ backgroundColor: '#0C4544' }}
-      >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2
-            className="reveal-item font-display uppercase text-center tracking-[0.12em] mb-10 md:mb-12"
-            style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.875rem)', color: '#FAE6C1' }}
-          >
-            Comprar Vinhos
-          </h2>
+      <section className="py-20 md:py-28" style={{ backgroundColor: 'var(--color-bg)' }}>
+        <div className="max-w-[1100px] mx-auto px-6 md:px-10">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[760px] mx-auto">
+          <div className="text-center mb-14 md:mb-16 max-w-[640px] mx-auto">
+            <h2
+              className="font-display uppercase text-cn-text mb-6"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.04em' }}
+            >
+              Os nossos vinhos
+            </h2>
+            <p className="font-body text-cn-text-muted"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}>
+              Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {WINES.map(wine => (
-              <div
-                key={wine.name}
-                className="reveal-item rounded-[8px] overflow-hidden border"
-                style={{ borderColor: 'rgba(250,230,193,0.18)', backgroundColor: '#0A3A39' }}
-              >
-                <div className="relative w-full" style={{ aspectRatio: '4/3' }}>
-                  <Image src={wine.img} alt={wine.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 380px" />
-                  <div className="absolute inset-0 pointer-events-none"
-                    style={{ background: 'linear-gradient(to top, rgba(5,38,37,0.55) 0%, transparent 50%)' }} />
-                </div>
-                <div className="px-5 py-4">
-                  <p className="font-display uppercase tracking-[0.12em]"
-                    style={{ fontSize: '10px', color: 'rgba(250,230,193,0.55)', marginBottom: '4px' }}>{wine.label}</p>
-                  <p className="font-display uppercase tracking-[0.06em] mb-4"
-                    style={{ fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', color: '#FAE6C1', lineHeight: 1.1 }}>{wine.name}</p>
-                  <div className="flex items-center gap-3">
-                    <Link href={wine.href}
-                      className="font-display uppercase tracking-[0.12em] text-[11px] px-4 py-2.5 rounded-[6px] border transition-colors duration-200"
-                      style={{ borderColor: 'rgba(250,230,193,0.40)', color: 'rgba(250,230,193,0.85)' }}>
-                      Detalhes
-                    </Link>
-                    <button disabled title="Em breve"
-                      className="font-display uppercase tracking-[0.12em] text-[11px] px-4 py-2.5 rounded-[6px] cursor-not-allowed"
-                      style={{ backgroundColor: 'rgba(250,230,193,0.12)', color: 'rgba(250,230,193,0.35)' }}>
-                      Comprar →
-                    </button>
+              <div key={wine.name} className="flex flex-col">
+                {/* Image — white card, contained */}
+                <div
+                  className="relative w-full overflow-hidden"
+                  style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
+                >
+                  <div className="absolute inset-6">
+                    <Image
+                      src={wine.img}
+                      alt={wine.name}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
+                </div>
+
+                {/* Name block */}
+                <div className="text-center py-8">
+                  <p className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1" style={{ fontSize: '11px' }}>
+                    {wine.label}
+                  </p>
+                  <h3 className="font-display uppercase text-cn-text"
+                    style={{ fontSize: 'clamp(1.625rem, 3vw, 2.5rem)', letterSpacing: '0.04em', lineHeight: 1.05 }}>
+                    {wine.name}
+                  </h3>
+                </div>
+
+                {/* Buttons */}
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    href={wine.href}
+                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
+                    style={{ border: '1px solid var(--color-border)', color: 'var(--color-text)', borderRadius: '8px' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-text)'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-bg)' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text)' }}
+                  >
+                    Detalhes <ArrowRight size={10} strokeWidth={1.5} />
+                  </Link>
+                  <button
+                    disabled
+                    title="Em breve"
+                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4"
+                    style={{ backgroundColor: 'var(--color-green)', color: '#FAE6C1', opacity: 0.55, cursor: 'not-allowed', borderRadius: '8px' }}
+                  >
+                    Comprar <ArrowRight size={10} strokeWidth={1.5} />
+                  </button>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -600,26 +727,20 @@ export default function FicarNaCasaPage() {
           MOBILE OVERLAY — formulário de reserva
       ══════════════════════════════════════════════════════ */}
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-[300] flex flex-col" style={{ backgroundColor: 'var(--color-bg)' }}>
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(3,29,29,0.10)]">
-            <div>
-              <p className="font-display" style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>A partir de</p>
-              <p className="font-display" style={{ fontSize: '1.25rem', color: 'var(--color-text)' }}>
-                €1.000 — €2.500
-                <span className="font-body" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginLeft: '4px' }}>/ noite</span>
-              </p>
-            </div>
+        <div className="lg:hidden fixed inset-0 z-[300] flex flex-col"
+          style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
+          <div className="flex items-center justify-end px-6 py-4">
             <button
-              onClick={() => setMobileOpen(false)}
+              onClick={() => { setMobileOpen(false); setFormStep(1) }}
               aria-label="Fechar"
               className="w-9 h-9 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: 'rgba(3,29,29,0.08)' }}
+              style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
             >
-              <X size={16} strokeWidth={1.5} style={{ color: 'var(--color-text)' }} />
+              <X size={16} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-6 py-6">
-            {renderBookingForm()}
+          <div className="flex-1 overflow-y-auto px-6 pb-8">
+            {renderBookingWidget()}
           </div>
         </div>
       )}
@@ -781,7 +902,7 @@ function Lightbox({
       </button>
 
       {index > 0 && (
-        <button onClick={onPrev} aria-label="Anterior"
+        <button onClick={e => { e.stopPropagation(); onPrev() }} aria-label="Anterior"
           className="absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
           style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
           <ChevronLeft size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -789,7 +910,7 @@ function Lightbox({
       )}
 
       {index < images.length - 1 && (
-        <button onClick={onNext} aria-label="Seguinte"
+        <button onClick={e => { e.stopPropagation(); onNext() }} aria-label="Seguinte"
           className="absolute right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
           style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
           <ChevronRight size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
