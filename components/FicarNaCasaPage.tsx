@@ -231,8 +231,8 @@ export default function FicarNaCasaPage() {
       ══════════════════════════════════════════════════════ */}
       <section
         style={{
-          background: 'linear-gradient(180deg, #0C4544 0%, #073332 100%)',
-          paddingBottom: '60px',
+          background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 23%, #031D1D 100%)',
+          paddingBottom: '80px',
         }}
       >
         {/* Título e localização */}
@@ -263,8 +263,8 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {/* Grid de fotos — 1 grande + 2×2 */}
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        {/* Grid de fotos — full bleed */}
+        <div className="w-full">
 
           {/* Desktop grid */}
           <div
@@ -336,7 +336,7 @@ export default function FicarNaCasaPage() {
             className="font-body mb-3"
             style={{
               fontSize: 'clamp(0.9375rem, 1.3vw, 1.0625rem)',
-              lineHeight: 1.7,
+              lineHeight: 1.45,
               color: 'rgba(255,249,237,0.80)',
             }}
           >
@@ -346,7 +346,7 @@ export default function FicarNaCasaPage() {
             className="font-body"
             style={{
               fontSize: 'clamp(0.9375rem, 1.3vw, 1.0625rem)',
-              lineHeight: 1.7,
+              lineHeight: 1.45,
               color: 'rgba(255,249,237,0.80)',
             }}
           >
@@ -378,32 +378,28 @@ export default function FicarNaCasaPage() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════
-          MAIN CONTENT — two-column
-      ══════════════════════════════════════════════════════ */}
-      <div style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-12 md:py-16">
+        {/* ── Two-column content — ainda dentro do wrap verde ── */}
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 mt-14 md:mt-20">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 xl:gap-20 items-start">
 
-            {/* ── LEFT ──────────────────────────────────────────── */}
+            {/* LEFT */}
             <div className="flex-1 min-w-0">
 
               {/* Preço mobile callout */}
               <div
-                className="lg:hidden mb-8 p-5 rounded-[8px] border border-[rgba(3,29,29,0.12)]"
-                style={{ backgroundColor: '#FFF3DE' }}
+                className="lg:hidden mb-8 p-5 rounded-[8px]"
+                style={{ border: '1px solid rgba(250,230,193,0.18)', backgroundColor: 'rgba(250,230,193,0.06)' }}
               >
-                <p className="font-display" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '2px' }}>A partir de</p>
-                <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 4vw, 1.75rem)', color: 'var(--color-text)', lineHeight: 1.1 }}>
+                <p className="font-display" style={{ fontSize: '0.8125rem', color: 'rgba(250,230,193,0.55)', marginBottom: '2px' }}>A partir de</p>
+                <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 4vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
                   €1.000 — €2.500
-                  <span className="font-body" style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginLeft: '4px' }}>/ noite</span>
+                  <span className="font-body" style={{ fontSize: '0.875rem', color: 'rgba(250,230,193,0.60)', marginLeft: '4px' }}>/ noite</span>
                 </p>
                 <button
                   onClick={() => setMobileOpen(true)}
                   className="mt-4 w-full font-display uppercase tracking-[0.14em] text-[12px] py-3.5 rounded-[6px]"
-                  style={{ backgroundColor: '#0C4544', color: '#FAE6C1' }}
+                  style={{ backgroundColor: 'rgba(250,230,193,0.14)', color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.30)' }}
                 >
                   Verificar disponibilidade
                 </button>
@@ -413,7 +409,7 @@ export default function FicarNaCasaPage() {
               <div className="reveal-section mb-10 md:mb-12">
                 <h2
                   className="reveal-item font-display uppercase tracking-[0.08em] mb-6"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'var(--color-text)' }}
+                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
                 >
                   Comodidades
                 </h2>
@@ -421,10 +417,10 @@ export default function FicarNaCasaPage() {
                   {[...AMENITIES_LEFT, ...AMENITIES_RIGHT].map(item => (
                     <div key={item} className="flex items-center gap-2.5">
                       <div className="w-4 h-4 rounded-sm flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: 'rgba(12,69,68,0.10)' }}>
-                        <Check size={10} strokeWidth={2.5} style={{ color: '#0C4544' }} />
+                        style={{ backgroundColor: 'rgba(250,230,193,0.10)' }}>
+                        <Check size={10} strokeWidth={2.5} style={{ color: 'rgba(250,230,193,0.75)' }} />
                       </div>
-                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'var(--color-text-muted)' }}>
+                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
                         {item}
                       </span>
                     </div>
@@ -436,7 +432,7 @@ export default function FicarNaCasaPage() {
               <div className="reveal-section mb-10 md:mb-12">
                 <h2
                   className="reveal-item font-display uppercase tracking-[0.08em] mb-6"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'var(--color-text)' }}
+                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
                 >
                   Atividades e experiências
                 </h2>
@@ -444,19 +440,19 @@ export default function FicarNaCasaPage() {
                   {ACTIVITIES.map(item => (
                     <div key={item} className="flex items-center gap-2.5">
                       <div className="w-4 h-4 rounded-sm flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: 'rgba(12,69,68,0.10)' }}>
-                        <Check size={10} strokeWidth={2.5} style={{ color: '#0C4544' }} />
+                        style={{ backgroundColor: 'rgba(250,230,193,0.10)' }}>
+                        <Check size={10} strokeWidth={2.5} style={{ color: 'rgba(250,230,193,0.75)' }} />
                       </div>
-                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'var(--color-text-muted)' }}>
+                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
                         {item}
                       </span>
                     </div>
                   ))}
                 </div>
-                <p className="reveal-item font-body mt-5" style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', opacity: 0.7 }}>
+                <p className="reveal-item font-body mt-5" style={{ fontSize: '0.875rem', color: 'rgba(255,249,237,0.45)' }}>
                   Saiba mais sobre actividades no Vale do Lima em{' '}
                   <a href="https://www.visitepontedelima.pt" target="_blank" rel="noopener noreferrer"
-                    className="underline underline-offset-2 hover:text-cn-green transition-colors duration-200">
+                    className="underline underline-offset-2 transition-opacity duration-200 hover:opacity-100">
                     visitepontedelima.pt
                   </a>
                 </p>
@@ -466,18 +462,18 @@ export default function FicarNaCasaPage() {
               <div className="reveal-section mb-10 md:mb-14">
                 <h2
                   className="reveal-item font-display uppercase tracking-[0.08em] mb-2"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'var(--color-text)' }}
+                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
                 >
                   Turismo histórico e cultural
                 </h2>
-                <p className="reveal-item font-body mb-5" style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', opacity: 0.7 }}>
+                <p className="reveal-item font-body mb-5" style={{ fontSize: '0.875rem', color: 'rgba(255,249,237,0.42)' }}>
                   A 10–15 minutos da Casa de Nabais
                 </p>
-                <div className="reveal-item flex flex-col divide-y divide-[rgba(3,29,29,0.08)]">
+                <div className="reveal-item flex flex-col" style={{ borderTop: '1px solid rgba(250,230,193,0.10)' }}>
                   {NEARBY.map(({ label, dist }) => (
-                    <div key={label} className="flex items-center justify-between py-2.5">
-                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'var(--color-text-muted)' }}>{label}</span>
-                      <span className="font-display uppercase tracking-[0.1em]" style={{ fontSize: '11px', color: 'var(--color-text-muted)', opacity: 0.6 }}>{dist}</span>
+                    <div key={label} className="flex items-center justify-between py-2.5" style={{ borderBottom: '1px solid rgba(250,230,193,0.10)' }}>
+                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>{label}</span>
+                      <span className="font-display uppercase tracking-[0.1em]" style={{ fontSize: '11px', color: 'rgba(250,230,193,0.40)' }}>{dist}</span>
                     </div>
                   ))}
                 </div>
@@ -487,13 +483,13 @@ export default function FicarNaCasaPage() {
               <div className="reveal-section">
                 <h2
                   className="reveal-item font-display uppercase tracking-[0.08em] mb-6"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'var(--color-text)' }}
+                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
                 >
                   Localização
                 </h2>
                 <div
                   className="reveal-item relative w-full overflow-hidden rounded-[6px]"
-                  style={{ aspectRatio: '16/9', backgroundColor: '#3A5B4F' }}
+                  style={{ aspectRatio: '16/9', backgroundColor: '#1A4E4D' }}
                 >
                   <iframe
                     title="Localização da Casa de Nabais"
@@ -510,8 +506,8 @@ export default function FicarNaCasaPage() {
                   href="https://maps.google.com/?q=Seara,Ponte+de+Lima,Portugal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="reveal-item inline-flex items-center gap-1.5 mt-4 font-display uppercase tracking-[0.12em] hover:opacity-70 transition-opacity duration-200"
-                  style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}
+                  className="reveal-item inline-flex items-center gap-1.5 mt-4 font-display uppercase tracking-[0.12em] transition-opacity duration-200 hover:opacity-70"
+                  style={{ fontSize: '11px', color: 'rgba(250,230,193,0.50)' }}
                 >
                   Ver no Google Maps
                   <ArrowRight size={10} strokeWidth={1.5} />
@@ -519,11 +515,15 @@ export default function FicarNaCasaPage() {
               </div>
             </div>
 
-            {/* ── RIGHT — sticky booking widget ─────────────────── */}
+            {/* RIGHT — sticky booking widget */}
             <div className="hidden lg:block w-full lg:w-[380px] xl:w-[420px] flex-shrink-0">
               <div
-                className="sticky rounded-[10px] border border-[rgba(3,29,29,0.12)] overflow-hidden"
-                style={{ top: '90px', backgroundColor: '#FFFDF5' }}
+                className="sticky rounded-[10px] overflow-hidden"
+                style={{
+                  top: '90px',
+                  backgroundColor: '#FFFDF5',
+                  boxShadow: '0 0 0 1px rgba(250,230,193,0.18), 0 24px 48px rgba(3,13,13,0.40)',
+                }}
               >
                 <div className="px-6 pt-6 pb-5 border-b border-[rgba(3,29,29,0.08)]">
                   <p className="font-display" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '4px' }}>A partir de</p>
@@ -543,7 +543,7 @@ export default function FicarNaCasaPage() {
 
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════════
           COMPRAR VINHOS
