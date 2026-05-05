@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, ArrowLeft } from 'lucide-react'
+import { ArrowRight, ArrowLeft, ArrowDown } from 'lucide-react'
 import TextReveal from './TextReveal'
 import ImageLightbox from './ImageLightbox'
 import CasaHistoriaSection from './CasaHistoriaSection'
@@ -176,12 +176,11 @@ export default function CasaPage() {
           </div>
         </div>
 
+        {/* Gradiente reforçado para cobrir título + texto */}
         <div
-          className="absolute left-0 right-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            top: '15%',
-            bottom: '-60px',
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.45) 38%, rgba(3,29,29,0.9) 65%, #031D1D 82%)',
+            background: 'linear-gradient(to bottom, transparent 0%, transparent 22%, rgba(3,29,29,0.25) 40%, rgba(3,29,29,0.82) 58%, rgba(3,29,29,0.97) 72%, #031D1D 84%)',
             zIndex: 1,
           }}
         />
@@ -202,38 +201,62 @@ export default function CasaPage() {
           Voltar
         </Link>
 
-        <h1
-          className="absolute left-0 right-0 text-center px-6 font-display uppercase"
-          style={{
-            bottom: '36px',
-            zIndex: 2,
-            fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
-            lineHeight: 1.0,
-            letterSpacing: '0.05em',
-            color: '#FAE6C1',
-            textShadow: '0 2px 28px rgba(3,29,29,0.95)',
-          }}
+        {/* Título + texto + scroll indicator */}
+        <div
+          className="absolute left-0 right-0 bottom-0 px-6 pb-6 flex flex-col items-center text-center"
+          style={{ zIndex: 2 }}
         >
-          A Casa<br />de Nabais
-        </h1>
+          <h1
+            className="font-display uppercase mb-7"
+            style={{
+              fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
+              lineHeight: 1.0,
+              letterSpacing: '0.05em',
+              color: '#FAE6C1',
+              textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+            }}
+          >
+            A Casa<br />de Nabais
+          </h1>
+
+          <p
+            className="font-body mb-8 w-full"
+            style={{
+              fontSize: 'clamp(0.8125rem, 3.5vw, 0.9375rem)',
+              lineHeight: 1.55,
+              color: 'rgba(255,249,237,0.68)',
+            }}
+          >
+            Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
+          </p>
+
+          {/* Scroll indicator */}
+          <div className="flex flex-col items-center gap-2">
+            <span
+              className="font-display uppercase"
+              style={{
+                fontSize: '9px',
+                letterSpacing: '0.2em',
+                color: 'rgba(250,230,193,0.40)',
+              }}
+            >
+              scroll
+            </span>
+            <ArrowDown
+              size={13}
+              strokeWidth={1.5}
+              className="animate-bounce"
+              style={{ color: 'rgba(250,230,193,0.40)' }}
+            />
+          </div>
+        </div>
       </div>
 
-      {/* Mobile intro text */}
+      {/* Gradient bridge dark → light — mobile only */}
       <div
-        className="relative lg:hidden px-6 pt-5 pb-10 text-center"
-        style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}
-      >
-        <p
-          className="font-body"
-          style={{
-            fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
-            lineHeight: 1.6,
-            color: 'rgba(255,249,237,0.72)',
-          }}
-        >
-          Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
-        </p>
-      </div>
+        className="relative lg:hidden"
+        style={{ height: '80px', background: 'linear-gradient(to bottom, #031D1D 0%, #FFF9ED 100%)', marginTop: '-1px' }}
+      />
 
       {/* ══════════════════════════════════════
           ← VOLTAR + TÍTULO (desktop)
