@@ -97,6 +97,32 @@ export default function VinificacaoPage() {
   function prev() { if (canPrev) setIndex(i => i - 1) }
   function next() { if (canNext) setIndex(i => i + 1) }
 
+  // Carousel Rigor images — mobile only
+  const [rigorIndex, setRigorIndex] = useState(0)
+  const [rigorSlideWidth, setRigorSlideWidth] = useState(280)
+  const rigorDragStartX = useRef(0)
+  const [rigorGrabbing, setRigorGrabbing] = useState(false)
+
+  const rigorCanPrev = rigorIndex > 0
+  const rigorCanNext = rigorIndex < RIGOR_IMAGES.length - 1
+
+  function rigorPrev() { if (rigorCanPrev) setRigorIndex(i => i - 1) }
+  function rigorNext() { if (rigorCanNext) setRigorIndex(i => i + 1) }
+
+  function onRigorPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    rigorDragStartX.current = e.clientX
+    setRigorGrabbing(true)
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+
+  function onRigorPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    setRigorGrabbing(false)
+    const diff = rigorDragStartX.current - e.clientX
+    if (Math.abs(diff) < 8) return
+    if (diff > 50 && rigorCanNext) rigorNext()
+    else if (diff < -50 && rigorCanPrev) rigorPrev()
+  }
+
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     dragStartX.current = e.clientX
     dragStartY.current = e.clientY
@@ -124,6 +150,7 @@ export default function VinificacaoPage() {
         const leftOffset = 16
         setCarouselLeft(`${leftOffset}px`)
         setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
+        setRigorSlideWidth(Math.round(window.innerWidth - 24 - SLIDE_GAP - 40))
       }
     }
     measure()
@@ -838,8 +865,53 @@ export default function VinificacaoPage() {
                 </p>
               </div>
 
-              {/* 3 imagens quadradas */}
-              <div className="grid grid-cols-3 gap-3 md:gap-4">
+              {/* 3 imagens — carrossel mobile, grid desktop */}
+              <div
+                className="lg:hidden -mx-6 py-2 select-none"
+                style={{ overflowX: 'clip', cursor: rigorGrabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+                onPointerDown={onRigorPointerDown}
+                onPointerUp={onRigorPointerUp}
+                onPointerCancel={() => setRigorGrabbing(false)}
+              >
+                <div
+                  className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                  style={{
+                    gap: `${SLIDE_GAP}px`,
+                    paddingLeft: '24px',
+                    transform: `translateX(calc(-${rigorIndex} * (${rigorSlideWidth}px + ${SLIDE_GAP}px)))`,
+                  }}
+                >
+                  {RIGOR_IMAGES.map((img, i) => (
+                    <div
+                      key={i}
+                      className="relative flex-shrink-0 overflow-hidden"
+                      style={{
+                        width: `${rigorSlideWidth}px`,
+                        aspectRatio: '1/1',
+                        backgroundColor: '#3A5B4F',
+                        borderRadius: '4px',
+                        cursor: rigorGrabbing ? 'grabbing' : 'grab',
+                      }}
+                    >
+                      <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="90vw" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="lg:hidden mt-5 flex items-center gap-5 justify-center">
+                <button onClick={rigorPrev} disabled={!rigorCanPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: rigorCanPrev ? 1 : 0.25 }}>
+                  <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
+                </button>
+                <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(3,29,29,0.45)' }}>
+                  {rigorIndex + 1} de {RIGOR_IMAGES.length}
+                </span>
+                <button onClick={rigorNext} disabled={!rigorCanNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: rigorCanNext ? 1 : 0.25 }}>
+                  <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
+                </button>
+              </div>
+
+              {/* Grid 3 colunas — desktop only */}
+              <div className="hidden lg:grid lg:grid-cols-3 gap-4">
                 {RIGOR_IMAGES.map((img, i) => (
                   <div
                     key={i}
@@ -851,7 +923,7 @@ export default function VinificacaoPage() {
                       alt={img.alt}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 33vw, (max-width: 1200px) 33vw, 380px"
+                      sizes="(max-width: 1200px) 33vw, 380px"
                     />
                   </div>
                 ))}
@@ -870,6 +942,20 @@ export default function VinificacaoPage() {
         <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
 
           <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+
+            {/* Mobile: portrait — antes do texto */}
+            <div
+              className="relative lg:hidden mb-10 mx-6"
+              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
+            >
+              <Image
+                src="/images/homepage/vinificacao/fullbleed-01.webp"
+                alt="Perfil do enólogo — Casa de Nabais"
+                fill
+                className="object-cover"
+                sizes="calc(100vw - 3rem)"
+              />
+            </div>
 
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -949,20 +1035,6 @@ export default function VinificacaoPage() {
                 </div>
 
               </div>
-            </div>
-
-            {/* Mobile: portrait */}
-            <div
-              className="relative lg:hidden mt-10 mx-6"
-              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-            >
-              <Image
-                src="/images/homepage/vinificacao/fullbleed-01.webp"
-                alt="Perfil do enólogo — Casa de Nabais"
-                fill
-                className="object-cover"
-                sizes="calc(100vw - 3rem)"
-              />
             </div>
 
           </section>
