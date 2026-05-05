@@ -232,7 +232,7 @@ export default function VinificacaoPage() {
             ZONA ESCURA 1
             Hero → TextReveal → Abordagem experimental
         ══════════════════════════════════════ */}
-        <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 40%, #031D1D 100%)' }}>
+        <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #031D1D 35%, #0C4544 62%, #031D1D 100%)' }}>
 
           {/* ── MOBILE HERO ── */}
           <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(100svh - 72px)' }}>
@@ -284,7 +284,7 @@ export default function VinificacaoPage() {
               style={{ zIndex: 2 }}
             >
               <h1
-                className="font-display uppercase mb-4"
+                className="font-display uppercase mb-7"
                 style={{
                   fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
                   lineHeight: 1.0,
@@ -297,12 +297,11 @@ export default function VinificacaoPage() {
               </h1>
 
               <p
-                className="font-body mb-8"
+                className="font-body mb-8 w-full"
                 style={{
                   fontSize: 'clamp(0.8125rem, 3.5vw, 0.9375rem)',
                   lineHeight: 1.55,
                   color: 'rgba(255,249,237,0.68)',
-                  maxWidth: '34ch',
                 }}
               >
                 {INTRO_TEXT}
