@@ -302,8 +302,8 @@ export default function FicarNaCasaPage() {
           Alterar datas
         </button>
 
-        {/* Dates summary */}
-        <div className="grid grid-cols-2 gap-2 mb-1">
+        {/* Dates + guests summary */}
+        <div className="grid grid-cols-2 gap-2">
           <div style={getPill('', '', true)}>
             <span style={labelStyle}>Check In</span>
             <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkIn || '—'}</p>
@@ -312,6 +312,20 @@ export default function FicarNaCasaPage() {
             <span style={labelStyle}>Check Out</span>
             <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkOut || '—'}</p>
           </div>
+        </div>
+
+        <div style={getPill('pessoas', form.pessoas)}>
+          <span style={labelStyle}>Nº de hóspedes</span>
+          <select value={form.pessoas} onChange={setField('pessoas')}
+            style={{ ...valueStyle, fontSize: '0.9375rem', appearance: 'none', cursor: 'pointer' }}
+            {...bind('pessoas')}
+          >
+            {[...Array(12)].map((_, i) => (
+              <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
+                {i + 1} {i === 0 ? 'Hóspede' : 'Hóspedes'}
+              </option>
+            ))}
+          </select>
         </div>
 
         {[
