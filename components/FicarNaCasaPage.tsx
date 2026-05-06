@@ -62,14 +62,29 @@ const ACTIVITIES: { name: string; Icon: LucideIcon }[] = [
   { name: 'Golfe e ténis (nas proximidades)',            Icon: Target   },
 ]
 
-const NEARBY = [
-  { label: 'Ponte de Lima — centro', dist: '5 km' },
-  { label: 'Museu dos Terceiros', dist: '6 km' },
-  { label: 'Viana do Castelo', dist: '25 km' },
-  { label: 'Braga (centro histórico)', dist: '35 km' },
-  { label: 'Porto (centro)', dist: '85 km' },
-  { label: 'Aeroporto do Porto', dist: '85 km' },
-  { label: 'Santiago de Compostela', dist: '130 km' },
+const NEARBY_CITIES = [
+  { name: 'Ponte de Lima (centro)',        detail: '6 km | 10 min | EN203 / A27 (ligação à A3)'  },
+  { name: 'Viana do Castelo',              detail: '35 km | 35 min | A27 (ligação à A28)'         },
+  { name: 'Braga',                         detail: '40 km | 40 min | A3'                           },
+  { name: 'Guimarães',                     detail: '70 km | 1h | A3 + A7'                          },
+  { name: 'Porto',                         detail: '95 km | 1h | A3'                               },
+  { name: 'Vigo (Espanha)',                detail: '95 km | 1h15 | A3 + AP-9'                      },
+  { name: 'Pontevedra (Espanha)',          detail: '75 km | 1h05 | A3 + AP-9'                      },
+  { name: 'Santiago de Compostela (Espanha)', detail: '140 km | 1h40 | A3 + AP-9'                 },
+  { name: 'A Coruña (Espanha)',            detail: '180 km | 2h | A3 + AP-9'                       },
+]
+
+const NEARBY_ROADS = [
+  'A3 – eixo Porto - Minho - Galiza (principal acesso à propriedade)',
+  'A27 – ligação Ponte de Lima - Viana do Castelo - A28',
+  'A28 – corredor litoral Viana do Castelo - Porto',
+  'AP-9 (Espanha) – Vigo - Pontevedra - Santiago - A Coruña',
+]
+
+const NEARBY_TRAINS = [
+  { name: 'Viana do Castelo', detail: '35 km' },
+  { name: 'Braga',            detail: '40 km' },
+  { name: 'Nine (Vila Nova de Famalicão)', detail: '55 km' },
 ]
 
 const WINES = [
@@ -643,17 +658,46 @@ export default function FicarNaCasaPage() {
                 >
                   Turismo histórico e cultural
                 </h2>
-                <p className="reveal-item font-body mb-5" style={{ fontSize: '0.875rem', color: 'rgba(255,249,237,0.42)' }}>
-                  A 10–15 minutos da Casa de Nabais
+                <p className="reveal-item font-display mb-8" style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}>
+                  (a 10-15 minutos da Casa de Nabais)
                 </p>
-                <div className="reveal-item flex flex-col" style={{ borderTop: '1px solid rgba(250,230,193,0.10)' }}>
-                  {NEARBY.map(({ label, dist }) => (
-                    <div key={label} className="flex items-center justify-between py-2.5" style={{ borderBottom: '1px solid rgba(250,230,193,0.10)' }}>
-                      <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>{label}</span>
-                      <span className="font-display uppercase tracking-[0.1em]" style={{ fontSize: '11px', color: 'rgba(250,230,193,0.40)' }}>{dist}</span>
-                    </div>
+
+                {/* Cidades */}
+                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                  Cidades e pontos de referência:
+                </p>
+                <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
+                  {NEARBY_CITIES.map(({ name, detail }) => (
+                    <li key={name} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
+                      <span style={{ textDecoration: 'underline', textUnderlineOffset: '3px', color: 'rgba(255,249,237,0.75)' }}>{name}</span>
+                      {': '}{detail}
+                    </li>
                   ))}
-                </div>
+                </ul>
+
+                {/* Estradas */}
+                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                  Principais eixos rodoviários da região:
+                </p>
+                <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
+                  {NEARBY_ROADS.map(road => (
+                    <li key={road} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
+                      {road}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Comboio */}
+                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                  Comboio (estações mais próximas):
+                </p>
+                <ul className="reveal-item" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
+                  {NEARBY_TRAINS.map(({ name, detail }) => (
+                    <li key={name} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
+                      {name}: {detail}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Divider */}
