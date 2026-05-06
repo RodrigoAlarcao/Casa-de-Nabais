@@ -461,8 +461,8 @@ export default function FicarNaCasaPage() {
           <p
             className="font-body mb-3"
             style={{
-              fontSize: '0.875rem',
-              lineHeight: 1.45,
+              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
+              lineHeight: 1.55,
               color: 'rgba(250,230,193,0.82)',
             }}
           >
@@ -471,8 +471,8 @@ export default function FicarNaCasaPage() {
           <p
             className="font-body"
             style={{
-              fontSize: '0.875rem',
-              lineHeight: 1.45,
+              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
+              lineHeight: 1.55,
               color: 'rgba(250,230,193,0.82)',
             }}
           >
@@ -507,7 +507,7 @@ export default function FicarNaCasaPage() {
 
         {/* ── Two-column content — ainda dentro do wrap verde ── */}
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 mt-14 md:mt-20">
-          <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 xl:gap-20 items-start">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 xl:gap-20">
 
             {/* LEFT */}
             <div className="flex-1 min-w-0">
@@ -571,7 +571,7 @@ export default function FicarNaCasaPage() {
                   <p
                     key={i}
                     className="reveal-item font-body mb-4 last:mb-0"
-                    style={{ fontSize: '0.875rem', lineHeight: 1.65, color: 'rgba(250,230,193,0.82)' }}
+                    style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}
                   >
                     {para}
                   </p>
