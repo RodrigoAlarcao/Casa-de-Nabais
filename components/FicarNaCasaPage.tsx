@@ -9,6 +9,7 @@ import {
   Check, Phone, ArrowRight, X,
   WashingMachine, ChefHat, Smartphone, Droplets, Flame,
   Utensils, Sparkles, Flower2, Thermometer, Waves,
+  Wine, Compass, TreePine, Heart, Target,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import gsap from 'gsap'
@@ -51,14 +52,14 @@ const AMENITIES: { name: string; Icon: LucideIcon }[] = [
   { name: 'Piscina',                           Icon: Waves          },
 ]
 
-const ACTIVITIES = [
-  'Prova de vinhos guiada',
-  'Visita à adega e vinhas',
-  'Percursos pedestres pela propriedade',
-  'Piscina privada com solário',
-  'Gastronomia regional (pré-reservado)',
-  'Golfe (pré-reservado)',
-  'Aluguer de bicicletas (pré-reservado)',
+const ACTIVITIES: { name: string; Icon: LucideIcon }[] = [
+  { name: 'Provas de vinho',                              Icon: Wine     },
+  { name: 'Visitas guiadas às vinhas e à adega',         Icon: Compass  },
+  { name: 'Almoços e experiências gastronómicas',        Icon: ChefHat  },
+  { name: 'Percursos pedestres na mata e nas vinhas',    Icon: TreePine },
+  { name: 'Spa e massagens',                             Icon: Heart    },
+  { name: 'Sauna e piscina',                             Icon: Waves    },
+  { name: 'Golfe e ténis (nas proximidades)',            Icon: Target   },
 ]
 
 const NEARBY = [
@@ -612,15 +613,12 @@ export default function FicarNaCasaPage() {
                 >
                   Atividades e experiências
                 </h2>
-                <div className="reveal-item flex flex-col gap-2.5">
-                  {ACTIVITIES.map(item => (
-                    <div key={item} className="flex items-center gap-2.5">
-                      <div className="w-4 h-4 rounded-sm flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: 'rgba(250,230,193,0.10)' }}>
-                        <Check size={10} strokeWidth={2.5} style={{ color: 'rgba(250,230,193,0.75)' }} />
-                      </div>
+                <div className="reveal-item flex flex-col gap-4">
+                  {ACTIVITIES.map(({ name, Icon }) => (
+                    <div key={name} className="flex items-center gap-3">
+                      <Icon size={16} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.65)', flexShrink: 0 }} />
                       <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
-                        {item}
+                        {name}
                       </span>
                     </div>
                   ))}
