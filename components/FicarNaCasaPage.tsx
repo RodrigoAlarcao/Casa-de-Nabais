@@ -107,9 +107,17 @@ export default function FicarNaCasaPage() {
   /* mobile booking overlay */
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  /* desktop booking modal */
+  const [bookingModalOpen, setBookingModalOpen] = useState(false)
+
+  /* mobile form step */
+  const [formStep, setFormStep] = useState<1 | 2>(1)
+
+  /* input focus tracking */
+  const [focusedField, setFocusedField] = useState<string | null>(null)
+
   /* form */
   const [formState, setFormState] = useState<FormState>('idle')
-  const [formStep, setFormStep] = useState<1 | 2>(1)
   const [form, setForm] = useState({
     nome: '', email: '', telefone: '',
     checkIn: '', checkOut: '', pessoas: '2', mensagem: '',
@@ -118,6 +126,31 @@ export default function FicarNaCasaPage() {
   function setField(k: keyof typeof form) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       setForm(f => ({ ...f, [k]: e.target.value }))
+  }
+
+  function bind(field: string) {
+    return {
+      onFocus: () => setFocusedField(field),
+      onBlur:  () => setFocusedField(null),
+    }
+  }
+
+  function getPill(field: string, value: string, isStatic = false): React.CSSProperties {
+    if (isStatic) return {
+      backgroundColor: 'rgba(255,249,237,0.05)',
+      border: '1px solid rgba(250,230,193,0.12)',
+      borderRadius: '12px',
+      padding: '14px 18px',
+    }
+    const focused = focusedField === field
+    const filled  = value !== ''
+    return {
+      backgroundColor: focused ? 'rgba(255,249,237,0.11)' : 'rgba(255,249,237,0.07)',
+      border: `1px solid ${focused ? 'rgba(250,230,193,0.55)' : filled ? 'rgba(250,230,193,0.32)' : 'rgba(250,230,193,0.16)'}`,
+      borderRadius: '12px',
+      padding: '14px 18px',
+      transition: 'border-color 0.18s ease, background-color 0.18s ease',
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -154,35 +187,97 @@ export default function FicarNaCasaPage() {
     return () => ctx.revert()
   }, [])
 
-  /* ── Booking widget (dark card, two-step) ── */
-  function renderBookingWidget() {
-    const pill = {
-      backgroundColor: 'rgba(255,249,237,0.07)',
-      border: '1px solid rgba(250,230,193,0.16)',
-      borderRadius: '12px',
-      padding: '14px 18px',
-    }
+  /* ── shared label / value styles ── */
+  const labelStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-display), serif',
+    fontSize: '10px',
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'rgba(250,230,193,0.55)',
+    marginBottom: '4px',
+    display: 'block',
+  }
+  const valueStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-display), serif',
+    fontSize: '1.0625rem',
+    color: '#FAE6C1',
+    background: 'transparent',
+    border: 'none',
+    outline: 'none',
+    width: '100%',
+  }
 
-    const labelStyle: React.CSSProperties = {
-      fontFamily: 'var(--font-display), serif',
-      fontSize: '10px',
-      letterSpacing: '0.12em',
-      textTransform: 'uppercase',
-      color: 'rgba(250,230,193,0.55)',
-      marginBottom: '4px',
-      display: 'block',
-    }
+  /* ── Step 1: dates + guests ── */
+  function renderStep1(onCTA: () => void) {
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="text-center mb-2">
+          <p className="font-display" style={{ fontSize: 'clamp(1.625rem, 2.2vw, 2.25rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            €1,000 to €2,500/night
+          </p>
+          <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.9375rem', color: 'rgba(255,249,237,0.50)', marginTop: '6px' }}>
+            Enter dates for seasonal pricing
+          </p>
+        </div>
 
-    const valueStyle: React.CSSProperties = {
-      fontFamily: 'var(--font-display), serif',
-      fontSize: '1.0625rem',
-      color: '#FAE6C1',
-      background: 'transparent',
-      border: 'none',
-      outline: 'none',
-      width: '100%',
-    }
+        <div className="grid grid-cols-2 gap-2">
+          <div style={getPill('checkIn', form.checkIn)}>
+            <span style={labelStyle}>Check In</span>
+            <input type="date" value={form.checkIn} onChange={setField('checkIn')}
+              min={new Date().toISOString().split('T')[0]}
+              style={{ ...valueStyle, colorScheme: 'dark' }}
+              {...bind('checkIn')}
+            />
+          </div>
+          <div style={getPill('checkOut', form.checkOut)}>
+            <span style={labelStyle}>Check Out</span>
+            <input type="date" value={form.checkOut} onChange={setField('checkOut')}
+              min={form.checkIn || new Date().toISOString().split('T')[0]}
+              style={{ ...valueStyle, colorScheme: 'dark' }}
+              {...bind('checkOut')}
+            />
+          </div>
+        </div>
 
+        <div style={getPill('pessoas', form.pessoas)}>
+          <span style={labelStyle}>Who</span>
+          <select value={form.pessoas} onChange={setField('pessoas')}
+            style={{ ...valueStyle, appearance: 'none', cursor: 'pointer' }}
+            {...bind('pessoas')}
+          >
+            {[...Array(12)].map((_, i) => (
+              <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
+                {i + 1} {i === 0 ? 'Guest' : 'Guests'}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button
+          onClick={onCTA}
+          className="w-full font-display tracking-[0.06em] transition-all duration-200 hover:opacity-90"
+          style={{
+            fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
+            backgroundColor: 'rgba(255,249,237,0.12)',
+            border: '1px solid rgba(250,230,193,0.22)',
+            borderRadius: '12px',
+            color: '#FAE6C1',
+            padding: '18px',
+            marginTop: '4px',
+          }}
+        >
+          Reservar
+        </button>
+
+        <p className="text-center font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.35)', marginTop: '2px' }}>
+          You won&apos;t be charged yet.
+        </p>
+      </div>
+    )
+  }
+
+  /* ── Step 2: contact form ── */
+  function renderContactForm(onBack: () => void) {
     if (formState === 'success') {
       return (
         <div className="flex flex-col items-center text-center py-10 gap-4">
@@ -197,90 +292,9 @@ export default function FicarNaCasaPage() {
       )
     }
 
-    /* ── Step 1: datas + hóspedes ── */
-    if (formStep === 1) {
-      return (
-        <div className="flex flex-col gap-3">
-          {/* Price */}
-          <div className="text-center mb-2">
-            <p className="font-display" style={{ fontSize: 'clamp(1.625rem, 2.2vw, 2.25rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-              €1,000 to €2,500/night
-            </p>
-            <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.9375rem', color: 'rgba(255,249,237,0.50)', marginTop: '6px' }}>
-              Enter dates for seasonal pricing
-            </p>
-          </div>
-
-          {/* Datas */}
-          <div className="grid grid-cols-2 gap-2">
-            <div style={pill}>
-              <span style={labelStyle}>Check In</span>
-              <input
-                type="date"
-                value={form.checkIn}
-                onChange={setField('checkIn')}
-                min={new Date().toISOString().split('T')[0]}
-                style={{ ...valueStyle, colorScheme: 'dark' }}
-              />
-            </div>
-            <div style={pill}>
-              <span style={labelStyle}>Check Out</span>
-              <input
-                type="date"
-                value={form.checkOut}
-                onChange={setField('checkOut')}
-                min={form.checkIn || new Date().toISOString().split('T')[0]}
-                style={{ ...valueStyle, colorScheme: 'dark' }}
-              />
-            </div>
-          </div>
-
-          {/* Hóspedes */}
-          <div style={pill}>
-            <span style={labelStyle}>Who</span>
-            <select
-              value={form.pessoas}
-              onChange={setField('pessoas')}
-              style={{ ...valueStyle, appearance: 'none', cursor: 'pointer' }}
-            >
-              {[...Array(12)].map((_, i) => (
-                <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
-                  {i + 1} {i === 0 ? 'Guest' : 'Guests'}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* CTA */}
-          <button
-            onClick={() => setFormStep(2)}
-            className="w-full font-display tracking-[0.06em] transition-all duration-200"
-            style={{
-              fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
-              backgroundColor: 'rgba(255,249,237,0.12)',
-              border: '1px solid rgba(250,230,193,0.20)',
-              borderRadius: '12px',
-              color: 'rgba(250,230,193,0.80)',
-              padding: '18px',
-              marginTop: '4px',
-            }}
-          >
-            Reservar
-          </button>
-
-          <p className="text-center font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.35)', marginTop: '2px' }}>
-            You won&apos;t be charged yet.
-          </p>
-        </div>
-      )
-    }
-
-    /* ── Step 2: dados de contacto ── */
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <button
-          type="button"
-          onClick={() => setFormStep(1)}
+        <button type="button" onClick={onBack}
           className="flex items-center gap-1.5 font-display uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-70 mb-1"
           style={{ fontSize: '10px', color: 'rgba(250,230,193,0.55)' }}
         >
@@ -288,57 +302,51 @@ export default function FicarNaCasaPage() {
           Alterar datas
         </button>
 
-        {/* Resumo datas */}
+        {/* Dates summary */}
         <div className="grid grid-cols-2 gap-2 mb-1">
-          <div style={{ ...pill, opacity: 0.75 }}>
+          <div style={getPill('', '', true)}>
             <span style={labelStyle}>Check In</span>
             <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkIn || '—'}</p>
           </div>
-          <div style={{ ...pill, opacity: 0.75 }}>
+          <div style={getPill('', '', true)}>
             <span style={labelStyle}>Check Out</span>
             <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkOut || '—'}</p>
           </div>
         </div>
 
         {[
-          { key: 'nome', label: 'Nome *', type: 'text', placeholder: 'O seu nome', required: true },
-          { key: 'email', label: 'Email *', type: 'email', placeholder: 'email@exemplo.pt', required: true },
-          { key: 'telefone', label: 'Telefone', type: 'tel', placeholder: '+351 — opcional', required: false },
+          { key: 'nome',     label: 'Nome *',   type: 'text',  placeholder: 'O seu nome',     required: true  },
+          { key: 'email',    label: 'Email *',  type: 'email', placeholder: 'email@exemplo.pt', required: true },
+          { key: 'telefone', label: 'Telefone', type: 'tel',   placeholder: '+351 — opcional', required: false },
         ].map(({ key, label, type, placeholder, required }) => (
-          <div key={key} style={pill}>
+          <div key={key} style={getPill(key, form[key as keyof typeof form])}>
             <span style={labelStyle}>{label}</span>
-            <input
-              type={type}
-              required={required}
-              placeholder={placeholder}
+            <input type={type} required={required} placeholder={placeholder}
               value={form[key as keyof typeof form]}
               onChange={setField(key as keyof typeof form)}
               style={{ ...valueStyle, fontSize: '0.9375rem' }}
+              {...bind(key)}
             />
           </div>
         ))}
 
-        <div style={pill}>
+        <div style={getPill('mensagem', form.mensagem)}>
           <span style={labelStyle}>Mensagem</span>
-          <textarea
-            rows={2}
-            placeholder="Pedidos especiais…"
-            value={form.mensagem}
-            onChange={setField('mensagem')}
+          <textarea rows={3} placeholder="Pedidos especiais…"
+            value={form.mensagem} onChange={setField('mensagem')}
             style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
+            {...bind('mensagem')}
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={formState === 'loading'}
-          className="w-full font-display tracking-[0.06em] transition-all duration-200"
+        <button type="submit" disabled={formState === 'loading'}
+          className="w-full font-display tracking-[0.06em] transition-all duration-200 hover:opacity-90"
           style={{
             fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
             backgroundColor: 'rgba(255,249,237,0.12)',
-            border: '1px solid rgba(250,230,193,0.20)',
+            border: '1px solid rgba(250,230,193,0.22)',
             borderRadius: '12px',
-            color: 'rgba(250,230,193,0.80)',
+            color: '#FAE6C1',
             padding: '18px',
             opacity: formState === 'loading' ? 0.55 : 1,
           }}
@@ -741,7 +749,7 @@ export default function FicarNaCasaPage() {
               </div>
             </div>
 
-            {/* RIGHT — sticky booking widget */}
+            {/* RIGHT — sticky booking card (always step 1 on desktop) */}
             <div className="hidden lg:block w-full lg:w-[380px] xl:w-[400px] flex-shrink-0">
               <div
                 className="sticky rounded-[16px] p-6"
@@ -751,7 +759,7 @@ export default function FicarNaCasaPage() {
                   border: '1px solid rgba(250,230,193,0.18)',
                 }}
               >
-                {renderBookingWidget()}
+                {renderStep1(() => setBookingModalOpen(true))}
               </div>
             </div>
 
@@ -836,47 +844,94 @@ export default function FicarNaCasaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          MOBILE OVERLAY — formulário de reserva
+          DESKTOP MODAL — step 2 contact form
+      ══════════════════════════════════════════════════════ */}
+      {bookingModalOpen && (
+        <div
+          className="hidden lg:flex fixed inset-0 z-[400] items-center justify-center"
+          style={{ backgroundColor: 'rgba(3,13,13,0.80)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)' }}
+          onClick={() => { setBookingModalOpen(false); setFormState('idle') }}
+        >
+          <div
+            className="relative w-full max-w-[520px] mx-6 rounded-[20px] p-7 overflow-y-auto"
+            style={{
+              maxHeight: '90vh',
+              backgroundColor: 'rgba(12,69,68,0.96)',
+              border: '1px solid rgba(250,230,193,0.18)',
+              boxShadow: '0 32px 80px rgba(0,0,0,0.50)',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => { setBookingModalOpen(false); setFormState('idle') }}
+              aria-label="Fechar"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-70"
+              style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
+            >
+              <X size={14} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+            </button>
+            {renderContactForm(() => setBookingModalOpen(false))}
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          MOBILE OVERLAY — two-step booking
       ══════════════════════════════════════════════════════ */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-[300] flex flex-col"
           style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
-          <div className="flex items-center justify-end px-6 py-4">
+          <div className="flex items-center justify-between px-6 py-4">
+            {formStep === 2 ? (
+              <button
+                onClick={() => setFormStep(1)}
+                className="flex items-center gap-1.5 font-display uppercase tracking-[0.1em] hover:opacity-70"
+                style={{ fontSize: '10px', color: 'rgba(250,230,193,0.55)' }}
+              >
+                <ChevronLeft size={12} strokeWidth={1.5} />
+                Voltar
+              </button>
+            ) : <div />}
             <button
-              onClick={() => { setMobileOpen(false); setFormStep(1) }}
+              onClick={() => { setMobileOpen(false); setFormStep(1); setFormState('idle') }}
               aria-label="Fechar"
-              className="w-9 h-9 rounded-full flex items-center justify-center"
+              className="w-9 h-9 rounded-full flex items-center justify-center ml-auto"
               style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
             >
               <X size={16} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
           </div>
           <div className="flex-1 overflow-y-auto px-6 pb-8">
-            {renderBookingWidget()}
+            {formStep === 1
+              ? renderStep1(() => setFormStep(2))
+              : renderContactForm(() => setFormStep(1))
+            }
           </div>
         </div>
       )}
 
-      {/* Mobile sticky bottom bar */}
+      {/* ══════════════════════════════════════════════════════
+          MOBILE STICKY BOTTOM BAR
+      ══════════════════════════════════════════════════════ */}
       <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3.5 flex items-center justify-between border-t"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-between"
         style={{
-          backgroundColor: 'rgba(255,249,237,0.96)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderColor: 'rgba(3,29,29,0.10)',
+          background: 'linear-gradient(180deg, rgba(12,69,68,0.97) 0%, rgba(5,38,37,0.97) 100%)',
+          backdropFilter: 'blur(22px)',
+          WebkitBackdropFilter: 'blur(22px)',
+          borderTop: '0.5px solid rgba(250,230,193,0.14)',
         }}
       >
         <div>
-          <p className="font-display" style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', lineHeight: 1.2 }}>A partir de</p>
-          <p className="font-display" style={{ fontSize: '1.0625rem', color: 'var(--color-text)', lineHeight: 1.1 }}>
-            €1.000 <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>/ noite</span>
+          <p className="font-display" style={{ fontSize: '0.625rem', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(250,230,193,0.50)', lineHeight: 1.2 }}>A partir de</p>
+          <p className="font-display" style={{ fontSize: '1.125rem', color: '#FAE6C1', lineHeight: 1.1 }}>
+            €1.000 <span style={{ fontSize: '0.8125rem', color: 'rgba(250,230,193,0.55)' }}>/ noite</span>
           </p>
         </div>
         <button
           onClick={() => setMobileOpen(true)}
-          className="font-display uppercase tracking-[0.14em] text-[11px] px-6 py-3 rounded-[6px]"
-          style={{ backgroundColor: '#0C4544', color: '#FAE6C1' }}
+          className="font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
+          style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '100px' }}
         >
           Reservar
         </button>
