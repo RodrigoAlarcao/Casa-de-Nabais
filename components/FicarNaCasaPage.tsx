@@ -519,11 +519,60 @@ export default function FicarNaCasaPage() {
                 </button>
               </div>
 
-              {/* Comodidades */}
-              <div className="reveal-section mb-10 md:mb-12">
+              {/* ── Bloco intro — Casa de Nabais ── */}
+              <div className="reveal-section mb-0">
                 <h2
-                  className="reveal-item font-display uppercase tracking-[0.08em] mb-6"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
+                  className="reveal-item font-display"
+                  style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: '#FAE6C1', lineHeight: 1.1, marginBottom: '10px' }}
+                >
+                  Casa de Nabais
+                </h2>
+                <div className="reveal-item flex items-center gap-2 mb-8">
+                  <MapPin size={13} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.55)', flexShrink: 0 }} />
+                  <a
+                    href="https://maps.google.com/?q=Seara,Ponte+de+Lima,Portugal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body underline underline-offset-2 transition-opacity duration-200 hover:opacity-80"
+                    style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.60)' }}
+                  >
+                    Seara, Ponte de Lima
+                  </a>
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', marginBottom: '32px' }} />
+
+                <h3
+                  className="reveal-item font-display mb-5"
+                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)', lineHeight: 1.3 }}
+                >
+                  Enoturismo de charme no coração do Vale do Lima
+                </h3>
+                {[
+                  'A cerca de uma hora do Porto, de Vigo (Espanha) e de Guimarães, a meia hora de Braga e de Viana do Castelo, e a 20 minutos da Praia do Cabedelo, o spot preferido dos praticantes de Surf, Windsurf e Kitesurf, a Casa de Nabais é uma quinta minhota histórica situada em Ponte de Lima, no coração do Vale do Lima, berço da casta Loureiro.',
+                  'Focado na frescura, no equilíbrio e no tempo que esta casta exige e merece, o projeto combina produção vínica com uma vertente de enoturismo personalizada e de elevada qualidade.',
+                  'Inteiramente recuperada, a casa dispõe de 5 suítes e 1 apartamento, confortáveis e silenciosos, integrados na paisagem e no ambiente agrícola que a rodeia. Com vistas abertas sobre as vinhas e proximidade à adega onde repousam os vinhos, os quartos oferecem o conforto da tecnologia atual sem perder o charme deste solar minhoto com séculos de história.',
+                  'Nos interiores, o encontro entre peças com história e uma modernidade discreta cria espaços de pausa e luz suave, pensados para estar e ficar. Dos pequenos-almoços com produtos da quinta à piscina e ao spa, tudo convida a abrandar, até que o silêncio do vale, a vinha e a casa se tornam parte da experiência.',
+                ].map((para, i) => (
+                  <p
+                    key={i}
+                    className="reveal-item font-body mb-4 last:mb-0"
+                    style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.70)' }}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
+
+              {/* Comodidades */}
+              <div className="reveal-section mb-0">
+                <h2
+                  className="reveal-item font-display mb-6"
+                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
                   Comodidades
                 </h2>
@@ -542,11 +591,14 @@ export default function FicarNaCasaPage() {
                 </div>
               </div>
 
+              {/* Divider */}
+              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
+
               {/* Atividades */}
-              <div className="reveal-section mb-10 md:mb-12">
+              <div className="reveal-section mb-0">
                 <h2
-                  className="reveal-item font-display uppercase tracking-[0.08em] mb-6"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
+                  className="reveal-item font-display mb-6"
+                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
                   Atividades e experiências
                 </h2>
@@ -572,11 +624,14 @@ export default function FicarNaCasaPage() {
                 </p>
               </div>
 
+              {/* Divider */}
+              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
+
               {/* Turismo histórico */}
-              <div className="reveal-section mb-10 md:mb-14">
+              <div className="reveal-section mb-0">
                 <h2
-                  className="reveal-item font-display uppercase tracking-[0.08em] mb-2"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
+                  className="reveal-item font-display mb-2"
+                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
                   Turismo histórico e cultural
                 </h2>
@@ -593,11 +648,14 @@ export default function FicarNaCasaPage() {
                 </div>
               </div>
 
+              {/* Divider */}
+              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
+
               {/* Localização */}
-              <div className="reveal-section">
+              <div className="reveal-section pb-4">
                 <h2
-                  className="reveal-item font-display uppercase tracking-[0.08em] mb-6"
-                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(250,230,193,0.85)' }}
+                  className="reveal-item font-display mb-6"
+                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
                   Localização
                 </h2>
