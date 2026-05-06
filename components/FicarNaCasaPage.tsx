@@ -7,7 +7,10 @@ import {
   MapPin, Bed, Users, Bath,
   ChevronLeft, ChevronRight,
   Check, Phone, ArrowRight, X,
+  WashingMachine, ChefHat, Smartphone, Droplets, Flame,
+  Utensils, Sparkles, Flower2, Thermometer, Waves,
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -35,8 +38,18 @@ const ALL_GALLERY = [
   { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
 ]
 
-const AMENITIES_LEFT  = ['Lavandaria', 'Cozinha equipada', 'Piscina privada', 'Sauna', 'Spa', 'Pátio exterior']
-const AMENITIES_RIGHT = ['Grelhador exterior', 'Bar', 'Wi-Fi', 'Parque automóvel', 'Portátil de bebé', 'Roupa de cama e toalhas']
+const AMENITIES: { name: string; Icon: LucideIcon }[] = [
+  { name: 'Lavandaria',                        Icon: WashingMachine },
+  { name: 'Cozinha equipada',                  Icon: ChefHat        },
+  { name: 'Carregamento de dispositivos móveis', Icon: Smartphone   },
+  { name: 'Duches',                            Icon: Droplets       },
+  { name: 'Forno de lenha',                    Icon: Flame          },
+  { name: 'Grelhador exterior',                Icon: Utensils       },
+  { name: 'Produtos de beleza',                Icon: Sparkles       },
+  { name: 'Spa',                               Icon: Flower2        },
+  { name: 'Sauna',                             Icon: Thermometer    },
+  { name: 'Piscina',                           Icon: Waves          },
+]
 
 const ACTIVITIES = [
   'Prova de vinhos guiada',
@@ -448,9 +461,9 @@ export default function FicarNaCasaPage() {
           <p
             className="font-body mb-3"
             style={{
-              fontSize: 'clamp(0.9375rem, 1.3vw, 1.0625rem)',
+              fontSize: '0.875rem',
               lineHeight: 1.45,
-              color: 'rgba(255,249,237,0.80)',
+              color: 'rgba(250,230,193,0.82)',
             }}
           >
             Inteiramente recuperada, a Casa de Nabais dispõe de 5 suítes e 1 apartamento, confortáveis e silenciosos, integrados na paisagem e no ambiente agrícola que a rodeia. Com vistas abertas sobre a vinha e próximos da adega onde repousam os vinhos, os quartos oferecem o conforto da tecnologia atual sem perder o charme deste solar milenário com séculos de história.
@@ -458,9 +471,9 @@ export default function FicarNaCasaPage() {
           <p
             className="font-body"
             style={{
-              fontSize: 'clamp(0.9375rem, 1.3vw, 1.0625rem)',
+              fontSize: '0.875rem',
               lineHeight: 1.45,
-              color: 'rgba(255,249,237,0.80)',
+              color: 'rgba(250,230,193,0.82)',
             }}
           >
             Nos interiores, o encontro entre peças com história e uma modernidade discreta cria espaços de pausa e luz suave, pensados para estar e ficar. Dos pequenos-almoços com produtos da quinta à piscina e ao spa, tudo convida a abrandar — até o silêncio do vale, a vinha e a casa se tornam parte da experiência.
@@ -558,7 +571,7 @@ export default function FicarNaCasaPage() {
                   <p
                     key={i}
                     className="reveal-item font-body mb-4 last:mb-0"
-                    style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.70)' }}
+                    style={{ fontSize: '0.875rem', lineHeight: 1.65, color: 'rgba(250,230,193,0.82)' }}
                   >
                     {para}
                   </p>
@@ -576,15 +589,12 @@ export default function FicarNaCasaPage() {
                 >
                   Comodidades
                 </h2>
-                <div className="reveal-item grid grid-cols-2 gap-x-8 gap-y-2.5">
-                  {[...AMENITIES_LEFT, ...AMENITIES_RIGHT].map(item => (
-                    <div key={item} className="flex items-center gap-2.5">
-                      <div className="w-4 h-4 rounded-sm flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: 'rgba(250,230,193,0.10)' }}>
-                        <Check size={10} strokeWidth={2.5} style={{ color: 'rgba(250,230,193,0.75)' }} />
-                      </div>
+                <div className="reveal-item grid grid-cols-2 gap-x-8 gap-y-4">
+                  {AMENITIES.map(({ name, Icon }) => (
+                    <div key={name} className="flex items-center gap-3">
+                      <Icon size={16} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.65)', flexShrink: 0 }} />
                       <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
-                        {item}
+                        {name}
                       </span>
                     </div>
                   ))}
