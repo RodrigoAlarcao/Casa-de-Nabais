@@ -24,8 +24,10 @@ const GRID_IMAGES = [
   { src: '/images/homepage/casa/section-01.webp',  alt: 'Casa de Nabais — fachada' },
   { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
   { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
+  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
   { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
   { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
+  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Varanda exterior' },
 ]
 
 const ALL_GALLERY = [
@@ -412,7 +414,7 @@ export default function FicarNaCasaPage() {
           <div
             className="hidden md:grid relative"
             style={{
-              gridTemplateColumns: '1.6fr 1fr 1fr',
+              gridTemplateColumns: '1.6fr 1fr 1fr 1fr',
               gridTemplateRows: '220px 220px',
               gap: '4px',
               borderRadius: '6px',
@@ -435,7 +437,7 @@ export default function FicarNaCasaPage() {
               />
             </div>
 
-            {/* 4 imagens menores */}
+            {/* 6 imagens menores */}
             {GRID_IMAGES.slice(1).map((img, i) => (
               <div
                 key={i}
@@ -447,7 +449,7 @@ export default function FicarNaCasaPage() {
                   alt={img.alt}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  sizes="(max-width: 1200px) 25vw, 300px"
+                  sizes="(max-width: 1200px) 17vw, 200px"
                 />
               </div>
             ))}
