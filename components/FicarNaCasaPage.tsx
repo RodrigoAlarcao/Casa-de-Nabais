@@ -156,12 +156,11 @@ export default function FicarNaCasaPage() {
     try {
       const url = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL
       if (!url) throw new Error('NEXT_PUBLIC_APPS_SCRIPT_URL not configured')
-      // text/plain avoids CORS preflight — Google Apps Script requires this
+      const params = new URLSearchParams(form as Record<string, string>)
       await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(form),
         mode: 'no-cors',
+        body: params,
       })
       setFormState('success')
     } catch {

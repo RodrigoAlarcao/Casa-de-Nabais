@@ -4,7 +4,7 @@
 // SETUP:
 // 1. Abre script.google.com → New project
 // 2. Cola este código (substitui o código existente)
-// 3. Edita SHEET_ID, SHEET_NAME e EMAIL_NOTIFICACAO abaixo
+// 3. Edita SHEET_ID e EMAIL_NOTIFICACAO abaixo
 //    SHEET_ID: o ID da Google Sheet no URL (docs.google.com/spreadsheets/d/ESTE_ID/edit)
 // 4. Deploy > New deployment > Web App
 //    - Execute as: Me
@@ -13,35 +13,23 @@
 
 var SHEET_ID = 'COLE_AQUI_O_ID_DA_GOOGLE_SHEET';
 var SHEET_NAME = 'Leads';
-var EMAIL_NOTIFICACAO = 'SEU_EMAIL@gmail.com'; // email que recebe notificação quando chega um lead
+var EMAIL_NOTIFICACAO = 'SEU_EMAIL@gmail.com';
 
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents);
+    var data = e.parameter;
 
     var ss = SpreadsheetApp.openById(SHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
 
-    // Cria a folha "Leads" com cabeçalhos se não existir
     if (!sheet) {
       sheet = ss.insertSheet(SHEET_NAME);
-      sheet.appendRow([
-        'Data',
-        'Nome',
-        'Email',
-        'Telefone',
-        'Check In',
-        'Check Out',
-        'Hóspedes',
-        'Mensagem'
-      ]);
-      // Formata cabeçalhos
+      sheet.appendRow(['Data', 'Nome', 'Email', 'Telefone', 'Check In', 'Check Out', 'Hóspedes', 'Mensagem']);
       sheet.getRange(1, 1, 1, 8).setFontWeight('bold');
       sheet.setFrozenRows(1);
     }
 
-    var agora = new Date();
-    var dataFormatada = Utilities.formatDate(agora, 'Europe/Lisbon', 'dd/MM/yyyy HH:mm');
+    var dataFormatada = Utilities.formatDate(new Date(), 'Europe/Lisbon', 'dd/MM/yyyy HH:mm');
 
     sheet.appendRow([
       dataFormatada,
@@ -54,35 +42,32 @@ function doPost(e) {
       data.mensagem || ''
     ]);
 
-    // Envia email de notificação
-    if (EMAIL_NOTIFICACAO && data.email) {
-      var assunto = '🏡 Novo pedido de reserva — Casa de Nabais';
-      var corpo = 'Novo pedido recebido em ' + dataFormatada + '\n\n'
-        + 'Nome: ' + (data.nome || '—') + '\n'
-        + 'Email: ' + (data.email || '—') + '\n'
-        + 'Telefone: ' + (data.telefone || '—') + '\n'
-        + 'Check In: ' + (data.checkIn || '—') + '\n'
+    MailApp.sendEmail(
+      EMAIL_NOTIFICACAO,
+      '🏡 Novo pedido de reserva — Casa de Nabais',
+      'Novo pedido recebido em ' + dataFormatada + '\n\n'
+        + 'Nome: '      + (data.nome || '—')     + '\n'
+        + 'Email: '     + (data.email || '—')    + '\n'
+        + 'Telefone: '  + (data.telefone || '—') + '\n'
+        + 'Check In: '  + (data.checkIn || '—')  + '\n'
         + 'Check Out: ' + (data.checkOut || '—') + '\n'
-        + 'Hóspedes: ' + (data.pessoas || '—') + '\n'
-        + 'Mensagem: ' + (data.mensagem || '—') + '\n';
-
-      MailApp.sendEmail(EMAIL_NOTIFICACAO, assunto, corpo);
-    }
+        + 'Hóspedes: '  + (data.pessoas || '—')  + '\n'
+        + 'Mensagem: '  + (data.mensagem || '—') + '\n'
+    );
 
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'ok' }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('ok')
+      .setMimeType(ContentService.MimeType.TEXT);
 
   } catch (err) {
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'error', message: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('error: ' + err.toString())
+      .setMimeType(ContentService.MimeType.TEXT);
   }
 }
 
-// Necessário para que o browser aceite a resposta (CORS preflight)
 function doGet(e) {
   return ContentService
-    .createTextOutput(JSON.stringify({ status: 'ok' }))
-    .setMimeType(ContentService.MimeType.JSON);
+    .createTextOutput('ok')
+    .setMimeType(ContentService.MimeType.TEXT);
 }
