@@ -318,52 +318,137 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
       ══════════════════════════ */}
       <section ref={cardsRef} className="pb-0" style={{ borderTop: '1px solid var(--color-border)' }}>
         <div className="max-w-[1100px] mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-14 md:pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-            {/* Coluna esquerda — 3 cards */}
-            <div className="flex flex-col gap-4">
-              {[
-                { title: 'Pontos-chave', text: wine.keyPoints },
-                { title: 'Notas de prova', text: wine.tastingNotes },
-                { title: 'Sugestão de serviço', text: wine.servingSuggestion },
-              ].map(({ title, text }) => (
+          {/* Mobile — cards sólidos + foto */}
+          <div className="md:hidden flex flex-col gap-4">
+            {[
+              { title: 'Pontos-chave', text: wine.keyPoints },
+              { title: 'Notas de prova', text: wine.tastingNotes },
+              { title: 'Sugestão de serviço', text: wine.servingSuggestion },
+            ].map(({ title, text }) => (
+              <div
+                key={title}
+                className="reveal-cards flex flex-col p-6"
+                style={{ backgroundColor: '#0C4544', borderRadius: '8px' }}
+              >
+                <h3
+                  className="font-body mb-3"
+                  style={{ fontSize: '1.0625rem', fontStyle: 'italic', fontWeight: 400, color: '#FAE6C1' }}
+                >
+                  {title}
+                </h3>
+                <p
+                  className="font-body"
+                  style={{ fontSize: '0.9rem', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                >
+                  {text}
+                </p>
+              </div>
+            ))}
+            <div
+              className="reveal-cards relative overflow-hidden"
+              style={{ aspectRatio: '4/3', borderRadius: '8px', backgroundColor: '#1A3A2E' }}
+            >
+              <Image
+                src={wine.sectionImage}
+                alt={`${wine.name} — detalhe`}
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            </div>
+          </div>
+
+          {/* Desktop — foto absoluta à direita + cards glassmorphic flutuantes */}
+          <div
+            className="reveal-cards hidden md:block relative"
+            style={{ paddingBottom: '200px' }}
+          >
+            {/* Fotografia — preenche metade direita do contentor, do topo ao fundo */}
+            <div
+              className="absolute overflow-hidden"
+              style={{
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: '55%',
+                borderRadius: '8px',
+                zIndex: 1,
+              }}
+            >
+              <Image
+                src={wine.sectionImage}
+                alt={`${wine.name} — detalhe`}
+                fill
+                className="object-cover"
+                sizes="55vw"
+              />
+            </div>
+
+            {/* Cards glassmorphic — acima da foto */}
+            <div className="relative" style={{ zIndex: 2 }}>
+
+              {/* Linha 1: Pontos-chave | Notas de prova */}
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                {[
+                  { title: 'Pontos-chave', text: wine.keyPoints },
+                  { title: 'Notas de prova', text: wine.tastingNotes },
+                ].map(({ title, text }) => (
+                  <div
+                    key={title}
+                    className="flex flex-col p-7"
+                    style={{
+                      backgroundColor: 'rgba(5, 38, 37, 0.65)',
+                      backdropFilter: 'blur(14px)',
+                      WebkitBackdropFilter: 'blur(14px)',
+                      border: '1px solid rgba(250, 230, 193, 0.10)',
+                      borderRadius: '8px',
+                    }}
+                  >
+                    <h3
+                      className="font-body mb-4"
+                      style={{ fontSize: 'clamp(1rem, 1.2vw, 1.125rem)', fontStyle: 'italic', fontWeight: 400, color: '#FAE6C1' }}
+                    >
+                      {title}
+                    </h3>
+                    <p
+                      className="font-body"
+                      style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                    >
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Linha 2: Sugestão de serviço (metade esquerda) */}
+              <div style={{ width: 'calc(50% - 8px)' }}>
                 <div
-                  key={title}
-                  className="reveal-cards flex flex-col p-6 md:p-7"
-                  style={{ backgroundColor: '#0C4544', borderRadius: '4px' }}
+                  className="flex flex-col p-7"
+                  style={{
+                    backgroundColor: 'rgba(5, 38, 37, 0.65)',
+                    backdropFilter: 'blur(14px)',
+                    WebkitBackdropFilter: 'blur(14px)',
+                    border: '1px solid rgba(250, 230, 193, 0.10)',
+                    borderRadius: '8px',
+                  }}
                 >
                   <h3
-                    className="font-display uppercase tracking-[0.1em] mb-3"
-                    style={{ fontSize: '11px', color: 'rgba(250,230,193,0.60)' }}
+                    className="font-body mb-4"
+                    style={{ fontSize: 'clamp(1rem, 1.2vw, 1.125rem)', fontStyle: 'italic', fontWeight: 400, color: '#FAE6C1' }}
                   >
-                    {title}
+                    Sugestão de serviço
                   </h3>
                   <p
                     className="font-body"
-                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.80)' }}
+                    style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                   >
-                    {text}
+                    {wine.servingSuggestion}
                   </p>
                 </div>
-              ))}
-            </div>
-
-            {/* Coluna direita — fotografia */}
-            <div className="reveal-cards">
-              <div
-                className="relative w-full h-full overflow-hidden"
-                style={{ minHeight: '360px', borderRadius: '4px', backgroundColor: '#1A3A2E' }}
-              >
-                <Image
-                  src={wine.sectionImage}
-                  alt={`${wine.name} — detalhe`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </section>
