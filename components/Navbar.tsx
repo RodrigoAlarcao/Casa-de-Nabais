@@ -179,21 +179,23 @@ export default function Navbar() {
           </nav>
 
           {/* CTAs mobile */}
-          <div className="mt-auto flex flex-col gap-4 mobile-nav-link">
+          <div className="mt-auto flex flex-col gap-3 mobile-nav-link">
             <Link
               href="/ficar-na-casa"
               onClick={closeMenu}
-              className="flex items-center gap-3 font-display text-[16px] text-[#FAE6C1]"
+              className="flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] transition-opacity duration-200 hover:opacity-85"
+              style={{ backgroundColor: '#FAE6C1', color: '#031D1D' }}
             >
-              <Home size={16} strokeWidth={1.5} />
+              <Home size={14} strokeWidth={1.5} />
               Ficar na Casa
             </Link>
             <button
               disabled
               title="Em breve"
-              className="flex items-center gap-3 font-display text-[16px] text-[#FFF9ED] opacity-40 cursor-not-allowed w-fit"
+              className="flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] cursor-not-allowed"
+              style={{ border: '1px solid rgba(250,230,193,0.30)', color: 'rgba(250,230,193,0.35)' }}
             >
-              <Wine size={16} strokeWidth={1.5} />
+              <Wine size={14} strokeWidth={1.5} />
               Comprar Vinho
             </button>
           </div>
