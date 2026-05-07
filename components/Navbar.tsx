@@ -144,9 +144,10 @@ export default function Navbar() {
         <div
           ref={overlayRef}
           style={{
-            background: 'rgba(3, 29, 29, 0.97)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
+            background: 'rgba(3, 29, 29, 0.78)',
+            backdropFilter: 'blur(28px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+            borderRight: '0.5px solid rgba(250,230,193,0.08)',
           }}
           className="fixed inset-0 z-[200] flex flex-col px-8 pt-8 pb-12 md:hidden"
         >
