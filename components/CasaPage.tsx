@@ -252,12 +252,6 @@ export default function CasaPage() {
         </div>
       </div>
 
-      {/* Gradient bridge dark → light — mobile only */}
-      <div
-        className="relative lg:hidden"
-        style={{ height: '80px', background: 'linear-gradient(to bottom, #031D1D 0%, #FFF9ED 100%)', marginTop: '-1px' }}
-      />
-
       {/* ══════════════════════════════════════
           ← VOLTAR + TÍTULO (desktop)
       ══════════════════════════════════════ */}
