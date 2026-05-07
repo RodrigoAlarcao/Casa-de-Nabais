@@ -232,14 +232,47 @@ export default function FicarNaCasaPage() {
   /* ── Success state ── */
   function renderSuccess() {
     return (
-      <div className="flex flex-col items-center text-center py-10 gap-4">
-        <div className="w-12 h-12 rounded-full flex items-center justify-center"
-          style={{ border: '1px solid rgba(250,230,193,0.30)' }}>
-          <Check size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+      <div className="flex-1 flex flex-col items-center justify-center text-center px-4 py-16 gap-6">
+
+        {/* Icon */}
+        <div
+          className="w-14 h-14 rounded-full flex items-center justify-center"
+          style={{ border: '1px solid rgba(250,230,193,0.35)', backgroundColor: 'rgba(250,230,193,0.07)' }}
+        >
+          <Check size={22} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
         </div>
-        <p className="font-body" style={{ fontSize: '1rem', lineHeight: 1.55, color: 'rgba(255,249,237,0.75)' }}>
-          Pedido enviado. Entraremos em contacto brevemente para confirmar a sua estadia.
-        </p>
+
+        {/* Thin gold rule */}
+        <div style={{ width: '32px', height: '1px', backgroundColor: 'rgba(250,230,193,0.30)' }} />
+
+        {/* Copy */}
+        <div className="flex flex-col gap-3 max-w-[300px]">
+          <p
+            className="font-display uppercase"
+            style={{ fontSize: '0.75rem', letterSpacing: '0.18em', color: 'rgba(250,230,193,0.55)' }}
+          >
+            Casa de Nabais
+          </p>
+          <h3
+            className="font-display"
+            style={{ fontSize: 'clamp(1.375rem, 5vw, 1.625rem)', color: '#FAE6C1', lineHeight: 1.15 }}
+          >
+            Pedido recebido.
+          </h3>
+          <p
+            className="font-body"
+            style={{ fontSize: '0.9375rem', lineHeight: 1.65, color: 'rgba(255,249,237,0.62)' }}
+          >
+            A nossa equipa irá entrar em contacto pessoalmente nas próximas 24 horas para confirmar todos os detalhes da sua estadia.
+          </p>
+          <p
+            className="font-display"
+            style={{ fontSize: '0.875rem', color: 'rgba(250,230,193,0.45)', marginTop: '4px' }}
+          >
+            Até breve.
+          </p>
+        </div>
+
       </div>
     )
   }
@@ -1009,7 +1042,7 @@ export default function FicarNaCasaPage() {
               <X size={16} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-6 pb-8">
+          <div className="flex-1 overflow-y-auto px-6 pb-8 flex flex-col">
             {renderMobileForm()}
           </div>
         </div>
