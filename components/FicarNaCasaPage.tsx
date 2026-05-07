@@ -516,7 +516,7 @@ export default function FicarNaCasaPage() {
               color: '#FAE6C1',
             }}
           >
-            Ficar na Casa de Nabais
+            Ficar na<br className="md:hidden" /> Casa de Nabais
           </h1>
 
           <div className="flex items-center justify-center gap-2 mt-4">
@@ -1024,7 +1024,7 @@ export default function FicarNaCasaPage() {
           background: 'linear-gradient(180deg, rgba(12,69,68,0.97) 0%, rgba(5,38,37,0.97) 100%)',
           backdropFilter: 'blur(22px)',
           WebkitBackdropFilter: 'blur(22px)',
-          borderTop: '0.5px solid rgba(250,230,193,0.14)',
+          borderTop: '1px solid rgba(250,230,193,0.28)',
         }}
       >
         <div>
