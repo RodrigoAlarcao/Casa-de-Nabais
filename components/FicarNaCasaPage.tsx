@@ -155,7 +155,7 @@ export default function FicarNaCasaPage() {
     setFormState('loading')
     try {
       const url = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL
-      if (!url) { setFormState('success'); return }
+      if (!url) throw new Error('NEXT_PUBLIC_APPS_SCRIPT_URL not configured')
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
