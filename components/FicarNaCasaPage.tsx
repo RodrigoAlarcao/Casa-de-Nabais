@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   MapPin, Bed, Users, Bath,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, ChevronDown,
   Check, Phone, ArrowRight, X,
   WashingMachine, ChefHat, Smartphone, Droplets, Flame,
   Utensils, Sparkles, Flower2, Thermometer, Waves,
@@ -110,9 +110,6 @@ export default function FicarNaCasaPage() {
   /* desktop booking modal */
   const [bookingModalOpen, setBookingModalOpen] = useState(false)
 
-  /* mobile form step */
-  const [formStep, setFormStep] = useState<1 | 2>(1)
-
   /* input focus tracking */
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
@@ -207,7 +204,47 @@ export default function FicarNaCasaPage() {
     width: '100%',
   }
 
-  /* ── Step 1: dates + guests ── */
+  /* ── Shared: guests select with chevron ── */
+  function renderGuestsSelect(labelText = 'Who', fontSize = '1.0625rem') {
+    return (
+      <div style={getPill('pessoas', form.pessoas)}>
+        <span style={labelStyle}>{labelText}</span>
+        <div className="relative flex items-center">
+          <select value={form.pessoas} onChange={setField('pessoas')}
+            style={{ ...valueStyle, fontSize, appearance: 'none', cursor: 'pointer', paddingRight: '20px' }}
+            {...bind('pessoas')}
+          >
+            {[...Array(12)].map((_, i) => (
+              <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
+                {i + 1} {i === 0 ? 'Hóspede' : 'Hóspedes'}
+              </option>
+            ))}
+          </select>
+          <ChevronDown size={14} strokeWidth={1.5}
+            className="absolute right-0 pointer-events-none"
+            style={{ color: 'rgba(250,230,193,0.50)' }}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  /* ── Success state ── */
+  function renderSuccess() {
+    return (
+      <div className="flex flex-col items-center text-center py-10 gap-4">
+        <div className="w-12 h-12 rounded-full flex items-center justify-center"
+          style={{ border: '1px solid rgba(250,230,193,0.30)' }}>
+          <Check size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+        </div>
+        <p className="font-body" style={{ fontSize: '1rem', lineHeight: 1.55, color: 'rgba(255,249,237,0.75)' }}>
+          Pedido enviado. Entraremos em contacto brevemente para confirmar a sua estadia.
+        </p>
+      </div>
+    )
+  }
+
+  /* ── Desktop card: step 1 (dates + guests + primary CTA) ── */
   function renderStep1(onCTA: () => void) {
     return (
       <div className="flex flex-col gap-3">
@@ -239,29 +276,17 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        <div style={getPill('pessoas', form.pessoas)}>
-          <span style={labelStyle}>Who</span>
-          <select value={form.pessoas} onChange={setField('pessoas')}
-            style={{ ...valueStyle, appearance: 'none', cursor: 'pointer' }}
-            {...bind('pessoas')}
-          >
-            {[...Array(12)].map((_, i) => (
-              <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
-                {i + 1} {i === 0 ? 'Guest' : 'Guests'}
-              </option>
-            ))}
-          </select>
-        </div>
+        {renderGuestsSelect('Who')}
 
         <button
           onClick={onCTA}
           className="w-full font-display tracking-[0.06em] transition-all duration-200 hover:opacity-90"
           style={{
             fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
-            backgroundColor: 'rgba(255,249,237,0.12)',
-            border: '1px solid rgba(250,230,193,0.22)',
+            backgroundColor: '#FAE6C1',
+            border: 'none',
             borderRadius: '12px',
-            color: '#FAE6C1',
+            color: '#031D1D',
             padding: '18px',
             marginTop: '4px',
           }}
@@ -276,62 +301,40 @@ export default function FicarNaCasaPage() {
     )
   }
 
-  /* ── Step 2: contact form ── */
-  function renderContactForm(onBack: () => void) {
-    if (formState === 'success') {
-      return (
-        <div className="flex flex-col items-center text-center py-10 gap-4">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center"
-            style={{ border: '1px solid rgba(250,230,193,0.30)' }}>
-            <Check size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-          </div>
-          <p className="font-body" style={{ fontSize: '1rem', lineHeight: 1.55, color: 'rgba(255,249,237,0.75)' }}>
-            Pedido enviado. Entraremos em contacto brevemente para confirmar a sua estadia.
-          </p>
-        </div>
-      )
-    }
+  /* ── Desktop modal: editable dates + guests + contact form ── */
+  function renderContactForm() {
+    if (formState === 'success') return renderSuccess()
+
+    const canSubmit = form.nome.trim() !== '' && form.email.trim() !== ''
 
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <button type="button" onClick={onBack}
-          className="flex items-center gap-1.5 font-display uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-70 mb-1"
-          style={{ fontSize: '10px', color: 'rgba(250,230,193,0.55)' }}
-        >
-          <ChevronLeft size={12} strokeWidth={1.5} />
-          Alterar datas
-        </button>
-
-        {/* Dates + guests summary */}
+        {/* Editable dates */}
         <div className="grid grid-cols-2 gap-2">
-          <div style={getPill('', '', true)}>
+          <div style={getPill('checkIn', form.checkIn)}>
             <span style={labelStyle}>Check In</span>
-            <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkIn || '—'}</p>
+            <input type="date" value={form.checkIn} onChange={setField('checkIn')}
+              min={new Date().toISOString().split('T')[0]}
+              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+              {...bind('checkIn')}
+            />
           </div>
-          <div style={getPill('', '', true)}>
+          <div style={getPill('checkOut', form.checkOut)}>
             <span style={labelStyle}>Check Out</span>
-            <p style={{ ...valueStyle, fontSize: '0.9375rem' }}>{form.checkOut || '—'}</p>
+            <input type="date" value={form.checkOut} onChange={setField('checkOut')}
+              min={form.checkIn || new Date().toISOString().split('T')[0]}
+              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+              {...bind('checkOut')}
+            />
           </div>
         </div>
 
-        <div style={getPill('pessoas', form.pessoas)}>
-          <span style={labelStyle}>Nº de hóspedes</span>
-          <select value={form.pessoas} onChange={setField('pessoas')}
-            style={{ ...valueStyle, fontSize: '0.9375rem', appearance: 'none', cursor: 'pointer' }}
-            {...bind('pessoas')}
-          >
-            {[...Array(12)].map((_, i) => (
-              <option key={i + 1} value={String(i + 1)} style={{ backgroundColor: '#0C4544' }}>
-                {i + 1} {i === 0 ? 'Hóspede' : 'Hóspedes'}
-              </option>
-            ))}
-          </select>
-        </div>
+        {renderGuestsSelect('Nº de hóspedes', '0.9375rem')}
 
         {[
-          { key: 'nome',     label: 'Nome *',   type: 'text',  placeholder: 'O seu nome',     required: true  },
-          { key: 'email',    label: 'Email *',  type: 'email', placeholder: 'email@exemplo.pt', required: true },
-          { key: 'telefone', label: 'Telefone', type: 'tel',   placeholder: '+351 — opcional', required: false },
+          { key: 'nome',     label: 'Nome *',   type: 'text',  placeholder: 'O seu nome',       required: true  },
+          { key: 'email',    label: 'Email *',  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
+          { key: 'telefone', label: 'Telefone', type: 'tel',   placeholder: '+351 — opcional',   required: false },
         ].map(({ key, label, type, placeholder, required }) => (
           <div key={key} style={getPill(key, form[key as keyof typeof form])}>
             <span style={labelStyle}>{label}</span>
@@ -353,16 +356,117 @@ export default function FicarNaCasaPage() {
           />
         </div>
 
-        <button type="submit" disabled={formState === 'loading'}
-          className="w-full font-display tracking-[0.06em] transition-all duration-200 hover:opacity-90"
+        <button type="submit" disabled={!canSubmit || formState === 'loading'}
+          className="w-full font-display tracking-[0.06em] transition-all duration-200"
           style={{
-            fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
-            backgroundColor: 'rgba(255,249,237,0.12)',
-            border: '1px solid rgba(250,230,193,0.22)',
+            fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
+            backgroundColor: canSubmit ? '#FAE6C1' : 'rgba(255,249,237,0.08)',
+            border: canSubmit ? 'none' : '1px solid rgba(250,230,193,0.15)',
             borderRadius: '12px',
-            color: '#FAE6C1',
+            color: canSubmit ? '#031D1D' : 'rgba(250,230,193,0.30)',
             padding: '18px',
-            opacity: formState === 'loading' ? 0.55 : 1,
+            cursor: canSubmit ? 'pointer' : 'not-allowed',
+            transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
+            opacity: formState === 'loading' ? 0.7 : 1,
+          }}
+        >
+          {formState === 'loading' ? 'A enviar…' : 'Enviar pedido'}
+        </button>
+
+        {formState === 'error' && (
+          <p className="font-body text-center" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
+            Ocorreu um erro. Tente novamente.
+          </p>
+        )}
+
+        <div className="flex items-center justify-center gap-2">
+          <Phone size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.40)' }} />
+          <span className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.40)' }}>
+            Ou ligue{' '}
+            <a href="tel:+351258000000" className="underline underline-offset-2" style={{ color: 'rgba(250,230,193,0.60)' }}>
+              +351 258 000 000
+            </a>
+          </span>
+        </div>
+      </form>
+    )
+  }
+
+  /* ── Mobile: single-screen all-in-one form ── */
+  function renderMobileForm() {
+    if (formState === 'success') return renderSuccess()
+
+    const canSubmit = form.nome.trim() !== '' && form.email.trim() !== ''
+
+    return (
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <div className="text-center mb-2">
+          <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 5vw, 1.875rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            €1,000 to €2,500/night
+          </p>
+          <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(255,249,237,0.50)', marginTop: '4px' }}>
+            Enter dates for seasonal pricing
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <div style={getPill('checkIn', form.checkIn)}>
+            <span style={labelStyle}>Check In</span>
+            <input type="date" value={form.checkIn} onChange={setField('checkIn')}
+              min={new Date().toISOString().split('T')[0]}
+              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+              {...bind('checkIn')}
+            />
+          </div>
+          <div style={getPill('checkOut', form.checkOut)}>
+            <span style={labelStyle}>Check Out</span>
+            <input type="date" value={form.checkOut} onChange={setField('checkOut')}
+              min={form.checkIn || new Date().toISOString().split('T')[0]}
+              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+              {...bind('checkOut')}
+            />
+          </div>
+        </div>
+
+        {renderGuestsSelect('Nº de hóspedes', '0.9375rem')}
+
+        {[
+          { key: 'nome',     label: 'Nome *',   type: 'text',  placeholder: 'O seu nome',       required: true  },
+          { key: 'email',    label: 'Email *',  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
+          { key: 'telefone', label: 'Telefone', type: 'tel',   placeholder: '+351 — opcional',   required: false },
+        ].map(({ key, label, type, placeholder, required }) => (
+          <div key={key} style={getPill(key, form[key as keyof typeof form])}>
+            <span style={labelStyle}>{label}</span>
+            <input type={type} required={required} placeholder={placeholder}
+              value={form[key as keyof typeof form]}
+              onChange={setField(key as keyof typeof form)}
+              style={{ ...valueStyle, fontSize: '0.9375rem' }}
+              {...bind(key)}
+            />
+          </div>
+        ))}
+
+        <div style={getPill('mensagem', form.mensagem)}>
+          <span style={labelStyle}>Mensagem</span>
+          <textarea rows={3} placeholder="Pedidos especiais…"
+            value={form.mensagem} onChange={setField('mensagem')}
+            style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
+            {...bind('mensagem')}
+          />
+        </div>
+
+        <button type="submit" disabled={!canSubmit || formState === 'loading'}
+          className="w-full font-display tracking-[0.06em] transition-all duration-200"
+          style={{
+            fontSize: '1.0625rem',
+            backgroundColor: canSubmit ? '#FAE6C1' : 'rgba(255,249,237,0.08)',
+            border: canSubmit ? 'none' : '1px solid rgba(250,230,193,0.15)',
+            borderRadius: '12px',
+            color: canSubmit ? '#031D1D' : 'rgba(250,230,193,0.30)',
+            padding: '18px',
+            cursor: canSubmit ? 'pointer' : 'not-allowed',
+            transition: 'background-color 0.2s ease, color 0.2s ease',
+            opacity: formState === 'loading' ? 0.7 : 1,
           }}
         >
           {formState === 'loading' ? 'A enviar…' : 'Enviar pedido'}
@@ -884,7 +988,7 @@ export default function FicarNaCasaPage() {
             >
               <X size={14} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
-            {renderContactForm(() => setBookingModalOpen(false))}
+            {renderContactForm()}
           </div>
         </div>
       )}
@@ -895,31 +999,18 @@ export default function FicarNaCasaPage() {
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-[300] flex flex-col"
           style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
-          <div className="flex items-center justify-between px-6 py-4">
-            {formStep === 2 ? (
-              <button
-                onClick={() => setFormStep(1)}
-                className="flex items-center gap-1.5 font-display uppercase tracking-[0.1em] hover:opacity-70"
-                style={{ fontSize: '10px', color: 'rgba(250,230,193,0.55)' }}
-              >
-                <ChevronLeft size={12} strokeWidth={1.5} />
-                Voltar
-              </button>
-            ) : <div />}
+          <div className="flex items-center justify-end px-6 py-4">
             <button
-              onClick={() => { setMobileOpen(false); setFormStep(1); setFormState('idle') }}
+              onClick={() => { setMobileOpen(false); setFormState('idle') }}
               aria-label="Fechar"
-              className="w-9 h-9 rounded-full flex items-center justify-center ml-auto"
+              className="w-9 h-9 rounded-full flex items-center justify-center"
               style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
             >
               <X size={16} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
           </div>
           <div className="flex-1 overflow-y-auto px-6 pb-8">
-            {formStep === 1
-              ? renderStep1(() => setFormStep(2))
-              : renderContactForm(() => setFormStep(1))
-            }
+            {renderMobileForm()}
           </div>
         </div>
       )}
@@ -945,7 +1036,7 @@ export default function FicarNaCasaPage() {
         <button
           onClick={() => setMobileOpen(true)}
           className="font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
-          style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '100px' }}
+          style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '8px' }}
         >
           Reservar
         </button>
