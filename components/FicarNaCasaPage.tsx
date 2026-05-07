@@ -670,7 +670,7 @@ export default function FicarNaCasaPage() {
                 <button
                   onClick={() => setMobileOpen(true)}
                   className="mt-4 w-full font-display tracking-[0.04em] py-4 rounded-[12px]"
-                  style={{ backgroundColor: 'rgba(255,249,237,0.12)', color: 'rgba(250,230,193,0.80)', border: '1px solid rgba(250,230,193,0.20)', fontSize: '1rem' }}
+                  style={{ backgroundColor: '#FAE6C1', color: '#031D1D', border: 'none', fontSize: '1rem' }}
                 >
                   Reservar
                 </button>
