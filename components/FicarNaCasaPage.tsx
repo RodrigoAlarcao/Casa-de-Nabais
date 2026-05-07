@@ -668,7 +668,7 @@ export default function FicarNaCasaPage() {
                   Enter dates for seasonal pricing
                 </p>
                 <button
-                  onClick={() => { setFormStep(1); setMobileOpen(true) }}
+                  onClick={() => setMobileOpen(true)}
                   className="mt-4 w-full font-display tracking-[0.04em] py-4 rounded-[12px]"
                   style={{ backgroundColor: 'rgba(255,249,237,0.12)', color: 'rgba(250,230,193,0.80)', border: '1px solid rgba(250,230,193,0.20)', fontSize: '1rem' }}
                 >
