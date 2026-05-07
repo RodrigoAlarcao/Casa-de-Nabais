@@ -1004,7 +1004,7 @@ export default function FicarNaCasaPage() {
           onClick={() => { setBookingModalOpen(false); setFormState('idle') }}
         >
           <div
-            className="relative w-full max-w-[520px] mx-6 rounded-[20px] p-7 overflow-y-auto"
+            className="w-full max-w-[520px] mx-6 rounded-[20px] overflow-y-auto flex flex-col"
             style={{
               maxHeight: '90vh',
               backgroundColor: 'rgba(12,69,68,0.96)',
@@ -1013,15 +1013,20 @@ export default function FicarNaCasaPage() {
             }}
             onClick={e => e.stopPropagation()}
           >
-            <button
-              onClick={() => { setBookingModalOpen(false); setFormState('idle') }}
-              aria-label="Fechar"
-              className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-70"
-              style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
-            >
-              <X size={14} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-            </button>
-            {renderContactForm()}
+            {/* Modal header — close button in its own row */}
+            <div className="flex justify-end px-5 pt-5 pb-2 flex-shrink-0">
+              <button
+                onClick={() => { setBookingModalOpen(false); setFormState('idle') }}
+                aria-label="Fechar"
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-70"
+                style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
+              >
+                <X size={14} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+              </button>
+            </div>
+            <div className="px-7 pb-7">
+              {renderContactForm()}
+            </div>
           </div>
         </div>
       )}
