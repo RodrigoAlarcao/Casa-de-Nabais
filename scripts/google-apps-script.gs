@@ -4,12 +4,14 @@
 // SETUP:
 // 1. Abre script.google.com → New project
 // 2. Cola este código (substitui o código existente)
-// 3. Edita SHEET_NAME e EMAIL_NOTIFICACAO abaixo
+// 3. Edita SHEET_ID, SHEET_NAME e EMAIL_NOTIFICACAO abaixo
+//    SHEET_ID: o ID da Google Sheet no URL (docs.google.com/spreadsheets/d/ESTE_ID/edit)
 // 4. Deploy > New deployment > Web App
 //    - Execute as: Me
 //    - Who has access: Anyone
 // 5. Copia o URL e adiciona no Vercel como NEXT_PUBLIC_APPS_SCRIPT_URL
 
+var SHEET_ID = 'COLE_AQUI_O_ID_DA_GOOGLE_SHEET';
 var SHEET_NAME = 'Leads';
 var EMAIL_NOTIFICACAO = 'SEU_EMAIL@gmail.com'; // email que recebe notificação quando chega um lead
 
@@ -17,7 +19,7 @@ function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
 
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = SpreadsheetApp.openById(SHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
 
     // Cria a folha "Leads" com cabeçalhos se não existir
