@@ -246,7 +246,7 @@ export default function VinhasPage() {
           SECÇÃO EDITORIAL
       ══════════════════════════════════════ */}
       <section ref={editorialRef} className="pt-4 pb-20 md:pb-28">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 space-y-24 md:space-y-32">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
           {/* Bloco A — O solo como origem */}
           <div className="reveal-vinhas">
@@ -325,43 +325,45 @@ export default function VinhasPage() {
             </div>
           </div>
 
-          {/* Bloco B — Vinhas como campo de estudo: imagem esq, texto dir */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div
-              className="reveal-vinhas-block relative overflow-hidden"
-              style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
-            >
-              <Image
-                src="/images/homepage/vinhas/carousel-04.webp"
-                alt="Vinhas como campo de estudo"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 90vw, 50vw"
-              />
-            </div>
-            <div className="reveal-vinhas-block flex flex-col justify-center">
-              <h2
-                className="font-display mb-5"
-                style={{
-                  fontSize: 'clamp(1.5rem, 2.5vw, 2.125rem)',
-                  lineHeight: 1.1,
-                  letterSpacing: '0.02em',
-                  color: 'var(--color-text)',
-                }}
+          {/* Bloco B — Vinhas como campo de estudo: texto 2/3 esq, imagem 1/3 dir */}
+          <div className="reveal-vinhas-block mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+              <div className="lg:col-span-2 flex flex-col justify-center lg:px-14">
+                <h2
+                  className="font-display mb-5"
+                  style={{
+                    fontSize: 'clamp(1.5rem, 2.5vw, 2.125rem)',
+                    lineHeight: 1.1,
+                    letterSpacing: '0.02em',
+                    color: 'var(--color-text)',
+                  }}
+                >
+                  Vinhas como campo de estudo
+                </h2>
+                <p
+                  className="font-body text-cn-text-muted"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
+                >
+                  As vinhas são recentes, plantadas de raiz, e conduzidas como um laboratório vivo. Testamos diferentes sistemas de poda e condução das videiras, linha a linha, para compreender como influenciam o vigor, a sanidade e a expressão da casta Loureiro.
+                </p>
+              </div>
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: '3/5', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
-                Vinhas como campo de estudo
-              </h2>
-              <p
-                className="font-body text-cn-text-muted"
-                style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
-              >
-                As nossas vinhas são laboratórios a céu aberto. Registamos dados de fenologia, analisamos microclimas por parcela e testamos técnicas de viticultura mínima em harmonia com a biodiversidade local. Cada decisão tomada na vinha — quando intervir, como conduzir, quando colher — resulta de anos de observação cuidadosa e de uma convicção crescente de que, neste terroir, o melhor vinho nasce da escuta.
-              </p>
+                <Image
+                  src="/images/homepage/vinhas/carousel-04.webp"
+                  alt="Vinhas como campo de estudo"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 90vw, 25vw"
+                />
+              </div>
             </div>
           </div>
 
           {/* Bloco C — Viticultura integrada: mosaico esq, texto dir */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="mt-24 md:mt-32 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div className="reveal-vinhas-block order-2 lg:order-1">
               <div className="grid grid-rows-2 gap-2" style={{ height: '420px' }}>
                 <div
