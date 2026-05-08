@@ -335,7 +335,7 @@ export default function CasaPage() {
       ══════════════════════════════════════ */}
       <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
-        <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
+        <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
             {/* Retrato ESQUERDA — só desktop */}
@@ -368,7 +368,7 @@ export default function CasaPage() {
                 <p
                   key={i}
                   className="reveal-casa font-body text-cn-text-muted mb-4 text-center lg:text-left"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                  style={{ fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)', lineHeight: 1.6 }}
                 >
                   {para}
                 </p>
@@ -378,7 +378,7 @@ export default function CasaPage() {
                 <p
                   key={i + 2}
                   className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left hidden lg:block"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                  style={{ fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)', lineHeight: 1.6 }}
                 >
                   {para}
                 </p>
@@ -439,7 +439,7 @@ export default function CasaPage() {
             <p
               key={i + 2}
               className="font-body text-cn-text-muted mb-4 last:mb-0 text-center"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+              style={{ fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)', lineHeight: 1.6 }}
             >
               {para}
             </p>
@@ -448,7 +448,7 @@ export default function CasaPage() {
 
         {/* ── Desktop: carrossel (inalterado) ── */}
         <div
-          className="hidden lg:block mt-16 py-2 select-none"
+          className="hidden lg:block mt-4 py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}

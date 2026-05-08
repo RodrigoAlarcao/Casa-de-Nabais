@@ -48,9 +48,12 @@ const RIGOR_IMAGES = [
 ]
 
 const ENOLOGO_PARAS = [
-  'Com formação em viticultura e enologia e experiência em regiões vitivinícolas portuguesas e internacionais, o enólogo da Casa de Nabais é o responsável pela condução técnica de todo o processo produtivo — desde a gestão das vinhas até ao engarrafamento.',
-  'A sua abordagem parte sempre da parcela: o estudo do solo, o comportamento da casta, a forma como a planta responde ao trabalho no campo. Na adega, intervém com parcimónia, convicto de que o melhor vinho é aquele que necessita do mínimo para se revelar.',
+  'Constantino Ramos dedica-se à Região dos Vinhos Verdes há quase 15 anos, tendo vindo a construir uma relação próxima à vinha e à casta Loureiro. Enólogo de escuta atenta e gesto preciso, acredita que o vinho nasce como uma ideia e ganha forma com paciência, respeito e atenção à natureza. Trabalha em escala humana, acompanhando cada parcela como um ecossistema vivo e defende a intervenção humana apenas na medida em que contribui para preservar o equilíbrio e a frescura dos vinhos, respeitando a uva, decidindo o momento certo e dando espaço à identidade de cada vinho.',
+  'O seu foco está em vinhos frescos, gastronómicos e com identidade, pensados para evoluir e contar uma história autêntica.',
+  'Assume-se como vigneron, aceitando os riscos e tomando as decisões que começam no campo e culminam na vindima, o momento-chave do ano. Vê o vinho como um processo que começa muito antes da colheita, sendo moldado pelo terroir e pela visão pessoal do enólogo.',
 ]
+
+const ENOLOGO_CLOSING = 'Nada é feito por moda. Tudo é observado, testado e integrado apenas se servir a origem, o tempo e a singularidade do vinho.'
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
@@ -405,7 +408,7 @@ export default function VinificacaoPage() {
           ══════════════════════════════════════ */}
           <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
-            <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
+            <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
                 <div className="reveal-vinif hidden lg:block">
@@ -508,7 +511,7 @@ export default function VinificacaoPage() {
 
             {/* Desktop: carrossel */}
             <div
-              className="hidden lg:block mt-16 py-2 select-none"
+              className="hidden lg:block mt-4 py-2 select-none"
               style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
               onPointerDown={onPointerDown}
               onPointerUp={onPointerUp}
@@ -642,7 +645,7 @@ export default function VinificacaoPage() {
             </div>
 
             {/* Panorâmica full-width — desktop */}
-            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-16 md:mt-20">
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
               <div
                 ref={expFullbleedContainerRef}
                 className="relative overflow-hidden w-full"
@@ -696,8 +699,31 @@ export default function VinificacaoPage() {
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-                {/* Texto ESQUERDA */}
-                <div className="flex flex-col">
+                {/* Retrato ESQUERDA — desktop */}
+                <div className="hidden lg:block">
+                  <div
+                    ref={adegaPortraitRef}
+                    className="relative overflow-hidden w-full"
+                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F', borderRadius: '4px' }}
+                  >
+                    <div
+                      ref={adegaImgWrapRef}
+                      className="absolute will-change-transform"
+                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+                    >
+                      <Image
+                        src="/images/homepage/casa/section-01.webp"
+                        alt="Adega — interior"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 90vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Texto DIREITA */}
+                <div className="flex flex-col lg:pl-10">
                   <h2
                     className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
                     style={{
@@ -713,7 +739,7 @@ export default function VinificacaoPage() {
                   <p
                     className="font-body mb-5 text-center lg:text-left"
                     style={{
-                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)',
                       lineHeight: 1.4,
                       color: 'rgba(3,29,29,0.65)',
                     }}
@@ -724,7 +750,7 @@ export default function VinificacaoPage() {
                   <ul
                     className="mb-5 flex flex-col gap-2 text-center lg:text-left"
                     style={{
-                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)',
                       lineHeight: 1.4,
                       color: 'rgba(3,29,29,0.65)',
                       listStyle: 'none',
@@ -752,7 +778,7 @@ export default function VinificacaoPage() {
                       key={i}
                       className="font-body mb-4 last:mb-0 text-center lg:text-left"
                       style={{
-                        fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                        fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)',
                         lineHeight: 1.4,
                         color: 'rgba(3,29,29,0.65)',
                       }}
@@ -762,34 +788,11 @@ export default function VinificacaoPage() {
                   ))}
                 </div>
 
-                {/* Retrato DIREITA — desktop */}
-                <div className="hidden lg:block">
-                  <div
-                    ref={adegaPortraitRef}
-                    className="relative overflow-hidden w-full"
-                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F', borderRadius: '4px' }}
-                  >
-                    <div
-                      ref={adegaImgWrapRef}
-                      className="absolute will-change-transform"
-                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
-                    >
-                      <Image
-                        src="/images/homepage/casa/section-01.webp"
-                        alt="Adega — interior"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 90vw, 50vw"
-                      />
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </div>
 
             {/* Panorâmica full-width — desktop */}
-            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-16 md:mt-20">
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
               <div
                 ref={adegaFullbleedContainerRef}
                 className="relative overflow-hidden w-full"
@@ -832,7 +835,7 @@ export default function VinificacaoPage() {
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
               {/* Título 1/3 + Texto 2/3 — desktop */}
-              <div className="hidden lg:grid lg:grid-cols-[1fr_2fr] gap-16 mb-14">
+              <div className="hidden lg:grid lg:grid-cols-[1fr_2fr] gap-16 mb-20">
                 <h2
                   className="font-display"
                   style={{
@@ -960,97 +963,139 @@ export default function VinificacaoPage() {
 
           <section className="pt-20 md:pt-28 pb-28 md:pb-36">
 
-            {/* Mobile: portrait — antes do texto */}
-            <div
-              className="relative lg:hidden mb-10 mx-6"
-              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-            >
-              <Image
-                src="/images/homepage/enoturismo/section-01.webp"
-                alt="Perfil do enólogo — Casa de Nabais"
-                fill
-                className="object-cover"
-                sizes="calc(100vw - 3rem)"
-              />
+            {/* Mobile: portrait + texto */}
+            <div className="lg:hidden mx-6">
+              <div
+                className="relative mb-6"
+                style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
+              >
+                <Image
+                  src="/images/homepage/enoturismo/section-01.webp"
+                  alt="Perfil do enólogo — Casa de Nabais"
+                  fill
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
+                />
+              </div>
+              <p
+                className="font-display uppercase mb-3 text-center"
+                style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(250,230,193,0.45)' }}
+              >
+                Perfil do enólogo
+              </p>
+              <h2
+                className="font-display mb-1 text-center"
+                style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}
+              >
+                Constantino Ramos
+              </h2>
+              <p
+                className="font-display uppercase mb-6 text-center"
+                style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(250,230,193,0.40)' }}
+              >
+                Enólogo
+              </p>
+              {ENOLOGO_PARAS.map((para, i) => (
+                <p
+                  key={i}
+                  className="font-body mb-4 last:mb-0 text-center"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                >
+                  {para}
+                </p>
+              ))}
             </div>
 
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Título da secção — desktop */}
+            <h2
+              className="hidden lg:block font-display uppercase text-center mb-16"
+              style={{
+                fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                lineHeight: 1.0,
+                letterSpacing: '0.04em',
+                color: '#FAE6C1',
+              }}
+            >
+              Perfil do Enólogo
+            </h2>
 
-                {/* Retrato ESQUERDA — desktop */}
-                <div className="hidden lg:block">
+            {/* Desktop: glassmorphism overlapping card + frase de fecho */}
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
+              <div className="relative" style={{ minHeight: '900px' }}>
+
+                {/* Imagem — lado esquerdo 62% */}
+                <div
+                  ref={enologoPortraitRef}
+                  className="absolute inset-y-0 left-0 overflow-hidden"
+                  style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
                   <div
-                    ref={enologoPortraitRef}
-                    className="relative overflow-hidden w-full"
-                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
+                    ref={enologoImgWrapRef}
+                    className="absolute will-change-transform"
+                    style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
-                    <div
-                      ref={enologoImgWrapRef}
-                      className="absolute will-change-transform"
-                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
-                    >
-                      <Image
-                        src="/images/homepage/enoturismo/section-01.webp"
-                        alt="Perfil do enólogo — Casa de Nabais"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 90vw, 50vw"
-                      />
-                    </div>
+                    <Image
+                      src="/images/homepage/enoturismo/section-01.webp"
+                      alt="Perfil do enólogo — Casa de Nabais"
+                      fill
+                      className="object-cover"
+                      sizes="60vw"
+                    />
                   </div>
                 </div>
 
-                {/* Texto DIREITA */}
-                <div className="flex flex-col px-0 lg:pl-10">
-
-                  <p
-                    className="font-display uppercase mb-4 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(0.625rem, 0.85vw, 0.75rem)',
-                      letterSpacing: '0.14em',
-                      color: 'rgba(250,230,193,0.50)',
-                    }}
-                  >
-                    Perfil do enólogo
-                  </p>
-
+                {/* Card glassmorfismo — lado direito, posicionado mais abaixo */}
+                <div
+                  className="absolute right-0"
+                  style={{
+                    top: '40%',
+                    width: '54%',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 249, 237, 0.72)',
+                    backdropFilter: 'blur(18px)',
+                    WebkitBackdropFilter: 'blur(18px)',
+                    border: '1px solid rgba(255, 249, 237, 0.30)',
+                    padding: '44px 52px',
+                    zIndex: 2,
+                  }}
+                >
                   <h2
-                    className="font-display mb-2 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
-                      lineHeight: 1.1,
-                      color: '#FAE6C1',
-                    }}
+                    className="font-display mb-1"
+                    style={{ fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)', lineHeight: 1.0, color: '#0C4544' }}
                   >
-                    Nome do Enólogo
+                    Constantino Ramos
                   </h2>
-
                   <p
-                    className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(0.625rem, 0.85vw, 0.75rem)',
-                      letterSpacing: '0.12em',
-                      color: 'rgba(250,230,193,0.45)',
-                    }}
+                    className="font-display uppercase mb-8"
+                    style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(12,69,68,0.40)' }}
                   >
                     Enólogo
                   </p>
-
                   {ENOLOGO_PARAS.map((para, i) => (
                     <p
                       key={i}
-                      className="font-body mb-5 last:mb-0 text-center lg:text-left"
-                      style={{
-                        fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                        lineHeight: 1.65,
-                        color: 'rgba(255,249,237,0.72)',
-                      }}
+                      className="font-body mb-4 last:mb-0"
+                      style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                     >
                       {para}
                     </p>
                   ))}
                 </div>
 
+              </div>
+
+              {/* Frase de fecho — dentro do mesmo wrapper, abaixo do card */}
+              <div className="text-center mt-28 md:mt-40 mb-8 md:mb-16">
+                <TextReveal
+                  text={ENOLOGO_CLOSING}
+                  className="font-display"
+                  style={{
+                    fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+                    lineHeight: 1.3,
+                    fontWeight: 400,
+                    color: '#FAE6C1',
+                  }}
+                />
               </div>
             </div>
 

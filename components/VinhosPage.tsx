@@ -11,6 +11,9 @@ import SectionExplore from './SectionExplore'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const INTRO_TEXT =
+  'Produzidos exclusivamente com uva própria, em pequena escala, os vinhos da Casa de Nabais são frescos, gastronómicos e pensados para evoluir. Revelam o caráter dos solos graníticos e xistosos onde nascem, e a identidade da casta Loureiro cultivada no Vale do Lima.'
+
 const wines = [
   {
     slug: 'vinha-do-pomar',
@@ -49,7 +52,7 @@ export default function VinhosPage() {
     <div ref={pageRef} className="bg-cn-bg">
 
       {/* ── BACK LINK ── */}
-      <div className="max-w-[1100px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-40"
@@ -58,7 +61,7 @@ export default function VinhosPage() {
             fontSize: '11px',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: 'rgba(3,29,29,0.50)',
+            color: '#3A5B4F',
           }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
@@ -66,32 +69,44 @@ export default function VinhosPage() {
         </Link>
       </div>
 
-      {/* ── CONTEÚDO PRINCIPAL ── */}
-      <section ref={sectionRef} className="pt-12 pb-20 md:pt-14 md:pb-28">
+      {/* ── TÍTULO ── */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <h1
+          className="font-display uppercase text-center mt-8 md:mt-10"
+          style={{
+            fontSize: 'clamp(2rem, 6vw, 4rem)',
+            lineHeight: 1.0,
+            letterSpacing: '0.05em',
+            color: '#0C4544',
+          }}
+        >
+          Os Vinhos
+        </h1>
+      </div>
+
+      {/* ── INTRO ── */}
+      <section className="pt-10 md:pt-12 pb-12 md:pb-20">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
+          <p
+            className="font-body"
+            style={{
+              fontSize: 'clamp(0.9375rem, 1.5vw, 1.25rem)',
+              lineHeight: 1.35,
+              fontWeight: 400,
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            {INTRO_TEXT}
+          </p>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          WINE CARDS
+      ══════════════════════════════════════ */}
+      <section ref={sectionRef} className="pb-20 md:pb-28">
         <div className="max-w-[1100px] mx-auto px-6 md:px-10">
 
-          {/* Cabeçalho centrado */}
-          <div className="text-center mb-14 md:mb-16 max-w-[640px] mx-auto">
-            <h1
-              className="reveal-vinhos-page font-display uppercase text-cn-text mb-6"
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                whiteSpace: 'nowrap',
-                lineHeight: 1.0,
-                letterSpacing: '0.04em',
-              }}
-            >
-              Os nossos vinhos
-            </h1>
-            <p
-              className="reveal-vinhos-page font-body text-cn-text-muted"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}
-            >
-              Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
-            </p>
-          </div>
-
-          {/* Cards — 2 colunas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {wines.map((wine) => (
               <div key={wine.slug} className="reveal-vinhos-page flex flex-col">
