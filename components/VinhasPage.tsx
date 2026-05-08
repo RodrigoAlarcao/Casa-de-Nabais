@@ -402,13 +402,14 @@ export default function VinhasPage() {
         </div>
 
         {/* Frase de fecho */}
-        <div className="max-w-[860px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32 pb-4 md:pb-8">
           <p
-            className="font-body italic"
+            className="font-display"
             style={{
-              fontSize: 'clamp(1.125rem, 1.8vw, 1.5rem)',
-              lineHeight: 1.55,
-              color: 'var(--color-text-muted)',
+              fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+              lineHeight: 1.3,
+              fontWeight: 400,
+              color: '#0C4544',
             }}
           >
             {CLOSING_QUOTE}
