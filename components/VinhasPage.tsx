@@ -201,7 +201,7 @@ export default function VinhasPage() {
           DESKTOP — INTRO
       ══════════════════════════════════════ */}
       <section className="hidden lg:block pt-12 md:pt-14 pb-14 md:pb-20">
-        <div className="max-w-[800px] mx-auto px-6 md:px-10 text-center">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
           <p
             className="font-body"
             style={{
