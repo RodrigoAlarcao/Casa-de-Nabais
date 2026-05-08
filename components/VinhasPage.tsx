@@ -245,7 +245,7 @@ export default function VinhasPage() {
       {/* ══════════════════════════════════════
           SECÇÃO EDITORIAL
       ══════════════════════════════════════ */}
-      <section ref={editorialRef} className="py-20 md:py-28">
+      <section ref={editorialRef} className="pt-4 pb-20 md:pb-28">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 space-y-24 md:space-y-32">
 
           {/* Bloco A — O solo como origem */}
@@ -280,7 +280,7 @@ export default function VinhasPage() {
                   className="font-body text-cn-text-muted"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
                 >
-                  Para nós, tudo começa no solo. O substrato granítico interrompido por um raro veio de xisto cria condições únicas de drenagem, estrutura e temperatura que se revelam directamente nos vinhos. Trabalhamos activamente com a geologia da quinta, mapeando variações de solo e adaptando a condução da vinha a cada parcela, sempre com o objectivo de expressar o lugar com fidelidade e precisão.
+                  Mais do que o tipo de rocha, interessa-nos como o solo gere a água, a nutrição e o equilíbrio. Solo granítico, solo de xisto e perfis mistos orientam a escolha de todos os elementos que, na vinha, nos levarão ao estilo de vinho que queremos construir.
                 </p>
               </div>
             </div>
