@@ -91,7 +91,7 @@ const NEARBY_TRAINS = [
 
 const WINES = [
   { label: 'Casa de Nabais', name: 'Vinha do Pomar', intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.', img: '/images/homepage/vinhos/vinha-do-pomar-context.webp', href: '/os-vinhos/vinha-do-pomar' },
-  { label: 'Casa de Nabais', name: 'Loureiro',       intro: 'Nasce no Vale do Lima, num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.', img: '/images/homepage/vinhos/loureiro-context.webp',       href: '/os-vinhos/loureiro' },
+  { label: 'Casa de Nabais', name: 'Loureiro',       intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.', img: '/images/homepage/vinhos/loureiro-context.webp',       href: '/os-vinhos/loureiro' },
 ]
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'

@@ -23,7 +23,7 @@ const wines = [
     slug: 'loureiro',
     brand: 'Casa de Nabais',
     name: 'Loureiro',
-    intro: 'Nasce no Vale do Lima, num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.',
+    intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.',
     image: '/images/homepage/vinhos/loureiro-context.webp',
     buyUrl: null,
   },
