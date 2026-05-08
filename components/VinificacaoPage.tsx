@@ -960,91 +960,112 @@ export default function VinificacaoPage() {
 
           <section className="pt-20 md:pt-28 pb-28 md:pb-36">
 
-            {/* Mobile: portrait — antes do texto */}
-            <div
-              className="relative lg:hidden mb-10 mx-6"
-              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-            >
-              <Image
-                src="/images/homepage/enoturismo/section-01.webp"
-                alt="Perfil do enólogo — Casa de Nabais"
-                fill
-                className="object-cover"
-                sizes="calc(100vw - 3rem)"
-              />
+            {/* Mobile: portrait + texto */}
+            <div className="lg:hidden mx-6">
+              <div
+                className="relative mb-6"
+                style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
+              >
+                <Image
+                  src="/images/homepage/enoturismo/section-01.webp"
+                  alt="Perfil do enólogo — Casa de Nabais"
+                  fill
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
+                />
+              </div>
+              <p
+                className="font-display uppercase mb-3 text-center"
+                style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(250,230,193,0.45)' }}
+              >
+                Perfil do enólogo
+              </p>
+              <h2
+                className="font-display mb-1 text-center"
+                style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}
+              >
+                Nome do Enólogo
+              </h2>
+              <p
+                className="font-display uppercase mb-6 text-center"
+                style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(250,230,193,0.40)' }}
+              >
+                Enólogo
+              </p>
+              {ENOLOGO_PARAS.map((para, i) => (
+                <p
+                  key={i}
+                  className="font-body mb-4 last:mb-0 text-center"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                >
+                  {para}
+                </p>
+              ))}
             </div>
 
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Desktop: glassmorphism overlapping card */}
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
+              <div className="relative" style={{ minHeight: '700px' }}>
 
-                {/* Retrato ESQUERDA — desktop */}
-                <div className="hidden lg:block">
+                {/* Imagem — lado esquerdo 62% */}
+                <div
+                  ref={enologoPortraitRef}
+                  className="absolute inset-y-0 left-0 overflow-hidden"
+                  style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
                   <div
-                    ref={enologoPortraitRef}
-                    className="relative overflow-hidden w-full"
-                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
+                    ref={enologoImgWrapRef}
+                    className="absolute will-change-transform"
+                    style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
-                    <div
-                      ref={enologoImgWrapRef}
-                      className="absolute will-change-transform"
-                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
-                    >
-                      <Image
-                        src="/images/homepage/enoturismo/section-01.webp"
-                        alt="Perfil do enólogo — Casa de Nabais"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 90vw, 50vw"
-                      />
-                    </div>
+                    <Image
+                      src="/images/homepage/enoturismo/section-01.webp"
+                      alt="Perfil do enólogo — Casa de Nabais"
+                      fill
+                      className="object-cover"
+                      sizes="60vw"
+                    />
                   </div>
                 </div>
 
-                {/* Texto DIREITA */}
-                <div className="flex flex-col px-0 lg:pl-10">
-
+                {/* Card glassmorfismo — lado direito, posicionado mais abaixo */}
+                <div
+                  className="absolute right-0"
+                  style={{
+                    top: '40%',
+                    width: '54%',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 249, 237, 0.72)',
+                    backdropFilter: 'blur(18px)',
+                    WebkitBackdropFilter: 'blur(18px)',
+                    border: '1px solid rgba(255, 249, 237, 0.30)',
+                    padding: '44px 52px',
+                    zIndex: 2,
+                  }}
+                >
                   <p
-                    className="font-display uppercase mb-4 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(0.625rem, 0.85vw, 0.75rem)',
-                      letterSpacing: '0.14em',
-                      color: 'rgba(250,230,193,0.50)',
-                    }}
+                    className="font-display uppercase mb-3"
+                    style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(12,69,68,0.55)' }}
                   >
                     Perfil do enólogo
                   </p>
-
                   <h2
-                    className="font-display mb-2 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
-                      lineHeight: 1.1,
-                      color: '#FAE6C1',
-                    }}
+                    className="font-display mb-1"
+                    style={{ fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)', lineHeight: 1.0, color: '#0C4544' }}
                   >
                     Nome do Enólogo
                   </h2>
-
                   <p
-                    className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
-                    style={{
-                      fontSize: 'clamp(0.625rem, 0.85vw, 0.75rem)',
-                      letterSpacing: '0.12em',
-                      color: 'rgba(250,230,193,0.45)',
-                    }}
+                    className="font-display uppercase mb-8"
+                    style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(12,69,68,0.40)' }}
                   >
                     Enólogo
                   </p>
-
                   {ENOLOGO_PARAS.map((para, i) => (
                     <p
                       key={i}
-                      className="font-body mb-5 last:mb-0 text-center lg:text-left"
-                      style={{
-                        fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                        lineHeight: 1.65,
-                        color: 'rgba(255,249,237,0.72)',
-                      }}
+                      className="font-body mb-4 last:mb-0"
+                      style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                     >
                       {para}
                     </p>
