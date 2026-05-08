@@ -405,7 +405,7 @@ export default function VinificacaoPage() {
           ══════════════════════════════════════ */}
           <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
 
-            <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20">
+            <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
                 <div className="reveal-vinif hidden lg:block">
@@ -508,7 +508,7 @@ export default function VinificacaoPage() {
 
             {/* Desktop: carrossel */}
             <div
-              className="hidden lg:block mt-16 py-2 select-none"
+              className="hidden lg:block mt-4 py-2 select-none"
               style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
               onPointerDown={onPointerDown}
               onPointerUp={onPointerUp}
@@ -642,7 +642,7 @@ export default function VinificacaoPage() {
             </div>
 
             {/* Panorâmica full-width — desktop */}
-            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-16 md:mt-20">
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
               <div
                 ref={expFullbleedContainerRef}
                 className="relative overflow-hidden w-full"
