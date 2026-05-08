@@ -248,69 +248,79 @@ export default function VinhasPage() {
       <section ref={editorialRef} className="py-20 md:py-28">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 space-y-24 md:space-y-32">
 
-          {/* Bloco A — O solo como origem: texto esq, mosaico dir */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div className="reveal-vinhas flex flex-col justify-center order-2 lg:order-1">
-              <h2
-                className="font-display mb-5"
-                style={{
-                  fontSize: 'clamp(1.5rem, 2.5vw, 2.125rem)',
-                  lineHeight: 1.1,
-                  letterSpacing: '0.02em',
-                  color: 'var(--color-text)',
-                }}
+          {/* Bloco A — O solo como origem */}
+          <div className="reveal-vinhas">
+            {/* Linha 1: imagem 1/3 + texto 2/3 */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
-                O solo como origem
-              </h2>
-              <p
-                className="font-body text-cn-text-muted"
-                style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
-              >
-                Para nós, tudo começa no solo. O substrato granítico interrompido por um raro veio de xisto cria condições únicas de drenagem, estrutura e temperatura que se revelam directamente nos vinhos. Trabalhamos activamente com a geologia da quinta, mapeando variações de solo e adaptando a condução da vinha a cada parcela, sempre com o objectivo de expressar o lugar com fidelidade e precisão.
-              </p>
-            </div>
-
-            {/* Mosaico: 2 retratos empilhados + 1 retrato maior */}
-            <div className="reveal-vinhas order-1 lg:order-2">
-              <div className="grid grid-cols-2 gap-2" style={{ height: '480px' }}>
-                <div className="grid grid-rows-2 gap-2">
-                  <div
-                    className="relative overflow-hidden"
-                    style={{ borderRadius: '4px', backgroundColor: '#3A5B4F' }}
-                  >
-                    <Image
-                      src="/images/homepage/vinhas/carousel-01.webp"
-                      alt="Solo da vinha"
-                      fill
-                      className="object-cover"
-                      sizes="20vw"
-                    />
-                  </div>
-                  <div
-                    className="relative overflow-hidden"
-                    style={{ borderRadius: '4px', backgroundColor: '#3A5B4F' }}
-                  >
-                    <Image
-                      src="/images/homepage/vinhas/carousel-02.webp"
-                      alt="Trabalho na vinha"
-                      fill
-                      className="object-cover"
-                      sizes="20vw"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="relative overflow-hidden"
-                  style={{ borderRadius: '4px', backgroundColor: '#3A5B4F' }}
+                <Image
+                  src="/images/homepage/vinhas/carousel-01.webp"
+                  alt="Solo da vinha"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 90vw, 25vw"
+                />
+              </div>
+              <div className="lg:col-span-2 flex flex-col justify-center lg:px-10">
+                <h2
+                  className="font-display mb-5"
+                  style={{
+                    fontSize: 'clamp(1.5rem, 2.5vw, 2.125rem)',
+                    lineHeight: 1.1,
+                    letterSpacing: '0.02em',
+                    color: 'var(--color-text)',
+                  }}
                 >
-                  <Image
-                    src="/images/homepage/vinhas/carousel-03.webp"
-                    alt="Paisagem da vinha"
-                    fill
-                    className="object-cover"
-                    sizes="25vw"
-                  />
-                </div>
+                  O solo como origem
+                </h2>
+                <p
+                  className="font-body text-cn-text-muted"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
+                >
+                  Para nós, tudo começa no solo. O substrato granítico interrompido por um raro veio de xisto cria condições únicas de drenagem, estrutura e temperatura que se revelam directamente nos vinhos. Trabalhamos activamente com a geologia da quinta, mapeando variações de solo e adaptando a condução da vinha a cada parcela, sempre com o objectivo de expressar o lugar com fidelidade e precisão.
+                </p>
+              </div>
+            </div>
+            {/* Linha 2: 3 imagens separadas por 16px, aspect ratios variados */}
+            <div className="grid grid-cols-3 gap-4 mt-4 items-start">
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
+              >
+                <Image
+                  src="/images/homepage/vinhas/carousel-02.webp"
+                  alt="Trabalho na vinha"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 33vw, 20vw"
+                />
+              </div>
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
+              >
+                <Image
+                  src="/images/homepage/vinhas/carousel-03.webp"
+                  alt="Detalhe na vinha"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 33vw, 20vw"
+                />
+              </div>
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: '2/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
+              >
+                <Image
+                  src="/images/homepage/vinhas/carousel-04.webp"
+                  alt="Paisagem da vinha"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 33vw, 20vw"
+                />
               </div>
             </div>
           </div>
