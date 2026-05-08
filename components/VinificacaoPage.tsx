@@ -832,7 +832,7 @@ export default function VinificacaoPage() {
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
 
               {/* Título 1/3 + Texto 2/3 — desktop */}
-              <div className="hidden lg:grid lg:grid-cols-[1fr_2fr] gap-16 mb-14">
+              <div className="hidden lg:grid lg:grid-cols-[1fr_2fr] gap-16 mb-4">
                 <h2
                   className="font-display"
                   style={{
