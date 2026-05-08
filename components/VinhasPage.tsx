@@ -439,43 +439,96 @@ export default function VinhasPage() {
             As Nossas Vinhas
           </h2>
 
-          <div
-            className="divide-y"
-            style={{ borderColor: 'rgba(250,230,193,0.12)' }}
-          >
+          <div className="space-y-16 md:space-y-20">
 
-            {/* Vinha do Pomar — texto esq, imagem dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-16 md:py-20">
-              <div className="reveal-vinha-item flex flex-col justify-center order-2 lg:order-1 lg:pr-16">
+            {/* Vinha do Pomar — card creme esq sobreposição, imagem dir */}
+            <div className="reveal-vinha-row">
+
+              {/* Desktop: layout de sobreposição */}
+              <div className="hidden lg:block relative" style={{ minHeight: '620px' }}>
+                {/* Imagem — lado direito, largura total da altura */}
+                <div
+                  className="absolute inset-y-0 right-0 overflow-hidden"
+                  style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <Image
+                    src="/images/homepage/vinhas/carousel-01.webp"
+                    alt="Vinha do Pomar"
+                    fill
+                    className="object-cover"
+                    sizes="60vw"
+                  />
+                </div>
+                {/* Card creme — lado esquerdo, alinhado em baixo */}
+                <div
+                  className="absolute bottom-0 left-0"
+                  style={{
+                    width: '50%',
+                    borderRadius: '6px',
+                    backgroundColor: '#FFF9ED',
+                    padding: '40px 48px',
+                    zIndex: 2,
+                  }}
+                >
+                  <span
+                    className="font-display uppercase block mb-5"
+                    style={{ fontSize: '11px', letterSpacing: '0.22em', color: '#0C4544' }}
+                  >
+                    Vinha do Pomar
+                  </span>
+                  <p
+                    className="font-body mb-4"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Com o clássico solo da região — terra preta, muita matéria orgânica e argila — apresenta um terreno fértil, com muito vigor, onde agimos para criar as melhores condições para a vinha.
+                  </p>
+                  <p
+                    className="font-body"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Aqui o foco é reduzir a produção natural do solo para alcançar mais qualidade, complexidade e identidade no vinho feito a partir da casta Loureiro.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mobile: empilhado */}
+              <div className="lg:hidden">
+                <div
+                  className="relative overflow-hidden mb-6"
+                  style={{ aspectRatio: '4/3', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <Image
+                    src="/images/homepage/vinhas/carousel-01.webp"
+                    alt="Vinha do Pomar"
+                    fill
+                    className="object-cover"
+                    sizes="90vw"
+                  />
+                </div>
                 <span
-                  className="font-display uppercase mb-4 block"
+                  className="font-display uppercase block mb-4"
                   style={{ fontSize: '10px', letterSpacing: '0.22em', color: 'rgba(250,230,193,0.45)' }}
                 >
                   Vinha do Pomar
                 </span>
                 <p
-                  className="font-body"
+                  className="font-body mb-3"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                 >
-                  Situada junto ao pomar histórico da quinta, esta vinha de Loureiro beneficia de um microclima particular, com maior amplitude térmica diurna e solos graníticos de boa estrutura. Dá origem ao nosso Loureiro de referência — fresco, floral e de grande persistência aromática.
+                  Com o clássico solo da região — terra preta, muita matéria orgânica e argila — apresenta um terreno fértil, com muito vigor, onde agimos para criar as melhores condições para a vinha.
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.55)' }}
+                >
+                  Aqui o foco é reduzir a produção natural do solo para alcançar mais qualidade, complexidade e identidade no vinho feito a partir da casta Loureiro.
                 </p>
               </div>
-              <div
-                className="reveal-vinha-item relative overflow-hidden order-1 lg:order-2"
-                style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#0A3A39' }}
-              >
-                <Image
-                  src="/images/homepage/vinhas/carousel-01.webp"
-                  alt="Vinha do Pomar"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 90vw, 50vw"
-                />
-              </div>
+
             </div>
 
             {/* Vinha da Adega — imagem esq, texto dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-16 md:py-20">
+            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-0">
               <div
                 className="reveal-vinha-item relative overflow-hidden"
                 style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#0A3A39' }}
@@ -511,7 +564,7 @@ export default function VinhasPage() {
             </div>
 
             {/* Vinha da Sorteia — texto esq, imagem dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-16 md:py-20">
+            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-0">
               <div className="reveal-vinha-item flex flex-col justify-center order-2 lg:order-1 lg:pr-16">
                 <span
                   className="font-display uppercase mb-4 block"
@@ -541,7 +594,7 @@ export default function VinhasPage() {
             </div>
 
             {/* Vinha Talhão de Xisto — imagem esq, texto dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-16 md:py-20">
+            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-0">
               <div
                 className="reveal-vinha-item relative overflow-hidden"
                 style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#0A3A39' }}
