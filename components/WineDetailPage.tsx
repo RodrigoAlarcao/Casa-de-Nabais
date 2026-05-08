@@ -268,48 +268,116 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
       </section>
 
       {/* ══════════════════════════
-          DETALHES TÉCNICOS
+          NARRATIVA + DADOS TÉCNICOS
       ══════════════════════════ */}
-      <section ref={detailsRef} className="py-14 md:py-20" style={{ borderTop: '1px solid var(--color-border)' }}>
-        <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+      <section ref={detailsRef} style={{ borderTop: '1px solid var(--color-border)' }}>
+        <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-24">
 
-          <h2
-            className="reveal-details font-body text-cn-text mb-8 md:mb-10"
-            style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 400, lineHeight: 1.1 }}
-          >
-            Detalhes
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-            {[
-              { label: 'Castas', value: wine.details.varieties },
-              { label: 'pH', value: wine.details.ph },
-              { label: 'Produção', value: wine.details.production },
-              { label: 'Acidez total', value: wine.details.totalAcidity },
-              { label: 'Álcool', value: wine.details.alcohol },
-              { label: 'Potencial de guarda', value: wine.details.storageTime },
-            ].map(({ label, value }) => (
+          {/* Secções narrativas — etiqueta esq, texto dir */}
+          <dl>
+            {wine.narrativeSections.map(({ heading, text }, i) => (
               <div
-                key={label}
-                className="reveal-details flex items-baseline justify-between py-3"
-                style={{ borderBottom: '1px solid var(--color-border)' }}
+                key={heading}
+                className="reveal-details grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-14 py-8 md:py-10"
+                style={{ borderTop: i === 0 ? 'none' : '1px solid var(--color-border)' }}
               >
-                <span
+                <dt
+                  className="font-display uppercase tracking-[0.12em]"
+                  style={{ fontSize: '11px', color: 'var(--color-green)', paddingTop: '3px' }}
+                >
+                  {heading}
+                </dt>
+                <dd
                   className="font-body text-cn-text-muted"
-                  style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)' }}
+                  style={{ fontSize: 'clamp(0.9rem, 1.1vw, 1rem)', lineHeight: 1.7 }}
                 >
-                  {label}
-                </span>
-                <span
-                  className="font-body text-cn-text text-right ml-4"
-                  style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)' }}
-                >
-                  {value}
-                </span>
+                  {text}
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
 
+          {/* Informação técnica + Notas de prova */}
+          <div
+            className="mt-2 pt-10 md:pt-14 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20"
+            style={{ borderTop: '1px solid var(--color-border)' }}
+          >
+
+            {/* Informação Técnica */}
+            <div className="reveal-details">
+              <p
+                className="font-display uppercase tracking-[0.14em] mb-7"
+                style={{ fontSize: '11px', color: 'var(--color-green)' }}
+              >
+                Informação Técnica
+              </p>
+              <dl className="flex flex-col">
+                {[
+                  { label: 'Região', value: wine.techDetails.region },
+                  { label: 'Sub-região', value: wine.techDetails.subRegion },
+                  { label: 'Casta', value: wine.techDetails.varieties },
+                  { label: 'Álcool', value: wine.techDetails.alcohol },
+                  { label: 'Acidez Total', value: wine.techDetails.totalAcidity },
+                  { label: 'pH', value: wine.techDetails.ph },
+                  { label: 'Açúcar Residual', value: wine.techDetails.residualSugar },
+                  { label: 'Temperatura de Serviço', value: wine.techDetails.servingTemperature },
+                ].map(({ label, value }) => (
+                  <div
+                    key={label}
+                    className="flex items-baseline gap-3 py-3"
+                    style={{ borderBottom: '1px solid var(--color-border)' }}
+                  >
+                    <dt
+                      className="font-display uppercase tracking-[0.08em] flex-shrink-0"
+                      style={{ fontSize: '10px', color: 'rgba(3,29,29,0.50)', minWidth: '148px' }}
+                    >
+                      {label}
+                    </dt>
+                    <span style={{ fontSize: '10px', color: 'rgba(3,29,29,0.25)', flexShrink: 0 }}>|</span>
+                    <dd
+                      className="font-body text-cn-text"
+                      style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.875rem)' }}
+                    >
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            {/* Notas de Prova */}
+            <div className="reveal-details">
+              <p
+                className="font-display uppercase tracking-[0.14em] mb-7"
+                style={{ fontSize: '11px', color: 'var(--color-green)' }}
+              >
+                Notas de Prova
+              </p>
+              <dl className="flex flex-col gap-7">
+                {[
+                  { label: 'Cor', value: wine.tastingNotes.color },
+                  { label: 'Aroma', value: wine.tastingNotes.aroma },
+                  { label: 'Paladar', value: wine.tastingNotes.palate },
+                ].map(({ label, value }) => (
+                  <div key={label}>
+                    <dt
+                      className="font-display uppercase tracking-[0.12em] mb-2"
+                      style={{ fontSize: '10px', color: 'var(--color-green)' }}
+                    >
+                      {label}
+                    </dt>
+                    <dd
+                      className="font-body text-cn-text-muted"
+                      style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65 }}
+                    >
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -323,7 +391,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
           <div className="md:hidden flex flex-col gap-4">
             {[
               { title: 'Pontos-chave', text: wine.keyPoints },
-              { title: 'Notas de prova', text: wine.tastingNotes },
+              { title: 'Notas de prova', text: `${wine.tastingNotes.color} ${wine.tastingNotes.aroma} ${wine.tastingNotes.palate}` },
               { title: 'Sugestão de serviço', text: wine.servingSuggestion },
             ].map(({ title, text }) => (
               <div
@@ -392,7 +460,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
               <div className="grid grid-cols-2 gap-4 mb-4">
                 {[
                   { title: 'Pontos-chave', text: wine.keyPoints },
-                  { title: 'Notas de prova', text: wine.tastingNotes },
+                  { title: 'Notas de prova', text: `${wine.tastingNotes.color} ${wine.tastingNotes.aroma} ${wine.tastingNotes.palate}` },
                 ].map(({ title, text }) => (
                   <div
                     key={title}
