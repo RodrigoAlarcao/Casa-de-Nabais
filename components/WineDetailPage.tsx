@@ -220,6 +220,23 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
             {/* ── Direita: conteúdo scrollável ── */}
             <div className="flex-1 min-w-0">
 
+              {/* Imagem — mobile only */}
+              <div
+                className="reveal-header block md:hidden relative w-full overflow-hidden mb-8"
+                style={{ aspectRatio: '3/4', backgroundColor: '#FFFFFF', borderRadius: '8px', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}
+              >
+                <div className="absolute inset-5">
+                  <Image
+                    src={wine.mainImage}
+                    alt={wine.name}
+                    fill
+                    priority
+                    className="object-contain"
+                    sizes="100vw"
+                  />
+                </div>
+              </div>
+
               {/* Título, ano e introdução */}
               <div className="mb-10">
                 <p className="reveal-header font-display uppercase tracking-[0.18em] text-cn-text-muted mb-2" style={{ fontSize: '11px' }}>

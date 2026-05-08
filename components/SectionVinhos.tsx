@@ -108,7 +108,7 @@ export default function SectionVinhos() {
                 >
                   {wine.name}
                 </h3>
-                <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6, maxWidth: '34ch' }}>
+                <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6 }}>
                   {wine.intro}
                 </p>
               </div>

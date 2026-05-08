@@ -965,7 +965,7 @@ export default function FicarNaCasaPage() {
                     style={{ fontSize: 'clamp(1.625rem, 3vw, 2.5rem)', letterSpacing: '0.04em', lineHeight: 1.05 }}>
                     {wine.name}
                   </h3>
-                  <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6, maxWidth: '34ch' }}>
+                  <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6 }}>
                     {wine.intro}
                   </p>
                 </div>
