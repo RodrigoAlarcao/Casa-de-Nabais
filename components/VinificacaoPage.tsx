@@ -48,9 +48,12 @@ const RIGOR_IMAGES = [
 ]
 
 const ENOLOGO_PARAS = [
-  'Com formação em viticultura e enologia e experiência em regiões vitivinícolas portuguesas e internacionais, o enólogo da Casa de Nabais é o responsável pela condução técnica de todo o processo produtivo — desde a gestão das vinhas até ao engarrafamento.',
-  'A sua abordagem parte sempre da parcela: o estudo do solo, o comportamento da casta, a forma como a planta responde ao trabalho no campo. Na adega, intervém com parcimónia, convicto de que o melhor vinho é aquele que necessita do mínimo para se revelar.',
+  'Constantino Ramos dedica-se à Região dos Vinhos Verdes há quase 15 anos, tendo vindo a construir uma relação próxima à vinha e à casta Loureiro. Enólogo de escuta atenta e gesto preciso, acredita que o vinho nasce como uma ideia e ganha forma com paciência, respeito e atenção à natureza. Trabalha em escala humana, acompanhando cada parcela como um ecossistema vivo e defende a intervenção humana apenas na medida em que contribui para preservar o equilíbrio e a frescura dos vinhos, respeitando a uva, decidindo o momento certo e dando espaço à identidade de cada vinho.',
+  'O seu foco está em vinhos frescos, gastronómicos e com identidade, pensados para evoluir e contar uma história autêntica.',
+  'Assume-se como vigneron, aceitando os riscos e tomando as decisões que começam no campo e culminam na vindima, o momento-chave do ano. Vê o vinho como um processo que começa muito antes da colheita, sendo moldado pelo terroir e pela visão pessoal do enólogo.',
 ]
+
+const ENOLOGO_CLOSING = 'Nada é feito por moda. Tudo é observado, testado e integrado apenas se servir a origem, o tempo e a singularidade do vinho.'
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
@@ -984,7 +987,7 @@ export default function VinificacaoPage() {
                 className="font-display mb-1 text-center"
                 style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}
               >
-                Nome do Enólogo
+                Constantino Ramos
               </h2>
               <p
                 className="font-display uppercase mb-6 text-center"
@@ -1002,6 +1005,19 @@ export default function VinificacaoPage() {
                 </p>
               ))}
             </div>
+
+            {/* Título da secção — desktop */}
+            <h2
+              className="hidden lg:block font-display uppercase text-center mb-16"
+              style={{
+                fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                lineHeight: 1.0,
+                letterSpacing: '0.04em',
+                color: '#FAE6C1',
+              }}
+            >
+              Perfil do Enólogo
+            </h2>
 
             {/* Desktop: glassmorphism overlapping card */}
             <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
@@ -1053,7 +1069,7 @@ export default function VinificacaoPage() {
                     className="font-display mb-1"
                     style={{ fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)', lineHeight: 1.0, color: '#0C4544' }}
                   >
-                    Nome do Enólogo
+                    Constantino Ramos
                   </h2>
                   <p
                     className="font-display uppercase mb-8"
@@ -1073,6 +1089,21 @@ export default function VinificacaoPage() {
                 </div>
 
               </div>
+            </div>
+
+            {/* Frase de fecho — desktop */}
+            <div className="hidden lg:block max-w-[900px] mx-auto px-6 md:px-10 text-center mt-24">
+              <p
+                className="font-display"
+                style={{
+                  fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+                  lineHeight: 1.3,
+                  fontWeight: 400,
+                  color: '#FAE6C1',
+                }}
+              >
+                {ENOLOGO_CLOSING}
+              </p>
             </div>
 
           </section>
