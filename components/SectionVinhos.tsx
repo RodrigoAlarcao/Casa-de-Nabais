@@ -15,6 +15,7 @@ const wines = [
     slug: 'vinha-do-pomar',
     brand: 'Casa de Nabais',
     name: 'Vinha do Pomar',
+    intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.',
     image: '/images/homepage/vinhos/vinha-do-pomar-context.webp',
     buyUrl: null,
   },
@@ -22,6 +23,7 @@ const wines = [
     slug: 'loureiro',
     brand: 'Casa de Nabais',
     name: 'Loureiro',
+    intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.',
     image: '/images/homepage/vinhos/loureiro-context.webp',
     buyUrl: null,
   },
@@ -89,7 +91,7 @@ export default function SectionVinhos() {
               </div>
 
               {/* Name block — centered */}
-              <div className="text-center py-8">
+              <div className="text-center pt-8 pb-5">
                 <p
                   className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
                   style={{ fontSize: '11px' }}
@@ -97,7 +99,7 @@ export default function SectionVinhos() {
                   {wine.brand}
                 </p>
                 <h3
-                  className="font-display uppercase text-cn-text"
+                  className="font-display uppercase text-cn-text mb-4"
                   style={{
                     fontSize: 'clamp(1.625rem, 3vw, 2.5rem)',
                     letterSpacing: '0.04em',
@@ -106,6 +108,9 @@ export default function SectionVinhos() {
                 >
                   {wine.name}
                 </h3>
+                <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6 }}>
+                  {wine.intro}
+                </p>
               </div>
 
               {/* Buttons — side by side */}

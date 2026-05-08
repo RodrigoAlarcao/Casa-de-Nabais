@@ -16,9 +16,10 @@ const items = [
   { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
 ]
 
-export default function SectionExplore({ noBg = false, dark = false }: { noBg?: boolean; dark?: boolean }) {
+export default function SectionExplore({ noBg = false, dark = false, excludeHref }: { noBg?: boolean; dark?: boolean; excludeHref?: string }) {
   const sectionRef = useRef<HTMLElement>(null)
   const [hovered, setHovered] = useState<number | null>(null)
+  const filteredItems = excludeHref ? items.filter((item) => item.href !== excludeHref) : items
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -61,7 +62,7 @@ export default function SectionExplore({ noBg = false, dark = false }: { noBg?: 
 
         {/* Desktop — expandable flex gallery */}
         <div className="hidden md:flex gap-2" style={{ height: '520px' }}>
-          {items.map((item, i) => (
+          {filteredItems.map((item, i) => (
             <Link
               key={item.href}
               href={item.href}
@@ -134,7 +135,7 @@ export default function SectionExplore({ noBg = false, dark = false }: { noBg?: 
 
         {/* Mobile — 2-column grid */}
         <div className="grid grid-cols-2 gap-3 md:hidden">
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
