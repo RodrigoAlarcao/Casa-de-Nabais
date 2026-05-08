@@ -362,54 +362,40 @@ export default function VinhasPage() {
             </div>
           </div>
 
-          {/* Bloco C — Viticultura integrada: mosaico esq, texto dir */}
-          <div className="mt-24 md:mt-32 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div className="reveal-vinhas-block order-2 lg:order-1">
-              <div className="grid grid-rows-2 gap-2" style={{ height: '420px' }}>
-                <div
-                  className="relative overflow-hidden"
-                  style={{ borderRadius: '4px', backgroundColor: '#3A5B4F' }}
-                >
-                  <Image
-                    src="/images/homepage/vinhas/carousel-05.webp"
-                    alt="Viticultura integrada"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 90vw, 50vw"
-                  />
-                </div>
-                <div
-                  className="relative overflow-hidden"
-                  style={{ borderRadius: '4px', backgroundColor: '#3A5B4F' }}
-                >
-                  <Image
-                    src="/images/homepage/vinhas/carousel-06.webp"
-                    alt="Biodiversidade nas vinhas"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 90vw, 50vw"
-                  />
-                </div>
+          {/* Bloco C — Viticultura integrada: imagem 2/3 esq, texto 1/3 dir */}
+          <div className="reveal-vinhas-block mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+              <div
+                className="relative overflow-hidden lg:col-span-2"
+                style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
+              >
+                <Image
+                  src="/images/homepage/vinhas/carousel-05.webp"
+                  alt="Viticultura integrada"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 90vw, 66vw"
+                />
               </div>
-            </div>
-            <div className="reveal-vinhas-block flex flex-col justify-center order-1 lg:order-2">
-              <h2
-                className="font-display mb-5"
-                style={{
-                  fontSize: 'clamp(1.5rem, 2.5vw, 2.125rem)',
-                  lineHeight: 1.1,
-                  letterSpacing: '0.02em',
-                  color: 'var(--color-text)',
-                }}
-              >
-                Viticultura integrada
-              </h2>
-              <p
-                className="font-body text-cn-text-muted"
-                style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
-              >
-                Seguimos os princípios da viticultura integrada: eliminação de pesticidas de síntese, promoção da biodiversidade, gestão responsável da água e das coberturas vegetais. Não se trata de seguir uma moda — é uma escolha sustentada por resultados. As vinhas mais equilibradas, com maior resistência a doenças e melhor expressão aromática, são invariavelmente as que tratamos com menor intervenção química e maior respeito pelos seus ritmos naturais.
-              </p>
+              <div className="flex flex-col justify-center lg:pl-10">
+                <h2
+                  className="font-display mb-5"
+                  style={{
+                    fontSize: 'clamp(1.5rem, 2.5vw, 2.125rem)',
+                    lineHeight: 1.15,
+                    letterSpacing: '0.02em',
+                    color: 'var(--color-text)',
+                  }}
+                >
+                  Viticultura integrada
+                </h2>
+                <p
+                  className="font-body text-cn-text-muted"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
+                >
+                  Seguimos um regime de produção integrada, sem herbicidas, caminhando para práticas regenerativas. O enrelvamento da vinha com espécies autóctones controla infestantes, promove biodiversidade e ajuda a regular o vigor das plantas.
+                </p>
+              </div>
             </div>
           </div>
 
