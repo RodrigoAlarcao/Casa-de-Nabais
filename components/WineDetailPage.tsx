@@ -237,15 +237,6 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   </p>
                 )}
 
-                {wine.subtitle && (
-                  <h2
-                    className="reveal-header font-body text-cn-text mt-5"
-                    style={{ fontSize: 'clamp(1.0625rem, 1.6vw, 1.25rem)', fontStyle: 'italic', fontWeight: 400, lineHeight: 1.3 }}
-                  >
-                    {wine.subtitle}
-                  </h2>
-                )}
-
                 {wine.introText.map((para, i) => (
                   <p
                     key={i}
@@ -276,8 +267,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                           style={{
                             fontSize: '11px', borderRadius: '100px',
                             border: '1px solid var(--color-border)',
-                            backgroundColor: isActive ? 'var(--color-text)' : 'transparent',
-                            color: isActive ? 'var(--color-bg)' : 'var(--color-text)',
+                            backgroundColor: isActive ? 'var(--color-green)' : 'transparent',
+                            color: isActive ? '#FAE6C1' : 'var(--color-text)',
                           }}
                         >
                           {v.year}
@@ -444,11 +435,20 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 {otherWine.brand}
               </p>
               <h2
-                className="font-display uppercase mb-8"
+                className="font-display uppercase"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.04em', color: '#FAE6C1' }}
               >
                 {otherWine.name}
               </h2>
+
+              {otherWine.introText[0] && (
+                <p
+                  className="font-body mt-5 mb-8"
+                  style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: 'rgba(250,230,193,0.65)' }}
+                >
+                  {otherWine.introText[0]}
+                </p>
+              )}
 
               <div className="flex items-center gap-3">
                 <Link
