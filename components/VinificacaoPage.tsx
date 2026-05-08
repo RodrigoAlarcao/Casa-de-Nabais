@@ -696,8 +696,31 @@ export default function VinificacaoPage() {
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-                {/* Texto ESQUERDA */}
-                <div className="flex flex-col">
+                {/* Retrato ESQUERDA — desktop */}
+                <div className="hidden lg:block">
+                  <div
+                    ref={adegaPortraitRef}
+                    className="relative overflow-hidden w-full"
+                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F', borderRadius: '4px' }}
+                  >
+                    <div
+                      ref={adegaImgWrapRef}
+                      className="absolute will-change-transform"
+                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+                    >
+                      <Image
+                        src="/images/homepage/casa/section-01.webp"
+                        alt="Adega — interior"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 90vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Texto DIREITA */}
+                <div className="flex flex-col lg:pl-10">
                   <h2
                     className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
                     style={{
@@ -762,34 +785,11 @@ export default function VinificacaoPage() {
                   ))}
                 </div>
 
-                {/* Retrato DIREITA — desktop */}
-                <div className="hidden lg:block">
-                  <div
-                    ref={adegaPortraitRef}
-                    className="relative overflow-hidden w-full"
-                    style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F', borderRadius: '4px' }}
-                  >
-                    <div
-                      ref={adegaImgWrapRef}
-                      className="absolute will-change-transform"
-                      style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
-                    >
-                      <Image
-                        src="/images/homepage/casa/section-01.webp"
-                        alt="Adega — interior"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 90vw, 50vw"
-                      />
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </div>
 
             {/* Panorâmica full-width — desktop */}
-            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-16 md:mt-20">
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
               <div
                 ref={adegaFullbleedContainerRef}
                 className="relative overflow-hidden w-full"
