@@ -181,7 +181,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
           <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
 
             {/* ── Esquerda: imagem sticky ── */}
-            <div className="hidden md:block w-[300px] lg:w-[340px] flex-shrink-0">
+            <div className="hidden md:block w-[300px] lg:w-[340px] flex-shrink-0 self-stretch">
               <div className="sticky" style={{ top: '90px' }}>
                 <div
                   className="relative w-full overflow-hidden"
