@@ -220,7 +220,25 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
             {/* ── Direita: conteúdo scrollável ── */}
             <div className="flex-1 min-w-0">
 
-              {/* Imagem — mobile only */}
+              {/* Título e ano — mobile centered, desktop left-aligned */}
+              <div className="mb-6 text-center md:text-left">
+                <p className="reveal-header font-display uppercase tracking-[0.18em] text-cn-text-muted mb-2" style={{ fontSize: '11px' }}>
+                  {wine.brand}
+                </p>
+                <h1
+                  className="reveal-header font-display uppercase text-cn-text"
+                  style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.04em' }}
+                >
+                  {wine.name}
+                </h1>
+                {latestVintage && (
+                  <p className="reveal-header font-display uppercase tracking-[0.12em] text-cn-text-muted mt-3" style={{ fontSize: '11px' }}>
+                    {latestVintage.year}
+                  </p>
+                )}
+              </div>
+
+              {/* Imagem — mobile only, after title, before intro */}
               <div
                 className="reveal-header block md:hidden relative w-full overflow-hidden mb-8"
                 style={{ aspectRatio: '3/4', backgroundColor: '#FFFFFF', borderRadius: '8px', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}
@@ -237,27 +255,12 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 </div>
               </div>
 
-              {/* Título, ano e introdução */}
+              {/* Introdução */}
               <div className="mb-10">
-                <p className="reveal-header font-display uppercase tracking-[0.18em] text-cn-text-muted mb-2" style={{ fontSize: '11px' }}>
-                  {wine.brand}
-                </p>
-                <h1
-                  className="reveal-header font-display uppercase text-cn-text"
-                  style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.04em' }}
-                >
-                  {wine.name}
-                </h1>
-                {latestVintage && (
-                  <p className="reveal-header font-display uppercase tracking-[0.12em] text-cn-text-muted mt-3" style={{ fontSize: '11px' }}>
-                    {latestVintage.year}
-                  </p>
-                )}
-
                 {wine.introText.map((para, i) => (
                   <p
                     key={i}
-                    className="reveal-header font-body text-cn-text-muted mt-4"
+                    className="reveal-header font-body text-cn-text-muted mt-4 first:mt-0"
                     style={{ fontSize: 'clamp(0.9rem, 1.1vw, 1rem)', lineHeight: 1.7 }}
                   >
                     {para}
