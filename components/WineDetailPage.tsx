@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -131,7 +131,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   const narrativeRef = useRef<HTMLDivElement>(null)
   const techRef      = useRef<HTMLDivElement>(null)
 
-  useEffect(() => { window.scrollTo(0, 0) }, [])
+  useIsomorphicLayoutEffect(() => { window.scrollTo(0, 0) }, [])
 
   const otherWine = wines.find((w) => w.slug !== wine.slug) as WineData
   const latestVintage = wine.vintages[0]
