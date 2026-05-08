@@ -775,7 +775,7 @@ export default function VinificacaoPage() {
                       key={i}
                       className="font-body mb-4 last:mb-0 text-center lg:text-left"
                       style={{
-                        fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                        fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)',
                         lineHeight: 1.4,
                         color: 'rgba(3,29,29,0.65)',
                       }}
