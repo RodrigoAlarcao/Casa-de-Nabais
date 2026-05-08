@@ -1059,12 +1059,6 @@ export default function VinificacaoPage() {
                     zIndex: 2,
                   }}
                 >
-                  <p
-                    className="font-display uppercase mb-3"
-                    style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(12,69,68,0.55)' }}
-                  >
-                    Perfil do enólogo
-                  </p>
                   <h2
                     className="font-display mb-1"
                     style={{ fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)', lineHeight: 1.0, color: '#0C4544' }}
@@ -1091,7 +1085,7 @@ export default function VinificacaoPage() {
               </div>
 
               {/* Frase de fecho — dentro do mesmo wrapper, abaixo do card */}
-              <div className="text-center mt-20 md:mt-28">
+              <div className="text-center mt-28 md:mt-40 mb-8 md:mb-16">
                 <TextReveal
                   text={ENOLOGO_CLOSING}
                   className="font-display"
