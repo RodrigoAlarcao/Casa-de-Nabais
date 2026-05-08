@@ -445,7 +445,7 @@ export default function VinhasPage() {
             <div className="reveal-vinha-row">
 
               {/* Desktop: layout de sobreposição */}
-              <div className="hidden lg:block relative" style={{ minHeight: '620px' }}>
+              <div className="hidden lg:block relative" style={{ minHeight: '700px' }}>
                 {/* Imagem — lado direito, largura total da altura */}
                 <div
                   className="absolute inset-y-0 right-0 overflow-hidden"
@@ -459,23 +459,32 @@ export default function VinhasPage() {
                     sizes="60vw"
                   />
                 </div>
-                {/* Card creme — lado esquerdo, alinhado em baixo */}
+                {/* Card glassmorfismo — posicionado mais abaixo para efeito editorial */}
                 <div
-                  className="absolute bottom-0 left-0"
+                  className="absolute left-0"
                   style={{
-                    width: '50%',
-                    borderRadius: '6px',
-                    backgroundColor: '#FFF9ED',
-                    padding: '40px 48px',
+                    top: '40%',
+                    width: '54%',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 249, 237, 0.72)',
+                    backdropFilter: 'blur(18px)',
+                    WebkitBackdropFilter: 'blur(18px)',
+                    border: '1px solid rgba(255, 249, 237, 0.30)',
+                    padding: '44px 52px',
                     zIndex: 2,
                   }}
                 >
-                  <span
-                    className="font-display uppercase block mb-5"
-                    style={{ fontSize: '11px', letterSpacing: '0.22em', color: '#0C4544' }}
+                  <h3
+                    className="font-display uppercase mb-6"
+                    style={{
+                      fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)',
+                      lineHeight: 1.0,
+                      letterSpacing: '0.06em',
+                      color: '#0C4544',
+                    }}
                   >
                     Vinha do Pomar
-                  </span>
+                  </h3>
                   <p
                     className="font-body mb-4"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
