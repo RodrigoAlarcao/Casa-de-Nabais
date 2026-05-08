@@ -256,7 +256,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
               </div>
 
               {/* Introdução */}
-              <div className="mb-10">
+              <div className="mb-10 text-center md:text-left">
                 {wine.introText.map((para, i) => (
                   <p
                     key={i}
@@ -450,7 +450,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
         <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
 
-            <div className="flex flex-col">
+            <div className="flex flex-col text-center md:text-left">
               <p className="font-display uppercase tracking-[0.18em] mb-3" style={{ fontSize: '11px', color: 'rgba(250,230,193,0.50)' }}>
                 {otherWine.brand}
               </p>
@@ -461,6 +461,11 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 {otherWine.name}
               </h2>
 
+              {/* Image — mobile only, between title and intro */}
+              <div className="block md:hidden relative w-full overflow-hidden mt-6" style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#0A3A39' }}>
+                <Image src={otherWine.mainImage} alt={otherWine.name} fill className="object-cover" sizes="100vw" />
+              </div>
+
               {otherWine.introText[0] && (
                 <p
                   className="font-body mt-5 mb-8"
@@ -470,7 +475,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 </p>
               )}
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center md:justify-start gap-3">
                 <Link
                   href={`/os-vinhos/${otherWine.slug}`}
                   className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3 transition-all duration-200"
@@ -490,8 +495,9 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
               </div>
             </div>
 
-            <div className="relative w-full overflow-hidden" style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#0A3A39' }}>
-              <Image src={otherWine.mainImage} alt={otherWine.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+            {/* Image — desktop only */}
+            <div className="hidden md:block relative w-full overflow-hidden" style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#0A3A39' }}>
+              <Image src={otherWine.mainImage} alt={otherWine.name} fill className="object-cover" sizes="50vw" />
             </div>
 
           </div>
