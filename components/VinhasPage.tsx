@@ -67,6 +67,20 @@ export default function VinhasPage() {
           scrollTrigger: { trigger: el, start: 'top 80%' },
         })
       })
+
+      gsap.utils.toArray<HTMLElement>('.vinha-img-inner').forEach((inner) => {
+        gsap.to(inner, {
+          yPercent: -15, ease: 'none',
+          scrollTrigger: { trigger: inner.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      })
+
+      gsap.utils.toArray<HTMLElement>('.vinha-card-glass').forEach((card) => {
+        gsap.from(card, {
+          y: 35, opacity: 0, duration: 1, ease: 'power2.out',
+          scrollTrigger: { trigger: card, start: 'top 88%' },
+        })
+      })
     }, pageRef)
 
     return () => ctx.revert()
@@ -451,17 +465,22 @@ export default function VinhasPage() {
                   className="absolute inset-y-0 right-0 overflow-hidden"
                   style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
                 >
-                  <Image
-                    src="/images/homepage/vinhas/carousel-01.webp"
-                    alt="Vinha do Pomar"
-                    fill
-                    className="object-cover"
-                    sizes="60vw"
-                  />
+                  <div
+                    className="vinha-img-inner absolute will-change-transform"
+                    style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+                  >
+                    <Image
+                      src="/images/homepage/vinhas/carousel-01.webp"
+                      alt="Vinha do Pomar"
+                      fill
+                      className="object-cover"
+                      sizes="60vw"
+                    />
+                  </div>
                 </div>
                 {/* Card glassmorfismo — posicionado mais abaixo para efeito editorial */}
                 <div
-                  className="absolute left-0"
+                  className="vinha-card-glass absolute left-0"
                   style={{
                     top: '40%',
                     width: '54%',
@@ -536,100 +555,298 @@ export default function VinhasPage() {
 
             </div>
 
-            {/* Vinha da Adega — imagem esq, texto dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-0">
-              <div
-                className="reveal-vinha-item relative overflow-hidden"
-                style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#0A3A39' }}
-              >
-                <Image
-                  src="/images/homepage/vinhas/carousel-02.webp"
-                  alt="Vinha da Adega"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 90vw, 50vw"
-                />
+            {/* Vinha da Adega — imagem esq, card glassmorfismo dir */}
+            <div className="reveal-vinha-row">
+
+              {/* Desktop: layout de sobreposição */}
+              <div className="hidden lg:block relative" style={{ minHeight: '700px' }}>
+                <div
+                  className="absolute inset-y-0 left-0 overflow-hidden"
+                  style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <div
+                    className="vinha-img-inner absolute will-change-transform"
+                    style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+                  >
+                    <Image
+                      src="/images/homepage/vinhas/carousel-02.webp"
+                      alt="Vinha da Adega"
+                      fill
+                      className="object-cover"
+                      sizes="60vw"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="vinha-card-glass absolute right-0"
+                  style={{
+                    top: '40%',
+                    width: '54%',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 249, 237, 0.72)',
+                    backdropFilter: 'blur(18px)',
+                    WebkitBackdropFilter: 'blur(18px)',
+                    border: '1px solid rgba(255, 249, 237, 0.30)',
+                    padding: '44px 52px',
+                    zIndex: 2,
+                  }}
+                >
+                  <h3
+                    className="font-display uppercase mb-6"
+                    style={{
+                      fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)',
+                      lineHeight: 1.0,
+                      letterSpacing: '0.06em',
+                      color: '#0C4544',
+                    }}
+                  >
+                    Vinha da Adega
+                  </h3>
+                  <p
+                    className="font-body mb-4"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Situada numa zona ligeiramente mais elevada da Casa de Nabais, esta é uma vinha de solo muito pobre, pedregoso, com seixo rolado e quase nenhuma retenção de água.
+                  </p>
+                  <p
+                    className="font-body"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Trata-se de uma parcela de menor produção, mas que entrega uvas mais concentradas, refletindo no vinho um caráter mais profundo e distinto da casta Loureiro que ali cresce.
+                  </p>
+                </div>
               </div>
-              <div className="reveal-vinha-item flex flex-col justify-center lg:pl-16">
+
+              {/* Mobile: empilhado */}
+              <div className="lg:hidden">
+                <div
+                  className="relative overflow-hidden mb-6"
+                  style={{ aspectRatio: '4/3', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <Image
+                    src="/images/homepage/vinhas/carousel-02.webp"
+                    alt="Vinha da Adega"
+                    fill
+                    className="object-cover"
+                    sizes="90vw"
+                  />
+                </div>
                 <span
-                  className="font-display uppercase mb-4 block"
+                  className="font-display uppercase block mb-4"
                   style={{ fontSize: '10px', letterSpacing: '0.22em', color: 'rgba(250,230,193,0.45)' }}
                 >
                   Vinha da Adega
                 </span>
                 <p
-                  className="font-body"
+                  className="font-body mb-3"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                 >
-                  A vinha mais próxima da adega, plantada em socalcos antigos com exposição poente. Os solos são mais argilosos nesta parcela, conferindo ao vinho maior peso em boca e uma textura diferenciada. Um terroir que se distingue pela densidade e pelo carácter mineral do xisto que aflora em algumas zonas.
+                  Situada numa zona ligeiramente mais elevada da Casa de Nabais, esta é uma vinha de solo muito pobre, pedregoso, com seixo rolado e quase nenhuma retenção de água.
                 </p>
                 <p
-                  className="font-body mt-3"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.48)' }}
+                  className="font-body"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.55)' }}
                 >
-                  A sua proximidade com a adega permite-nos acompanhar de perto a evolução das uvas ao longo da maturação, colhendo em múltiplas passagens quando a condição sanitária o permite.
+                  Trata-se de uma parcela de menor produção, mas que entrega uvas mais concentradas, refletindo no vinho um caráter mais profundo e distinto da casta Loureiro que ali cresce.
                 </p>
               </div>
+
             </div>
 
-            {/* Vinha da Sorteia — texto esq, imagem dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-0">
-              <div className="reveal-vinha-item flex flex-col justify-center order-2 lg:order-1 lg:pr-16">
+            {/* Vinha da Igreja — card glassmorfismo esq, imagem dir */}
+            <div className="reveal-vinha-row">
+
+              {/* Desktop: layout de sobreposição */}
+              <div className="hidden lg:block relative" style={{ minHeight: '700px' }}>
+                <div
+                  className="absolute inset-y-0 right-0 overflow-hidden"
+                  style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <div
+                    className="vinha-img-inner absolute will-change-transform"
+                    style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+                  >
+                    <Image
+                      src="/images/homepage/vinhas/carousel-04.webp"
+                      alt="Vinha da Igreja"
+                      fill
+                      className="object-cover"
+                      sizes="60vw"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="vinha-card-glass absolute left-0"
+                  style={{
+                    top: '40%',
+                    width: '54%',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 249, 237, 0.72)',
+                    backdropFilter: 'blur(18px)',
+                    WebkitBackdropFilter: 'blur(18px)',
+                    border: '1px solid rgba(255, 249, 237, 0.30)',
+                    padding: '44px 52px',
+                    zIndex: 2,
+                  }}
+                >
+                  <h3
+                    className="font-display uppercase mb-6"
+                    style={{
+                      fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)',
+                      lineHeight: 1.0,
+                      letterSpacing: '0.06em',
+                      color: '#0C4544',
+                    }}
+                  >
+                    Vinha da Igreja
+                  </h3>
+                  <p
+                    className="font-body mb-4"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Localizada na freguesia da Seara, a poucos quilómetros da Casa de Nabais, apresenta solo granítico com fertilidade e uma exposição solar durante praticamente todo o dia, graças à sua posição num ligeiro planalto.
+                  </p>
+                  <p
+                    className="font-body"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Foi a escolhida para plantar as castas Alvarinho e Vinhão, explorando esta luz privilegiada para obter maturações mais completas num clima marcadamente atlântico.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mobile: empilhado */}
+              <div className="lg:hidden">
+                <div
+                  className="relative overflow-hidden mb-6"
+                  style={{ aspectRatio: '4/3', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <Image
+                    src="/images/homepage/vinhas/carousel-04.webp"
+                    alt="Vinha da Igreja"
+                    fill
+                    className="object-cover"
+                    sizes="90vw"
+                  />
+                </div>
                 <span
-                  className="font-display uppercase mb-4 block"
+                  className="font-display uppercase block mb-4"
                   style={{ fontSize: '10px', letterSpacing: '0.22em', color: 'rgba(250,230,193,0.45)' }}
                 >
-                  Vinha da Sorteia
+                  Vinha da Igreja
                 </span>
                 <p
-                  className="font-body"
+                  className="font-body mb-3"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                 >
-                  A vinha da Sorteia tira o nome de um campo histórico da quinta. Plantada em granito degradado e com cepas de maior idade, é a parcela que consideramos mais expressiva do terroir de Nabais. Os vinhos aqui produzidos têm um carácter mais seco e tenso, com acidez vibrante e um perfil mineral que os distingue no conjunto.
+                  Localizada na freguesia da Seara, a poucos quilómetros da Casa de Nabais, apresenta solo granítico com fertilidade e uma exposição solar durante praticamente todo o dia, graças à sua posição num ligeiro planalto.
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.55)' }}
+                >
+                  Foi a escolhida para plantar as castas Alvarinho e Vinhão, explorando esta luz privilegiada para obter maturações mais completas num clima marcadamente atlântico.
                 </p>
               </div>
-              <div
-                className="reveal-vinha-item relative overflow-hidden order-1 lg:order-2"
-                style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#0A3A39' }}
-              >
-                <Image
-                  src="/images/homepage/vinhas/carousel-04.webp"
-                  alt="Vinha da Sorteia"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 90vw, 50vw"
-                />
-              </div>
+
             </div>
 
-            {/* Vinha Talhão de Xisto — imagem esq, texto dir */}
-            <div className="reveal-vinha-row grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0 py-0">
-              <div
-                className="reveal-vinha-item relative overflow-hidden"
-                style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#0A3A39' }}
-              >
-                <Image
-                  src="/images/homepage/vinhas/carousel-05.webp"
-                  alt="Vinha Talhão de Xisto"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 90vw, 50vw"
-                />
+            {/* Vinha Talhão de Xisto — imagem esq, card glassmorfismo dir */}
+            <div className="reveal-vinha-row">
+
+              {/* Desktop: layout de sobreposição */}
+              <div className="hidden lg:block relative" style={{ minHeight: '700px' }}>
+                <div
+                  className="absolute inset-y-0 left-0 overflow-hidden"
+                  style={{ width: '62%', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <div
+                    className="vinha-img-inner absolute will-change-transform"
+                    style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
+                  >
+                    <Image
+                      src="/images/homepage/vinhas/carousel-05.webp"
+                      alt="Vinha Talhão de Xisto"
+                      fill
+                      className="object-cover"
+                      sizes="60vw"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="vinha-card-glass absolute right-0"
+                  style={{
+                    top: '40%',
+                    width: '54%',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 249, 237, 0.72)',
+                    backdropFilter: 'blur(18px)',
+                    WebkitBackdropFilter: 'blur(18px)',
+                    border: '1px solid rgba(255, 249, 237, 0.30)',
+                    padding: '44px 52px',
+                    zIndex: 2,
+                  }}
+                >
+                  <h3
+                    className="font-display uppercase mb-6"
+                    style={{
+                      fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)',
+                      lineHeight: 1.0,
+                      letterSpacing: '0.06em',
+                      color: '#0C4544',
+                    }}
+                  >
+                    Vinha Talhão de Xisto
+                  </h3>
+                  <p
+                    className="font-body mb-4"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Situada na freguesia da Feitosa, também na margem esquerda do Rio Lima, esta parcela singulariza-se pelo substrato xistoso que contrasta com o granito dominante na região.
+                  </p>
+                  <p
+                    className="font-body"
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                  >
+                    Aqui a vinha produz menos, as raízes vão a maior profundidade em busca de água e nutrição, e as uvas expressam uma concentração e mineralidade que se transferem directamente para o copo.
+                  </p>
+                </div>
               </div>
-              <div className="reveal-vinha-item flex flex-col justify-center lg:pl-16">
+
+              {/* Mobile: empilhado */}
+              <div className="lg:hidden">
+                <div
+                  className="relative overflow-hidden mb-6"
+                  style={{ aspectRatio: '4/3', borderRadius: '6px', backgroundColor: '#0A3A39' }}
+                >
+                  <Image
+                    src="/images/homepage/vinhas/carousel-05.webp"
+                    alt="Vinha Talhão de Xisto"
+                    fill
+                    className="object-cover"
+                    sizes="90vw"
+                  />
+                </div>
                 <span
-                  className="font-display uppercase mb-4 block"
+                  className="font-display uppercase block mb-4"
                   style={{ fontSize: '10px', letterSpacing: '0.22em', color: 'rgba(250,230,193,0.45)' }}
                 >
                   Vinha Talhão de Xisto
                 </span>
                 <p
-                  className="font-body"
+                  className="font-body mb-3"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                 >
-                  Num raro talhão onde o granito cede lugar ao xisto, esta vinha produz uvas de intensidade singular. O xisto retém calor durante o dia e irradia-o lentamente à noite, promovendo uma maturação mais lenta e complexa. Os vinhos do Talhão de Xisto têm estrutura, profundidade e uma salinidade característica que os torna únicos no contexto da Casa de Nabais.
+                  Situada na freguesia da Feitosa, também na margem esquerda do Rio Lima, esta parcela singulariza-se pelo substrato xistoso que contrasta com o granito dominante na região.
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.55)' }}
+                >
+                  Aqui a vinha produz menos, as raízes vão a maior profundidade em busca de água e nutrição, e as uvas expressam uma concentração e mineralidade que se transferem directamente para o copo.
                 </p>
               </div>
+
             </div>
 
           </div>
