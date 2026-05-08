@@ -1019,9 +1019,9 @@ export default function VinificacaoPage() {
               Perfil do Enólogo
             </h2>
 
-            {/* Desktop: glassmorphism overlapping card */}
+            {/* Desktop: glassmorphism overlapping card + frase de fecho */}
             <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
-              <div className="relative" style={{ minHeight: '700px' }}>
+              <div className="relative" style={{ minHeight: '900px' }}>
 
                 {/* Imagem — lado esquerdo 62% */}
                 <div
@@ -1089,21 +1089,20 @@ export default function VinificacaoPage() {
                 </div>
 
               </div>
-            </div>
 
-            {/* Frase de fecho — desktop */}
-            <div className="hidden lg:block max-w-[900px] mx-auto px-6 md:px-10 text-center mt-24">
-              <p
-                className="font-display"
-                style={{
-                  fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
-                  lineHeight: 1.3,
-                  fontWeight: 400,
-                  color: '#FAE6C1',
-                }}
-              >
-                {ENOLOGO_CLOSING}
-              </p>
+              {/* Frase de fecho — dentro do mesmo wrapper, abaixo do card */}
+              <div className="text-center mt-20 md:mt-28">
+                <TextReveal
+                  text={ENOLOGO_CLOSING}
+                  className="font-display"
+                  style={{
+                    fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
+                    lineHeight: 1.3,
+                    fontWeight: 400,
+                    color: '#FAE6C1',
+                  }}
+                />
+              </div>
             </div>
 
           </section>
