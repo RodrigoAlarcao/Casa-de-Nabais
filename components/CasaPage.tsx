@@ -368,7 +368,7 @@ export default function CasaPage() {
                 <p
                   key={i}
                   className="reveal-casa font-body text-cn-text-muted mb-4 text-center lg:text-left"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                  style={{ fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)', lineHeight: 1.6 }}
                 >
                   {para}
                 </p>
@@ -378,7 +378,7 @@ export default function CasaPage() {
                 <p
                   key={i + 2}
                   className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left hidden lg:block"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+                  style={{ fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)', lineHeight: 1.6 }}
                 >
                   {para}
                 </p>
@@ -439,7 +439,7 @@ export default function CasaPage() {
             <p
               key={i + 2}
               className="font-body text-cn-text-muted mb-4 last:mb-0 text-center"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
+              style={{ fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)', lineHeight: 1.6 }}
             >
               {para}
             </p>
