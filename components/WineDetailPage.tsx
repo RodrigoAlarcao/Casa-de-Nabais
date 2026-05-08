@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  ArrowLeft, ArrowRight, ChevronDown,
+  ArrowLeft, ArrowRight, ChevronDown, Download,
   Globe, MapPin, Leaf, Wine, Clock, TrendingUp,
   Utensils, Eye, Wind, Sparkles, Thermometer,
   Droplets, FlaskConical, Activity, Minus,
@@ -17,6 +17,21 @@ import SectionExplore from './SectionExplore'
 import { wines, type WineData } from '@/lib/wines-data'
 
 gsap.registerPlugin(ScrollTrigger)
+
+/* ─── Medal helpers ─────────────────────────────────────────── */
+
+const MEDAL_COLORS: Record<string, string> = {
+  gold: '#C9A227', silver: '#9B9B9B', bronze: '#A0522D',
+}
+
+function MedalDot({ type }: { type: string }) {
+  return (
+    <span
+      className="inline-block rounded-full flex-shrink-0"
+      style={{ width: 10, height: 10, backgroundColor: MEDAL_COLORS[type] ?? MEDAL_COLORS.gold, marginTop: 3 }}
+    />
+  )
+}
 
 /* ─── Icon maps ────────────────────────────────────────────── */
 
@@ -118,6 +133,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
   const otherWine = wines.find((w) => w.slug !== wine.slug) as WineData
   const latestVintage = wine.vintages[0]
+  const [activeYear, setActiveYear] = useState(latestVintage?.year ?? '')
+  const activeVintage = wine.vintages.find((v) => v.year === activeYear) ?? latestVintage
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -223,6 +240,79 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   </p>
                 ))}
               </div>
+
+              {/* Vintage tabs + prémios + ficha técnica */}
+              {wine.vintages.length > 0 && (
+                <div className="reveal-header mb-10 pt-8" style={{ borderTop: '1px solid var(--color-border)' }}>
+                  <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
+                    Colheitas
+                  </p>
+
+                  {/* Year pill tabs */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {wine.vintages.map((v) => {
+                      const isActive = v.year === activeYear
+                      return (
+                        <button
+                          key={v.year}
+                          onClick={() => setActiveYear(v.year)}
+                          className="font-display uppercase tracking-[0.1em] px-4 py-1.5 transition-all duration-200"
+                          style={{
+                            fontSize: '11px', borderRadius: '100px',
+                            border: '1px solid var(--color-border)',
+                            backgroundColor: isActive ? 'var(--color-text)' : 'transparent',
+                            color: isActive ? 'var(--color-bg)' : 'var(--color-text)',
+                          }}
+                        >
+                          {v.year}
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Awards */}
+                  <div className="min-h-[40px] mb-6">
+                    {activeVintage && activeVintage.awards.length > 0 ? (
+                      <ul className="flex flex-col gap-2">
+                        {activeVintage.awards.map((award, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <MedalDot type={award.type} />
+                            <span className="font-body text-cn-text-muted" style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.875rem)', lineHeight: 1.45 }}>
+                              {award.label}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="font-body text-cn-text-muted" style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.875rem)', opacity: 0.45 }}>
+                        Sem prémios registados para esta colheita.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* PDF download */}
+                  {activeVintage?.techSheetUrl ? (
+                    <a
+                      href={activeVintage.techSheetUrl}
+                      download
+                      className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3 transition-colors duration-200"
+                      style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-text)'; e.currentTarget.style.color = 'var(--color-bg)' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-text)' }}
+                    >
+                      Ficha Técnica <Download size={11} strokeWidth={1.5} />
+                    </a>
+                  ) : (
+                    <button
+                      disabled title="Em breve"
+                      className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3"
+                      style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)', opacity: 0.35, cursor: 'not-allowed' }}
+                    >
+                      Ficha Técnica <Download size={11} strokeWidth={1.5} />
+                    </button>
+                  )}
+                </div>
+              )}
 
               {/* Accordions narrativos */}
               <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
