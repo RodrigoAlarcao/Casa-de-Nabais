@@ -736,7 +736,7 @@ export default function VinificacaoPage() {
                   <p
                     className="font-body mb-5 text-center lg:text-left"
                     style={{
-                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)',
                       lineHeight: 1.4,
                       color: 'rgba(3,29,29,0.65)',
                     }}
@@ -747,7 +747,7 @@ export default function VinificacaoPage() {
                   <ul
                     className="mb-5 flex flex-col gap-2 text-center lg:text-left"
                     style={{
-                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      fontSize: 'clamp(0.875rem, 1.05vw, 0.9375rem)',
                       lineHeight: 1.4,
                       color: 'rgba(3,29,29,0.65)',
                       listStyle: 'none',
