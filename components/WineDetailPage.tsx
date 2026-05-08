@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -131,6 +131,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   const narrativeRef = useRef<HTMLDivElement>(null)
   const techRef      = useRef<HTMLDivElement>(null)
 
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+
   const otherWine = wines.find((w) => w.slug !== wine.slug) as WineData
   const latestVintage = wine.vintages[0]
   const [activeYear, setActiveYear] = useState(latestVintage?.year ?? '')
@@ -198,6 +200,20 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                     />
                   </div>
                 </div>
+
+                {/* Comprar CTA */}
+                <button
+                  disabled
+                  title="Em breve"
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.14em]"
+                  style={{
+                    fontSize: '11px', padding: '12px 0', borderRadius: '8px',
+                    backgroundColor: 'var(--color-green)', color: '#FAE6C1',
+                    opacity: 0.45, cursor: 'not-allowed',
+                  }}
+                >
+                  Comprar vinho
+                </button>
               </div>
             </div>
 
