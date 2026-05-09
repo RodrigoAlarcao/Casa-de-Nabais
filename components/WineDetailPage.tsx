@@ -445,20 +445,18 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   <div
                     className="reveal-tech rounded-[8px] p-5"
                     style={{
-                      background: 'rgba(255,255,255,0.52)',
-                      backdropFilter: 'blur(16px) saturate(160%)',
-                      WebkitBackdropFilter: 'blur(16px) saturate(160%)',
-                      border: '1px solid rgba(12,69,68,0.14)',
-                      boxShadow: '0 4px 24px rgba(12,69,68,0.07)',
+                      background: 'linear-gradient(135deg, #052625 0%, #0C4544 50%, #052625 100%)',
+                      border: '1px solid rgba(250,230,193,0.08)',
+                      boxShadow: '0 4px 24px rgba(5,38,37,0.18)',
                     }}
                   >
                     <div className="flex items-center gap-2 mb-2">
-                      <Utensils size={11} strokeWidth={1.5} style={{ color: 'var(--color-green)' }} />
-                      <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'var(--color-green)' }}>
+                      <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
+                      <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
                         Sugestão de Serviço
                       </p>
                     </div>
-                    <p className="font-body text-cn-text-muted" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65 }}>
+                    <p className="font-body" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65, color: 'rgba(250,230,193,0.85)' }}>
                       {wine.servingSuggestion}
                     </p>
                   </div>
