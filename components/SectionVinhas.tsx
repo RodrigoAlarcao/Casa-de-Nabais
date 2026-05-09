@@ -69,11 +69,15 @@ export default function SectionVinhas() {
         const rect = containerRef.current.getBoundingClientRect()
         const isLg = window.innerWidth >= 1024
         setIsMobile(!isLg)
-        const leftOffset = isLg ? rect.left : 16
-        setCarouselLeft(`${leftOffset}px`)
         if (isLg && portraitRef.current) {
-          setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+          const portraitRect = portraitRef.current.getBoundingClientRect()
+          const sw = portraitRect.width
+          setSlideWidth(sw)
+          // 2nd slide aligns with the left edge of the portrait image
+          setCarouselLeft(`${portraitRect.left - sw - SLIDE_GAP}px`)
         } else {
+          const leftOffset = isLg ? rect.left : 16
+          setCarouselLeft(`${leftOffset}px`)
           // Reserve space so the next slide peeks ~40px on the right
           setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
         }
@@ -167,7 +171,7 @@ export default function SectionVinhas() {
 
       {/* Carousel — left-aligned with content, bleeds off the right edge */}
       <div
-        className="mt-10 md:mt-14 lg:mt-16 py-2 select-none"
+        className="mt-10 md:mt-14 lg:mt-4 py-2 select-none"
         style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
