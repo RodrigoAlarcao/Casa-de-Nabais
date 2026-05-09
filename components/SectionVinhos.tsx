@@ -74,9 +74,29 @@ export default function SectionVinhos() {
           {wines.map((wine) => (
             <div key={wine.slug} className="reveal-vinhos flex flex-col">
 
-              {/* Image */}
+              {/* Título — mobile: 1.º, desktop: 2.º */}
+              <div className="order-1 md:order-2 text-center pt-6 md:pt-8 pb-3 md:pb-5">
+                <p
+                  className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
+                  style={{ fontSize: '11px' }}
+                >
+                  {wine.brand}
+                </p>
+                <h3
+                  className="font-display uppercase text-cn-text"
+                  style={{
+                    fontSize: 'clamp(1.625rem, 3vw, 2.5rem)',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1.05,
+                  }}
+                >
+                  {wine.name}
+                </h3>
+              </div>
+
+              {/* Imagem — mobile: 2.º, desktop: 1.º */}
               <div
-                className="relative w-full overflow-hidden"
+                className="order-2 md:order-1 relative w-full overflow-hidden"
                 style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
               >
                 <div className="absolute inset-6">
@@ -90,31 +110,15 @@ export default function SectionVinhos() {
                 </div>
               </div>
 
-              {/* Name block — centered */}
-              <div className="text-center pt-8 pb-5">
-                <p
-                  className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
-                  style={{ fontSize: '11px' }}
-                >
-                  {wine.brand}
-                </p>
-                <h3
-                  className="font-display uppercase text-cn-text mb-4"
-                  style={{
-                    fontSize: 'clamp(1.625rem, 3vw, 2.5rem)',
-                    letterSpacing: '0.04em',
-                    lineHeight: 1.05,
-                  }}
-                >
-                  {wine.name}
-                </h3>
+              {/* Descrição — mobile: 3.º, desktop: 3.º */}
+              <div className="order-3 text-center pt-5 pb-5">
                 <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6 }}>
                   {wine.intro}
                 </p>
               </div>
 
               {/* Buttons — side by side */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="order-4 grid grid-cols-2 gap-3">
                 <Link
                   href={`/os-vinhos/${wine.slug}`}
                   className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
