@@ -77,8 +77,11 @@ export default function SectionCasa() {
       const isLg = window.innerWidth >= 1024
       setIsMobile(!isLg)
       if (isLg && portraitRef.current) {
-        setCarouselLeft(`${rect.left}px`)
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        const portraitRect = portraitRef.current.getBoundingClientRect()
+        const sw = portraitRect.width
+        setSlideWidth(sw)
+        // 2nd slide aligns with the left edge of the portrait image
+        setCarouselLeft(`${portraitRect.left - sw - SLIDE_GAP}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
         setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
@@ -271,7 +274,7 @@ export default function SectionCasa() {
       </div>
 
       {/* Desktop carousel */}
-      <div className="hidden lg:block mt-16">
+      <div className="hidden lg:block mt-4">
         <CarouselStrip />
       </div>
 
