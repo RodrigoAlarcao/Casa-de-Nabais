@@ -112,7 +112,7 @@ export default function VinhosPage() {
               <div key={wine.slug} className="reveal-vinhos-page flex flex-col">
 
                 {/* Título — mobile: 1.º, desktop: 2.º */}
-                <div className="order-1 md:order-2 text-center pt-6 md:pt-8 pb-3 md:pb-5">
+                <div className="order-1 md:order-2 text-center pt-6 md:pt-8 pb-7 md:pb-5">
                   <p
                     className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
                     style={{ fontSize: '11px' }}
