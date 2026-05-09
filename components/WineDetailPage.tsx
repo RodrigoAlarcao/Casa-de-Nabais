@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -46,24 +46,22 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
 /* ─── Accordion ─────────────────────────────────────────────── */
 
 function NarrativeAccordion({
-  icon: Icon, title, text, defaultOpen = true,
+  icon: Icon, title, text, isOpen, onToggle,
 }: {
-  icon: LucideIcon; title: string; text: string; defaultOpen?: boolean
+  icon: LucideIcon; title: string; text: string; isOpen: boolean; onToggle: () => void
 }) {
-  const [open, setOpen] = useState(defaultOpen)
   const contentRef = useRef<HTMLDivElement>(null)
+  const mounted = useRef(false)
 
   useIsomorphicLayoutEffect(() => {
-    if (contentRef.current && !defaultOpen) {
-      gsap.set(contentRef.current, { height: 0, overflow: 'hidden' })
-    }
-  }, [])
-
-  function toggle() {
     if (!contentRef.current) return
+    if (!mounted.current) {
+      if (!isOpen) gsap.set(contentRef.current, { height: 0, overflow: 'hidden' })
+      mounted.current = true
+      return
+    }
     const el = contentRef.current
-
-    if (open) {
+    if (!isOpen) {
       gsap.to(el, {
         height: 0, duration: 0.38, ease: 'power2.inOut', overwrite: true,
         onStart: () => { el.style.overflow = 'hidden' },
@@ -71,21 +69,17 @@ function NarrativeAccordion({
     } else {
       gsap.set(el, { height: 'auto', overflow: 'hidden' })
       const h = el.offsetHeight
-      gsap.fromTo(el,
-        { height: 0 },
-        {
-          height: h, duration: 0.48, ease: 'power2.out', overwrite: true,
-          onComplete: () => { el.style.height = 'auto'; el.style.overflow = 'visible' },
-        }
-      )
+      gsap.fromTo(el, { height: 0 }, {
+        height: h, duration: 0.48, ease: 'power2.out', overwrite: true,
+        onComplete: () => { el.style.height = 'auto'; el.style.overflow = 'visible' },
+      })
     }
-    setOpen((v) => !v)
-  }
+  }, [isOpen])
 
   return (
     <div className="accordion-item border-b" style={{ borderColor: 'var(--color-border)' }}>
       <button
-        onClick={toggle}
+        onClick={onToggle}
         className="flex items-center justify-between w-full py-5 text-left gap-4"
       >
         <div className="flex items-center gap-3">
@@ -107,7 +101,7 @@ function NarrativeAccordion({
           style={{
             color: 'rgba(3,29,29,0.35)', flexShrink: 0,
             transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
-            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
           }}
         />
       </button>
@@ -137,6 +131,38 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   const latestVintage = wine.vintages[0]
   const [activeYear, setActiveYear] = useState(latestVintage?.year ?? '')
   const activeVintage = wine.vintages.find((v) => v.year === activeYear) ?? latestVintage
+
+  // Accordion state — mobile: só um aberto (ou nenhum); desktop: todos abertos de forma independente
+  const [isMobile, setIsMobile] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState<string | null>(null)
+  const [desktopOpen, setDesktopOpen] = useState<Set<string>>(
+    () => new Set(wine.narrativeSections.map((s) => s.heading))
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  function getAccordionProps(heading: string) {
+    if (isMobile) {
+      return {
+        isOpen: mobileOpen === heading,
+        onToggle: () => setMobileOpen((prev) => (prev === heading ? null : heading)),
+      }
+    }
+    return {
+      isOpen: desktopOpen.has(heading),
+      onToggle: () => setDesktopOpen((prev) => {
+        const next = new Set(prev)
+        if (next.has(heading)) next.delete(heading); else next.add(heading)
+        return next
+      }),
+    }
+  }
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -231,11 +257,6 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 >
                   {wine.name}
                 </h1>
-                {latestVintage && (
-                  <p className="reveal-header font-display uppercase tracking-[0.12em] text-cn-text-muted mt-3" style={{ fontSize: '11px' }}>
-                    {latestVintage.year}
-                  </p>
-                )}
               </div>
 
               {/* Imagem — mobile only, after title, before intro */}
@@ -285,7 +306,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                           onClick={() => setActiveYear(v.year)}
                           className="font-display uppercase tracking-[0.1em] px-4 py-1.5 transition-all duration-200"
                           style={{
-                            fontSize: '11px', borderRadius: '100px',
+                            fontSize: '11px', borderRadius: '8px',
                             border: '1px solid var(--color-border)',
                             backgroundColor: isActive ? 'var(--color-green)' : 'transparent',
                             color: isActive ? '#FAE6C1' : 'var(--color-text)',
@@ -352,7 +373,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                     icon={SECTION_ICONS[section.heading] ?? Leaf}
                     title={section.heading}
                     text={section.text}
-                    defaultOpen={true}
+                    {...getAccordionProps(section.heading)}
                   />
                 ))}
               </div>
@@ -423,7 +444,13 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
                   <div
                     className="reveal-tech rounded-[8px] p-5"
-                    style={{ backgroundColor: 'rgba(12,69,68,0.06)', border: '1px solid rgba(12,69,68,0.14)' }}
+                    style={{
+                      background: 'rgba(255,255,255,0.52)',
+                      backdropFilter: 'blur(16px) saturate(160%)',
+                      WebkitBackdropFilter: 'blur(16px) saturate(160%)',
+                      border: '1px solid rgba(12,69,68,0.14)',
+                      boxShadow: '0 4px 24px rgba(12,69,68,0.07)',
+                    }}
                   >
                     <div className="flex items-center gap-2 mb-2">
                       <Utensils size={11} strokeWidth={1.5} style={{ color: 'var(--color-green)' }} />
