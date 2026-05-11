@@ -27,8 +27,8 @@ const PROVAS_IMAGES = [
 ]
 
 const VISITAS_PARAS = [
-  'A visita começa nas vinhas — percorrendo as diferentes parcelas, compreendendo a influência dos solos e do microclima do Vale do Lima. Os nossos guias partilham o conhecimento acumulado ao longo de gerações, com uma perspectiva a longo prazo e respeito pela biodiversidade.',
-  'Na adega, o percurso continua: desde a receção da uva até às cubas e barricas onde os vinhos repousam antes de chegarem à garrafa. Uma visita que liga a terra à mesa, com toda a honestidade de quem trabalha o produto que oferece.',
+  'O acompanhamento das visitas à adega e às vinhas da Casa de Nabais cabe sempre a quem vive a quinta todos os dias e conhece cada detalhe do que aqui é feito.',
+  'O percurso permite assim descobrir a relação direta entre vinha e adega, e compreender, por exemplo, a importância das uvas colhidas à mão que chegam à prensa em minutos ou do trabalho contínuo em torno da casta Loureiro e dos diferentes solos da propriedade.',
 ]
 const VISITAS_IMAGES = [
   { src: '/images/homepage/vinhas/section-01.webp',  alt: 'Vinhas da Casa de Nabais' },
@@ -37,8 +37,8 @@ const VISITAS_IMAGES = [
 ]
 
 const ALMOCOS_PARAS = [
-  'A gastronomia da Casa de Nabais nasce dos mesmos princípios que guiam os nossos vinhos: proximidade, sazonalidade e respeito pelo produto. A cozinha parte dos legumes da horta, dos enchidos locais e dos queijos artesanais para construir uma mesa que reflete a identidade da região.',
-  'Almoços e experiências gastronómicas são vividos em espaços únicos — na adega em harmonia com os nossos vinhos, no jardim histórico sob as árvores centenárias, ou na vinha durante as vindimas. Tornando cada refeição uma memória de lugar e de tempo.',
+  'A gastronomia da Casa de Nabais nasce do seu próprio ecossistema. Da horta para a cozinha, do pomar para a mesa, cada refeição reflete a estação e o que a quinta produz em cada estação. Fruta fresca, sidra, marmelada, hortícolas e ervas aromáticas podem ser servidos aos hóspedes ou integrar os menus vínicos pensados para dialogar com os vinhos da casa.',
+  'Almoços e experiências gastronómicas são realizados mediante reserva, celebrando uma cozinha simples, honesta e profundamente ligada a este lugar onde os pratos do Minho têm primazia.',
 ]
 const ALMOCOS_IMAGES = [
   { src: '/images/homepage/casa/carousel-01.webp',        alt: 'Interior da Casa de Nabais' },
@@ -47,8 +47,8 @@ const ALMOCOS_IMAGES = [
 ]
 
 const PASSEIOS_PARAS = [
-  'Os percursos na mata da Casa de Nabais atravessam sobreiros, carvalhos e pinheiros centenários. Numa manhã tranquila, é possível ouvir o som do ribeiro e sentir a frescura das sombras com vista para as vinhas ao longe, enquanto os pássaros anunciam a mudança de estação.',
-  'Os percursos são adequados a todos os níveis e podem ser feitos ao ritmo de cada visitante — a pé ou com orientação. Uma forma de desacelerar, de se reencontrar com a natureza e de perceber que o vinho começa muito antes da adega.',
+  'Os passeios na mata da Casa de Nabais começam nas vinhas, entre folhas e uvas que em breve serão vinho. Numa manhã fresca ou tarde calma, atravessa-se a vinha até ao bosque, por trilhos suaves, ao som do Rio Lima e com o reconfortante cheiro de terra húmida. A flora nativa envolve o caminho e, por vezes, o casal de águias que ali nidifica, uma de muitas espécies da fauna local, sobrevoa em silêncio quem passa.',
+  'Um percurso para abrandar, sentir o Minho autêntico e descobrir a harmonia natural que sustenta toda a quinta.',
 ]
 const PASSEIOS_IMAGES = [
   { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Paisagem do Vale do Lima' },
