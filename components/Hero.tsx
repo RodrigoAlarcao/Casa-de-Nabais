@@ -21,7 +21,6 @@ export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null)
   const linesRef = useRef<HTMLSpanElement[]>([])
   const subRef = useRef<HTMLParagraphElement>(null)
-  const ctaRef = useRef<HTMLAnchorElement>(null)
 
   useIsomorphicLayoutEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -72,10 +71,6 @@ export default function Hero() {
         subRef.current,
         { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' },
         '-=0.4'
-      ).from(
-        ctaRef.current,
-        { y: 16, opacity: 0, duration: 0.7, ease: 'power2.out' },
-        '-=0.3'
       )
     }, sectionRef)
 
@@ -159,7 +154,6 @@ export default function Hero() {
         </p>
 
         <Link
-          ref={ctaRef}
           href="/ficar-na-casa"
           className="inline-flex items-center gap-2 font-display uppercase tracking-[0.14em] mt-10 px-8 py-4 transition-opacity duration-200 hover:opacity-85"
           style={{
@@ -169,6 +163,7 @@ export default function Hero() {
             borderRadius: '8px',
             boxShadow: '0 4px 24px rgba(3,29,29,0.45)',
             border: '1px solid rgba(250,230,193,0.18)',
+            animation: 'heroCtaIn 0.7s ease-out 1.6s both',
           }}
         >
           Ficar na Casa
