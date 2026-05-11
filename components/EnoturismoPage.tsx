@@ -201,7 +201,7 @@ function MobileSection({
       </div>
 
       {/* Body text + 3-image swipe carousel */}
-      <div style={{ marginTop: '-2px', background: '#031D1D' }}>
+      <div style={{ marginTop: '-2px', background: '#031D1D', paddingBottom: '32px' }}>
         <div className="px-6 pt-6 pb-6 text-center">
           {paras.map((para, i) => (
             <p
@@ -243,7 +243,7 @@ function MobileSection({
         </div>
 
         {/* Carousel nav */}
-        <div className="mt-4 mb-8 flex items-center gap-5 justify-center">
+        <div className="mt-4 flex items-center gap-5 justify-center">
           <button
             onClick={() => setIndex((i) => i - 1)}
             disabled={!canPrev}
