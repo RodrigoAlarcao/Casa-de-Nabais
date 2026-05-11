@@ -57,26 +57,73 @@ const PASSEIOS_IMAGES = [
 ]
 
 /* ─── 3-image row ───────────────────────────────────────────────── */
+// largeSide: large image (2fr) aligns with the portrait column above it.
+// 2 equal images (1fr each) align with where the next section's portrait will sit.
 
-function ThreeImages({ images }: { images: { src: string; alt: string }[] }) {
+function ThreeImages({
+  images,
+  largeSide,
+}: {
+  images: { src: string; alt: string }[]
+  largeSide: 'left' | 'right'
+}) {
+  // Reorder so the large image is always first in DOM (for left) or last (for right)
+  const ordered = largeSide === 'left'
+    ? [images[0], images[1], images[2]]
+    : [images[1], images[2], images[0]]
+
   return (
-    <div className="grid grid-cols-3 gap-1">
-      {images.map((img, i) => (
+    <>
+      {/* Desktop: 2fr + 1fr + 1fr (or reversed), fixed row height */}
+      <div
+        className="hidden md:grid gap-4"
+        style={{
+          gridTemplateColumns: largeSide === 'left' ? '2fr 1fr 1fr' : '1fr 1fr 2fr',
+          gridTemplateRows: 'clamp(260px, 28vw, 400px)',
+        }}
+      >
+        {ordered.map((img, i) => (
+          <div
+            key={i}
+            className="relative overflow-hidden"
+            style={{ borderRadius: '4px', backgroundColor: '#0A3A39' }}
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              className="object-cover"
+              sizes={
+                (largeSide === 'left' && i === 0) || (largeSide === 'right' && i === 2)
+                  ? '(max-width: 1200px) 50vw, 560px'
+                  : '(max-width: 1200px) 25vw, 280px'
+              }
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile: large image full-width + 2 smalls side by side */}
+      <div className="md:hidden flex flex-col gap-4">
         <div
-          key={i}
-          className="relative overflow-hidden"
-          style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}
+          className="relative overflow-hidden w-full"
+          style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#0A3A39' }}
         >
-          <Image
-            src={img.src}
-            alt={img.alt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1200px) 33vw, 380px"
-          />
+          <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" sizes="100vw" />
         </div>
-      ))}
-    </div>
+        <div className="grid grid-cols-2 gap-4">
+          {images.slice(1).map((img, i) => (
+            <div
+              key={i}
+              className="relative overflow-hidden"
+              style={{ aspectRatio: '1/1', borderRadius: '4px', backgroundColor: '#0A3A39' }}
+            >
+              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="50vw" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   )
 }
 
@@ -356,7 +403,7 @@ export default function EnoturismoPage() {
 
           {/* 3 imagens */}
           <div className="mt-4">
-            <ThreeImages images={PROVAS_IMAGES} />
+            <ThreeImages images={PROVAS_IMAGES} largeSide="left" />
           </div>
 
         </section>
@@ -396,7 +443,7 @@ export default function EnoturismoPage() {
 
           {/* 3 imagens */}
           <div className="mt-4">
-            <ThreeImages images={VISITAS_IMAGES} />
+            <ThreeImages images={VISITAS_IMAGES} largeSide="right" />
           </div>
 
         </section>
@@ -436,7 +483,7 @@ export default function EnoturismoPage() {
 
           {/* 3 imagens */}
           <div className="mt-4">
-            <ThreeImages images={ALMOCOS_IMAGES} />
+            <ThreeImages images={ALMOCOS_IMAGES} largeSide="left" />
           </div>
 
         </section>
@@ -476,7 +523,7 @@ export default function EnoturismoPage() {
 
           {/* 3 imagens */}
           <div className="mt-4">
-            <ThreeImages images={PASSEIOS_IMAGES} />
+            <ThreeImages images={PASSEIOS_IMAGES} largeSide="right" />
           </div>
 
         </section>
