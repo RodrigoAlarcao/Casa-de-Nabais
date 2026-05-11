@@ -998,7 +998,7 @@ export default function VinificacaoPage() {
         ══════════════════════════════════════ */}
         <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
 
-          <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+          <section className="lg:pt-20 lg:pb-28">
 
             {/* Mobile: imagem full-bleed + gradient + título */}
             <div className="lg:hidden relative" style={{ height: '60vh' }}>
