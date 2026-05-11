@@ -229,7 +229,7 @@ export default function SectionEnoturismo() {
       </div>
 
       {/* ══ DESKTOP ══ image LEFT, text RIGHT */}
-      <div ref={containerRef} className="hidden lg:block max-w-[1200px] mx-auto px-10 pt-0 pb-28">
+      <div ref={containerRef} className="hidden lg:block max-w-[1200px] mx-auto px-10 pt-0 pb-0">
         <div className="grid grid-cols-2 gap-16 items-center">
 
           <div className="reveal-eno">
