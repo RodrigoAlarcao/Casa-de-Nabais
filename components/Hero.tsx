@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -151,6 +152,22 @@ export default function Hero() {
         >
           Assim nascem grandes vinhos
         </p>
+
+        <Link
+          href="/ficar-na-casa"
+          className="inline-flex items-center gap-2 font-display uppercase tracking-[0.14em] mt-10 px-8 py-4 transition-opacity duration-200 hover:opacity-85"
+          style={{
+            fontSize: 'clamp(0.6875rem, 1vw, 0.75rem)',
+            background: 'linear-gradient(135deg, #0C4544 0%, #031D1D 100%)',
+            color: '#FAE6C1',
+            borderRadius: '8px',
+            boxShadow: '0 4px 24px rgba(3,29,29,0.45)',
+            border: '1px solid rgba(250,230,193,0.18)',
+            animation: 'heroCtaIn 0.7s ease-out 1.6s both',
+          }}
+        >
+          Ficar na Casa
+        </Link>
       </div>
     </section>
   )
