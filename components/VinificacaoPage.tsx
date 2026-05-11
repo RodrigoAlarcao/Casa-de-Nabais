@@ -1000,43 +1000,62 @@ export default function VinificacaoPage() {
 
           <section className="pt-20 md:pt-28 pb-28 md:pb-36">
 
-            {/* Mobile: portrait + texto */}
-            <div className="lg:hidden mx-6">
-              <div
-                className="relative mb-6"
-                style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-              >
+            {/* Mobile: imagem full-bleed + gradient + título */}
+            <div className="lg:hidden relative" style={{ height: '60vh' }}>
+              <div className="absolute inset-0 overflow-hidden">
                 <Image
                   src="/images/homepage/enoturismo/section-01.webp"
                   alt="Perfil do enólogo — Casa de Nabais"
                   fill
                   className="object-cover"
-                  sizes="calc(100vw - 3rem)"
+                  sizes="100vw"
                 />
               </div>
-              <p
-                className="font-display uppercase mb-3 text-center"
-                style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(250,230,193,0.45)' }}
+              <div
+                className="absolute left-0 right-0 pointer-events-none"
+                style={{
+                  top: '48%', bottom: '-2px', zIndex: 1,
+                  background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 80%)',
+                }}
+              />
+              <div
+                className="absolute left-0 right-0 px-6 text-center"
+                style={{ bottom: '28px', zIndex: 2 }}
               >
-                Perfil do enólogo
-              </p>
-              <h2
-                className="font-display mb-1 text-center"
-                style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}
-              >
-                Constantino Ramos
-              </h2>
-              <p
-                className="font-display uppercase mb-6 text-center"
-                style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(250,230,193,0.40)' }}
-              >
-                Enólogo
-              </p>
+                <p
+                  className="font-display uppercase mb-2"
+                  style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.50)' }}
+                >
+                  Perfil do enólogo
+                </p>
+                <h2
+                  className="font-display"
+                  style={{
+                    fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
+                    color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+                  }}
+                >
+                  Constantino Ramos
+                </h2>
+                <p
+                  className="font-display uppercase mt-1"
+                  style={{ fontSize: '9px', letterSpacing: '0.16em', color: 'rgba(250,230,193,0.40)' }}
+                >
+                  Enólogo
+                </p>
+              </div>
+            </div>
+
+            {/* Mobile: texto body */}
+            <div
+              className="lg:hidden px-6 pt-6 pb-10 text-center"
+              style={{ marginTop: '-2px', background: '#031D1D' }}
+            >
               {ENOLOGO_PARAS.map((para, i) => (
                 <p
                   key={i}
-                  className="font-body mb-4 last:mb-0 text-center"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                  className="font-body mb-4 last:mb-0"
+                  style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                 >
                   {para}
                 </p>
