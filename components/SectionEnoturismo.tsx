@@ -77,8 +77,10 @@ export default function SectionEnoturismo() {
       const isLg = window.innerWidth >= 1024
       setIsMobile(!isLg)
       if (isLg && portraitRef.current) {
-        setCarouselLeft(`${rect.left}px`)
-        setSlideWidth(portraitRef.current.getBoundingClientRect().width)
+        const portraitRect = portraitRef.current.getBoundingClientRect()
+        setSlideWidth(portraitRect.width)
+        // Portrait is the LEFT column — 1st slide aligns with it directly
+        setCarouselLeft(`${portraitRect.left}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
         setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
@@ -270,7 +272,7 @@ export default function SectionEnoturismo() {
       </div>
 
       {/* Desktop carousel */}
-      <div className="hidden lg:block mt-0">
+      <div className="hidden lg:block mt-4">
         <CarouselStrip />
       </div>
 
