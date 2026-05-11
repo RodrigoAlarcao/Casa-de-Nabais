@@ -57,8 +57,9 @@ const PASSEIOS_IMAGES = [
 ]
 
 /* ─── 3-image row ───────────────────────────────────────────────── */
-// largeSide: large image (2fr) aligns with the portrait column above it.
-// 2 equal images (1fr each) align with where the next section's portrait will sit.
+// Outer grid-cols-2 gap-4 mirrors the portrait+text block above exactly —
+// the large image occupies the portrait column, the nested grid of 2 smalls
+// occupies the text column. Column edges align pixel-perfectly.
 
 function ThreeImages({
   images,
@@ -67,43 +68,55 @@ function ThreeImages({
   images: { src: string; alt: string }[]
   largeSide: 'left' | 'right'
 }) {
-  // Reorder so the large image is always first in DOM (for left) or last (for right)
-  const ordered = largeSide === 'left'
-    ? [images[0], images[1], images[2]]
-    : [images[1], images[2], images[0]]
+  const ROW_H = 'clamp(260px, 28vw, 400px)'
+
+  const largeImg = (
+    <div
+      className="relative overflow-hidden"
+      style={{ borderRadius: '4px', backgroundColor: '#0A3A39', height: '100%' }}
+    >
+      <Image
+        src={images[0].src}
+        alt={images[0].alt}
+        fill
+        className="object-cover"
+        sizes="(max-width: 1024px) 90vw, 50vw"
+      />
+    </div>
+  )
+
+  const smallsGrid = (
+    <div className="grid grid-cols-2 gap-4" style={{ height: '100%' }}>
+      {images.slice(1).map((img, i) => (
+        <div
+          key={i}
+          className="relative overflow-hidden"
+          style={{ borderRadius: '4px', backgroundColor: '#0A3A39', height: '100%' }}
+        >
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 45vw, 25vw"
+          />
+        </div>
+      ))}
+    </div>
+  )
 
   return (
     <>
-      {/* Desktop: 2fr + 1fr + 1fr (or reversed), fixed row height */}
-      <div
-        className="hidden md:grid gap-4"
-        style={{
-          gridTemplateColumns: largeSide === 'left' ? '2fr 1fr 1fr' : '1fr 1fr 2fr',
-          gridTemplateRows: 'clamp(260px, 28vw, 400px)',
-        }}
-      >
-        {ordered.map((img, i) => (
-          <div
-            key={i}
-            className="relative overflow-hidden"
-            style={{ borderRadius: '4px', backgroundColor: '#0A3A39' }}
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className="object-cover"
-              sizes={
-                (largeSide === 'left' && i === 0) || (largeSide === 'right' && i === 2)
-                  ? '(max-width: 1200px) 50vw, 560px'
-                  : '(max-width: 1200px) 25vw, 280px'
-              }
-            />
-          </div>
-        ))}
+      {/* Desktop: outer grid-cols-2 = same structure as portrait+text → perfect alignment */}
+      <div className="hidden md:grid grid-cols-2 gap-4" style={{ height: ROW_H }}>
+        {largeSide === 'left' ? (
+          <>{largeImg}{smallsGrid}</>
+        ) : (
+          <>{smallsGrid}{largeImg}</>
+        )}
       </div>
 
-      {/* Mobile: large image full-width + 2 smalls side by side */}
+      {/* Mobile: large full-width + 2 smalls side by side */}
       <div className="md:hidden flex flex-col gap-4">
         <div
           className="relative overflow-hidden w-full"
