@@ -176,8 +176,8 @@ function MobileSection({
 
   return (
     <div className="lg:hidden">
-      {/* Portrait image with gradient + section title */}
-      <div className="relative overflow-hidden" style={{ height: '60vh', backgroundColor: '#031D1D' }}>
+      {/* Full-bleed image + gradient + título + texto */}
+      <div className="relative overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
         </div>
@@ -185,36 +185,37 @@ function MobileSection({
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 88%, #031D1D 100%)',
+            background: 'linear-gradient(to bottom, transparent 38%, rgba(56,103,102,0.18) 50%, rgba(56,103,102,0.55) 60%, rgba(25,79,78,0.82) 68%, rgba(3,29,29,0.94) 76%, #031D1D 86%, #031D1D 100%)',
           }}
         />
-        <h2
-          className="absolute left-0 right-0 text-center px-8 font-display"
-          style={{
-            bottom: '32px', zIndex: 2,
-            fontSize: 'clamp(2.25rem, 10vw, 3rem)', lineHeight: 1.1, letterSpacing: '0.02em',
-            color: '#FAE6C1',
-          }}
-        >
-          {title}
-        </h2>
-      </div>
-
-      {/* Body text + 3-image swipe carousel */}
-      <div style={{ background: '#031D1D', paddingBottom: '32px' }}>
-        <div className="px-6 pt-6 pb-6 text-center">
+        <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
+          <h2
+            className="font-display mb-5"
+            style={{
+              fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '0.02em',
+              color: '#FAE6C1',
+            }}
+          >
+            {title}
+          </h2>
           {paras.map((para, i) => (
             <p
               key={i}
               className="font-body mb-4 last:mb-0"
-              style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+              style={{
+                fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)',
+                lineHeight: 1.6,
+                color: i === 0 ? 'rgba(255,249,237,0.78)' : 'rgba(255,249,237,0.60)',
+              }}
             >
               {para}
             </p>
           ))}
         </div>
+      </div>
 
-        {/* Swipe carousel */}
+      {/* Swipe carousel — fundo contínuo */}
+      <div style={{ background: '#031D1D', paddingBottom: '32px' }}>
         <div
           className="mt-2 py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
