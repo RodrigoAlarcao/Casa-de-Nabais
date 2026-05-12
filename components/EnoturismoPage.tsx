@@ -149,7 +149,7 @@ function MobileSection({
   portraitAlt,
   images,
 }: {
-  title: string
+  title: React.ReactNode
   paras: string[]
   portraitSrc: string
   portraitAlt: string
@@ -189,10 +189,10 @@ function MobileSection({
           }}
         />
         <h2
-          className="absolute left-0 right-0 text-center px-6 font-display"
+          className="absolute left-0 right-0 text-center px-8 font-display"
           style={{
-            bottom: '28px', zIndex: 2,
-            fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '0.02em',
+            bottom: '32px', zIndex: 2,
+            fontSize: 'clamp(2.25rem, 10vw, 3rem)', lineHeight: 1.1, letterSpacing: '0.02em',
             color: '#FAE6C1',
           }}
         >
@@ -518,7 +518,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Provas de vinho"
+          title={<>Provas<br />de vinho</>}
           paras={PROVAS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-01.webp"
           portraitAlt="Prova de vinhos na adega"
@@ -547,7 +547,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Visitas guiadas"
+          title={<>Visitas<br />guiadas</>}
           paras={VISITAS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-02.webp"
           portraitAlt="Visita guiada às vinhas"
@@ -576,7 +576,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Almoços & gastronomia"
+          title={<>Almoços &<br />gastronomia</>}
           paras={ALMOCOS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-03.webp"
           portraitAlt="Almoço na quinta"
@@ -605,7 +605,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Passeios na mata"
+          title={<>Passeios<br />na mata</>}
           paras={PASSEIOS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-04.webp"
           portraitAlt="Passeio na mata"
