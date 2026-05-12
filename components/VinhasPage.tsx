@@ -404,7 +404,7 @@ export default function VinhasPage() {
         {/* Full bleed image with gradient + title + text overlaid */}
         <div
           className="relative overflow-hidden"
-          style={{ aspectRatio: '3/4' }}
+          style={{ minHeight: '100svh' }}
         >
           <Image
             src="/images/homepage/vinhas/carousel-05.webp"
@@ -707,7 +707,7 @@ export default function VinhasPage() {
 
               {/* Mobile: full bleed */}
               <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
                     src="/images/homepage/vinhas/carousel-01.webp"
                     alt="Vinha do Pomar"
@@ -815,7 +815,7 @@ export default function VinhasPage() {
 
               {/* Mobile: full bleed */}
               <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
                     src="/images/homepage/vinhas/carousel-02.webp"
                     alt="Vinha da Adega"
@@ -923,7 +923,7 @@ export default function VinhasPage() {
 
               {/* Mobile: full bleed */}
               <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
                     src="/images/homepage/vinhas/carousel-04.webp"
                     alt="Vinha da Igreja"
@@ -1031,7 +1031,7 @@ export default function VinhasPage() {
 
               {/* Mobile: full bleed */}
               <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
                     src="/images/homepage/vinhas/carousel-05.webp"
                     alt="Vinha Talhão de Xisto"
