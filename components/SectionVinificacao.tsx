@@ -70,15 +70,12 @@ export default function SectionVinificacao() {
       {/* ── MOBILE ──
           Outer wrapper: position relative, NO overflow-hidden, so the gradient
           child can visually bleed 60px below the image boundary. */}
-      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '55vh' }}>
-
-        {/* Inner image container: overflow-hidden clips parallax overflow */}
+      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
-          {/* Parallax wrap: oversized so GSAP yPercent has room to move */}
           <div
             ref={mobileImgWrapRef}
             className="absolute will-change-transform"
-            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
           >
             <Image
               src="/images/homepage/vinificacao/fullbleed-01.webp"
@@ -90,64 +87,35 @@ export default function SectionVinificacao() {
             />
           </div>
         </div>
-
-        {/* Gradient: starts at 15% of image height, bleeds 60px below the wrapper.
-            No overflow-hidden on parent means this renders past the 55vh boundary. */}
         <div
-          className="absolute left-0 right-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            top: '15%',
-            bottom: '-60px',
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.45) 38%, rgba(3,29,29,0.9) 65%, #031D1D 82%)',
             zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 45%, rgba(56,103,102,0.14) 56%, rgba(56,103,102,0.50) 64%, rgba(25,79,78,0.80) 71%, rgba(3,29,29,0.93) 80%, #031D1D 90%)',
           }}
         />
-
-        {/* Title: absolute within image, floats over the gradient */}
-        <h2
-          className="reveal-above absolute left-0 right-0 text-center px-6 font-display uppercase"
-          style={{
-            bottom: '36px',
-            zIndex: 2,
-            fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
-            lineHeight: 1.05,
-            letterSpacing: '0.04em',
-            color: '#FAE6C1',
-            textShadow: '0 2px 28px rgba(3,29,29,0.95)',
-          }}
-        >
-          A nossa<br />vinificação
-        </h2>
-      </div>
-
-      {/* Text block: slides up 2px to close the seam; z-index 2 renders it above
-          the gradient extension so the gradient colour merges with the background. */}
-      <div
-        className="relative lg:hidden px-6 pt-5 pb-16 text-center"
-        style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}
-      >
-        <p
-          className="reveal-above font-body mb-8"
-          style={{
-            fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-            lineHeight: 1.6,
-            color: 'rgba(255,249,237,0.72)',
-          }}
-        >
-          {BODY_TEXT}
-        </p>
-        <Link
-          href="/a-vinificacao"
-          className="reveal-above flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
-          style={{
-            color: '#FAE6C1',
-            border: '1px solid rgba(250,230,193,0.45)',
-            borderRadius: '8px',
-          }}
-        >
-          Saber mais
-          <ArrowRight size={11} strokeWidth={1.5} />
-        </Link>
+        <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
+          <h2
+            className="reveal-above font-display uppercase mb-6"
+            style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
+          >
+            A nossa<br />vinificação
+          </h2>
+          <p
+            className="reveal-above font-body mb-8"
+            style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+          >
+            {BODY_TEXT}
+          </p>
+          <Link
+            href="/a-vinificacao"
+            className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
+            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.45)', borderRadius: '8px' }}
+          >
+            Saber mais
+            <ArrowRight size={11} strokeWidth={1.5} />
+          </Link>
+        </div>
       </div>
 
       {/* ── DESKTOP ── text columns */}

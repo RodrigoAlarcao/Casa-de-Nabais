@@ -149,7 +149,7 @@ function MobileSection({
   portraitAlt,
   images,
 }: {
-  title: string
+  title: React.ReactNode
   paras: string[]
   portraitSrc: string
   portraitAlt: string
@@ -158,9 +158,23 @@ function MobileSection({
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
   const [grabbing, setGrabbing] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLDivElement>(null)
   const GAP = 12
   const canPrev = index > 0
   const canNext = index < images.length - 1
+
+  useIsomorphicLayoutEffect(() => {
+    if (!imgRef.current || !containerRef.current) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const ctx = gsap.context(() => {
+      gsap.to(imgRef.current, {
+        yPercent: -15, ease: 'none',
+        scrollTrigger: { trigger: containerRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+      })
+    })
+    return () => ctx.revert()
+  }, [])
 
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     dragStartX.current = e.clientX
@@ -176,47 +190,54 @@ function MobileSection({
 
   return (
     <div className="lg:hidden">
-      {/* Portrait image with gradient + section title */}
-      <div className="relative" style={{ height: '60vh' }}>
+      {/* Full-bleed image + parallax + gradient + título + texto */}
+      <div ref={containerRef} className="relative overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
-          <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
+          <div
+            ref={imgRef}
+            className="absolute will-change-transform"
+            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
+          >
+            <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
+          </div>
         </div>
         <div
-          className="absolute left-0 right-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            top: '48%', bottom: '-2px', zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 80%)',
+            zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 45%, rgba(56,103,102,0.14) 56%, rgba(56,103,102,0.50) 64%, rgba(25,79,78,0.80) 71%, rgba(3,29,29,0.93) 80%, #031D1D 90%)',
           }}
         />
-        <h2
-          className="absolute left-0 right-0 text-center px-6 font-display uppercase"
-          style={{
-            bottom: '28px', zIndex: 2,
-            fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
-            color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)',
-          }}
-        >
-          {title}
-        </h2>
-      </div>
-
-      {/* Body text + 3-image swipe carousel */}
-      <div style={{ marginTop: '-2px', background: '#031D1D', paddingBottom: '32px' }}>
-        <div className="px-6 pt-6 pb-6 text-center">
+        <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
+          <h2
+            className="font-display mb-5"
+            style={{
+              fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '0.02em',
+              color: '#FAE6C1',
+            }}
+          >
+            {title}
+          </h2>
           {paras.map((para, i) => (
             <p
               key={i}
               className="font-body mb-4 last:mb-0"
-              style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+              style={{
+                fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)',
+                lineHeight: 1.6,
+                color: i === 0 ? 'rgba(255,249,237,0.78)' : 'rgba(255,249,237,0.60)',
+              }}
             >
               {para}
             </p>
           ))}
         </div>
+      </div>
 
-        {/* Swipe carousel */}
+      {/* Swipe carousel — fundo contínuo */}
+      <div style={{ background: '#031D1D', marginTop: '-2px', paddingTop: '16px', paddingBottom: '32px' }}>
         <div
-          className="mt-2 py-2 select-none"
+          className="py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
@@ -424,7 +445,7 @@ export default function EnoturismoPage() {
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(to bottom, transparent 0%, transparent 22%, rgba(3,29,29,0.25) 40%, rgba(3,29,29,0.82) 58%, rgba(3,29,29,0.97) 72%, #031D1D 84%)',
+              background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
               zIndex: 1,
             }}
           />
@@ -518,7 +539,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Provas de vinho"
+          title={<>Provas<br />de vinho</>}
           paras={PROVAS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-01.webp"
           portraitAlt="Prova de vinhos na adega"
@@ -547,7 +568,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Visitas guiadas"
+          title={<>Visitas<br />guiadas</>}
           paras={VISITAS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-02.webp"
           portraitAlt="Visita guiada às vinhas"
@@ -576,7 +597,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Almoços & gastronomia"
+          title={<>Almoços &<br />gastronomia</>}
           paras={ALMOCOS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-03.webp"
           portraitAlt="Almoço na quinta"
@@ -605,7 +626,7 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title="Passeios na mata"
+          title={<>Passeios<br />na mata</>}
           paras={PASSEIOS_PARAS}
           portraitSrc="/images/homepage/enoturismo/carousel-04.webp"
           portraitAlt="Passeio na mata"
