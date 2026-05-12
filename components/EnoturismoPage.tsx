@@ -177,23 +177,23 @@ function MobileSection({
   return (
     <div className="lg:hidden">
       {/* Portrait image with gradient + section title */}
-      <div className="relative" style={{ height: '60vh' }}>
+      <div className="relative overflow-hidden" style={{ height: '60vh', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
         </div>
         <div
-          className="absolute left-0 right-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            inset: 0, zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
+            zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 88%, #031D1D 100%)',
           }}
         />
         <h2
-          className="absolute left-0 right-0 text-center px-6 font-display uppercase"
+          className="absolute left-0 right-0 text-center px-6 font-display"
           style={{
             bottom: '28px', zIndex: 2,
-            fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
-            color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+            fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '0.02em',
+            color: '#FAE6C1',
           }}
         >
           {title}
@@ -201,7 +201,7 @@ function MobileSection({
       </div>
 
       {/* Body text + 3-image swipe carousel */}
-      <div style={{ marginTop: '-2px', background: '#031D1D', paddingBottom: '32px' }}>
+      <div style={{ background: '#031D1D', paddingBottom: '32px' }}>
         <div className="px-6 pt-6 pb-6 text-center">
           {paras.map((para, i) => (
             <p
