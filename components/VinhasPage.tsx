@@ -151,7 +151,7 @@ export default function VinhasPage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(to bottom, transparent 0%, transparent 18%, rgba(3,29,29,0.20) 35%, rgba(3,29,29,0.75) 52%, rgba(3,29,29,0.97) 68%, #031D1D 80%)',
+            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
             zIndex: 1,
           }}
         />
@@ -1078,8 +1078,6 @@ export default function VinhasPage() {
           </div>
         </div>
 
-        {/* Mobile bottom padding */}
-        <div className="lg:hidden" style={{ height: '48px' }} />
       </section>
 
       <SectionExplore excludeHref="/as-vinhas" />
