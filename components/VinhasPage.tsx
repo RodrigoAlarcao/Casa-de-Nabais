@@ -416,7 +416,7 @@ export default function VinhasPage() {
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(to bottom, transparent 20%, rgba(5,38,37,0.50) 45%, rgba(5,38,37,0.90) 68%, #052625 88%)',
+              background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
             }}
           />
           <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
@@ -718,7 +718,7 @@ export default function VinhasPage() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(to bottom, transparent 25%, rgba(3,29,29,0.50) 50%, rgba(3,29,29,0.90) 70%, #031D1D 88%)',
+                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
                     }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
@@ -826,7 +826,7 @@ export default function VinhasPage() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(to bottom, transparent 25%, rgba(3,29,29,0.50) 50%, rgba(3,29,29,0.90) 70%, #031D1D 88%)',
+                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
                     }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
@@ -934,7 +934,7 @@ export default function VinhasPage() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(to bottom, transparent 25%, rgba(3,29,29,0.50) 50%, rgba(3,29,29,0.90) 70%, #031D1D 88%)',
+                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
                     }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
@@ -1042,7 +1042,7 @@ export default function VinhasPage() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(to bottom, transparent 25%, rgba(3,29,29,0.50) 50%, rgba(3,29,29,0.90) 70%, #031D1D 88%)',
+                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
                     }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
