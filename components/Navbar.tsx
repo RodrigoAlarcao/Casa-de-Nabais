@@ -7,15 +7,13 @@ import { Home, Wine, X, Menu } from 'lucide-react'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang, type Lang } from '@/lib/i18n'
 
-function LangToggle({ lang, setLang, dark = false }: { lang: Lang; setLang: (l: Lang) => void; dark?: boolean }) {
-  const base = dark
-    ? 'font-display text-[11px] uppercase tracking-[0.12em] transition-opacity duration-200'
-    : 'font-display text-[11px] uppercase tracking-[0.12em] transition-opacity duration-200'
+function LangToggle({ lang, setLang, dark = false, large = false }: { lang: Lang; setLang: (l: Lang) => void; dark?: boolean; large?: boolean }) {
+  const base = `font-display uppercase tracking-[0.14em] transition-opacity duration-200 ${large ? 'text-[15px] px-1 py-1' : 'text-[11px]'}`
   const activeColor = dark ? '#FAE6C1' : '#FAE6C1'
-  const inactiveOpacity = 0.38
+  const inactiveOpacity = 0.35
 
   return (
-    <div className="flex items-center gap-1" style={{ color: activeColor }}>
+    <div className={`flex items-center ${large ? 'gap-2' : 'gap-1'}`} style={{ color: activeColor }}>
       <button
         onClick={() => setLang('pt')}
         className={base}
@@ -23,7 +21,7 @@ function LangToggle({ lang, setLang, dark = false }: { lang: Lang; setLang: (l: 
       >
         PT
       </button>
-      <span style={{ opacity: 0.3, fontSize: '10px' }}>|</span>
+      <span style={{ opacity: 0.3, fontSize: large ? '13px' : '10px' }}>|</span>
       <button
         onClick={() => setLang('en')}
         className={base}
@@ -203,8 +201,8 @@ export default function Navbar() {
           {/* Language toggle + CTAs mobile */}
           <div className="mt-auto flex flex-col gap-3">
             {/* Language toggle — before CTAs */}
-            <div className="mobile-nav-link flex justify-center mb-1">
-              <LangToggle lang={lang} setLang={setLang} dark />
+            <div className="mobile-nav-link flex justify-center mb-4">
+              <LangToggle lang={lang} setLang={setLang} dark large />
             </div>
             <Link
               href="/ficar-na-casa"
