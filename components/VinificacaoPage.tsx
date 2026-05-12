@@ -994,7 +994,7 @@ export default function VinificacaoPage() {
 
           <section className="lg:pt-20 lg:pb-28">
 
-            {/* Mobile: imagem full-bleed + gradient + título + texto */}
+            {/* Mobile: imagem full-bleed + gradient + identidade */}
             <div className="lg:hidden relative overflow-hidden" style={{ minHeight: '100svh' }}>
               <div className="absolute inset-0 overflow-hidden">
                 <Image
@@ -1029,25 +1029,32 @@ export default function VinificacaoPage() {
                   Constantino Ramos
                 </h2>
                 <p
-                  className="font-display uppercase mb-5"
+                  className="font-display uppercase"
                   style={{ fontSize: '9px', letterSpacing: '0.16em', color: 'rgba(250,230,193,0.40)' }}
                 >
                   Enólogo
                 </p>
-                {ENOLOGO_PARAS.map((para, i) => (
-                  <p
-                    key={i}
-                    className="font-body mb-4 last:mb-0"
-                    style={{
-                      fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)',
-                      lineHeight: 1.6,
-                      color: i === 0 ? 'rgba(255,249,237,0.75)' : 'rgba(255,249,237,0.58)',
-                    }}
-                  >
-                    {para}
-                  </p>
-                ))}
               </div>
+            </div>
+
+            {/* Mobile: parágrafos — fundo contínuo com o gradiente */}
+            <div
+              className="lg:hidden px-7 pt-8 pb-12 text-center"
+              style={{ background: '#031D1D' }}
+            >
+              {ENOLOGO_PARAS.map((para, i) => (
+                <p
+                  key={i}
+                  className="font-body mb-5 last:mb-0"
+                  style={{
+                    fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
+                    lineHeight: 1.65,
+                    color: i === 0 ? 'rgba(255,249,237,0.72)' : 'rgba(255,249,237,0.55)',
+                  }}
+                >
+                  {para}
+                </p>
+              ))}
             </div>
 
             {/* Título da secção — desktop */}
