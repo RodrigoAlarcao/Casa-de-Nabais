@@ -169,7 +169,7 @@ export default function SectionEnoturismo() {
             Enoturismo
           </h2>
           <p className="reveal-eno font-body mb-8"
-            style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}>
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
             Na Casa de Nabais, o enoturismo nasce da terra e tem as pessoas no centro. Entre solos graníticos e um raro veio de xisto, a cada experiência partilhamos a vida da quinta — a vinha, a adega, a mesa e os seus produtos — com autenticidade e cuidado de quem os faz.
           </p>
           <div className="flex gap-3">

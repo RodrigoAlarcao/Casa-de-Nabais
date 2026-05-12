@@ -171,7 +171,7 @@ export default function SectionCasa() {
             Conheça a Casa<br />de Nabais
           </h2>
           <p className="reveal-casa font-body mb-8"
-            style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}>
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
             Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.
           </p>
           <div className="flex gap-3">

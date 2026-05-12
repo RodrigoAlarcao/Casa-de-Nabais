@@ -103,7 +103,7 @@ export default function SectionVinificacao() {
           </h2>
           <p
             className="reveal-above font-body mb-8"
-            style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
           >
             {BODY_TEXT}
           </p>

@@ -218,9 +218,9 @@ export default function CasaPage() {
           <p
             className="font-body mb-8 w-full"
             style={{
-              fontSize: 'clamp(0.8125rem, 3.5vw, 0.9375rem)',
+              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
               lineHeight: 1.6,
-              color: 'rgba(255,249,237,0.68)',
+              color: 'rgba(255,249,237,0.90)',
             }}
           >
             Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
