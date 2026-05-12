@@ -129,7 +129,6 @@ export default function Navbar() {
 
           {/* CTAs + toggle — desktop */}
           <div className="hidden md:flex items-center gap-6">
-            <LangToggle lang={lang} setLang={setLang} />
             <Link
               href="/ficar-na-casa"
               className="flex items-center gap-2 font-display text-[14px] text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
@@ -145,6 +144,7 @@ export default function Navbar() {
               <Wine size={14} strokeWidth={1.5} />
               {t.nav.buyWine}
             </button>
+            <LangToggle lang={lang} setLang={setLang} />
           </div>
 
           {/* Hamburger — mobile */}
