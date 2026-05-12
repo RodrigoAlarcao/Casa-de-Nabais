@@ -98,7 +98,7 @@ export default function SectionVinificacao() {
           style={{
             top: '15%',
             bottom: '-60px',
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.45) 38%, rgba(3,29,29,0.9) 65%, #031D1D 82%)',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(56,103,102,0.14) 30%, rgba(56,103,102,0.50) 48%, rgba(25,79,78,0.80) 62%, rgba(3,29,29,0.93) 74%, #031D1D 86%)',
             zIndex: 1,
           }}
         />
