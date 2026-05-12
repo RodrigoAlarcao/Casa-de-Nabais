@@ -158,9 +158,23 @@ function MobileSection({
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
   const [grabbing, setGrabbing] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLDivElement>(null)
   const GAP = 12
   const canPrev = index > 0
   const canNext = index < images.length - 1
+
+  useIsomorphicLayoutEffect(() => {
+    if (!imgRef.current || !containerRef.current) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const ctx = gsap.context(() => {
+      gsap.to(imgRef.current, {
+        yPercent: -15, ease: 'none',
+        scrollTrigger: { trigger: containerRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+      })
+    })
+    return () => ctx.revert()
+  }, [])
 
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     dragStartX.current = e.clientX
@@ -176,10 +190,16 @@ function MobileSection({
 
   return (
     <div className="lg:hidden">
-      {/* Full-bleed image + gradient + título + texto */}
-      <div className="relative overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
+      {/* Full-bleed image + parallax + gradient + título + texto */}
+      <div ref={containerRef} className="relative overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
-          <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
+          <div
+            ref={imgRef}
+            className="absolute will-change-transform"
+            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
+          >
+            <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
+          </div>
         </div>
         <div
           className="absolute inset-0 pointer-events-none"
@@ -215,9 +235,9 @@ function MobileSection({
       </div>
 
       {/* Swipe carousel — fundo contínuo */}
-      <div style={{ background: '#031D1D', paddingBottom: '32px' }}>
+      <div style={{ background: '#031D1D', marginTop: '-1px', paddingTop: '16px', paddingBottom: '32px' }}>
         <div
-          className="mt-2 py-2 select-none"
+          className="py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
