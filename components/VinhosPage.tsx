@@ -55,14 +55,8 @@ export default function VinhosPage() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-40"
-          style={{
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#3A5B4F',
-          }}
+          className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-40"
+          style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
           Voltar

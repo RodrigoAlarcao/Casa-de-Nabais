@@ -193,8 +193,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
       <div className="max-w-[1100px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/os-vinhos"
-          className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-40"
-          style={{ fontFamily: 'var(--font-display), serif', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(3,29,29,0.50)' }}
+          className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-40"
+          style={{ color: 'rgba(3,29,29,0.50)' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
           Os vinhos

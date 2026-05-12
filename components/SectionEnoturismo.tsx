@@ -240,7 +240,7 @@ export default function SectionEnoturismo() {
               Enoturismo
             </h2>
             <p className="reveal-eno font-body mb-10"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4, color: 'rgba(255,249,237,0.72)' }}>
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}>
               Na Casa de Nabais, o enoturismo nasce da terra e tem as pessoas no centro. Entre solos graníticos e um raro veio de xisto, a cada experiência partilhamos a vida da quinta — a vinha, a adega, a mesa e os seus produtos — com autenticidade e cuidado de quem os faz.
             </p>
             <div className="reveal-eno flex items-center gap-4">
@@ -269,7 +269,7 @@ export default function SectionEnoturismo() {
       </div>
 
       {/* Desktop navigation */}
-      <div className="hidden lg:block mt-5 flex items-center gap-5"
+      <div className="hidden lg:flex mt-5 items-center gap-5"
         style={{ paddingLeft: carouselLeft }}>
         <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
           className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>

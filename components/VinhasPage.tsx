@@ -158,13 +158,9 @@ export default function VinhasPage() {
 
         <Link
           href="/"
-          className="absolute top-8 left-6 inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
+          className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
           style={{
             zIndex: 10,
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
             color: 'rgba(250,230,193,0.80)',
           }}
         >
@@ -192,9 +188,9 @@ export default function VinhasPage() {
           <p
             className="font-body mb-8 w-full"
             style={{
-              fontSize: 'clamp(0.75rem, 3.2vw, 0.875rem)',
+              fontSize: 'clamp(0.8125rem, 3.5vw, 0.9375rem)',
               lineHeight: 1.6,
-              color: 'rgba(255,249,237,0.65)',
+              color: 'rgba(255,249,237,0.68)',
             }}
           >
             Na Casa de Nabais, as vinhas começaram muito antes de o serem.
@@ -226,14 +222,8 @@ export default function VinhasPage() {
       <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
-          style={{
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#3A5B4F',
-          }}
+          className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+          style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
           Voltar
@@ -261,7 +251,7 @@ export default function VinhasPage() {
             className="font-body"
             style={{
               fontSize: 'clamp(1.0625rem, 1.5vw, 1.25rem)',
-              lineHeight: 1.35,
+              lineHeight: 1.3,
               fontWeight: 400,
               color: 'var(--color-text-muted)',
             }}
