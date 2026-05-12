@@ -205,7 +205,7 @@ function MobileSection({
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 38%, rgba(56,103,102,0.18) 50%, rgba(56,103,102,0.55) 60%, rgba(25,79,78,0.82) 68%, rgba(3,29,29,0.94) 76%, #031D1D 86%, #031D1D 100%)',
+            background: 'linear-gradient(to bottom, transparent 45%, rgba(56,103,102,0.14) 56%, rgba(56,103,102,0.50) 64%, rgba(25,79,78,0.80) 71%, rgba(3,29,29,0.93) 80%, #031D1D 90%)',
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
@@ -235,7 +235,7 @@ function MobileSection({
       </div>
 
       {/* Swipe carousel — fundo contínuo */}
-      <div style={{ background: '#031D1D', marginTop: '-1px', paddingTop: '16px', paddingBottom: '32px' }}>
+      <div style={{ background: '#031D1D', marginTop: '-2px', paddingTop: '16px', paddingBottom: '32px' }}>
         <div
           className="py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
