@@ -6,11 +6,9 @@ import SectionExplore from './SectionExplore'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const INTRO =
-  'Tudo o que se passa, diariamente, na vinha, na adega, no solar, na horta ou no pomar da Casa de Nabais depende a 100% de quem aqui trabalha com dedicação. Quem nos visite vai decerto encontrar-se com estas pessoas que no dia a dia asseguram a qualidade dos nossos vinhos, do nosso serviço aos hóspedes, dos produtos da nossa horta e do nosso pomar.'
 
 const teamMembers: { name: string; role: string; image: string | null; bg: string }[] = [
   { name: 'Nome', role: 'Posição na casa', image: null, bg: '#3A5B4F' },
@@ -22,6 +20,7 @@ const teamMembers: { name: string; role: string; image: string | null; bg: strin
 ]
 
 export default function CasaPessoasSection() {
+  const { t } = useLang()
   const wrapperRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -61,7 +60,7 @@ export default function CasaPessoasSection() {
               letterSpacing: '0.04em',
             }}
           >
-            As Pessoas de Nabais
+            {t.casaPessoas.heading}
           </h2>
 
           <p
@@ -73,7 +72,7 @@ export default function CasaPessoasSection() {
               color: 'var(--color-text-muted)',
             }}
           >
-            {INTRO}
+            {t.casaPessoas.intro}
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">

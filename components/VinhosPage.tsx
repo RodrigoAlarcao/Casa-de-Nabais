@@ -7,35 +7,30 @@ import { ArrowRight, ArrowLeft } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 import SectionExplore from './SectionExplore'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const INTRO_TEXT =
-  'Produzidos exclusivamente com uva própria, em pequena escala, os vinhos da Casa de Nabais são frescos, gastronómicos e pensados para evoluir. Revelam o caráter dos solos graníticos e xistosos onde nascem, e a identidade da casta Loureiro cultivada no Vale do Lima.'
+const wineImages: Record<string, string> = {
+  'vinha-do-pomar': '/images/homepage/vinhos/vinha-do-pomar-context.webp',
+  'loureiro': '/images/homepage/vinhos/loureiro-context.webp',
+}
 
-const wines = [
-  {
-    slug: 'vinha-do-pomar',
-    brand: 'Casa de Nabais',
-    name: 'Vinha do Pomar',
-    intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.',
-    image: '/images/homepage/vinhos/vinha-do-pomar-context.webp',
-    buyUrl: null,
-  },
-  {
-    slug: 'loureiro',
-    brand: 'Casa de Nabais',
-    name: 'Loureiro',
-    intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.',
-    image: '/images/homepage/vinhos/loureiro-context.webp',
-    buyUrl: null,
-  },
-]
+const wineNames: Record<string, string> = {
+  'vinha-do-pomar': 'Vinha do Pomar',
+  'loureiro': 'Loureiro',
+}
+
+const wineBuyUrls: Record<string, string | null> = {
+  'vinha-do-pomar': null,
+  'loureiro': null,
+}
 
 export default function VinhosPage() {
   const pageRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
+  const { t } = useLang()
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -59,7 +54,7 @@ export default function VinhosPage() {
           style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
-          Voltar
+          {t.common.back}
         </Link>
       </div>
 
@@ -74,7 +69,7 @@ export default function VinhosPage() {
             color: '#0C4544',
           }}
         >
-          Os Vinhos
+          {t.vinhosPage.title}
         </h1>
       </div>
 
@@ -90,7 +85,7 @@ export default function VinhosPage() {
               color: 'var(--color-text-muted)',
             }}
           >
-            {INTRO_TEXT}
+            {t.vinhosPage.intro}
           </p>
         </div>
       </section>
@@ -102,7 +97,11 @@ export default function VinhosPage() {
         <div className="max-w-[1100px] mx-auto px-6 md:px-10">
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {wines.map((wine) => (
+            {t.vinhosPage.wines.map((wine) => {
+              const image = wineImages[wine.slug]
+              const name = wineNames[wine.slug]
+              const buyUrl = wineBuyUrls[wine.slug] ?? null
+              return (
               <div key={wine.slug} className="reveal-vinhos-page flex flex-col">
 
                 {/* Título — mobile: 1.º, desktop: 2.º */}
@@ -111,7 +110,7 @@ export default function VinhosPage() {
                     className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
                     style={{ fontSize: '11px' }}
                   >
-                    {wine.brand}
+                    Casa de Nabais
                   </p>
                   <h2
                     className="font-display uppercase text-cn-text"
@@ -121,7 +120,7 @@ export default function VinhosPage() {
                       lineHeight: 1.05,
                     }}
                   >
-                    {wine.name}
+                    {name}
                   </h2>
                 </div>
 
@@ -132,8 +131,8 @@ export default function VinhosPage() {
                 >
                   <div className="absolute inset-6">
                     <Image
-                      src={wine.image}
-                      alt={wine.name}
+                      src={image}
+                      alt={name ?? wine.slug}
                       fill
                       className="object-contain"
                       sizes="(max-width: 768px) 100vw, 50vw"
@@ -167,28 +166,29 @@ export default function VinhosPage() {
                       ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text)'
                     }}
                   >
-                    Detalhes
+                    {t.common.details}
                     <ArrowRight size={10} strokeWidth={1.5} />
                   </Link>
                   <button
-                    disabled={!wine.buyUrl}
-                    title={wine.buyUrl ? undefined : 'Em breve'}
+                    disabled={!buyUrl}
+                    title={buyUrl ? undefined : t.common.comingSoon}
                     className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
                     style={{
                       backgroundColor: 'var(--color-green)',
                       color: '#FAE6C1',
-                      opacity: wine.buyUrl ? 1 : 0.55,
-                      cursor: wine.buyUrl ? 'pointer' : 'not-allowed',
+                      opacity: buyUrl ? 1 : 0.55,
+                      cursor: buyUrl ? 'pointer' : 'not-allowed',
                       borderRadius: '8px',
                     }}
                   >
-                    Comprar
+                    {t.common.buy}
                     <ArrowRight size={10} strokeWidth={1.5} />
                   </button>
                 </div>
 
               </div>
-            ))}
+              )
+            })}
           </div>
 
         </div>

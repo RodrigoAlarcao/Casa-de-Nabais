@@ -5,22 +5,41 @@ import Link from 'next/link'
 import gsap from 'gsap'
 import { Home, Wine, X, Menu } from 'lucide-react'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang, type Lang } from '@/lib/i18n'
 
-const NAV_LINKS = [
-  { href: '/a-casa', label: 'A Casa' },
-  { href: '/as-vinhas', label: 'As Vinhas' },
-  { href: '/a-vinificacao', label: 'A Vinificação' },
-  { href: '/os-vinhos', label: 'Os Vinhos' },
-  { href: '/o-enoturismo', label: 'O Enoturismo' },
-]
+function LangToggle({ lang, setLang, dark = false, large = false }: { lang: Lang; setLang: (l: Lang) => void; dark?: boolean; large?: boolean }) {
+  const base = `font-display uppercase tracking-[0.14em] transition-opacity duration-200 ${large ? 'text-[15px] px-1 py-1' : 'text-[11px]'}`
+  const activeColor = dark ? '#FAE6C1' : '#FAE6C1'
+  const inactiveOpacity = 0.35
+
+  return (
+    <div className={`flex items-center ${large ? 'gap-2' : 'gap-1'}`} style={{ color: activeColor }}>
+      <button
+        onClick={() => setLang('pt')}
+        className={base}
+        style={{ opacity: lang === 'pt' ? 1 : inactiveOpacity }}
+      >
+        PT
+      </button>
+      <span style={{ opacity: 0.3, fontSize: large ? '13px' : '10px' }}>|</span>
+      <button
+        onClick={() => setLang('en')}
+        className={base}
+        style={{ opacity: lang === 'en' ? 1 : inactiveOpacity }}
+      >
+        EN
+      </button>
+    </div>
+  )
+}
 
 export default function Navbar() {
+  const { lang, setLang, t } = useLang()
   const headerRef = useRef<HTMLElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuTlRef = useRef<gsap.core.Timeline | null>(null)
 
-  /* Animação de entrada da navbar ao carregar */
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(headerRef.current, {
@@ -37,7 +56,6 @@ export default function Navbar() {
   const openMenu = () => {
     setMenuOpen(true)
 
-    /* Aguardar montagem do overlay no DOM antes de animar */
     requestAnimationFrame(() => {
       const tl = gsap.timeline()
       menuTlRef.current = tl
@@ -98,7 +116,7 @@ export default function Navbar() {
 
           {/* Links de navegação — desktop */}
           <nav className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {t.nav.links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -109,29 +127,30 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* CTAs — desktop */}
+          {/* CTAs + toggle — desktop */}
           <div className="hidden md:flex items-center gap-6">
             <Link
               href="/ficar-na-casa"
               className="flex items-center gap-2 font-display text-[14px] text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
             >
               <Home size={14} strokeWidth={1.5} />
-              Ficar na Casa
+              {t.nav.stayAtEstate}
             </Link>
             <button
               disabled
-              title="Em breve"
+              title={t.nav.comingSoon}
               className="flex items-center gap-2 font-display text-[14px] text-[#FFF9ED] opacity-40 cursor-not-allowed"
             >
               <Wine size={14} strokeWidth={1.5} />
-              Comprar Vinho
+              {t.nav.buyWine}
             </button>
+            <LangToggle lang={lang} setLang={setLang} />
           </div>
 
           {/* Hamburger — mobile */}
           <button
             onClick={openMenu}
-            aria-label="Abrir menu"
+            aria-label={t.nav.openMenu}
             className="md:hidden text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
           >
             <Menu size={22} strokeWidth={1.5} />
@@ -158,7 +177,7 @@ export default function Navbar() {
             </span>
             <button
               onClick={closeMenu}
-              aria-label="Fechar menu"
+              aria-label={t.nav.closeMenu}
               className="text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
             >
               <X size={22} strokeWidth={1.5} />
@@ -167,7 +186,7 @@ export default function Navbar() {
 
           {/* Links */}
           <nav className="flex flex-col gap-2">
-            {NAV_LINKS.map((link) => (
+            {t.nav.links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -179,25 +198,29 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* CTAs mobile */}
-          <div className="mt-auto flex flex-col gap-3 mobile-nav-link">
+          {/* Language toggle + CTAs mobile */}
+          <div className="mt-auto flex flex-col gap-3">
+            {/* Language toggle — before CTAs */}
+            <div className="mobile-nav-link flex justify-center mb-4">
+              <LangToggle lang={lang} setLang={setLang} dark large />
+            </div>
             <Link
               href="/ficar-na-casa"
               onClick={closeMenu}
-              className="flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] transition-opacity duration-200 hover:opacity-85"
+              className="mobile-nav-link flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] transition-opacity duration-200 hover:opacity-85"
               style={{ backgroundColor: '#FAE6C1', color: '#031D1D' }}
             >
               <Home size={14} strokeWidth={1.5} />
-              Ficar na Casa
+              {t.nav.stayAtEstate}
             </Link>
             <button
               disabled
-              title="Em breve"
-              className="flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] cursor-not-allowed"
+              title={t.nav.comingSoon}
+              className="mobile-nav-link flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] cursor-not-allowed"
               style={{ border: '1px solid rgba(250,230,193,0.30)', color: 'rgba(250,230,193,0.35)' }}
             >
               <Wine size={14} strokeWidth={1.5} />
-              Comprar Vinho
+              {t.nav.buyWine}
             </button>
           </div>
         </div>

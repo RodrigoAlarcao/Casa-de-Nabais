@@ -7,29 +7,22 @@ import { ArrowRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const wines = [
-  {
-    slug: 'vinha-do-pomar',
-    brand: 'Casa de Nabais',
-    name: 'Vinha do Pomar',
-    intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.',
-    image: '/images/homepage/vinhos/vinha-do-pomar-context.webp',
-    buyUrl: null,
-  },
-  {
-    slug: 'loureiro',
-    brand: 'Casa de Nabais',
-    name: 'Loureiro',
-    intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.',
-    image: '/images/homepage/vinhos/loureiro-context.webp',
-    buyUrl: null,
-  },
-]
+const wineImages: Record<string, string> = {
+  'vinha-do-pomar': '/images/homepage/vinhos/vinha-do-pomar-context.webp',
+  'loureiro':       '/images/homepage/vinhos/loureiro-context.webp',
+}
+
+const wineNames: Record<string, string> = {
+  'vinha-do-pomar': 'Vinha do Pomar',
+  'loureiro':       'Loureiro',
+}
 
 export default function SectionVinhos() {
+  const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
 
   useIsomorphicLayoutEffect(() => {
@@ -54,24 +47,24 @@ export default function SectionVinhos() {
             className="reveal-vinhos font-display uppercase text-cn-text mb-6"
             style={{
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-            whiteSpace: 'nowrap',
+              whiteSpace: 'nowrap',
               lineHeight: 1.0,
               letterSpacing: '0.04em',
             }}
           >
-            Os nossos vinhos
+            {t.sectionVinhos.heading}
           </h2>
           <p
             className="reveal-vinhos font-body text-cn-text-muted"
             style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
           >
-            Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
+            {t.sectionVinhos.body}
           </p>
         </div>
 
         {/* Wine cards — 2 columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {wines.map((wine) => (
+          {t.sectionVinhos.wines.map((wine) => (
             <div key={wine.slug} className="reveal-vinhos flex flex-col">
 
               {/* Título — mobile: 1.º, desktop: 2.º */}
@@ -80,7 +73,7 @@ export default function SectionVinhos() {
                   className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
                   style={{ fontSize: '11px' }}
                 >
-                  {wine.brand}
+                  Casa de Nabais
                 </p>
                 <h3
                   className="font-display uppercase text-cn-text"
@@ -90,7 +83,7 @@ export default function SectionVinhos() {
                     lineHeight: 1.05,
                   }}
                 >
-                  {wine.name}
+                  {wineNames[wine.slug]}
                 </h3>
               </div>
 
@@ -101,8 +94,8 @@ export default function SectionVinhos() {
               >
                 <div className="absolute inset-6">
                   <Image
-                    src={wine.image}
-                    alt={wine.name}
+                    src={wineImages[wine.slug]}
+                    alt={wineNames[wine.slug]}
                     fill
                     className="object-contain"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -136,22 +129,22 @@ export default function SectionVinhos() {
                     ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text)'
                   }}
                 >
-                  Detalhes
+                  {t.common.details}
                   <ArrowRight size={10} strokeWidth={1.5} />
                 </Link>
                 <button
-                  disabled={!wine.buyUrl}
-                  title={wine.buyUrl ? undefined : 'Em breve'}
+                  disabled
+                  title={t.common.comingSoon}
                   className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
                   style={{
-                    backgroundColor: wine.buyUrl ? 'var(--color-green)' : 'var(--color-green)',
+                    backgroundColor: 'var(--color-green)',
                     color: '#FAE6C1',
-                    opacity: wine.buyUrl ? 1 : 0.55,
-                    cursor: wine.buyUrl ? 'pointer' : 'not-allowed',
+                    opacity: 0.55,
+                    cursor: 'not-allowed',
                     borderRadius: '8px',
                   }}
                 >
-                  Comprar
+                  {t.common.buy}
                   <ArrowRight size={10} strokeWidth={1.5} />
                 </button>
               </div>

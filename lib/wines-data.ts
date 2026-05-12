@@ -31,6 +31,15 @@ export type TastingNotes = {
   palate: string
 }
 
+export type WineEnContent = {
+  subtitle: string
+  introText: string[]
+  narrativeSections: NarrativeSection[]
+  tastingNotes: TastingNotes
+  keyPoints: string
+  servingSuggestion: string
+}
+
 export type WineData = {
   slug: string
   brand: string
@@ -45,6 +54,7 @@ export type WineData = {
   keyPoints: string
   servingSuggestion: string
   vintages: WineVintage[]
+  en?: WineEnContent
 }
 
 export const wines: WineData[] = [
@@ -120,6 +130,41 @@ export const wines: WineData[] = [
         ],
       },
     ],
+    en: {
+      subtitle: 'Atlantic Freshness',
+      introText: [
+        'Casa de Nabais Loureiro is born in the Lima Valley, in an Atlantic setting where freshness and precision define the style. A direct expression of the variety, focused on aromatic purity, tension and a true sense of place.',
+      ],
+      narrativeSections: [
+        {
+          heading: 'Terroir',
+          text: 'Located in the Seara parish, in Ponte de Lima, the wine comes from vineyards exposed to Atlantic influence, with fine-grained granite soils of variable drainage. The constant ventilation of the valley favours slow ripening, preserving acidity and aromatic definition.',
+        },
+        {
+          heading: 'Viticulture',
+          text: 'High-density vineyards with permanent cover crops and no herbicides. Focus on vegetative balance and the preservation of soil life.',
+        },
+        {
+          heading: 'Winemaking',
+          text: 'Hand-harvested in small 20 kg crates. Short distance between vineyard and winery. Approximately 4 hours of skin maceration. Gentle pressing in a pneumatic press. Static settling followed by fermentation in stainless steel with temperature control.',
+        },
+        {
+          heading: 'Ageing',
+          text: 'Aged on fine lees with regular bâtonnage to build texture, complexity and natural stability.',
+        },
+        {
+          heading: 'Ageing Potential',
+          text: 'Expressive when young for its freshness and aromatic character. With bottle age it gains definition and integration.',
+        },
+      ],
+      tastingNotes: {
+        color: 'Citrine with greenish reflections.',
+        aroma: 'Refined floral profile, fresh citrus and a hint of tropical fruit.',
+        palate: 'Tense entry, marked acidity, dry and precise finish.',
+      },
+      keyPoints: 'Produced exclusively from estate-grown grapes, on a small scale, from vineyards on the granite soils of the Lima Valley. A fresh, food-friendly wine crafted to evolve.',
+      servingSuggestion: 'Grilled fish, shellfish, salads or as an aperitif.',
+    },
   },
   {
     slug: 'vinha-do-pomar',
@@ -184,5 +229,40 @@ export const wines: WineData[] = [
         ],
       },
     ],
+    en: {
+      subtitle: 'Atlantic Depth',
+      introText: [
+        'Casa de Nabais Vinha do Pomar is drawn from the selection of a single plot seeking a deeper reading of Loureiro. It retains the Atlantic character, but with greater structure, texture and ageing potential.',
+      ],
+      narrativeSections: [
+        {
+          heading: 'Terroir',
+          text: 'A specific plot of Casa de Nabais, set within the same fine-to-medium-grained granite context of the Lima Valley but with a higher clay content. Predominantly sandy to sandy-loam soils, with variable drainage and low water retention, occasionally offset by the presence of finer fractions at depth.',
+        },
+        {
+          heading: 'Viticulture',
+          text: 'High-density vineyard trained on a unilateral cordon, with permanent cover crops and no herbicides. Moderate yields, focused on concentration and precision. Phytosanitary management based on low-intervention practices, favouring the balance of the vineyard ecosystem.',
+        },
+        {
+          heading: 'Winemaking',
+          text: 'Hand-harvested in small 20 kg crates. Short distance between vineyard and winery. Approximately 4 hours of skin maceration. Gentle pressing in a pneumatic press. Static settling followed by fermentation in stainless steel with temperature control, and ageing in cement vats for gentle micro-oxygenation without disturbing the aromatic profile.',
+        },
+        {
+          heading: 'Ageing',
+          text: 'Aged on fine lees for 4 months, with natural bâtonnage from the rounded edges of the cement vats, building texture, complexity and natural stability.',
+        },
+        {
+          heading: 'Ageing Potential',
+          text: 'To be defined.',
+        },
+      ],
+      tastingNotes: {
+        color: 'Citrine with slight golden reflections.',
+        aroma: 'Stone fruit (peach, nectarine), dried herb notes, light tropical hints and a subtle mineral register.',
+        palate: 'Voluminous and textured entry, supported by well-integrated acidity that provides balance. A broad, taut and precise palate with a long, structured and persistent finish.',
+      },
+      keyPoints: 'Produced from a selected plot on the granite soils of the Lima Valley, with ageing in cement vats for greater texture and complexity. A Loureiro with structure, depth and long ageing potential.',
+      servingSuggestion: 'Structured fish dishes (salt cod, monkfish rice, octopus); poultry (free-range chicken, partridge); vegetarian cuisine (vegetable risotto); semi-aged cheeses.',
+    },
   },
 ]

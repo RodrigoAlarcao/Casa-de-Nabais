@@ -6,19 +6,22 @@ import Link from 'next/link'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const items = [
-  { label: 'As Vinhas',      href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.webp',      bg: '#3A5B4F' },
-  { label: 'A Vinificação',  href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.webp', bg: '#2A4A3E' },
-  { label: 'Os Vinhos',      href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.webp',      bg: '#1A3A2E' },
-  { label: 'Ficar na Casa',  href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
+const itemMeta = [
+  { href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.webp',      bg: '#3A5B4F' },
+  { href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.webp', bg: '#2A4A3E' },
+  { href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.webp',      bg: '#1A3A2E' },
+  { href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
 ]
 
 export default function SectionExplore({ noBg = false, dark = false, excludeHref }: { noBg?: boolean; dark?: boolean; excludeHref?: string }) {
+  const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
   const [hovered, setHovered] = useState<number | null>(null)
+  const items = t.sectionExplore.items.map((item, i) => ({ ...itemMeta[i], label: item.label }))
   const filteredItems = excludeHref ? items.filter((item) => item.href !== excludeHref) : items
 
   useIsomorphicLayoutEffect(() => {
@@ -57,7 +60,7 @@ export default function SectionExplore({ noBg = false, dark = false, excludeHref
             color: dark ? '#FAE6C1' : 'var(--color-text)',
           }}
         >
-          Explore também
+          {t.sectionExplore.heading}
         </h2>
 
         {/* Desktop — expandable flex gallery */}

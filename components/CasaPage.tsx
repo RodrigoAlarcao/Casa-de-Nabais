@@ -11,6 +11,7 @@ import CasaPessoasSection from './CasaPessoasSection'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,19 +25,12 @@ const galleryImages = [
   { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
 ]
 
-const BODY_PARAGRAPHS = [
-  'A Casa de Nabais nasce da terra e volta a ela. Entre muros antigos, vinhas trabalhadas à mão, o pomar, a horta e a mesa, vive-se um Minho verdadeiro, onde o saber agrícola, o vinho e a hospitalidade formam uma mesma realidade.',
-  'Os nossos vinhos começam muito antes de chegarem à garrafa. Começam no subsolo granítico, atravessado por um raro veio de xisto. Continuam no cuidado diário da vinha, na espera paciente, na decisão de intervir pouco. E revelam-se no copo — frescos, precisos, coerentes com o lugar de onde vêm.',
-  'Ficar na Casa de Nabais é entrar nesse ritmo: dormir num solar com séculos de história, acordar com a paisagem do Vale do Lima à nossa volta, provar o vinho na terra onde nasce, a mesma que nos dá os frutos, os legumes e as aromáticas que servimos. Entre as vinhas, a adega e a mesa, quem nos visita é convidado a compreender o vinho desde a sua origem, numa experiência próxima e autêntica, vivida com quem o faz.',
-  'A generosidade do conjunto e do que o rodeia dispensa encenações ou adornos em excesso. A casa, a vinha, o vinho e a mesa existem em continuidade. Tudo tem origem, intenção e função. Tudo foi pensado para durar, não para impressionar. Receber, na Casa de Nabais, é um ato simples e profundo: abrir a casa, partilhar o que se faz, explicar aquilo em que se acredita.',
-]
-
-const CLOSING_TEXT = 'Mais do que um lugar para visitar e partir, a Casa de Nabais é um lugar para se ficar, oferecendo estadias em plena paisagem minhota e revelando-se como um refúgio para ser vivido com tempo — como verdadeira casa de campo que é, onde vinho, história e hospitalidade se unem para criar uma experiência rara e memorável no Minho.'
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
 
 export default function CasaPage() {
+  const { t } = useLang()
   const pageRef = useRef<HTMLDivElement>(null)
 
   // SectionVinhas-style refs
@@ -194,7 +188,7 @@ export default function CasaPage() {
           }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
-          Voltar
+          {t.common.back}
         </Link>
 
         {/* Título + texto + scroll indicator */}
@@ -212,7 +206,7 @@ export default function CasaPage() {
               textShadow: '0 2px 28px rgba(3,29,29,0.95)',
             }}
           >
-            A Casa<br />de Nabais
+            {t.casaPage.titleMobile}
           </h1>
 
           <p
@@ -223,7 +217,7 @@ export default function CasaPage() {
               color: 'rgba(255,249,237,0.90)',
             }}
           >
-            Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
+            {t.casaPage.intro}
           </p>
 
           {/* Scroll indicator */}
@@ -236,7 +230,7 @@ export default function CasaPage() {
                 color: 'rgba(250,230,193,0.40)',
               }}
             >
-              scroll
+              {t.common.scroll}
             </span>
             <ArrowDown
               size={13}
@@ -258,7 +252,7 @@ export default function CasaPage() {
           style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
-          Voltar
+          {t.common.back}
         </Link>
 
         <h1
@@ -270,7 +264,7 @@ export default function CasaPage() {
             color: '#0C4544',
           }}
         >
-          A Casa de Nabais
+          {t.casaPage.title}
         </h1>
       </div>
 
@@ -288,7 +282,7 @@ export default function CasaPage() {
               color: 'var(--color-text-muted)',
             }}
           >
-            Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
+            {t.casaPage.intro}
           </p>
         </div>
       </section>
@@ -354,7 +348,7 @@ export default function CasaPage() {
             {/* Texto DIREITA */}
             <div className="flex flex-col px-0 lg:pl-10">
               {/* Parágrafos 1–2: sempre visíveis */}
-              {BODY_PARAGRAPHS.slice(0, 2).map((para, i) => (
+              {t.casaPage.bodyParagraphs.slice(0, 2).map((para: string, i: number) => (
                 <p
                   key={i}
                   className="reveal-casa font-body text-cn-text-muted mb-4 text-center lg:text-left"
@@ -364,7 +358,7 @@ export default function CasaPage() {
                 </p>
               ))}
               {/* Parágrafos 3–4: apenas desktop */}
-              {BODY_PARAGRAPHS.slice(2).map((para, i) => (
+              {t.casaPage.bodyParagraphs.slice(2).map((para: string, i: number) => (
                 <p
                   key={i + 2}
                   className="reveal-casa font-body text-cn-text-muted mb-4 last:mb-0 text-center lg:text-left hidden lg:block"
@@ -414,18 +408,18 @@ export default function CasaPage() {
           </div>
         </div>
         <div className="lg:hidden mt-5 flex items-center gap-5 justify-center">
-          <button onClick={prev} disabled={!canPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
+          <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous} className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
             <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
-            {index + 1} de {galleryImages.length}
+            {index + 1} {t.common.of} {galleryImages.length}
           </span>
-          <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
+          <button onClick={next} disabled={!canNext} aria-label={t.common.next} className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
             <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
         </div>
         <div className="lg:hidden max-w-[1200px] mx-auto px-6 mt-8">
-          {BODY_PARAGRAPHS.slice(2).map((para, i) => (
+          {t.casaPage.bodyParagraphs.slice(2).map((para: string, i: number) => (
             <p
               key={i + 2}
               className="font-body text-cn-text-muted mb-4 last:mb-0 text-center"
@@ -486,19 +480,19 @@ export default function CasaPage() {
           <button
             onClick={prev}
             disabled={!canPrev}
-            aria-label="Anterior"
+            aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200"
             style={{ opacity: canPrev ? 1 : 0.25 }}
           >
             <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
-            {index + 1} de {galleryImages.length}
+            {index + 1} {t.common.of} {galleryImages.length}
           </span>
           <button
             onClick={next}
             disabled={!canNext}
-            aria-label="Seguinte"
+            aria-label={t.common.next}
             className="p-1 transition-opacity duration-200"
             style={{ opacity: canNext ? 1 : 0.25 }}
           >
@@ -535,7 +529,7 @@ export default function CasaPage() {
       <section className="py-28 md:py-40">
         <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center">
           <TextReveal
-            text={CLOSING_TEXT}
+            text={t.casaPage.closingText}
             className="font-display"
             style={{
               fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
@@ -552,7 +546,7 @@ export default function CasaPage() {
             href="/ficar-na-casa"
             className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
           >
-            Ficar na Casa
+            {t.common.stayAtEstate}
             <ArrowRight size={11} strokeWidth={1.5} />
           </Link>
         </div>

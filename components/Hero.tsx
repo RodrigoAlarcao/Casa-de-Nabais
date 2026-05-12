@@ -6,16 +6,12 @@ import Link from 'next/link'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const HEADLINE_LINES = [
-  'PERTO DA TERRA,',
-  'ATENTOS AO DETALHE,',
-  'RESPEITANDO O TEMPO',
-]
-
 export default function Hero() {
+  const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
   const imgWrapRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -82,7 +78,6 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Imagem de fundo */}
       <div
         ref={imgWrapRef}
         className="absolute inset-0 will-change-transform"
@@ -98,7 +93,6 @@ export default function Hero() {
         />
       </div>
 
-      {/* Overlay escuro subtil */}
       <div
         className="absolute inset-0"
         style={{
@@ -107,7 +101,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Gradient de transição — funde para #FFF3DE, início exacto do gradiente da secção seguinte */}
       <div
         className="absolute left-0 right-0 z-10"
         style={{
@@ -117,7 +110,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Conteúdo — centrado */}
       <div ref={contentRef} className="relative z-20 w-full max-w-[1100px] mx-auto px-6 md:px-10 text-center">
         <h1
           className="font-display uppercase mb-6 md:mb-8"
@@ -129,7 +121,7 @@ export default function Hero() {
             textShadow: '0 2px 12px rgba(0,0,0,0.65), 0 6px 40px rgba(0,0,0,0.55)',
           }}
         >
-          {HEADLINE_LINES.map((line, i) => (
+          {t.hero.headlineLines.map((line, i) => (
             <span
               key={i}
               ref={(el) => { if (el) linesRef.current[i] = el }}
@@ -150,7 +142,7 @@ export default function Hero() {
             textShadow: '0 2px 12px rgba(0,0,0,0.60), 0 4px 32px rgba(0,0,0,0.45)',
           }}
         >
-          Assim nascem grandes vinhos
+          {t.hero.sub}
         </p>
 
         <Link
@@ -166,7 +158,7 @@ export default function Hero() {
             animation: 'heroCtaIn 0.7s ease-out 1.6s both',
           }}
         >
-          Ficar na Casa
+          {t.common.stayAtEstate}
         </Link>
       </div>
     </section>

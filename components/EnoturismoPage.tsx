@@ -8,48 +8,30 @@ import SectionExplore from './SectionExplore'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const IMG_RATIO = '4/5'
 
-const INTRO_TEXT =
-  'Na Casa de Nabais, o enoturismo no Vale do Lima vive-se de forma autêntica e intimista. Entre o solar histórico, as vinhas, a adega e a mesa, cada experiência permite compreender o vinho desde a sua origem. Provas comentadas, visitas guiadas, gastronomia sazonal e estadias em plena natureza revelam uma quinta onde o Loureiro, a terra e o tempo definem o ritmo.'
-
-const PROVAS_PARAS = [
-  'Na Casa de Nabais, as provas de vinho são sempre acompanhadas por quem o faz — o produtor, o enólogo ou um membro da equipa técnica — assegurando que cada vinho provado é explicado a partir da vinha, do solo e das escolhas de vinificação que lhe dão forma.',
-  'O Loureiro, casta central da quinta, afirma-se como fio condutor destas provas, com a sua expressão aromática marcada, as notas florais de rosa branca, flor e folha de laranjeira e o subtil laivo a louro e, na boca, a mesma nota nítida de flor e folha de laranjeira e uma acidez vibrante e muito fresca.',
-]
 const PROVAS_IMAGES = [
   { src: '/images/homepage/enoturismo/carousel-02.webp', alt: 'Prova de vinho' },
   { src: '/images/homepage/enoturismo/carousel-05.webp', alt: 'Vindima' },
   { src: '/images/homepage/enoturismo/carousel-06.webp', alt: 'Pôr do sol no Vale do Lima' },
 ]
 
-const VISITAS_PARAS = [
-  'O acompanhamento das visitas à adega e às vinhas da Casa de Nabais cabe sempre a quem vive a quinta todos os dias e conhece cada detalhe do que aqui é feito.',
-  'O percurso permite assim descobrir a relação direta entre vinha e adega, e compreender, por exemplo, a importância das uvas colhidas à mão que chegam à prensa em minutos ou do trabalho contínuo em torno da casta Loureiro e dos diferentes solos da propriedade.',
-]
 const VISITAS_IMAGES = [
   { src: '/images/homepage/vinhas/section-01.webp',  alt: 'Vinhas da Casa de Nabais' },
   { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Percurso entre as vinhas' },
   { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Detalhe das videiras' },
 ]
 
-const ALMOCOS_PARAS = [
-  'A gastronomia da Casa de Nabais nasce do seu próprio ecossistema. Da horta para a cozinha, do pomar para a mesa, cada refeição reflete a estação e o que a quinta produz em cada estação. Fruta fresca, sidra, marmelada, hortícolas e ervas aromáticas podem ser servidos aos hóspedes ou integrar os menus vínicos pensados para dialogar com os vinhos da casa.',
-  'Almoços e experiências gastronómicas são realizados mediante reserva, celebrando uma cozinha simples, honesta e profundamente ligada a este lugar onde os pratos do Minho têm primazia.',
-]
 const ALMOCOS_IMAGES = [
   { src: '/images/homepage/casa/carousel-01.webp',        alt: 'Interior da Casa de Nabais' },
   { src: '/images/homepage/casa/carousel-02.webp',        alt: 'Sala de refeições' },
   { src: '/images/homepage/enoturismo/section-01.webp',   alt: 'Sala de provas' },
 ]
 
-const PASSEIOS_PARAS = [
-  'Os passeios na mata da Casa de Nabais começam nas vinhas, entre folhas e uvas que em breve serão vinho. Numa manhã fresca ou tarde calma, atravessa-se a vinha até ao bosque, por trilhos suaves, ao som do Rio Lima e com o reconfortante cheiro de terra húmida. A flora nativa envolve o caminho e, por vezes, o casal de águias que ali nidifica, uma de muitas espécies da fauna local, sobrevoa em silêncio quem passa.',
-  'Um percurso para abrandar, sentir o Minho autêntico e descobrir a harmonia natural que sustenta toda a quinta.',
-]
 const PASSEIOS_IMAGES = [
   { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Paisagem do Vale do Lima' },
   { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Vinhas ao entardecer' },
@@ -155,6 +137,7 @@ function MobileSection({
   portraitAlt: string
   images: { src: string; alt: string }[]
 }) {
+  const { t } = useLang()
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
   const [grabbing, setGrabbing] = useState(false)
@@ -268,19 +251,19 @@ function MobileSection({
           <button
             onClick={() => setIndex((i) => i - 1)}
             disabled={!canPrev}
-            aria-label="Anterior"
+            aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200"
             style={{ opacity: canPrev ? 1 : 0.25 }}
           >
             <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(250,230,193,0.55)' }}>
-            {index + 1} de {images.length}
+            {index + 1} {t.common.of} {images.length}
           </span>
           <button
             onClick={() => setIndex((i) => i + 1)}
             disabled={!canNext}
-            aria-label="Seguinte"
+            aria-label={t.common.next}
             className="p-1 transition-opacity duration-200"
             style={{ opacity: canNext ? 1 : 0.25 }}
           >
@@ -295,6 +278,7 @@ function MobileSection({
 /* ─── Component ─────────────────────────────────────────────────── */
 
 export default function EnoturismoPage() {
+  const { t } = useLang()
   const pageRef    = useRef<HTMLDivElement>(null)
   const mobileHeroRef    = useRef<HTMLDivElement>(null)
   const mobileHeroImgRef = useRef<HTMLDivElement>(null)
@@ -456,7 +440,7 @@ export default function EnoturismoPage() {
             style={{ zIndex: 10, color: 'rgba(250,230,193,0.80)' }}
           >
             <ArrowLeft size={11} strokeWidth={1.5} />
-            Voltar
+            {t.common.back}
           </Link>
 
           <div className="absolute left-0 right-0 bottom-0 px-6 pb-6 flex flex-col items-center text-center" style={{ zIndex: 2 }}>
@@ -464,16 +448,16 @@ export default function EnoturismoPage() {
               className="font-display uppercase mb-7"
               style={{ fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.05em', color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)' }}
             >
-              Enoturismo
+              {t.enoturismoPage.title}
             </h1>
             <p
               className="font-body mb-8 w-full"
               style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
             >
-              {INTRO_TEXT}
+              {t.enoturismoPage.intro}
             </p>
             <div className="flex flex-col items-center gap-2">
-              <span className="font-display uppercase" style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.40)' }}>scroll</span>
+              <span className="font-display uppercase" style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.40)' }}>{t.common.scroll}</span>
               <ArrowDown size={13} strokeWidth={1.5} className="animate-bounce" style={{ color: 'rgba(250,230,193,0.40)' }} />
             </div>
           </div>
@@ -487,14 +471,14 @@ export default function EnoturismoPage() {
             style={{ color: 'rgba(250,230,193,0.60)' }}
           >
             <ArrowLeft size={11} strokeWidth={1.5} />
-            Voltar
+            {t.common.back}
           </Link>
 
           <h1
             className="font-display uppercase text-center mt-8 md:mt-10"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', lineHeight: 1.0, letterSpacing: '0.05em', color: '#FAE6C1' }}
           >
-            O Enoturismo
+            {t.enoturismoPage.title}
           </h1>
         </div>
 
@@ -505,7 +489,7 @@ export default function EnoturismoPage() {
               className="font-body"
               style={{ fontSize: 'clamp(1.0625rem, 1.5vw, 1.25rem)', lineHeight: 1.5, color: 'rgba(255,249,237,0.72)' }}
             >
-              {INTRO_TEXT}
+              {t.enoturismoPage.intro}
             </p>
           </div>
         </section>
@@ -539,8 +523,8 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title={<>Provas<br />de vinho</>}
-          paras={PROVAS_PARAS}
+          title={t.enoturismoPage.provasHeading}
+          paras={t.enoturismoPage.provasParas}
           portraitSrc="/images/homepage/enoturismo/carousel-01.webp"
           portraitAlt="Prova de vinhos na adega"
           images={PROVAS_IMAGES}
@@ -555,7 +539,7 @@ export default function EnoturismoPage() {
               containerRef={p1Ref}
               wrapRef={p1Wrap}
             />
-            <TextColumn title="Provas de vinho" paras={PROVAS_PARAS} pad="right" />
+            <TextColumn title={t.enoturismoPage.provasHeading} paras={t.enoturismoPage.provasParas} pad="right" />
           </div>
           <div className="mt-4">
             <ThreeImages images={PROVAS_IMAGES} largeSide="left" />
@@ -568,8 +552,8 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title={<>Visitas<br />guiadas</>}
-          paras={VISITAS_PARAS}
+          title={t.enoturismoPage.visitasHeading}
+          paras={t.enoturismoPage.visitasParas}
           portraitSrc="/images/homepage/enoturismo/carousel-02.webp"
           portraitAlt="Visita guiada às vinhas"
           images={VISITAS_IMAGES}
@@ -578,7 +562,7 @@ export default function EnoturismoPage() {
         {/* Desktop */}
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
-            <TextColumn title="Visitas guiadas às vinhas e adega" paras={VISITAS_PARAS} pad="left" />
+            <TextColumn title={t.enoturismoPage.visitasHeading} paras={t.enoturismoPage.visitasParas} pad="left" />
             <PortraitCell
               src="/images/homepage/enoturismo/carousel-02.webp"
               alt="Visita guiada às vinhas"
@@ -597,8 +581,8 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title={<>Almoços &<br />gastronomia</>}
-          paras={ALMOCOS_PARAS}
+          title={t.enoturismoPage.almocosHeading}
+          paras={t.enoturismoPage.almocosParas}
           portraitSrc="/images/homepage/enoturismo/carousel-03.webp"
           portraitAlt="Almoço na quinta"
           images={ALMOCOS_IMAGES}
@@ -613,7 +597,7 @@ export default function EnoturismoPage() {
               containerRef={p3Ref}
               wrapRef={p3Wrap}
             />
-            <TextColumn title="Almoços e experiências gastronómicas" paras={ALMOCOS_PARAS} pad="right" />
+            <TextColumn title={t.enoturismoPage.almocosHeading} paras={t.enoturismoPage.almocosParas} pad="right" />
           </div>
           <div className="mt-4">
             <ThreeImages images={ALMOCOS_IMAGES} largeSide="left" />
@@ -626,8 +610,8 @@ export default function EnoturismoPage() {
 
         {/* Mobile */}
         <MobileSection
-          title={<>Passeios<br />na mata</>}
-          paras={PASSEIOS_PARAS}
+          title={t.enoturismoPage.passeiosHeading}
+          paras={t.enoturismoPage.passeiosParas}
           portraitSrc="/images/homepage/enoturismo/carousel-04.webp"
           portraitAlt="Passeio na mata"
           images={PASSEIOS_IMAGES}
@@ -636,7 +620,7 @@ export default function EnoturismoPage() {
         {/* Desktop */}
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4 pb-28">
           <div className="grid grid-cols-2 gap-4 items-center">
-            <TextColumn title="Passeios na mata" paras={PASSEIOS_PARAS} pad="left" />
+            <TextColumn title={t.enoturismoPage.passeiosHeading} paras={t.enoturismoPage.passeiosParas} pad="left" />
             <PortraitCell
               src="/images/homepage/enoturismo/carousel-04.webp"
               alt="Passeio na mata"

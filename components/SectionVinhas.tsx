@@ -8,6 +8,7 @@ import ImageLightbox from './ImageLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,6 +25,7 @@ const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12 // px
 
 export default function SectionVinhas() {
+  const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const portraitRef = useRef<HTMLDivElement>(null)
@@ -121,25 +123,27 @@ export default function SectionVinhas() {
                 letterSpacing: '0.04em',
               }}
             >
-              As nossas<br />vinhas
+              {t.sectionVinhas.heading.split('\n').map((line, i) => (
+                <span key={i}>{line}{i === 0 && <br />}</span>
+              ))}
             </h2>
             <p
               className="reveal-vinhas font-body text-cn-text-muted mb-4 text-center lg:text-left"
               style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
             >
-              As vinhas da Casa de Nabais, situada no Vale do Lima, são vinhas próprias, onde a uva é vindimada à mão e levada até à adega em poucos minutos, preservando a sua frescura e a sua identidade.
+              {t.sectionVinhas.body1}
             </p>
             <p
               className="reveal-vinhas font-body text-cn-text-muted mb-0 lg:mb-10 text-center lg:text-left"
               style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}
             >
-              Aqui, a casta Loureiro encontra solo, tempo e rigor para se revelar com autenticidade.
+              {t.sectionVinhas.body2}
             </p>
             <Link
               href="/as-vinhas"
               className="reveal-vinhas hidden lg:inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-fit hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
             >
-              Saber mais
+              {t.common.learnMore}
               <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
           </div>
@@ -219,7 +223,7 @@ export default function SectionVinhas() {
         <button
           onClick={prev}
           disabled={!canPrev}
-          aria-label="Anterior"
+          aria-label={t.common.previous}
           className="p-1 transition-opacity duration-200"
           style={{ opacity: canPrev ? 1 : 0.25 }}
         >
@@ -228,12 +232,12 @@ export default function SectionVinhas() {
         <span
           className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted"
         >
-          {index + 1} de {carouselImages.length}
+          {index + 1} {t.common.of} {carouselImages.length}
         </span>
         <button
           onClick={next}
           disabled={!canNext}
-          aria-label="Seguinte"
+          aria-label={t.common.next}
           className="p-1 transition-opacity duration-200"
           style={{ opacity: canNext ? 1 : 0.25 }}
         >
@@ -247,7 +251,7 @@ export default function SectionVinhas() {
           href="/as-vinhas"
           className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-full hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"
         >
-          Saber mais
+          {t.common.learnMore}
           <ArrowRight size={11} strokeWidth={1.5} />
         </Link>
       </div>

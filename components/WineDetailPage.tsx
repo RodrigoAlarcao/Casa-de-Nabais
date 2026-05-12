@@ -15,6 +15,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import SectionExplore from './SectionExplore'
 import { wines, type WineData } from '@/lib/wines-data'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -41,6 +42,10 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   'Vinificação':           Wine,
   'Estágio':               Clock,
   'Potencial de Evolução': TrendingUp,
+  'Viticulture':           Leaf,
+  'Winemaking':            Wine,
+  'Ageing':                Clock,
+  'Ageing Potential':      TrendingUp,
 }
 
 /* ─── Accordion ─────────────────────────────────────────────── */
@@ -125,18 +130,26 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   const narrativeRef = useRef<HTMLDivElement>(null)
   const techRef      = useRef<HTMLDivElement>(null)
 
+  const { t, lang } = useLang()
+
+  const narrativeSections  = lang === 'en' && wine.en ? wine.en.narrativeSections  : wine.narrativeSections
+  const tastingNotes       = lang === 'en' && wine.en ? wine.en.tastingNotes       : wine.tastingNotes
+  const keyPoints          = lang === 'en' && wine.en ? wine.en.keyPoints          : wine.keyPoints
+  const servingSuggestion  = lang === 'en' && wine.en ? wine.en.servingSuggestion  : wine.servingSuggestion
+  const introText          = lang === 'en' && wine.en ? wine.en.introText          : wine.introText
+
   useIsomorphicLayoutEffect(() => { window.scrollTo(0, 0) }, [])
 
   const otherWine = wines.find((w) => w.slug !== wine.slug) as WineData
+  const otherIntroText = lang === 'en' && otherWine.en ? otherWine.en.introText : otherWine.introText
   const latestVintage = wine.vintages[0]
   const [activeYear, setActiveYear] = useState(latestVintage?.year ?? '')
   const activeVintage = wine.vintages.find((v) => v.year === activeYear) ?? latestVintage
 
-  // Accordion state — mobile: só um aberto (ou nenhum); desktop: todos abertos de forma independente
   const [isMobile, setIsMobile] = useState(false)
   const [mobileOpen, setMobileOpen] = useState<string | null>(null)
   const [desktopOpen, setDesktopOpen] = useState<Set<string>>(
-    () => new Set(wine.narrativeSections.map((s) => s.heading))
+    () => new Set(narrativeSections.map((s) => s.heading))
   )
 
   useEffect(() => {
@@ -197,7 +210,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
           style={{ color: 'rgba(3,29,29,0.50)' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
-          Os vinhos
+          {t.common.backToWines}
         </Link>
       </div>
 
@@ -230,7 +243,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 {/* Comprar CTA */}
                 <button
                   disabled
-                  title="Em breve"
+                  title={t.common.comingSoon}
                   className="mt-4 w-full inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.14em]"
                   style={{
                     fontSize: '11px', padding: '12px 0', borderRadius: '8px',
@@ -238,7 +251,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                     opacity: 0.45, cursor: 'not-allowed',
                   }}
                 >
-                  Comprar vinho
+                  {t.common.buyWine}
                 </button>
               </div>
             </div>
@@ -278,7 +291,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
               {/* Introdução */}
               <div className="mb-10 text-center md:text-left">
-                {wine.introText.map((para, i) => (
+                {introText.map((para, i) => (
                   <p
                     key={i}
                     className="reveal-header font-body text-cn-text-muted mt-4 first:mt-0"
@@ -293,7 +306,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
               {wine.vintages.length > 0 && (
                 <div className="reveal-header mb-10 pt-8" style={{ borderTop: '1px solid var(--color-border)' }}>
                   <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
-                    Colheitas
+                    {t.wineDetail.vintagesLabel}
                   </p>
 
                   {/* Year pill tabs */}
@@ -333,7 +346,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                       </ul>
                     ) : (
                       <p className="font-body text-cn-text-muted" style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.875rem)', opacity: 0.45 }}>
-                        Sem prémios registados para esta colheita.
+                        {t.common.noAwards}
                       </p>
                     )}
                   </div>
@@ -348,15 +361,15 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                       onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-text)'; e.currentTarget.style.color = 'var(--color-bg)' }}
                       onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-text)' }}
                     >
-                      Ficha Técnica <Download size={11} strokeWidth={1.5} />
+                      {t.common.techSheet} <Download size={11} strokeWidth={1.5} />
                     </a>
                   ) : (
                     <button
-                      disabled title="Em breve"
+                      disabled title={t.common.comingSoon}
                       className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3"
                       style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)', opacity: 0.35, cursor: 'not-allowed' }}
                     >
-                      Ficha Técnica <Download size={11} strokeWidth={1.5} />
+                      {t.common.techSheet} <Download size={11} strokeWidth={1.5} />
                     </button>
                   )}
                 </div>
@@ -364,10 +377,10 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
               {/* Accordions narrativos */}
               <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
-                Sobre o vinho
+                {t.wineDetail.aboutWineLabel}
               </p>
               <div ref={narrativeRef} style={{ borderTop: '1px solid var(--color-border)' }}>
-                {wine.narrativeSections.map((section) => (
+                {narrativeSections.map((section) => (
                   <NarrativeAccordion
                     key={section.heading}
                     icon={SECTION_ICONS[section.heading] ?? Leaf}
@@ -387,18 +400,18 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 {/* Informação Técnica */}
                 <div>
                   <p className="reveal-tech font-display uppercase tracking-[0.14em] mb-6" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
-                    Informação Técnica
+                    {t.wineDetail.techInfoLabel}
                   </p>
                   <dl>
                     {([
-                      { Icon: Globe,        label: 'Região',                 value: wine.techDetails.region },
-                      { Icon: MapPin,       label: 'Sub-região',             value: wine.techDetails.subRegion },
-                      { Icon: Leaf,         label: 'Casta',                  value: wine.techDetails.varieties },
-                      { Icon: Droplets,     label: 'Álcool',                 value: wine.techDetails.alcohol },
-                      { Icon: Activity,     label: 'Acidez Total',           value: wine.techDetails.totalAcidity },
-                      { Icon: FlaskConical, label: 'pH',                     value: wine.techDetails.ph },
-                      { Icon: Minus,        label: 'Açúcar Residual',        value: wine.techDetails.residualSugar },
-                      { Icon: Thermometer,  label: 'Temperatura de Serviço', value: wine.techDetails.servingTemperature },
+                      { Icon: Globe,        label: t.wineDetail.techLabels.region,             value: wine.techDetails.region },
+                      { Icon: MapPin,       label: t.wineDetail.techLabels.subRegion,           value: wine.techDetails.subRegion },
+                      { Icon: Leaf,         label: t.wineDetail.techLabels.varieties,           value: wine.techDetails.varieties },
+                      { Icon: Droplets,     label: t.wineDetail.techLabels.alcohol,             value: wine.techDetails.alcohol },
+                      { Icon: Activity,     label: t.wineDetail.techLabels.totalAcidity,        value: wine.techDetails.totalAcidity },
+                      { Icon: FlaskConical, label: t.wineDetail.techLabels.ph,                  value: wine.techDetails.ph },
+                      { Icon: Minus,        label: t.wineDetail.techLabels.residualSugar,       value: wine.techDetails.residualSugar },
+                      { Icon: Thermometer,  label: t.wineDetail.techLabels.servingTemperature,  value: wine.techDetails.servingTemperature },
                     ] as { Icon: LucideIcon; label: string; value: string }[]).map(({ Icon: RowIcon, label, value }) => (
                       <div
                         key={label}
@@ -420,13 +433,13 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 {/* Notas de Prova + Sugestão de Serviço */}
                 <div>
                   <p className="reveal-tech font-display uppercase tracking-[0.14em] mb-6" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
-                    Notas de Prova
+                    {t.wineDetail.tastingNotesLabel}
                   </p>
                   <dl className="flex flex-col gap-6 mb-8">
                     {([
-                      { Icon: Eye,      label: 'Cor',     value: wine.tastingNotes.color  },
-                      { Icon: Wind,     label: 'Aroma',   value: wine.tastingNotes.aroma  },
-                      { Icon: Sparkles, label: 'Paladar', value: wine.tastingNotes.palate },
+                      { Icon: Eye,      label: t.wineDetail.tastingLabels.color,  value: tastingNotes.color  },
+                      { Icon: Wind,     label: t.wineDetail.tastingLabels.aroma,  value: tastingNotes.aroma  },
+                      { Icon: Sparkles, label: t.wineDetail.tastingLabels.palate, value: tastingNotes.palate },
                     ] as { Icon: LucideIcon; label: string; value: string }[]).map(({ Icon: ItemIcon, label, value }) => (
                       <div key={label} className="reveal-tech">
                         <div className="flex items-center gap-2 mb-1.5">
@@ -453,11 +466,11 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                     <div className="flex items-center gap-2 mb-2">
                       <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
                       <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
-                        Sugestão de Serviço
+                        {t.wineDetail.servingSuggestionLabel}
                       </p>
                     </div>
                     <p className="font-body" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65, color: 'rgba(250,230,193,0.85)' }}>
-                      {wine.servingSuggestion}
+                      {servingSuggestion}
                     </p>
                   </div>
                 </div>
@@ -491,12 +504,12 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 <Image src={otherWine.mainImage} alt={otherWine.name} fill className="object-cover" sizes="100vw" />
               </div>
 
-              {otherWine.introText[0] && (
+              {otherIntroText[0] && (
                 <p
                   className="font-body mt-5 mb-8"
                   style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: 'rgba(250,230,193,0.65)' }}
                 >
-                  {otherWine.introText[0]}
+                  {otherIntroText[0]}
                 </p>
               )}
 
@@ -508,14 +521,14 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.12)' }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}
                 >
-                  Detalhes <ArrowRight size={10} strokeWidth={1.5} />
+                  {t.common.details} <ArrowRight size={10} strokeWidth={1.5} />
                 </Link>
                 <button
-                  disabled title="Em breve"
+                  disabled title={t.common.comingSoon}
                   className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3"
                   style={{ backgroundColor: 'rgba(250,230,193,0.12)', borderRadius: '8px', color: 'rgba(250,230,193,0.55)', cursor: 'not-allowed' }}
                 >
-                  Comprar <ArrowRight size={10} strokeWidth={1.5} />
+                  {t.common.buy} <ArrowRight size={10} strokeWidth={1.5} />
                 </button>
               </div>
             </div>

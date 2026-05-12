@@ -4,6 +4,7 @@ import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ClientProviders from '@/components/ClientProviders'
 
 const joan = Joan({
   subsets: ['latin'],
@@ -34,11 +35,13 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className={joan.variable}>
-        <SmoothScroll>
-          <Navbar />
-          {children}
-          <Footer />
-        </SmoothScroll>
+        <ClientProviders>
+          <SmoothScroll>
+            <Navbar />
+            {children}
+            <Footer />
+          </SmoothScroll>
+        </ClientProviders>
       </body>
     </html>
   )

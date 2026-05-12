@@ -1,18 +1,11 @@
+'use client'
+
 import Link from 'next/link'
-
-const quintaLinks = [
-  { label: 'A Casa', href: '/a-casa' },
-  { label: 'As Vinhas', href: '/as-vinhas' },
-  { label: 'A Vinificação', href: '/a-vinificacao' },
-  { label: 'O Enoturismo', href: '/o-enoturismo' },
-]
-
-const vinhosLinks = [
-  { label: 'Loureiro', href: '/os-vinhos' },
-  { label: 'Vinha do Pomar', href: '/os-vinhos' },
-]
+import { useLang } from '@/lib/i18n'
 
 export default function Footer() {
+  const { t } = useLang()
+
   return (
     <footer
       style={{
@@ -30,7 +23,7 @@ export default function Footer() {
               className="font-display uppercase tracking-[0.15em] text-[11px] mb-5"
               style={{ color: 'rgba(250,230,193,0.45)' }}
             >
-              Enoturismo · Vale do Lima
+              {t.footer.tagline}
             </p>
             <p
               className="font-body"
@@ -47,10 +40,10 @@ export default function Footer() {
               className="font-display uppercase tracking-[0.15em] text-[11px] mb-5"
               style={{ color: 'rgba(250,230,193,0.45)' }}
             >
-              A Quinta
+              {t.footer.quintaColumn}
             </p>
             <nav className="flex flex-col gap-3">
-              {quintaLinks.map((link) => (
+              {t.footer.quintaLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -68,10 +61,10 @@ export default function Footer() {
               className="font-display uppercase tracking-[0.15em] text-[11px] mb-5"
               style={{ color: 'rgba(250,230,193,0.45)' }}
             >
-              Os Vinhos
+              {t.footer.winesColumn}
             </p>
             <nav className="flex flex-col gap-3">
-              {vinhosLinks.map((link) => (
+              {t.footer.winesLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
@@ -117,7 +110,7 @@ export default function Footer() {
           className="font-display tracking-[0.12em] text-[10px] text-center pb-10"
           style={{ color: 'rgba(250,230,193,0.30)' }}
         >
-          2024 Casa de Nabais – Todos os direitos reservados
+          {t.footer.copyright}
         </p>
 
         <p
