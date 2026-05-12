@@ -184,8 +184,8 @@ function MobileSection({
         <div
           className="absolute left-0 right-0 pointer-events-none"
           style={{
-            top: '48%', bottom: '-2px', zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 80%)',
+            inset: 0, zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
           }}
         />
         <h2
@@ -424,7 +424,7 @@ export default function EnoturismoPage() {
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(to bottom, transparent 0%, transparent 22%, rgba(3,29,29,0.25) 40%, rgba(3,29,29,0.82) 58%, rgba(3,29,29,0.97) 72%, #031D1D 84%)',
+              background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
               zIndex: 1,
             }}
           />
