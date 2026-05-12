@@ -191,7 +191,7 @@ export default function CasaHistoriaSection() {
           </h2>
           <p
             className="reveal-hist font-body px-10"
-            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4, color: 'rgba(255,249,237,0.72)' }}
+            style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
           >
             {INTRO_TEXT}
           </p>
@@ -292,7 +292,7 @@ export default function CasaHistoriaSection() {
               <p
                 key={i}
                 className="reveal-hist font-body mb-8 last:mb-0"
-                style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4, color: 'rgba(255,249,237,0.72)' }}
+                style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
               >
                 {para}
               </p>

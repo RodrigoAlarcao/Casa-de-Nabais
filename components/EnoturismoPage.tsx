@@ -223,9 +223,9 @@ function MobileSection({
               key={i}
               className="font-body mb-4 last:mb-0"
               style={{
-                fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)',
+                fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
                 lineHeight: 1.6,
-                color: i === 0 ? 'rgba(255,249,237,0.78)' : 'rgba(255,249,237,0.60)',
+                color: i === 0 ? 'rgba(255,249,237,0.90)' : 'rgba(255,249,237,0.72)',
               }}
             >
               {para}
@@ -452,8 +452,8 @@ export default function EnoturismoPage() {
 
           <Link
             href="/"
-            className="absolute top-8 left-6 inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
-            style={{ zIndex: 10, fontFamily: 'var(--font-display), serif', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(250,230,193,0.80)' }}
+            className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+            style={{ zIndex: 10, color: 'rgba(250,230,193,0.80)' }}
           >
             <ArrowLeft size={11} strokeWidth={1.5} />
             Voltar
@@ -468,7 +468,7 @@ export default function EnoturismoPage() {
             </h1>
             <p
               className="font-body mb-8 w-full"
-              style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9375rem)', lineHeight: 1.55, color: 'rgba(255,249,237,0.68)' }}
+              style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
             >
               {INTRO_TEXT}
             </p>
@@ -483,8 +483,8 @@ export default function EnoturismoPage() {
         <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
-            style={{ fontFamily: 'var(--font-display), serif', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(250,230,193,0.60)' }}
+            className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+            style={{ color: 'rgba(250,230,193,0.60)' }}
           >
             <ArrowLeft size={11} strokeWidth={1.5} />
             Voltar

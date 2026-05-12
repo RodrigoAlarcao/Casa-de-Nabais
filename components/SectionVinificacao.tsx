@@ -103,14 +103,14 @@ export default function SectionVinificacao() {
           </h2>
           <p
             className="reveal-above font-body mb-8"
-            style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
           >
             {BODY_TEXT}
           </p>
           <Link
             href="/a-vinificacao"
             className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
-            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.45)', borderRadius: '8px' }}
+            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
           >
             Saber mais
             <ArrowRight size={11} strokeWidth={1.5} />
@@ -124,7 +124,7 @@ export default function SectionVinificacao() {
           <h2
             className="reveal-above font-display uppercase"
             style={{
-              fontSize: 'clamp(2.5rem, 5.5vw, 5rem)',
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
               lineHeight: 1.0,
               letterSpacing: '0.04em',
               color: '#FAE6C1',
@@ -137,7 +137,7 @@ export default function SectionVinificacao() {
               className="reveal-above font-body mb-10"
               style={{
                 fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
-                lineHeight: 1.4,
+                lineHeight: 1.6,
                 color: 'rgba(255,249,237,0.72)',
               }}
             >
@@ -148,7 +148,7 @@ export default function SectionVinificacao() {
               className="reveal-above inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-fit transition-colors duration-200"
               style={{
                 color: '#FAE6C1',
-                border: '1px solid rgba(250,230,193,0.45)',
+                border: '1px solid rgba(250,230,193,0.40)',
                 borderRadius: '8px',
               }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}

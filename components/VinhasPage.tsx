@@ -158,13 +158,9 @@ export default function VinhasPage() {
 
         <Link
           href="/"
-          className="absolute top-8 left-6 inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
+          className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
           style={{
             zIndex: 10,
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
             color: 'rgba(250,230,193,0.80)',
           }}
         >
@@ -192,9 +188,9 @@ export default function VinhasPage() {
           <p
             className="font-body mb-8 w-full"
             style={{
-              fontSize: 'clamp(0.75rem, 3.2vw, 0.875rem)',
+              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
               lineHeight: 1.6,
-              color: 'rgba(255,249,237,0.65)',
+              color: 'rgba(255,249,237,0.90)',
             }}
           >
             Na Casa de Nabais, as vinhas começaram muito antes de o serem.
@@ -226,14 +222,8 @@ export default function VinhasPage() {
       <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
-          style={{
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#3A5B4F',
-          }}
+          className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+          style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
           Voltar
@@ -261,7 +251,7 @@ export default function VinhasPage() {
             className="font-body"
             style={{
               fontSize: 'clamp(1.0625rem, 1.5vw, 1.25rem)',
-              lineHeight: 1.35,
+              lineHeight: 1.3,
               fontWeight: 400,
               color: 'var(--color-text-muted)',
             }}
@@ -383,7 +373,7 @@ export default function VinhasPage() {
         </div>
 
         {/* Animated quote */}
-        <div className="mobile-quote px-8 py-14 text-center">
+        <div className="mobile-quote px-8 py-16 text-center">
           <p
             className="font-display"
             style={{
@@ -604,7 +594,7 @@ export default function VinhasPage() {
         </div>
 
         {/* Frase de fecho */}
-        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32 pb-4 md:pb-8">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32 pb-20 md:pb-28">
           <p
             className="font-display"
             style={{
@@ -735,13 +725,13 @@ export default function VinhasPage() {
                     </h3>
                     <p
                       className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
                       Com o clássico solo da região — terra preta, muita matéria orgânica e argila — apresenta um terreno fértil, com muito vigor, onde agimos para criar as melhores condições para a vinha.
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.58)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
                       Aqui o foco é reduzir a produção natural do solo para alcançar mais qualidade, complexidade e identidade no vinho feito a partir da casta Loureiro.
                     </p>
@@ -843,13 +833,13 @@ export default function VinhasPage() {
                     </h3>
                     <p
                       className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
                       Situada numa zona ligeiramente mais elevada da Casa de Nabais, esta é uma vinha de solo muito pobre, pedregoso, com seixo rolado e quase nenhuma retenção de água.
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.58)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
                       Trata-se de uma parcela de menor produção, mas que entrega uvas mais concentradas, refletindo no vinho um caráter mais profundo e distinto da casta Loureiro que ali cresce.
                     </p>
@@ -951,13 +941,13 @@ export default function VinhasPage() {
                     </h3>
                     <p
                       className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
                       Localizada na freguesia da Seara, a poucos quilómetros da Casa de Nabais, apresenta solo granítico com fertilidade e uma exposição solar durante praticamente todo o dia, graças à sua posição num ligeiro planalto.
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.58)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
                       Foi a escolhida para plantar as castas Alvarinho e Vinhão, explorando esta luz privilegiada para obter maturações mais completas num clima marcadamente atlântico.
                     </p>
@@ -1059,13 +1049,13 @@ export default function VinhasPage() {
                     </h3>
                     <p
                       className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
                       Situada na freguesia da Feitosa, também na margem esquerda do Rio Lima, esta parcela singulariza-se pelo substrato xistoso que contrasta com o granito dominante na região.
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.58)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
                       Aqui a vinha produz menos, as raízes vão a maior profundidade em busca de água e nutrição, e as uvas expressam uma concentração e mineralidade que se transferem directamente para o copo.
                     </p>

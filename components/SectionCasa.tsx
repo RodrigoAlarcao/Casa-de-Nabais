@@ -171,7 +171,7 @@ export default function SectionCasa() {
             Conheça a Casa<br />de Nabais
           </h2>
           <p className="reveal-casa font-body mb-8"
-            style={{ fontSize: 'clamp(0.8125rem, 3.5vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.75)' }}>
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
             Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.
           </p>
           <div className="flex gap-3">
@@ -214,7 +214,7 @@ export default function SectionCasa() {
 
 
         {/* TextReveal — mobile */}
-        <div className="px-6 pb-16 text-center">
+        <div className="px-6 pt-10 pb-20 text-center">
           <TextReveal
             text="A Casa de Nabais é também um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
             className="font-display"
@@ -234,7 +234,7 @@ export default function SectionCasa() {
               Conheça<br />a Casa<br />de Nabais
             </h2>
             <p className="reveal-casa font-body mb-10"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4, color: 'rgba(255,249,237,0.72)' }}>
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}>
               Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.
             </p>
             <div className="reveal-casa flex items-center gap-4">
@@ -273,7 +273,7 @@ export default function SectionCasa() {
       </div>
 
       {/* Desktop navigation */}
-      <div className="hidden lg:block mt-5 flex items-center gap-5"
+      <div className="hidden lg:flex mt-5 items-center gap-5"
         style={{ paddingLeft: carouselLeft }}>
         <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
           className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>

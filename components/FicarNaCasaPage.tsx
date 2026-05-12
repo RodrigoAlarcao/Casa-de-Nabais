@@ -639,7 +639,7 @@ export default function FicarNaCasaPage() {
             className="font-body mb-3"
             style={{
               fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               color: 'rgba(250,230,193,0.82)',
             }}
           >
@@ -649,7 +649,7 @@ export default function FicarNaCasaPage() {
             className="font-body"
             style={{
               fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               color: 'rgba(250,230,193,0.82)',
             }}
           >
@@ -932,7 +932,7 @@ export default function FicarNaCasaPage() {
               Os nossos vinhos
             </h2>
             <p className="font-body text-cn-text-muted"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.4 }}>
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}>
               Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
             </p>
           </div>

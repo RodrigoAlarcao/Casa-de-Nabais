@@ -187,13 +187,9 @@ export default function CasaPage() {
 
         <Link
           href="/"
-          className="absolute top-8 left-6 inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
+          className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
           style={{
             zIndex: 10,
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
             color: 'rgba(250,230,193,0.80)',
           }}
         >
@@ -222,9 +218,9 @@ export default function CasaPage() {
           <p
             className="font-body mb-8 w-full"
             style={{
-              fontSize: 'clamp(0.8125rem, 3.5vw, 0.9375rem)',
-              lineHeight: 1.55,
-              color: 'rgba(255,249,237,0.68)',
+              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+              lineHeight: 1.6,
+              color: 'rgba(255,249,237,0.90)',
             }}
           >
             Na Casa de Nabais, o tempo corre ao ritmo da vinha, da luz que ilumina o Vale do Lima e das estações que regressam sempre diferentes. Construída há mais de quatro séculos, é uma casa feita para cultivar, acolher e durar.
@@ -258,14 +254,8 @@ export default function CasaPage() {
       <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-50"
-          style={{
-            fontFamily: 'var(--font-display), serif',
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#3A5B4F',
-          }}
+          className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+          style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
           Voltar
