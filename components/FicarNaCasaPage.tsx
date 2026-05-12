@@ -15,6 +15,7 @@ import type { LucideIcon } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -99,6 +100,7 @@ type FormState = 'idle' | 'loading' | 'success' | 'error'
 /* ─── Component ────────────────────────────────────────────────── */
 
 export default function FicarNaCasaPage() {
+  const { t } = useLang()
   const pageRef = useRef<HTMLDivElement>(null)
 
   /* gallery lightbox */
@@ -205,7 +207,7 @@ export default function FicarNaCasaPage() {
   }
 
   /* ── Shared: guests select with chevron ── */
-  function renderGuestsSelect(labelText = 'Who', fontSize = '1.0625rem') {
+  function renderGuestsSelect(labelText: string, fontSize = '1.0625rem') {
     return (
       <div style={getPill('pessoas', form.pessoas)}>
         <span style={labelStyle}>{labelText}</span>
@@ -257,19 +259,13 @@ export default function FicarNaCasaPage() {
             className="font-display"
             style={{ fontSize: 'clamp(1.375rem, 5vw, 1.625rem)', color: '#FAE6C1', lineHeight: 1.15 }}
           >
-            Pedido recebido.
+            {t.ficarNaCasaPage.formSuccess}
           </h3>
           <p
             className="font-body"
             style={{ fontSize: '0.9375rem', lineHeight: 1.65, color: 'rgba(255,249,237,0.62)' }}
           >
-            A nossa equipa irá entrar em contacto pessoalmente nas próximas 24 horas para confirmar todos os detalhes da sua estadia.
-          </p>
-          <p
-            className="font-display"
-            style={{ fontSize: '0.875rem', color: 'rgba(250,230,193,0.45)', marginTop: '4px' }}
-          >
-            Até breve.
+            {t.ficarNaCasaPage.formSuccessMsg}
           </p>
         </div>
 
@@ -292,7 +288,7 @@ export default function FicarNaCasaPage() {
 
         <div className="grid grid-cols-2 gap-2">
           <div style={getPill('checkIn', form.checkIn)}>
-            <span style={labelStyle}>Check In</span>
+            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
             <input type="date" value={form.checkIn} onChange={setField('checkIn')}
               min={new Date().toISOString().split('T')[0]}
               style={{ ...valueStyle, colorScheme: 'dark' }}
@@ -300,7 +296,7 @@ export default function FicarNaCasaPage() {
             />
           </div>
           <div style={getPill('checkOut', form.checkOut)}>
-            <span style={labelStyle}>Check Out</span>
+            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
             <input type="date" value={form.checkOut} onChange={setField('checkOut')}
               min={form.checkIn || new Date().toISOString().split('T')[0]}
               style={{ ...valueStyle, colorScheme: 'dark' }}
@@ -309,7 +305,7 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect('Who')}
+        {renderGuestsSelect(t.ficarNaCasaPage.formGuests)}
 
         <button
           onClick={onCTA}
@@ -324,7 +320,7 @@ export default function FicarNaCasaPage() {
             marginTop: '4px',
           }}
         >
-          Reservar
+          {t.ficarNaCasaPage.bookingButton}
         </button>
 
         <p className="text-center font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.35)', marginTop: '2px' }}>
@@ -345,7 +341,7 @@ export default function FicarNaCasaPage() {
         {/* Editable dates */}
         <div className="grid grid-cols-2 gap-2">
           <div style={getPill('checkIn', form.checkIn)}>
-            <span style={labelStyle}>Check In</span>
+            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
             <input type="date" value={form.checkIn} onChange={setField('checkIn')}
               min={new Date().toISOString().split('T')[0]}
               style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
@@ -353,7 +349,7 @@ export default function FicarNaCasaPage() {
             />
           </div>
           <div style={getPill('checkOut', form.checkOut)}>
-            <span style={labelStyle}>Check Out</span>
+            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
             <input type="date" value={form.checkOut} onChange={setField('checkOut')}
               min={form.checkIn || new Date().toISOString().split('T')[0]}
               style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
@@ -362,12 +358,12 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect('Nº de hóspedes', '0.9375rem')}
+        {renderGuestsSelect(t.ficarNaCasaPage.formGuests, '0.9375rem')}
 
         {[
-          { key: 'nome',     label: 'Nome *',   type: 'text',  placeholder: 'O seu nome',       required: true  },
-          { key: 'email',    label: 'Email *',  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
-          { key: 'telefone', label: 'Telefone', type: 'tel',   placeholder: '+351 — opcional',   required: false },
+          { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
+          { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
+          { key: 'telefone', label: t.ficarNaCasaPage.formPhone,  type: 'tel',   placeholder: '+351 — opcional',   required: false },
         ].map(({ key, label, type, placeholder, required }) => (
           <div key={key} style={getPill(key, form[key as keyof typeof form])}>
             <span style={labelStyle}>{label}</span>
@@ -381,7 +377,7 @@ export default function FicarNaCasaPage() {
         ))}
 
         <div style={getPill('mensagem', form.mensagem)}>
-          <span style={labelStyle}>Mensagem</span>
+          <span style={labelStyle}>{t.ficarNaCasaPage.formMessage}</span>
           <textarea rows={3} placeholder="Pedidos especiais…"
             value={form.mensagem} onChange={setField('mensagem')}
             style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
@@ -403,13 +399,18 @@ export default function FicarNaCasaPage() {
             opacity: formState === 'loading' ? 0.7 : 1,
           }}
         >
-          {formState === 'loading' ? 'A enviar…' : 'Enviar pedido'}
+          {formState === 'loading' ? t.ficarNaCasaPage.formSending : t.ficarNaCasaPage.formSubmit}
         </button>
 
         {formState === 'error' && (
-          <p className="font-body text-center" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
-            Ocorreu um erro. Tente novamente.
-          </p>
+          <div className="text-center">
+            <p className="font-display" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
+              {t.ficarNaCasaPage.formError}
+            </p>
+            <p className="font-body" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
+              {t.ficarNaCasaPage.formErrorMsg}
+            </p>
+          </div>
         )}
 
         <div className="flex items-center justify-center gap-2">
@@ -444,7 +445,7 @@ export default function FicarNaCasaPage() {
 
         <div className="grid grid-cols-2 gap-2">
           <div style={getPill('checkIn', form.checkIn)}>
-            <span style={labelStyle}>Check In</span>
+            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
             <input type="date" value={form.checkIn} onChange={setField('checkIn')}
               min={new Date().toISOString().split('T')[0]}
               style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
@@ -452,7 +453,7 @@ export default function FicarNaCasaPage() {
             />
           </div>
           <div style={getPill('checkOut', form.checkOut)}>
-            <span style={labelStyle}>Check Out</span>
+            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
             <input type="date" value={form.checkOut} onChange={setField('checkOut')}
               min={form.checkIn || new Date().toISOString().split('T')[0]}
               style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
@@ -461,12 +462,12 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect('Nº de hóspedes', '0.9375rem')}
+        {renderGuestsSelect(t.ficarNaCasaPage.formGuests, '0.9375rem')}
 
         {[
-          { key: 'nome',     label: 'Nome *',   type: 'text',  placeholder: 'O seu nome',       required: true  },
-          { key: 'email',    label: 'Email *',  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
-          { key: 'telefone', label: 'Telefone', type: 'tel',   placeholder: '+351 — opcional',   required: false },
+          { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
+          { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
+          { key: 'telefone', label: t.ficarNaCasaPage.formPhone,  type: 'tel',   placeholder: '+351 — opcional',   required: false },
         ].map(({ key, label, type, placeholder, required }) => (
           <div key={key} style={getPill(key, form[key as keyof typeof form])}>
             <span style={labelStyle}>{label}</span>
@@ -480,7 +481,7 @@ export default function FicarNaCasaPage() {
         ))}
 
         <div style={getPill('mensagem', form.mensagem)}>
-          <span style={labelStyle}>Mensagem</span>
+          <span style={labelStyle}>{t.ficarNaCasaPage.formMessage}</span>
           <textarea rows={3} placeholder="Pedidos especiais…"
             value={form.mensagem} onChange={setField('mensagem')}
             style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
@@ -502,13 +503,18 @@ export default function FicarNaCasaPage() {
             opacity: formState === 'loading' ? 0.7 : 1,
           }}
         >
-          {formState === 'loading' ? 'A enviar…' : 'Enviar pedido'}
+          {formState === 'loading' ? t.ficarNaCasaPage.formSending : t.ficarNaCasaPage.formSubmit}
         </button>
 
         {formState === 'error' && (
-          <p className="font-body text-center" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
-            Ocorreu um erro. Tente novamente.
-          </p>
+          <div className="text-center">
+            <p className="font-display" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
+              {t.ficarNaCasaPage.formError}
+            </p>
+            <p className="font-body" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
+              {t.ficarNaCasaPage.formErrorMsg}
+            </p>
+          </div>
         )}
 
         <div className="flex items-center justify-center gap-2">
@@ -549,7 +555,7 @@ export default function FicarNaCasaPage() {
               color: '#FAE6C1',
             }}
           >
-            Ficar na<br className="md:hidden" /> Casa de Nabais
+            {t.ficarNaCasaPage.title}
           </h1>
 
           <div className="flex items-center justify-center gap-2 mt-4">
@@ -635,26 +641,19 @@ export default function FicarNaCasaPage() {
 
         {/* Intro text + specs — ainda no fundo verde */}
         <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-10 md:mt-14 text-center">
-          <p
-            className="font-body mb-3"
-            style={{
-              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
-              lineHeight: 1.6,
-              color: 'rgba(250,230,193,0.82)',
-            }}
-          >
-            Inteiramente recuperada, a Casa de Nabais dispõe de 5 suítes e 1 apartamento, confortáveis e silenciosos, integrados na paisagem e no ambiente agrícola que a rodeia. Com vistas abertas sobre a vinha e próximos da adega onde repousam os vinhos, os quartos oferecem o conforto da tecnologia atual sem perder o charme deste solar milenário com séculos de história.
-          </p>
-          <p
-            className="font-body"
-            style={{
-              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
-              lineHeight: 1.6,
-              color: 'rgba(250,230,193,0.82)',
-            }}
-          >
-            Nos interiores, o encontro entre peças com história e uma modernidade discreta cria espaços de pausa e luz suave, pensados para estar e ficar. Dos pequenos-almoços com produtos da quinta à piscina e ao spa, tudo convida a abrandar — até o silêncio do vale, a vinha e a casa se tornam parte da experiência.
-          </p>
+          {(Array.isArray(t.ficarNaCasaPage.intro) ? t.ficarNaCasaPage.intro : [t.ficarNaCasaPage.intro]).map((para: string, i: number, arr: string[]) => (
+            <p
+              key={i}
+              className={`font-body${i < arr.length - 1 ? ' mb-3' : ''}`}
+              style={{
+                fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
+                lineHeight: 1.6,
+                color: 'rgba(250,230,193,0.82)',
+              }}
+            >
+              {para}
+            </p>
+          ))}
 
           {/* Specs row */}
           <div
@@ -664,19 +663,19 @@ export default function FicarNaCasaPage() {
             <div className="flex items-center gap-2.5">
               <Bed size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
               <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                5 suítes + 1 apartamento
+                {t.ficarNaCasaPage.bedroomsLabel}
               </span>
             </div>
             <div className="flex items-center gap-2.5">
               <Users size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
               <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                12 pessoas
+                {t.ficarNaCasaPage.guestsLabel}
               </span>
             </div>
             <div className="flex items-center gap-2.5">
               <Bath size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
               <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                7 casas de banho
+                {t.ficarNaCasaPage.bathsLabel}
               </span>
             </div>
           </div>
@@ -705,7 +704,7 @@ export default function FicarNaCasaPage() {
                   className="mt-4 w-full font-display tracking-[0.04em] py-4 rounded-[12px]"
                   style={{ backgroundColor: '#FAE6C1', color: '#031D1D', border: 'none', fontSize: '1rem' }}
                 >
-                  Reservar
+                  {t.ficarNaCasaPage.bookingButton}
                 </button>
               </div>
 
@@ -737,14 +736,9 @@ export default function FicarNaCasaPage() {
                   className="reveal-item font-display mb-5"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)', lineHeight: 1.3 }}
                 >
-                  Enoturismo de charme no coração do Vale do Lima
+                  {t.ficarNaCasaPage.locationIntro}
                 </h3>
-                {[
-                  'A cerca de uma hora do Porto, de Vigo (Espanha) e de Guimarães, a meia hora de Braga e de Viana do Castelo, e a 20 minutos da Praia do Cabedelo, o spot preferido dos praticantes de Surf, Windsurf e Kitesurf, a Casa de Nabais é uma quinta minhota histórica situada em Ponte de Lima, no coração do Vale do Lima, berço da casta Loureiro.',
-                  'Focado na frescura, no equilíbrio e no tempo que esta casta exige e merece, o projeto combina produção vínica com uma vertente de enoturismo personalizada e de elevada qualidade.',
-                  'Inteiramente recuperada, a casa dispõe de 5 suítes e 1 apartamento, confortáveis e silenciosos, integrados na paisagem e no ambiente agrícola que a rodeia. Com vistas abertas sobre as vinhas e proximidade à adega onde repousam os vinhos, os quartos oferecem o conforto da tecnologia atual sem perder o charme deste solar minhoto com séculos de história.',
-                  'Nos interiores, o encontro entre peças com história e uma modernidade discreta cria espaços de pausa e luz suave, pensados para estar e ficar. Dos pequenos-almoços com produtos da quinta à piscina e ao spa, tudo convida a abrandar, até que o silêncio do vale, a vinha e a casa se tornam parte da experiência.',
-                ].map((para, i) => (
+                {(Array.isArray(t.ficarNaCasaPage.intro) ? t.ficarNaCasaPage.intro : [t.ficarNaCasaPage.intro]).map((para: string, i: number) => (
                   <p
                     key={i}
                     className="reveal-item font-body mb-4 last:mb-0"
@@ -764,14 +758,14 @@ export default function FicarNaCasaPage() {
                   className="reveal-item font-display mb-6"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
-                  Comodidades
+                  {t.ficarNaCasaPage.amenitiesHeading}
                 </h2>
                 <div className="reveal-item grid grid-cols-2 gap-x-8 gap-y-4">
-                  {AMENITIES.map(({ name, Icon }) => (
-                    <div key={name} className="flex items-center gap-3">
+                  {AMENITIES.map(({ Icon }, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
                       <Icon size={16} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.65)', flexShrink: 0 }} />
                       <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
-                        {name}
+                        {t.ficarNaCasaPage.amenities[idx]}
                       </span>
                     </div>
                   ))}
@@ -787,20 +781,20 @@ export default function FicarNaCasaPage() {
                   className="reveal-item font-display mb-6"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
-                  Atividades e experiências
+                  {t.ficarNaCasaPage.activitiesHeading}
                 </h2>
                 <div className="reveal-item flex flex-col gap-4">
-                  {ACTIVITIES.map(({ name, Icon }) => (
-                    <div key={name} className="flex items-center gap-3">
+                  {ACTIVITIES.map(({ Icon }, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
                       <Icon size={16} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.65)', flexShrink: 0 }} />
                       <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
-                        {name}
+                        {t.ficarNaCasaPage.activities[idx]}
                       </span>
                     </div>
                   ))}
                 </div>
                 <p className="reveal-item font-body mt-5" style={{ fontSize: '0.875rem', color: 'rgba(255,249,237,0.45)' }}>
-                  Saiba mais sobre actividades no Vale do Lima em{' '}
+                  {t.ficarNaCasaPage.activitiesLinkText}{' '}
                   <a href="https://www.visitepontedelima.pt" target="_blank" rel="noopener noreferrer"
                     className="underline underline-offset-2 transition-opacity duration-200 hover:opacity-100">
                     visitepontedelima.pt
@@ -817,15 +811,15 @@ export default function FicarNaCasaPage() {
                   className="reveal-item font-display mb-2"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
-                  Turismo histórico e cultural
+                  {t.ficarNaCasaPage.locationHeading}
                 </h2>
                 <p className="reveal-item font-display mb-8" style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}>
-                  (a 10-15 minutos da Casa de Nabais)
+                  {t.ficarNaCasaPage.winesSubtitle}
                 </p>
 
                 {/* Cidades */}
                 <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
-                  Cidades e pontos de referência:
+                  {t.ficarNaCasaPage.nearbyCitiesHeading}
                 </p>
                 <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
                   {NEARBY_CITIES.map(({ name, detail }) => (
@@ -838,11 +832,11 @@ export default function FicarNaCasaPage() {
 
                 {/* Estradas */}
                 <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
-                  Principais eixos rodoviários da região:
+                  {t.ficarNaCasaPage.nearbyRoadsHeading}
                 </p>
                 <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
-                  {NEARBY_ROADS.map(road => (
-                    <li key={road} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
+                  {t.ficarNaCasaPage.nearbyRoads.map((road: string, i: number) => (
+                    <li key={i} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
                       {road}
                     </li>
                   ))}
@@ -850,7 +844,7 @@ export default function FicarNaCasaPage() {
 
                 {/* Comboio */}
                 <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
-                  Comboio (estações mais próximas):
+                  {t.ficarNaCasaPage.nearbyTrainsHeading}
                 </p>
                 <ul className="reveal-item" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
                   {NEARBY_TRAINS.map(({ name, detail }) => (
@@ -870,7 +864,7 @@ export default function FicarNaCasaPage() {
                   className="reveal-item font-display mb-6"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
-                  Localização
+                  {t.ficarNaCasaPage.locationHeading}
                 </h2>
                 <div
                   className="reveal-item relative w-full overflow-hidden rounded-[6px]"
@@ -929,11 +923,11 @@ export default function FicarNaCasaPage() {
               className="font-display uppercase text-cn-text mb-6"
               style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.04em' }}
             >
-              Os nossos vinhos
+              {t.ficarNaCasaPage.winesHeading}
             </h2>
             <p className="font-body text-cn-text-muted"
               style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6 }}>
-              Produzidos exclusivamente com uva própria, em pequena escala, são vinhos frescos, gastronómicos e pensados para evoluir, revelando o caráter dos solos graníticos e xistosos onde nascem.
+              {t.ficarNaCasaPage.winesIntro}
             </p>
           </div>
 
@@ -979,15 +973,15 @@ export default function FicarNaCasaPage() {
                     onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-text)'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-bg)' }}
                     onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text)' }}
                   >
-                    Detalhes <ArrowRight size={10} strokeWidth={1.5} />
+                    {t.common.details} <ArrowRight size={10} strokeWidth={1.5} />
                   </Link>
                   <button
                     disabled
-                    title="Em breve"
+                    title={t.common.comingSoon}
                     className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4"
                     style={{ backgroundColor: 'var(--color-green)', color: '#FAE6C1', opacity: 0.55, cursor: 'not-allowed', borderRadius: '8px' }}
                   >
-                    Comprar <ArrowRight size={10} strokeWidth={1.5} />
+                    {t.common.buy} <ArrowRight size={10} strokeWidth={1.5} />
                   </button>
                 </div>
               </div>
@@ -1020,7 +1014,7 @@ export default function FicarNaCasaPage() {
             <div className="flex justify-end px-5 pt-5 pb-2 flex-shrink-0">
               <button
                 onClick={() => { setBookingModalOpen(false); setFormState('idle') }}
-                aria-label="Fechar"
+                aria-label={t.common.close}
                 className="w-8 h-8 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-70"
                 style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
               >
@@ -1043,7 +1037,7 @@ export default function FicarNaCasaPage() {
           <div className="flex items-center justify-end px-6 py-4">
             <button
               onClick={() => { setMobileOpen(false); setFormState('idle') }}
-              aria-label="Fechar"
+              aria-label={t.common.close}
               className="w-9 h-9 rounded-full flex items-center justify-center"
               style={{ backgroundColor: 'rgba(255,249,237,0.10)', border: '1px solid rgba(250,230,193,0.18)' }}
             >
@@ -1079,7 +1073,7 @@ export default function FicarNaCasaPage() {
           className="font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
           style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '8px' }}
         >
-          Reservar
+          {t.ficarNaCasaPage.bookingButton}
         </button>
       </div>
 
@@ -1192,6 +1186,7 @@ function Lightbox({
   onPrev: () => void
   onNext: () => void
 }) {
+  const { t } = useLang()
   return (
     <div
       className="fixed inset-0 z-[400] flex items-center justify-center"
@@ -1208,14 +1203,14 @@ function Lightbox({
         />
       </div>
 
-      <button onClick={onClose} aria-label="Fechar"
+      <button onClick={onClose} aria-label={t.common.close}
         className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center"
         style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
         <X size={18} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
       </button>
 
       {index > 0 && (
-        <button onClick={e => { e.stopPropagation(); onPrev() }} aria-label="Anterior"
+        <button onClick={e => { e.stopPropagation(); onPrev() }} aria-label={t.common.previous}
           className="absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
           style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
           <ChevronLeft size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -1223,7 +1218,7 @@ function Lightbox({
       )}
 
       {index < images.length - 1 && (
-        <button onClick={e => { e.stopPropagation(); onNext() }} aria-label="Seguinte"
+        <button onClick={e => { e.stopPropagation(); onNext() }} aria-label={t.common.next}
           className="absolute right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
           style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
           <ChevronRight size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />

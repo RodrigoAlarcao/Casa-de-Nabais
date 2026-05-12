@@ -9,6 +9,7 @@ import ImageLightbox from './ImageLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -29,6 +30,7 @@ const MOBILE_LEFT = 16    // px from left edge on mobile
 const MOBILE_PEEK = 40    // px of next slide visible on mobile
 
 export default function SectionCasa() {
+  const { t } = useLang()
   const sectionRef       = useRef<HTMLElement>(null)
   const containerRef     = useRef<HTMLDivElement>(null)
   const portraitRef      = useRef<HTMLDivElement>(null)
@@ -168,22 +170,24 @@ export default function SectionCasa() {
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
           <h2 className="reveal-casa font-display uppercase mb-6"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}>
-            Conheça a Casa<br />de Nabais
+            {t.sectionCasa.headingMobile.split('\n').map((line, i, arr) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}
           </h2>
           <p className="reveal-casa font-body mb-8"
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
-            Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.
+            {t.sectionCasa.body}
           </p>
           <div className="flex gap-3">
             <Link href="/a-casa"
               className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
               style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
-              Saber mais <ArrowRight size={11} strokeWidth={1.5} />
+              {t.common.learnMore} <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
             <Link href="/ficar-na-casa"
               className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
               style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
-              Ficar na casa <ArrowRight size={11} strokeWidth={1.5} />
+              {t.common.stayAtEstate} <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
           </div>
         </div>
@@ -197,15 +201,15 @@ export default function SectionCasa() {
 
         {/* Navigation */}
         <div className="mt-5 flex items-center gap-5 justify-center">
-          <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
+          <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
             <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em]"
             style={{ color: 'rgba(250,230,193,0.55)' }}>
-            {index + 1} de {carouselImages.length}
+            {index + 1} {t.common.of} {carouselImages.length}
           </span>
-          <button onClick={next} disabled={!canNext} aria-label="Seguinte"
+          <button onClick={next} disabled={!canNext} aria-label={t.common.next}
             className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
             <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
@@ -216,7 +220,7 @@ export default function SectionCasa() {
         {/* TextReveal — mobile */}
         <div className="px-6 pt-10 pb-20 text-center">
           <TextReveal
-            text="A Casa de Nabais é também um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
+            text={t.sectionCasa.textRevealMobile}
             className="font-display"
             style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
             ghostOpacity={0.18}
@@ -231,11 +235,13 @@ export default function SectionCasa() {
           <div className="flex flex-col justify-center px-[4.5rem]">
             <h2 className="reveal-casa font-display uppercase mb-8"
               style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', lineHeight: 1.0, letterSpacing: '0.04em', color: '#FAE6C1' }}>
-              Conheça<br />a Casa<br />de Nabais
+              {t.sectionCasa.headingDesktop.split('\n').map((line, i, arr) => (
+                <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+              ))}
             </h2>
             <p className="reveal-casa font-body mb-10"
               style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}>
-              Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.
+              {t.sectionCasa.body}
             </p>
             <div className="reveal-casa flex items-center gap-4">
               <Link href="/a-casa"
@@ -243,14 +249,14 @@ export default function SectionCasa() {
                 style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}>
-                Saiba mais <ArrowRight size={11} strokeWidth={1.5} />
+                {t.sectionCasa.learnMore} <ArrowRight size={11} strokeWidth={1.5} />
               </Link>
               <Link href="/ficar-na-casa"
                 className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 transition-colors duration-200"
                 style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}>
-                Ficar na Casa <ArrowRight size={11} strokeWidth={1.5} />
+                {t.common.stayAtEstate} <ArrowRight size={11} strokeWidth={1.5} />
               </Link>
             </div>
           </div>
@@ -275,15 +281,15 @@ export default function SectionCasa() {
       {/* Desktop navigation */}
       <div className="hidden lg:flex mt-5 items-center gap-5"
         style={{ paddingLeft: carouselLeft }}>
-        <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
+        <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
           className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
           <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
         </button>
         <span className="font-display text-[10px] uppercase tracking-[0.16em]"
           style={{ color: 'rgba(250,230,193,0.55)' }}>
-          {index + 1} de {carouselImages.length}
+          {index + 1} {t.common.of} {carouselImages.length}
         </span>
-        <button onClick={next} disabled={!canNext} aria-label="Seguinte"
+        <button onClick={next} disabled={!canNext} aria-label={t.common.next}
           className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
           <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
         </button>
@@ -292,7 +298,7 @@ export default function SectionCasa() {
       {/* TextReveal — desktop only */}
       <div className="hidden lg:block max-w-[1050px] mx-auto px-10 py-28 text-center">
         <TextReveal
-          text="A Casa de Nabais é um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
+          text={t.sectionCasa.textRevealDesktop}
           className="font-display"
           style={{ fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)', lineHeight: 1.0, fontWeight: 400, color: '#FAE6C1' }}
           ghostOpacity={0.18}

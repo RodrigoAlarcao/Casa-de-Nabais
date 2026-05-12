@@ -7,13 +7,12 @@ import { ArrowRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const BODY_TEXT = 'Na Casa de Nabais vinificação é sinónimo de investigação contínua. Começa na vinha, respeita a uva e intervém apenas quando necessário. Trabalhamos com precisão, ciência e curiosidade, para revelar a identidade e as singularidades da casta Loureiro.'
-const DESTAQUE = 'O nosso objetivo é criar equilíbrio desde o início, para que, mais tarde, o vinho necessite do mínimo de intervenção possível.'
-
 export default function SectionVinificacao() {
+  const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
   const imgContainerRef = useRef<HTMLDivElement>(null)
   const imgWrapRef = useRef<HTMLDivElement>(null)
@@ -64,12 +63,12 @@ export default function SectionVinificacao() {
     return () => ctx.revert()
   }, [])
 
+  const headingLines = t.sectionVinificacao.heading.split('\n')
+
   return (
     <section ref={sectionRef} style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 57%, #031D1D 100%)' }}>
 
-      {/* ── MOBILE ──
-          Outer wrapper: position relative, NO overflow-hidden, so the gradient
-          child can visually bleed 60px below the image boundary. */}
+      {/* ── MOBILE ── */}
       <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div
@@ -99,20 +98,20 @@ export default function SectionVinificacao() {
             className="reveal-above font-display uppercase mb-6"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
           >
-            A nossa<br />vinificação
+            {headingLines[0]}<br />{headingLines[1]}
           </h2>
           <p
             className="reveal-above font-body mb-8"
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
           >
-            {BODY_TEXT}
+            {t.sectionVinificacao.body}
           </p>
           <Link
             href="/a-vinificacao"
             className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
             style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
           >
-            Saber mais
+            {t.common.learnMore}
             <ArrowRight size={11} strokeWidth={1.5} />
           </Link>
         </div>
@@ -130,7 +129,7 @@ export default function SectionVinificacao() {
               color: '#FAE6C1',
             }}
           >
-            A nossa<br />vinificação
+            {headingLines[0]}<br />{headingLines[1]}
           </h2>
           <div>
             <p
@@ -141,7 +140,7 @@ export default function SectionVinificacao() {
                 color: 'rgba(255,249,237,0.72)',
               }}
             >
-              {BODY_TEXT}
+              {t.sectionVinificacao.body}
             </p>
             <Link
               href="/a-vinificacao"
@@ -154,7 +153,7 @@ export default function SectionVinificacao() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(250,230,193,0.10)' }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent' }}
             >
-              Saber mais
+              {t.common.learnMore}
               <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
           </div>
@@ -189,7 +188,7 @@ export default function SectionVinificacao() {
             color: '#FAE6C1',
           }}
         >
-          {DESTAQUE}
+          {t.sectionVinificacao.destaque}
         </p>
       </div>
 

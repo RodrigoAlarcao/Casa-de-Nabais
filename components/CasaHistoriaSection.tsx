@@ -8,6 +8,7 @@ import TextReveal from './TextReveal'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,14 +22,6 @@ const carouselImages = [
   { src: '/images/homepage/casa/carousel-08.webp', alt: 'Detalhe da casa' },
 ]
 
-const INTRO_TEXT = 'A Casa de Nabais nasceu da paisagem fértil da freguesia da Seara, em pleno Vale do Lima, e da longa história das grandes casas do Minho.'
-
-const BODY_PARAGRAPHS = [
-  'As primeiras referências à quinta remontam ao século XVII, quando pertencia aos Jácome do Lago, poderosa família de Viana do Castelo, cujo brasão ainda hoje marca a fachada. Habitada apenas de forma sazonal, Nabais foi sempre uma casa de rendimento, trabalhada por caseiros e ligada à lógica dos morgados.',
-  'Desde cedo, a vinha fez parte da sua identidade. Já no século XVIII a freguesia produzia vinho, e em 1862 a quinta é descrita oficialmente como composta de "terra lavradia com vinha", árvores de fruto e capela própria. No século XX, a memória vitivinícola confirma-se com a existência de lagar aparelhado, sinal claro de produção de vinho na própria casa.',
-]
-
-const CLOSING_TEXT = 'Entre fidalgos, desembargadores, marqueses e, mais tarde, proprietários burgueses, Nabais manteve sempre a mesma vocação: uma casa murada, de vinha e de vinho, onde a história se escreveu entre a nobreza, o território e o trabalho agrícola.'
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
@@ -36,6 +29,7 @@ const MOBILE_LEFT = 16
 const MOBILE_PEEK = 40
 
 export default function CasaHistoriaSection() {
+  const { t } = useLang()
   const sectionRef       = useRef<HTMLElement>(null)
   const containerRef     = useRef<HTMLDivElement>(null)
   const portraitRef      = useRef<HTMLDivElement>(null)
@@ -187,13 +181,13 @@ export default function CasaHistoriaSection() {
               color: '#FAE6C1',
             }}
           >
-            História da<br />Casa de Nabais
+            {t.casaHistoria.heading}
           </h2>
           <p
             className="reveal-hist font-body px-10"
             style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
           >
-            {INTRO_TEXT}
+            {t.casaHistoria.intro}
           </p>
         </div>
       </div>
@@ -226,13 +220,13 @@ export default function CasaHistoriaSection() {
               color: '#FAE6C1',
             }}
           >
-            História da Casa<br />de Nabais
+            {t.casaHistoria.headingMobile}
           </h2>
           <p
             className="reveal-hist font-body"
             style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
           >
-            {INTRO_TEXT}
+            {t.casaHistoria.intro}
           </p>
         </div>
       </div>
@@ -243,22 +237,22 @@ export default function CasaHistoriaSection() {
         </div>
 
         <div className="mt-5 flex items-center gap-5 justify-center">
-          <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
+          <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
             <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em]"
             style={{ color: 'rgba(250,230,193,0.55)' }}>
-            {index + 1} de {carouselImages.length}
+            {index + 1} {t.common.of} {carouselImages.length}
           </span>
-          <button onClick={next} disabled={!canNext} aria-label="Seguinte"
+          <button onClick={next} disabled={!canNext} aria-label={t.common.next}
             className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
             <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
         </div>
 
         <div className="px-6 pt-10 pb-4 text-center">
-          {BODY_PARAGRAPHS.map((para, i) => (
+          {t.casaHistoria.bodyParagraphs.map((para: string, i: number) => (
             <p
               key={i}
               className="reveal-hist font-body mb-5 last:mb-0"
@@ -271,7 +265,7 @@ export default function CasaHistoriaSection() {
 
         <div className="px-6 py-16 text-center">
           <TextReveal
-            text={CLOSING_TEXT}
+            text={t.casaHistoria.closingText}
             className="font-display"
             style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
             triggerStart="top 85%"
@@ -288,7 +282,7 @@ export default function CasaHistoriaSection() {
         <div className="grid grid-cols-2 gap-16 items-center">
 
           <div className="flex flex-col justify-center px-[4.5rem]">
-            {BODY_PARAGRAPHS.map((para, i) => (
+            {t.casaHistoria.bodyParagraphs.map((para: string, i: number) => (
               <p
                 key={i}
                 className="reveal-hist font-body mb-8 last:mb-0"
@@ -321,15 +315,15 @@ export default function CasaHistoriaSection() {
       {/* Desktop nav */}
       <div className="hidden lg:block mt-5 flex items-center gap-5"
         style={{ paddingLeft: carouselLeft }}>
-        <button onClick={prev} disabled={!canPrev} aria-label="Anterior"
+        <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
           className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
           <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
         </button>
         <span className="font-display text-[10px] uppercase tracking-[0.16em]"
           style={{ color: 'rgba(250,230,193,0.55)' }}>
-          {index + 1} de {carouselImages.length}
+          {index + 1} {t.common.of} {carouselImages.length}
         </span>
-        <button onClick={next} disabled={!canNext} aria-label="Seguinte"
+        <button onClick={next} disabled={!canNext} aria-label={t.common.next}
           className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
           <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
         </button>
@@ -338,7 +332,7 @@ export default function CasaHistoriaSection() {
       {/* Desktop closing text — padrão Enoturismo */}
       <div className="hidden lg:block max-w-[1050px] mx-auto px-10 py-28 text-center">
         <TextReveal
-          text={CLOSING_TEXT}
+          text={t.casaHistoria.closingText}
           className="font-display"
           style={{
             fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',

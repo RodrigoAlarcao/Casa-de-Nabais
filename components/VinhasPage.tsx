@@ -8,14 +8,9 @@ import SectionExplore from './SectionExplore'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const INTRO_TEXT =
-  'Na Casa de Nabais, as vinhas começaram muito antes de o serem. Tudo começa no solo: antes de se plantarem as vinhas, fizemos uma leitura profunda do território, um rigoroso estudo do subsolo e da rocha-mãe e escolhas com visão de longo prazo. Como produtores da uva que vinificamos, controlamos todo o processo — da terra à garrafa — com foco no equilíbrio e na qualidade.'
-
-const CLOSING_QUOTE =
-  'Trabalhamos o solo como um ecossistema vivo, onde sustentabilidade ambiental e qualidade caminham juntas.'
 
 const carouselImages = [
   { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Vinha do Pomar em flor' },
@@ -29,6 +24,7 @@ const carouselImages = [
 const SLIDE_GAP = 12
 
 export default function VinhasPage() {
+  const { t } = useLang()
   const pageRef = useRef<HTMLDivElement>(null)
   const mobileHeroRef = useRef<HTMLDivElement>(null)
   const mobileHeroImgRef = useRef<HTMLDivElement>(null)
@@ -165,7 +161,7 @@ export default function VinhasPage() {
           }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
-          Voltar
+          {t.common.back}
         </Link>
 
         <div
@@ -182,7 +178,7 @@ export default function VinhasPage() {
               textShadow: '0 2px 28px rgba(3,29,29,0.95)',
             }}
           >
-            As Vinhas
+            {t.vinhasPage.title}
           </h1>
 
           <p
@@ -193,10 +189,7 @@ export default function VinhasPage() {
               color: 'rgba(255,249,237,0.90)',
             }}
           >
-            Na Casa de Nabais, as vinhas começaram muito antes de o serem.
-            Tudo começa no solo: antes de se plantarem as vinhas, fizemos uma leitura profunda do território,
-            um rigoroso estudo do subsolo e da rocha-mãe e escolhas com visão de longo prazo.
-            Como produtores da uva que vinificamos, controlamos todo o processo — da terra à garrafa — com foco no equilíbrio e na qualidade.
+            {t.vinhasPage.intro}
           </p>
 
           <div className="flex flex-col items-center gap-2">
@@ -204,7 +197,7 @@ export default function VinhasPage() {
               className="font-display uppercase"
               style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.40)' }}
             >
-              scroll
+              {t.common.scroll}
             </span>
             <ArrowDown
               size={13}
@@ -226,7 +219,7 @@ export default function VinhasPage() {
           style={{ color: '#3A5B4F' }}
         >
           <ArrowLeft size={11} strokeWidth={1.5} />
-          Voltar
+          {t.common.back}
         </Link>
 
         <h1
@@ -238,7 +231,7 @@ export default function VinhasPage() {
             color: '#0C4544',
           }}
         >
-          As Vinhas
+          {t.vinhasPage.title}
         </h1>
       </div>
 
@@ -256,7 +249,7 @@ export default function VinhasPage() {
               color: 'var(--color-text-muted)',
             }}
           >
-            {INTRO_TEXT}
+            {t.vinhasPage.intro}
           </p>
         </div>
       </section>
@@ -301,7 +294,7 @@ export default function VinhasPage() {
               color: 'var(--color-text)',
             }}
           >
-            O solo como origem
+            {t.vinhasPage.soloHeading}
           </h2>
           <p
             className="font-body"
@@ -311,7 +304,7 @@ export default function VinhasPage() {
               color: 'var(--color-text-muted)',
             }}
           >
-            Mais do que o tipo de rocha, interessa-nos como o solo gere a água, a nutrição e o equilíbrio. Solo granítico, solo de xisto e perfis mistos orientam a escolha de todos os elementos que, na vinha, nos levarão ao estilo de vinho que queremos construir.
+            {t.vinhasPage.soloText}
           </p>
         </div>
 
@@ -352,19 +345,19 @@ export default function VinhasPage() {
           <button
             onClick={prevSlide}
             disabled={carouselIndex === 0}
-            aria-label="Anterior"
+            aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200"
             style={{ opacity: carouselIndex === 0 ? 0.25 : 1 }}
           >
             <ArrowLeft size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
           <span className="font-display text-[10px] uppercase tracking-[0.16em] text-cn-text-muted">
-            {carouselIndex + 1} de {carouselImages.length}
+            {carouselIndex + 1} {t.common.of} {carouselImages.length}
           </span>
           <button
             onClick={nextSlide}
             disabled={carouselIndex === carouselImages.length - 1}
-            aria-label="Seguinte"
+            aria-label={t.common.next}
             className="p-1 transition-opacity duration-200"
             style={{ opacity: carouselIndex === carouselImages.length - 1 ? 0.25 : 1 }}
           >
@@ -382,7 +375,7 @@ export default function VinhasPage() {
               color: '#0C4544',
             }}
           >
-            {CLOSING_QUOTE}
+            {t.vinhasPage.closingQuote}
           </p>
         </div>
       </section>
@@ -419,7 +412,7 @@ export default function VinhasPage() {
                 color: '#FAE6C1',
               }}
             >
-              Viticultura<br />Integrada
+              {t.vinhasPage.viticulturaMobileHeading}
             </h2>
             <p
               className="font-body"
@@ -429,7 +422,7 @@ export default function VinhasPage() {
                 color: 'rgba(255,249,237,0.75)',
               }}
             >
-              Seguimos um regime de produção integrada, sem herbicidas, caminhando para práticas regenerativas. O enrelvamento da vinha com espécies autóctones controla infestantes, promove biodiversidade e ajuda a regular o vigor das plantas.
+              {t.vinhasPage.viticulturaText}
             </p>
           </div>
         </div>
@@ -467,13 +460,13 @@ export default function VinhasPage() {
                     color: 'var(--color-text)',
                   }}
                 >
-                  O solo como origem
+                  {t.vinhasPage.soloHeading}
                 </h2>
                 <p
                   className="font-body text-cn-text-muted"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
                 >
-                  Mais do que o tipo de rocha, interessa-nos como o solo gere a água, a nutrição e o equilíbrio. Solo granítico, solo de xisto e perfis mistos orientam a escolha de todos os elementos que, na vinha, nos levarão ao estilo de vinho que queremos construir.
+                  {t.vinhasPage.soloText}
                 </p>
               </div>
             </div>
@@ -530,13 +523,13 @@ export default function VinhasPage() {
                     color: 'var(--color-text)',
                   }}
                 >
-                  Vinhas como campo de estudo
+                  {t.vinhasPage.laboratorioHeading}
                 </h2>
                 <p
                   className="font-body text-cn-text-muted"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
                 >
-                  As vinhas são recentes, plantadas de raiz, e conduzidas como um laboratório vivo. Testamos diferentes sistemas de poda e condução das videiras, linha a linha, para compreender como influenciam o vigor, a sanidade e a expressão da casta Loureiro.
+                  {t.vinhasPage.laboratorioText}
                 </p>
               </div>
               <div
@@ -579,13 +572,13 @@ export default function VinhasPage() {
                     color: 'var(--color-text)',
                   }}
                 >
-                  Viticultura integrada
+                  {t.vinhasPage.viticulturaDesktopHeading}
                 </h2>
                 <p
                   className="font-body text-cn-text-muted"
                   style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65 }}
                 >
-                  Seguimos um regime de produção integrada, sem herbicidas, caminhando para práticas regenerativas. O enrelvamento da vinha com espécies autóctones controla infestantes, promove biodiversidade e ajuda a regular o vigor das plantas.
+                  {t.vinhasPage.viticulturaText}
                 </p>
               </div>
             </div>
@@ -604,7 +597,7 @@ export default function VinhasPage() {
               color: '#0C4544',
             }}
           >
-            {CLOSING_QUOTE}
+            {t.vinhasPage.closingQuote}
           </p>
         </div>
       </section>
@@ -628,7 +621,7 @@ export default function VinhasPage() {
               color: '#FAE6C1',
             }}
           >
-            As Nossas Vinhas
+            {t.vinhasPage.ourVineyardsHeading}
           </h2>
 
           <div className="lg:space-y-20">
@@ -678,19 +671,19 @@ export default function VinhasPage() {
                       color: '#0C4544',
                     }}
                   >
-                    Vinha do Pomar
+                    {t.vinhasPage.vinhaDoPomarH}
                   </h3>
                   <p
                     className="font-body mb-4"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Com o clássico solo da região — terra preta, muita matéria orgânica e argila — apresenta um terreno fértil, com muito vigor, onde agimos para criar as melhores condições para a vinha.
+                    {t.vinhasPage.vinhaDoPomarP1}
                   </p>
                   <p
                     className="font-body"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Aqui o foco é reduzir a produção natural do solo para alcançar mais qualidade, complexidade e identidade no vinho feito a partir da casta Loureiro.
+                    {t.vinhasPage.vinhaDoPomarP2}
                   </p>
                 </div>
               </div>
@@ -721,19 +714,19 @@ export default function VinhasPage() {
                         color: '#FAE6C1',
                       }}
                     >
-                      Vinha do Pomar
+                      {t.vinhasPage.vinhaDoPomarH}
                     </h3>
                     <p
                       className="font-body mb-4"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
-                      Com o clássico solo da região — terra preta, muita matéria orgânica e argila — apresenta um terreno fértil, com muito vigor, onde agimos para criar as melhores condições para a vinha.
+                      {t.vinhasPage.vinhaDoPomarP1}
                     </p>
                     <p
                       className="font-body"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
-                      Aqui o foco é reduzir a produção natural do solo para alcançar mais qualidade, complexidade e identidade no vinho feito a partir da casta Loureiro.
+                      {t.vinhasPage.vinhaDoPomarP2}
                     </p>
                   </div>
                 </div>
@@ -786,19 +779,19 @@ export default function VinhasPage() {
                       color: '#0C4544',
                     }}
                   >
-                    Vinha da Adega
+                    {t.vinhasPage.vinhaAdegaH}
                   </h3>
                   <p
                     className="font-body mb-4"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Situada numa zona ligeiramente mais elevada da Casa de Nabais, esta é uma vinha de solo muito pobre, pedregoso, com seixo rolado e quase nenhuma retenção de água.
+                    {t.vinhasPage.vinhaAdegaP1}
                   </p>
                   <p
                     className="font-body"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Trata-se de uma parcela de menor produção, mas que entrega uvas mais concentradas, refletindo no vinho um caráter mais profundo e distinto da casta Loureiro que ali cresce.
+                    {t.vinhasPage.vinhaAdegaP2}
                   </p>
                 </div>
               </div>
@@ -829,19 +822,19 @@ export default function VinhasPage() {
                         color: '#FAE6C1',
                       }}
                     >
-                      Vinha da Adega
+                      {t.vinhasPage.vinhaAdegaH}
                     </h3>
                     <p
                       className="font-body mb-4"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
-                      Situada numa zona ligeiramente mais elevada da Casa de Nabais, esta é uma vinha de solo muito pobre, pedregoso, com seixo rolado e quase nenhuma retenção de água.
+                      {t.vinhasPage.vinhaAdegaP1}
                     </p>
                     <p
                       className="font-body"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
-                      Trata-se de uma parcela de menor produção, mas que entrega uvas mais concentradas, refletindo no vinho um caráter mais profundo e distinto da casta Loureiro que ali cresce.
+                      {t.vinhasPage.vinhaAdegaP2}
                     </p>
                   </div>
                 </div>
@@ -894,19 +887,19 @@ export default function VinhasPage() {
                       color: '#0C4544',
                     }}
                   >
-                    Vinha da Igreja
+                    {t.vinhasPage.vinhaIgrejaH}
                   </h3>
                   <p
                     className="font-body mb-4"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Localizada na freguesia da Seara, a poucos quilómetros da Casa de Nabais, apresenta solo granítico com fertilidade e uma exposição solar durante praticamente todo o dia, graças à sua posição num ligeiro planalto.
+                    {t.vinhasPage.vinhaIgrejaP1}
                   </p>
                   <p
                     className="font-body"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Foi a escolhida para plantar as castas Alvarinho e Vinhão, explorando esta luz privilegiada para obter maturações mais completas num clima marcadamente atlântico.
+                    {t.vinhasPage.vinhaIgrejaP2}
                   </p>
                 </div>
               </div>
@@ -937,19 +930,19 @@ export default function VinhasPage() {
                         color: '#FAE6C1',
                       }}
                     >
-                      Vinha da Igreja
+                      {t.vinhasPage.vinhaIgrejaH}
                     </h3>
                     <p
                       className="font-body mb-4"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
-                      Localizada na freguesia da Seara, a poucos quilómetros da Casa de Nabais, apresenta solo granítico com fertilidade e uma exposição solar durante praticamente todo o dia, graças à sua posição num ligeiro planalto.
+                      {t.vinhasPage.vinhaIgrejaP1}
                     </p>
                     <p
                       className="font-body"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
-                      Foi a escolhida para plantar as castas Alvarinho e Vinhão, explorando esta luz privilegiada para obter maturações mais completas num clima marcadamente atlântico.
+                      {t.vinhasPage.vinhaIgrejaP2}
                     </p>
                   </div>
                 </div>
@@ -1002,19 +995,19 @@ export default function VinhasPage() {
                       color: '#0C4544',
                     }}
                   >
-                    Vinha Talhão de Xisto
+                    {t.vinhasPage.vinhaTalhaoH}
                   </h3>
                   <p
                     className="font-body mb-4"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Situada na freguesia da Feitosa, também na margem esquerda do Rio Lima, esta parcela singulariza-se pelo substrato xistoso que contrasta com o granito dominante na região.
+                    {t.vinhasPage.vinhaTalhaoP1}
                   </p>
                   <p
                     className="font-body"
                     style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
                   >
-                    Aqui a vinha produz menos, as raízes vão a maior profundidade em busca de água e nutrição, e as uvas expressam uma concentração e mineralidade que se transferem directamente para o copo.
+                    {t.vinhasPage.vinhaTalhaoP2}
                   </p>
                 </div>
               </div>
@@ -1045,19 +1038,19 @@ export default function VinhasPage() {
                         color: '#FAE6C1',
                       }}
                     >
-                      Vinha Talhão de Xisto
+                      {t.vinhasPage.vinhaTalhaoH}
                     </h3>
                     <p
                       className="font-body mb-4"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                     >
-                      Situada na freguesia da Feitosa, também na margem esquerda do Rio Lima, esta parcela singulariza-se pelo substrato xistoso que contrasta com o granito dominante na região.
+                      {t.vinhasPage.vinhaTalhaoP1}
                     </p>
                     <p
                       className="font-body"
                       style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
                     >
-                      Aqui a vinha produz menos, as raízes vão a maior profundidade em busca de água e nutrição, e as uvas expressam uma concentração e mineralidade que se transferem directamente para o copo.
+                      {t.vinhasPage.vinhaTalhaoP2}
                     </p>
                   </div>
                 </div>

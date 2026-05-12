@@ -9,6 +9,7 @@ import SectionExplore from './SectionExplore'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { useLang } from '@/lib/i18n'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -23,23 +24,6 @@ const galleryImages = [
   { src: '/images/homepage/casa/section-01.webp',  alt: 'Expedição' },
 ]
 
-const INTRO_TEXT =
-  'Na Casa de Nabais, fazer vinho é um processo contínuo de observação e descoberta. Antes das vinhas, analisámos cuidadosamente o solo e o que existe por baixo dele, escolhemos a base da videira (o porta-enxerto) e tomámos decisões quanto ao rumo a seguir muito antes das uvas chegarem à adega. O nosso objetivo é criar equilíbrio desde o início, para que, mais tarde, o vinho necessite do mínimo de intervenção possível.'
-
-const LOUREIRO_PARAS = [
-  'O Loureiro é o centro do nosso trabalho. A frescura natural, a acidez equilibrada, o perfil aromático terpénico – que confere notas aromáticas ao vinho – e, ainda, o grau alcoólico moderado fazem do Loureiro uma resposta atual ao que é cada vez mais procurado pelos apreciadores.',
-  'No Vale do Lima, onde se situa a Casa de Nabais e onde a casta atinge a sua expressão mais completa, acompanhamos o seu comportamento em diferentes solos — no solo granítico, mais comum na região, e num raro veio de xisto que atravessa uma das nossas vinhas. Observamos também exposições e os sistemas de condução da videira, para tirar o máximo partido das características da casta.',
-]
-
-const CLOSING_TEXT =
-  'Observamos exposições e sistemas de condução da videira, tudo para aproveitar ao máximo as características da casta.'
-
-const EXPERIMENTAL_PARAS = [
-  'As nossas vinhas são um verdadeiro laboratório ao ar livre. Testamos diferentes formas de podar e conduzir as videiras, linha a linha, para perceber como essas escolhas influenciam a saúde das plantas, o seu equilíbrio e o carácter do vinho.',
-  'Na adega trabalhamos com pequenos depósitos, o que nos permite fazer vinificações muito precisas. Assim, conseguimos compreender melhor a influência de fatores como o solo, a forma como a vinha é cuidada e a quantidade de uvas produzidas em cada parcela.',
-]
-
-const RIGOR_TEXT = 'A nossa estação meteorológica própria, ímpar na região, recolhe dados contínuos de temperatura, humidade, precipitação, vento e radiação solar. Estes dados ajudam a ajustar as decisões que afetam a vinha e a aprofundar o conhecimento do ecossistema.'
 
 const RIGOR_IMAGES = [
   { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Controlo de temperatura — adega' },
@@ -47,18 +31,12 @@ const RIGOR_IMAGES = [
   { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Registo de dados — vinificação' },
 ]
 
-const ENOLOGO_PARAS = [
-  'Constantino Ramos dedica-se à Região dos Vinhos Verdes há quase 15 anos, tendo vindo a construir uma relação próxima à vinha e à casta Loureiro. Enólogo de escuta atenta e gesto preciso, acredita que o vinho nasce como uma ideia e ganha forma com paciência, respeito e atenção à natureza. Trabalha em escala humana, acompanhando cada parcela como um ecossistema vivo e defende a intervenção humana apenas na medida em que contribui para preservar o equilíbrio e a frescura dos vinhos, respeitando a uva, decidindo o momento certo e dando espaço à identidade de cada vinho.',
-  'O seu foco está em vinhos frescos, gastronómicos e com identidade, pensados para evoluir e contar uma história autêntica.',
-  'Assume-se como vigneron, aceitando os riscos e tomando as decisões que começam no campo e culminam na vindima, o momento-chave do ano. Vê o vinho como um processo que começa muito antes da colheita, sendo moldado pelo terroir e pela visão pessoal do enólogo.',
-]
-
-const ENOLOGO_CLOSING = 'Nada é feito por moda. Tudo é observado, testado e integrado apenas se servir a origem, o tempo e a singularidade do vinho.'
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
 
 export default function VinificacaoPage() {
+  const { t } = useLang()
   const pageRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -274,7 +252,7 @@ export default function VinificacaoPage() {
               }}
             >
               <ArrowLeft size={11} strokeWidth={1.5} />
-              Voltar
+              {t.common.back}
             </Link>
 
             {/* Título + texto + scroll indicator */}
@@ -292,7 +270,7 @@ export default function VinificacaoPage() {
                   textShadow: '0 2px 28px rgba(3,29,29,0.95)',
                 }}
               >
-                Vinificação
+                {t.vinificacaoPage.title}
               </h1>
 
               <p
@@ -303,7 +281,7 @@ export default function VinificacaoPage() {
                   color: 'rgba(255,249,237,0.90)',
                 }}
               >
-                {INTRO_TEXT}
+                {t.vinificacaoPage.intro}
               </p>
 
               {/* Scroll indicator */}
@@ -316,7 +294,7 @@ export default function VinificacaoPage() {
                     color: 'rgba(250,230,193,0.40)',
                   }}
                 >
-                  scroll
+                  {t.common.scroll}
                 </span>
                 <ArrowDown
                   size={13}
@@ -336,7 +314,7 @@ export default function VinificacaoPage() {
               style={{ color: 'rgba(250,230,193,0.60)' }}
             >
               <ArrowLeft size={11} strokeWidth={1.5} />
-              Voltar
+              {t.common.back}
             </Link>
 
             <h1
@@ -348,7 +326,7 @@ export default function VinificacaoPage() {
                 color: '#FAE6C1',
               }}
             >
-              A Vinificação
+              {t.vinificacaoPage.title}
             </h1>
           </div>
 
@@ -364,7 +342,7 @@ export default function VinificacaoPage() {
                   color: 'rgba(255,249,237,0.72)',
                 }}
               >
-                {INTRO_TEXT}
+                {t.vinificacaoPage.intro}
               </p>
             </div>
           </section>
@@ -432,10 +410,10 @@ export default function VinificacaoPage() {
                       color: '#FAE6C1',
                     }}
                   >
-                    A casta Loureiro<br />como centro de estudo
+                    {t.vinificacaoPage.loureiroHeading}
                   </h2>
 
-                  {LOUREIRO_PARAS.map((para, i) => (
+                  {t.vinificacaoPage.loureiroParas.map((para, i) => (
                     <p
                       key={i}
                       className="reveal-vinif font-body mb-5 last:mb-0 text-center lg:text-left"
@@ -488,13 +466,13 @@ export default function VinificacaoPage() {
               </div>
             </div>
             <div className="lg:hidden mt-5 flex items-center gap-5 justify-center">
-              <button onClick={prev} disabled={!canPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
+              <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous} className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
                 <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
               </button>
               <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(250,230,193,0.60)' }}>
-                {index + 1} de {galleryImages.length}
+                {index + 1} {t.common.of} {galleryImages.length}
               </span>
-              <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
+              <button onClick={next} disabled={!canNext} aria-label={t.common.next} className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
                 <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
               </button>
             </div>
@@ -544,13 +522,13 @@ export default function VinificacaoPage() {
               className="hidden lg:flex mt-5 items-center gap-5 justify-start"
               style={{ paddingLeft: carouselLeft }}
             >
-              <button onClick={prev} disabled={!canPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
+              <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous} className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
                 <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
               </button>
               <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(250,230,193,0.60)' }}>
-                {index + 1} de {galleryImages.length}
+                {index + 1} {t.common.of} {galleryImages.length}
               </span>
-              <button onClick={next} disabled={!canNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
+              <button onClick={next} disabled={!canNext} aria-label={t.common.next} className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
                 <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
               </button>
             </div>
@@ -561,7 +539,7 @@ export default function VinificacaoPage() {
           <section className="py-28 md:py-40">
             <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
               <TextReveal
-                text={CLOSING_TEXT}
+                text={t.vinificacaoPage.closingText}
                 className="font-display"
                 style={{
                   fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
@@ -605,9 +583,9 @@ export default function VinificacaoPage() {
                     color: '#FAE6C1',
                   }}
                 >
-                  Abordagem experimental<br />e microvinificações
+                  {t.vinificacaoPage.experimentalHeading}
                 </h2>
-                {EXPERIMENTAL_PARAS.map((para, i) => (
+                {t.vinificacaoPage.experimentalParas.map((para, i) => (
                   <p
                     key={i}
                     className="font-body mb-4 last:mb-0"
@@ -636,10 +614,10 @@ export default function VinificacaoPage() {
                       color: '#FAE6C1',
                     }}
                   >
-                    Abordagem experimental e microvinificações
+                    {t.vinificacaoPage.experimentalHeading}
                   </h2>
 
-                  {EXPERIMENTAL_PARAS.map((para, i) => (
+                  {t.vinificacaoPage.experimentalParas.map((para, i) => (
                     <p
                       key={i}
                       className="font-body mb-5 last:mb-0 text-left"
@@ -754,7 +732,7 @@ export default function VinificacaoPage() {
                       color: '#031D1D',
                     }}
                   >
-                    Uma adega<br />à frente<br />do seu tempo
+                    {t.vinificacaoPage.adegaHeading}
                   </h2>
 
                   <p
@@ -765,7 +743,7 @@ export default function VinificacaoPage() {
                       color: 'rgba(3,29,29,0.65)',
                     }}
                   >
-                    Na adega, utilizamos diferentes materiais como ferramentas ao serviço do vinho.
+                    {t.vinificacaoPage.adegaParas[0]}
                   </p>
 
                   <ul
@@ -778,11 +756,7 @@ export default function VinificacaoPage() {
                       padding: 0,
                     }}
                   >
-                    {[
-                      'O inox ajuda a preservar a frescura e a pureza dos aromas.',
-                      'O cimento contribui para uma textura mais equilibrada, sem alterar o aroma do vinho.',
-                      'As barricas de carvalho são usadas com moderação, para suavizar o vinho e dar-lhe maior profundidade.',
-                    ].map((item, i) => (
+                    {t.vinificacaoPage.adegaList.map((item, i) => (
                       <li key={i} className="font-body flex gap-2 justify-center lg:justify-start">
                         <span style={{ opacity: 0.35, flexShrink: 0 }}>—</span>
                         <span>{item}</span>
@@ -790,11 +764,7 @@ export default function VinificacaoPage() {
                     ))}
                   </ul>
 
-                  {[
-                    'Cada material funciona como um tempero: só é usado quando realmente faz sentido e acrescenta valor ao vinho.',
-                    'Projetada pelo Arquiteto André Tavares, a nossa adega foi construída no meio da vinha, estando parcialmente enterrada, sem luz natural direta.',
-                    'Esta escolha garante proximidade absoluta à colheita e uma grande estabilidade térmica, essencial para uma evolução lenta e elegante dos vinhos, em depósito e em garrafa.',
-                  ].map((para, i) => (
+                  {t.vinificacaoPage.adegaParas.slice(1).map((para, i) => (
                     <p
                       key={i}
                       className="font-body mb-4 last:mb-0 text-center lg:text-left"
@@ -865,7 +835,7 @@ export default function VinificacaoPage() {
                     color: '#031D1D',
                   }}
                 >
-                  Rigor, dados<br />e tempo
+                  {t.vinificacaoPage.rigorHeading}
                 </h2>
 
                 <div className="flex flex-col justify-center">
@@ -877,7 +847,7 @@ export default function VinificacaoPage() {
                       color: 'rgba(3,29,29,0.65)',
                     }}
                   >
-                    {RIGOR_TEXT}
+                    {t.vinificacaoPage.rigorText}
                   </p>
                 </div>
               </div>
@@ -892,7 +862,7 @@ export default function VinificacaoPage() {
                     color: '#031D1D',
                   }}
                 >
-                  Rigor, dados<br />e tempo
+                  {t.vinificacaoPage.rigorHeading}
                 </h2>
                 <p
                   className="font-body"
@@ -902,7 +872,7 @@ export default function VinificacaoPage() {
                     color: 'rgba(3,29,29,0.65)',
                   }}
                 >
-                  {RIGOR_TEXT}
+                  {t.vinificacaoPage.rigorText}
                 </p>
               </div>
 
@@ -940,13 +910,13 @@ export default function VinificacaoPage() {
                 </div>
               </div>
               <div className="lg:hidden mt-5 flex items-center gap-5 justify-center">
-                <button onClick={rigorPrev} disabled={!rigorCanPrev} aria-label="Anterior" className="p-1 transition-opacity duration-200" style={{ opacity: rigorCanPrev ? 1 : 0.25 }}>
+                <button onClick={rigorPrev} disabled={!rigorCanPrev} aria-label={t.common.previous} className="p-1 transition-opacity duration-200" style={{ opacity: rigorCanPrev ? 1 : 0.25 }}>
                   <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
                 </button>
                 <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(3,29,29,0.45)' }}>
-                  {rigorIndex + 1} de {RIGOR_IMAGES.length}
+                  {rigorIndex + 1} {t.common.of} {RIGOR_IMAGES.length}
                 </span>
-                <button onClick={rigorNext} disabled={!rigorCanNext} aria-label="Seguinte" className="p-1 transition-opacity duration-200" style={{ opacity: rigorCanNext ? 1 : 0.25 }}>
+                <button onClick={rigorNext} disabled={!rigorCanNext} aria-label={t.common.next} className="p-1 transition-opacity duration-200" style={{ opacity: rigorCanNext ? 1 : 0.25 }}>
                   <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
                 </button>
               </div>
@@ -1007,7 +977,7 @@ export default function VinificacaoPage() {
                   className="font-display uppercase mb-2"
                   style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.50)' }}
                 >
-                  Perfil do enólogo
+                  {t.vinificacaoPage.enologoHeading}
                 </p>
                 <h2
                   className="font-display mb-1"
@@ -1016,13 +986,13 @@ export default function VinificacaoPage() {
                     color: '#FAE6C1',
                   }}
                 >
-                  Constantino Ramos
+                  {t.vinificacaoPage.enologoName}
                 </h2>
                 <p
                   className="font-display uppercase"
                   style={{ fontSize: '9px', letterSpacing: '0.16em', color: 'rgba(250,230,193,0.40)' }}
                 >
-                  Enólogo
+                  {t.vinificacaoPage.enologoRole}
                 </p>
               </div>
             </div>
@@ -1032,7 +1002,7 @@ export default function VinificacaoPage() {
               className="lg:hidden px-7 pt-8 pb-12 text-center"
               style={{ background: '#031D1D' }}
             >
-              {ENOLOGO_PARAS.map((para, i) => (
+              {t.vinificacaoPage.enologoParas.map((para, i) => (
                 <p
                   key={i}
                   className="font-body mb-5 last:mb-0"
@@ -1057,7 +1027,7 @@ export default function VinificacaoPage() {
                 color: '#FAE6C1',
               }}
             >
-              Perfil do Enólogo
+              {t.vinificacaoPage.enologoHeading}
             </h2>
 
             {/* Desktop: glassmorphism overlapping card + frase de fecho */}
@@ -1104,15 +1074,15 @@ export default function VinificacaoPage() {
                     className="font-display mb-1"
                     style={{ fontSize: 'clamp(1.25rem, 1.8vw, 1.625rem)', lineHeight: 1.0, color: '#0C4544' }}
                   >
-                    Constantino Ramos
+                    {t.vinificacaoPage.enologoName}
                   </h2>
                   <p
                     className="font-display uppercase mb-8"
                     style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(12,69,68,0.40)' }}
                   >
-                    Enólogo
+                    {t.vinificacaoPage.enologoRole}
                   </p>
-                  {ENOLOGO_PARAS.map((para, i) => (
+                  {t.vinificacaoPage.enologoParas.map((para, i) => (
                     <p
                       key={i}
                       className="font-body mb-4 last:mb-0"
@@ -1128,7 +1098,7 @@ export default function VinificacaoPage() {
               {/* Frase de fecho — dentro do mesmo wrapper, abaixo do card */}
               <div className="text-center mt-28 md:mt-40 mb-8 md:mb-16">
                 <TextReveal
-                  text={ENOLOGO_CLOSING}
+                  text={t.vinificacaoPage.enologoClosing}
                   className="font-display"
                   style={{
                     fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
