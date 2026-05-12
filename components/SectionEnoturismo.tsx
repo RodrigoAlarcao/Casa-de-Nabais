@@ -210,7 +210,7 @@ export default function SectionEnoturismo() {
         </div>
 
         {/* TextReveal — mobile */}
-        <div className="px-6 pb-16 text-center">
+        <div className="px-6 pt-10 pb-20 text-center">
           <TextReveal
             text="Entre solos graníticos e um raro veio de xisto, criamos vinhos com identidade e oferecemos uma experiência de enoturismo vivida com quem os faz."
             className="font-display"

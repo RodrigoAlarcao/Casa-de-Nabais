@@ -373,7 +373,7 @@ export default function VinhasPage() {
         </div>
 
         {/* Animated quote */}
-        <div className="mobile-quote px-8 py-14 text-center">
+        <div className="mobile-quote px-8 py-16 text-center">
           <p
             className="font-display"
             style={{
@@ -594,7 +594,7 @@ export default function VinhasPage() {
         </div>
 
         {/* Frase de fecho */}
-        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32 pb-4 md:pb-8">
+        <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32 pb-20 md:pb-28">
           <p
             className="font-display"
             style={{

@@ -214,7 +214,7 @@ export default function SectionCasa() {
 
 
         {/* TextReveal — mobile */}
-        <div className="px-6 pb-16 text-center">
+        <div className="px-6 pt-10 pb-20 text-center">
           <TextReveal
             text="A Casa de Nabais é também um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo."
             className="font-display"
