@@ -1,9 +1,9 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowDown } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowDown } from 'lucide-react'
 import SectionExplore from './SectionExplore'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -137,6 +137,137 @@ function ThreeImages({
         </div>
       </div>
     </>
+  )
+}
+
+/* ─── Mobile section block (full-bleed image + gradient title + text + swipe carousel) ── */
+
+function MobileSection({
+  title,
+  paras,
+  portraitSrc,
+  portraitAlt,
+  images,
+}: {
+  title: string
+  paras: string[]
+  portraitSrc: string
+  portraitAlt: string
+  images: { src: string; alt: string }[]
+}) {
+  const [index, setIndex] = useState(0)
+  const dragStartX = useRef(0)
+  const [grabbing, setGrabbing] = useState(false)
+  const GAP = 12
+  const canPrev = index > 0
+  const canNext = index < images.length - 1
+
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    dragStartX.current = e.clientX
+    setGrabbing(true)
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+  function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    setGrabbing(false)
+    const diff = dragStartX.current - e.clientX
+    if (diff > 50 && canNext) setIndex((i) => i + 1)
+    else if (diff < -50 && canPrev) setIndex((i) => i - 1)
+  }
+
+  return (
+    <div className="lg:hidden">
+      {/* Portrait image with gradient + section title */}
+      <div className="relative" style={{ height: '60vh' }}>
+        <div className="absolute inset-0 overflow-hidden">
+          <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
+        </div>
+        <div
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{
+            top: '48%', bottom: '-2px', zIndex: 1,
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 80%)',
+          }}
+        />
+        <h2
+          className="absolute left-0 right-0 text-center px-6 font-display uppercase"
+          style={{
+            bottom: '28px', zIndex: 2,
+            fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
+            color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+          }}
+        >
+          {title}
+        </h2>
+      </div>
+
+      {/* Body text + 3-image swipe carousel */}
+      <div style={{ marginTop: '-2px', background: '#031D1D', paddingBottom: '32px' }}>
+        <div className="px-6 pt-6 pb-6 text-center">
+          {paras.map((para, i) => (
+            <p
+              key={i}
+              className="font-body mb-4 last:mb-0"
+              style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+            >
+              {para}
+            </p>
+          ))}
+        </div>
+
+        {/* Swipe carousel */}
+        <div
+          className="mt-2 py-2 select-none"
+          style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => setGrabbing(false)}
+        >
+          <div
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            style={{
+              gap: `${GAP}px`,
+              paddingLeft: '16px',
+              transform: `translateX(calc(-${index} * (85vw + ${GAP}px)))`,
+            }}
+          >
+            {images.map((img, i) => (
+              <div
+                key={i}
+                className="relative flex-shrink-0 overflow-hidden"
+                style={{ width: '85vw', aspectRatio: '3/2', backgroundColor: '#0A3A39', borderRadius: '4px' }}
+              >
+                <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="85vw" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Carousel nav */}
+        <div className="mt-4 flex items-center gap-5 justify-center">
+          <button
+            onClick={() => setIndex((i) => i - 1)}
+            disabled={!canPrev}
+            aria-label="Anterior"
+            className="p-1 transition-opacity duration-200"
+            style={{ opacity: canPrev ? 1 : 0.25 }}
+          >
+            <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+          </button>
+          <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(250,230,193,0.55)' }}>
+            {index + 1} de {images.length}
+          </span>
+          <button
+            onClick={() => setIndex((i) => i + 1)}
+            disabled={!canNext}
+            aria-label="Seguinte"
+            className="p-1 transition-opacity duration-200"
+            style={{ opacity: canNext ? 1 : 0.25 }}
+          >
+            <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -312,7 +443,7 @@ export default function EnoturismoPage() {
               className="font-display uppercase mb-7"
               style={{ fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.05em', color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)' }}
             >
-              O Enoturismo
+              Enoturismo
             </h1>
             <p
               className="font-body mb-8 w-full"
@@ -384,22 +515,19 @@ export default function EnoturismoPage() {
         {/* ══════════════════════════════════════════════════════
             PROVAS DE VINHO
         ══════════════════════════════════════════════════════ */}
-        <section className="max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
 
-          {/* Mobile: texto */}
-          <div className="lg:hidden mb-8">
-            <h2 className="font-display mb-6 text-center" style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}>
-              Provas de vinho
-            </h2>
-            {PROVAS_PARAS.map((para, i) => (
-              <p key={i} className="font-body mb-4 last:mb-0 text-center" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}>
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* Mobile */}
+        <MobileSection
+          title="Provas de vinho"
+          paras={PROVAS_PARAS}
+          portraitSrc="/images/homepage/enoturismo/carousel-01.webp"
+          portraitAlt="Prova de vinhos na adega"
+          images={PROVAS_IMAGES}
+        />
 
-          {/* Desktop: portrait esq + texto dir */}
-          <div className="hidden lg:grid grid-cols-2 gap-4 items-center">
+        {/* Desktop */}
+        <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
+          <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
               src="/images/homepage/enoturismo/carousel-01.webp"
               alt="Prova de vinhos na adega"
@@ -408,38 +536,27 @@ export default function EnoturismoPage() {
             />
             <TextColumn title="Provas de vinho" paras={PROVAS_PARAS} pad="right" />
           </div>
-
-          {/* Mobile: portrait */}
-          <div className="lg:hidden relative mb-4" style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}>
-            <Image src="/images/homepage/enoturismo/carousel-01.webp" alt="Prova de vinhos na adega" fill className="object-cover" sizes="calc(100vw - 3rem)" />
-          </div>
-
-          {/* 3 imagens */}
           <div className="mt-4">
             <ThreeImages images={PROVAS_IMAGES} largeSide="left" />
           </div>
-
         </section>
 
         {/* ══════════════════════════════════════════════════════
             VISITAS GUIADAS
         ══════════════════════════════════════════════════════ */}
-        <section className="max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
 
-          {/* Mobile: texto */}
-          <div className="lg:hidden mb-8">
-            <h2 className="font-display mb-6 text-center" style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}>
-              Visitas guiadas às vinhas e adega
-            </h2>
-            {VISITAS_PARAS.map((para, i) => (
-              <p key={i} className="font-body mb-4 last:mb-0 text-center" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}>
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* Mobile */}
+        <MobileSection
+          title="Visitas guiadas"
+          paras={VISITAS_PARAS}
+          portraitSrc="/images/homepage/enoturismo/carousel-02.webp"
+          portraitAlt="Visita guiada às vinhas"
+          images={VISITAS_IMAGES}
+        />
 
-          {/* Desktop: texto esq + portrait dir */}
-          <div className="hidden lg:grid grid-cols-2 gap-4 items-center">
+        {/* Desktop */}
+        <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
+          <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title="Visitas guiadas às vinhas e adega" paras={VISITAS_PARAS} pad="left" />
             <PortraitCell
               src="/images/homepage/enoturismo/carousel-02.webp"
@@ -448,38 +565,27 @@ export default function EnoturismoPage() {
               wrapRef={p2Wrap}
             />
           </div>
-
-          {/* Mobile: portrait */}
-          <div className="lg:hidden relative mb-4" style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}>
-            <Image src="/images/homepage/enoturismo/carousel-02.webp" alt="Visita guiada às vinhas" fill className="object-cover" sizes="calc(100vw - 3rem)" />
-          </div>
-
-          {/* 3 imagens */}
           <div className="mt-4">
             <ThreeImages images={VISITAS_IMAGES} largeSide="right" />
           </div>
-
         </section>
 
         {/* ══════════════════════════════════════════════════════
             ALMOÇOS E EXPERIÊNCIAS GASTRONÓMICAS
         ══════════════════════════════════════════════════════ */}
-        <section className="max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
 
-          {/* Mobile: texto */}
-          <div className="lg:hidden mb-8">
-            <h2 className="font-display mb-6 text-center" style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}>
-              Almoços e experiências gastronómicas
-            </h2>
-            {ALMOCOS_PARAS.map((para, i) => (
-              <p key={i} className="font-body mb-4 last:mb-0 text-center" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}>
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* Mobile */}
+        <MobileSection
+          title="Almoços & gastronomia"
+          paras={ALMOCOS_PARAS}
+          portraitSrc="/images/homepage/enoturismo/carousel-03.webp"
+          portraitAlt="Almoço na quinta"
+          images={ALMOCOS_IMAGES}
+        />
 
-          {/* Desktop: portrait esq + texto dir */}
-          <div className="hidden lg:grid grid-cols-2 gap-4 items-center">
+        {/* Desktop */}
+        <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
+          <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
               src="/images/homepage/enoturismo/carousel-03.webp"
               alt="Almoço na quinta"
@@ -488,38 +594,27 @@ export default function EnoturismoPage() {
             />
             <TextColumn title="Almoços e experiências gastronómicas" paras={ALMOCOS_PARAS} pad="right" />
           </div>
-
-          {/* Mobile: portrait */}
-          <div className="lg:hidden relative mb-4" style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}>
-            <Image src="/images/homepage/enoturismo/carousel-03.webp" alt="Almoço na quinta" fill className="object-cover" sizes="calc(100vw - 3rem)" />
-          </div>
-
-          {/* 3 imagens */}
           <div className="mt-4">
             <ThreeImages images={ALMOCOS_IMAGES} largeSide="left" />
           </div>
-
         </section>
 
         {/* ══════════════════════════════════════════════════════
             PASSEIOS NA MATA
         ══════════════════════════════════════════════════════ */}
-        <section className="max-w-[1200px] mx-auto px-6 md:px-10 mt-4 pb-28">
 
-          {/* Mobile: texto */}
-          <div className="lg:hidden mb-8">
-            <h2 className="font-display mb-6 text-center" style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}>
-              Passeios na mata
-            </h2>
-            {PASSEIOS_PARAS.map((para, i) => (
-              <p key={i} className="font-body mb-4 last:mb-0 text-center" style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}>
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* Mobile */}
+        <MobileSection
+          title="Passeios na mata"
+          paras={PASSEIOS_PARAS}
+          portraitSrc="/images/homepage/enoturismo/carousel-04.webp"
+          portraitAlt="Passeio na mata"
+          images={PASSEIOS_IMAGES}
+        />
 
-          {/* Desktop: texto esq + portrait dir */}
-          <div className="hidden lg:grid grid-cols-2 gap-4 items-center">
+        {/* Desktop */}
+        <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4 pb-28">
+          <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title="Passeios na mata" paras={PASSEIOS_PARAS} pad="left" />
             <PortraitCell
               src="/images/homepage/enoturismo/carousel-04.webp"
@@ -528,18 +623,13 @@ export default function EnoturismoPage() {
               wrapRef={p4Wrap}
             />
           </div>
-
-          {/* Mobile: portrait */}
-          <div className="lg:hidden relative mb-4" style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}>
-            <Image src="/images/homepage/enoturismo/carousel-04.webp" alt="Passeio na mata" fill className="object-cover" sizes="calc(100vw - 3rem)" />
-          </div>
-
-          {/* 3 imagens */}
           <div className="mt-4">
             <ThreeImages images={PASSEIOS_IMAGES} largeSide="right" />
           </div>
-
         </section>
+
+        {/* Mobile bottom spacing before SectionExplore */}
+        <div className="lg:hidden" style={{ height: '48px', background: '#031D1D' }} />
 
       </div>
       {/* ── fim zona escura ── */}

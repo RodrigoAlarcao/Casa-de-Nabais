@@ -587,14 +587,65 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               ABORDAGEM EXPERIMENTAL
           ══════════════════════════════════════ */}
-          <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+          <section className="lg:pt-20 lg:pb-28 md:pb-36">
 
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Mobile: imagem full-bleed + gradient + título */}
+            <div className="lg:hidden relative" style={{ height: '60vh' }}>
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src="/images/homepage/vinhas/section-01.webp"
+                  alt="Abordagem experimental — microvinificações"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+              </div>
+              <div
+                className="absolute left-0 right-0 pointer-events-none"
+                style={{
+                  top: '48%', bottom: '-2px', zIndex: 1,
+                  background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 80%)',
+                }}
+              />
+              <h2
+                className="absolute left-0 right-0 text-center px-6 font-display"
+                style={{
+                  bottom: '28px', zIndex: 2,
+                  fontSize: 'clamp(1.375rem, 5vw, 1.875rem)', lineHeight: 1.1, letterSpacing: '0.03em',
+                  color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+                }}
+              >
+                Abordagem experimental<br />e microvinificações
+              </h2>
+            </div>
+
+            {/* Mobile: texto body */}
+            <div
+              className="lg:hidden px-6 pt-6 pb-10 text-center"
+              style={{ marginTop: '-2px', background: '#031D1D' }}
+            >
+              {EXPERIMENTAL_PARAS.map((para, i) => (
+                <p
+                  key={i}
+                  className="font-body mb-4 last:mb-0"
+                  style={{
+                    fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+                    lineHeight: 1.65,
+                    color: 'rgba(255,249,237,0.72)',
+                  }}
+                >
+                  {para}
+                </p>
+              ))}
+            </div>
+
+            {/* Desktop: texto ESQ + portrait DIR */}
+            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
+              <div className="grid grid-cols-2 gap-10 lg:gap-16 items-center">
 
                 <div className="flex flex-col px-0 lg:pr-10">
                   <h2
-                    className="font-display mb-8 lg:mb-10 text-center lg:text-left"
+                    className="font-display mb-8 lg:mb-10 text-left"
                     style={{
                       fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
                       lineHeight: 1.1,
@@ -607,7 +658,7 @@ export default function VinificacaoPage() {
                   {EXPERIMENTAL_PARAS.map((para, i) => (
                     <p
                       key={i}
-                      className="font-body mb-5 last:mb-0 text-center lg:text-left"
+                      className="font-body mb-5 last:mb-0 text-left"
                       style={{
                         fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
                         lineHeight: 1.65,
@@ -619,7 +670,7 @@ export default function VinificacaoPage() {
                   ))}
                 </div>
 
-                <div className="hidden lg:block">
+                <div>
                   <div
                     ref={expPortraitRef}
                     className="relative overflow-hidden w-full"
@@ -665,20 +716,6 @@ export default function VinificacaoPage() {
                   />
                 </div>
               </div>
-            </div>
-
-            {/* Mobile: portrait */}
-            <div
-              className="relative lg:hidden mt-10 mx-6"
-              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-            >
-              <Image
-                src="/images/homepage/vinhas/section-01.webp"
-                alt="Abordagem experimental — microvinificações"
-                fill
-                className="object-cover"
-                sizes="calc(100vw - 3rem)"
-              />
             </div>
 
           </section>
@@ -961,45 +998,64 @@ export default function VinificacaoPage() {
         ══════════════════════════════════════ */}
         <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
 
-          <section className="pt-20 md:pt-28 pb-28 md:pb-36">
+          <section className="lg:pt-20 lg:pb-28">
 
-            {/* Mobile: portrait + texto */}
-            <div className="lg:hidden mx-6">
-              <div
-                className="relative mb-6"
-                style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#0A3A39' }}
-              >
+            {/* Mobile: imagem full-bleed + gradient + título */}
+            <div className="lg:hidden relative" style={{ height: '60vh' }}>
+              <div className="absolute inset-0 overflow-hidden">
                 <Image
                   src="/images/homepage/enoturismo/section-01.webp"
                   alt="Perfil do enólogo — Casa de Nabais"
                   fill
                   className="object-cover"
-                  sizes="calc(100vw - 3rem)"
+                  sizes="100vw"
                 />
               </div>
-              <p
-                className="font-display uppercase mb-3 text-center"
-                style={{ fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(250,230,193,0.45)' }}
+              <div
+                className="absolute left-0 right-0 pointer-events-none"
+                style={{
+                  top: '48%', bottom: '-2px', zIndex: 1,
+                  background: 'linear-gradient(to bottom, transparent 0%, rgba(3,29,29,0.60) 30%, rgba(3,29,29,0.94) 58%, #031D1D 80%)',
+                }}
+              />
+              <div
+                className="absolute left-0 right-0 px-6 text-center"
+                style={{ bottom: '28px', zIndex: 2 }}
               >
-                Perfil do enólogo
-              </p>
-              <h2
-                className="font-display mb-1 text-center"
-                style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)', lineHeight: 1.1, color: '#FAE6C1' }}
-              >
-                Constantino Ramos
-              </h2>
-              <p
-                className="font-display uppercase mb-6 text-center"
-                style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(250,230,193,0.40)' }}
-              >
-                Enólogo
-              </p>
+                <p
+                  className="font-display uppercase mb-2"
+                  style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.50)' }}
+                >
+                  Perfil do enólogo
+                </p>
+                <h2
+                  className="font-display"
+                  style={{
+                    fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
+                    color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)',
+                  }}
+                >
+                  Constantino Ramos
+                </h2>
+                <p
+                  className="font-display uppercase mt-1"
+                  style={{ fontSize: '9px', letterSpacing: '0.16em', color: 'rgba(250,230,193,0.40)' }}
+                >
+                  Enólogo
+                </p>
+              </div>
+            </div>
+
+            {/* Mobile: texto body */}
+            <div
+              className="lg:hidden px-6 pt-6 pb-10 text-center"
+              style={{ marginTop: '-2px', background: '#031D1D' }}
+            >
               {ENOLOGO_PARAS.map((para, i) => (
                 <p
                   key={i}
-                  className="font-body mb-4 last:mb-0 text-center"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
+                  className="font-body mb-4 last:mb-0"
+                  style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.65, color: 'rgba(255,249,237,0.72)' }}
                 >
                   {para}
                 </p>
