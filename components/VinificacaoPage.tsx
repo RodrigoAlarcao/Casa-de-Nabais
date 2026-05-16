@@ -536,7 +536,7 @@ export default function VinificacaoPage() {
           </section>
 
           {/* TEXTO ANIMADO (TextReveal) */}
-          <section className="py-28 md:py-40">
+          <section className="py-14 md:py-20">
             <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
               <TextReveal
                 text={t.vinificacaoPage.closingText}
