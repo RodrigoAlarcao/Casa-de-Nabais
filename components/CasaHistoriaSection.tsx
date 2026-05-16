@@ -108,7 +108,7 @@ export default function CasaHistoriaSection() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: 20, ease: 'none',
+          yPercent: -10, ease: 'none',
           scrollTrigger: { trigger: mobileOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
@@ -196,10 +196,10 @@ export default function CasaHistoriaSection() {
           MOBILE: imagem hero + bloco de texto
       ══════════════════════════════════════════ */}
 
-      <div ref={mobileOuterRef} className="relative lg:hidden" style={{ height: '80vh', background: '#031D1D' }}>
+      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ minHeight: '85svh', background: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
-            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
+            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
             <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
               fill className="object-cover" sizes="100vw" />
           </div>

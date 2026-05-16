@@ -43,7 +43,7 @@ export default function SectionVinificacao() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: 20, ease: 'none',
+          yPercent: -10, ease: 'none',
           scrollTrigger: {
             trigger: mobileOuterRef.current,
             start: 'top bottom',
