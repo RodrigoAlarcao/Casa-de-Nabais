@@ -270,7 +270,7 @@ export default function VinificacaoPage() {
                   textShadow: '0 2px 28px rgba(3,29,29,0.95)',
                 }}
               >
-                {t.vinificacaoPage.title}
+                {t.vinificacaoPage.title.replace(/^A /, '')}
               </h1>
 
               <p
@@ -696,7 +696,7 @@ export default function VinificacaoPage() {
           <section className="pt-20 md:pt-28 pb-20 md:pb-28">
 
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
                 {/* Retrato ESQUERDA — desktop */}
                 <div className="hidden lg:block">
