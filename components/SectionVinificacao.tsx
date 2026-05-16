@@ -95,30 +95,30 @@ export default function SectionVinificacao() {
         />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
           <h2
-            className="reveal-above font-display uppercase mb-8"
+            className="reveal-above font-display uppercase"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
           >
             {headingLines[0]}<br />{headingLines[1]}
           </h2>
-          <Link
-            href="/a-vinificacao"
-            className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
-            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
-          >
-            {t.common.learnMore}
-            <ArrowRight size={11} strokeWidth={1.5} />
-          </Link>
         </div>
       </div>
 
-      {/* ── MOBILE body text — dark section below hero ── */}
+      {/* ── MOBILE body text + CTA — dark section below hero ── */}
       <div className="lg:hidden px-6 pt-10 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-2px' }}>
         <p
-          className="reveal-above font-body"
+          className="reveal-above font-body mb-8"
           style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
         >
           {t.sectionVinificacao.body}
         </p>
+        <Link
+          href="/a-vinificacao"
+          className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
+          style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
+        >
+          {t.common.learnMore}
+          <ArrowRight size={11} strokeWidth={1.5} />
+        </Link>
       </div>
 
       {/* ── DESKTOP ── text columns */}

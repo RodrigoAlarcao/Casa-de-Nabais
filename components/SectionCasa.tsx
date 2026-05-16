@@ -168,12 +168,22 @@ export default function SectionCasa() {
           style={{ zIndex: 1,
             background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)' }} />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
-          <h2 className="reveal-casa font-display uppercase mb-8"
+          <h2 className="reveal-casa font-display uppercase"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}>
             {t.sectionCasa.headingMobile.split('\n').map((line, i, arr) => (
               <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
             ))}
           </h2>
+        </div>
+      </div>
+
+      {/* Carousel + nav + TextReveal — fundo contínuo com -2px overlap */}
+      <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
+        <div className="px-6 pt-10 pb-6 text-center">
+          <p className="reveal-casa font-body mb-8"
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
+            {t.sectionCasa.body}
+          </p>
           <div className="flex flex-col gap-2">
             <Link href="/a-casa"
               className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
@@ -186,16 +196,6 @@ export default function SectionCasa() {
               {t.common.stayAtEstate} <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
           </div>
-        </div>
-      </div>
-
-      {/* Carousel + nav + TextReveal — fundo contínuo com -2px overlap */}
-      <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
-        <div className="px-6 pt-10 pb-6 text-center">
-          <p className="reveal-casa font-body"
-            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
-            {t.sectionCasa.body}
-          </p>
         </div>
         <div className="pt-2">
           <CarouselStrip />
