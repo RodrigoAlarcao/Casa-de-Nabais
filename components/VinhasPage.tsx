@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowDown, ArrowRight } from 'lucide-react'
 import SectionExplore from './SectionExplore'
+import TextReveal from './TextReveal'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -367,16 +368,12 @@ export default function VinhasPage() {
 
         {/* Animated quote */}
         <div className="mobile-quote px-8 py-16 text-center">
-          <p
+          <TextReveal
+            text={t.vinhasPage.closingQuote}
             className="font-display"
-            style={{
-              fontSize: 'clamp(1.25rem, 5.5vw, 1.5rem)',
-              lineHeight: 1.45,
-              color: '#0C4544',
-            }}
-          >
-            {t.vinhasPage.closingQuote}
-          </p>
+            style={{ fontSize: 'clamp(1.25rem, 5.5vw, 1.5rem)', lineHeight: 1.45, fontWeight: 400, color: '#0C4544' }}
+            ghostOpacity={0.15}
+          />
         </div>
       </section>
 
@@ -588,17 +585,12 @@ export default function VinhasPage() {
 
         {/* Frase de fecho */}
         <div className="max-w-[1050px] mx-auto px-6 md:px-10 text-center mt-24 md:mt-32 pb-20 md:pb-28">
-          <p
+          <TextReveal
+            text={t.vinhasPage.closingQuote}
             className="font-display"
-            style={{
-              fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)',
-              lineHeight: 1.3,
-              fontWeight: 400,
-              color: '#0C4544',
-            }}
-          >
-            {t.vinhasPage.closingQuote}
-          </p>
+            style={{ fontSize: 'clamp(1.375rem, 2.2vw, 1.875rem)', lineHeight: 1.3, fontWeight: 400, color: '#0C4544' }}
+            ghostOpacity={0.15}
+          />
         </div>
       </section>
 
