@@ -210,9 +210,9 @@ export default function CasaHistoriaSection() {
             background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)',
           }}
         />
-        <div className="absolute left-0 right-0 bottom-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
+        <div className="absolute left-0 right-0 bottom-0 px-6 pb-4 text-center" style={{ zIndex: 2 }}>
           <h2
-            className="reveal-hist font-display uppercase mb-8"
+            className="reveal-hist font-display uppercase"
             style={{
               fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
               lineHeight: 1.05,
@@ -226,7 +226,7 @@ export default function CasaHistoriaSection() {
       </div>
 
       <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
-        <div className="px-6 pt-4 pb-6 text-center">
+        <div className="px-6 pt-0 pb-6 text-center">
           <p
             className="reveal-hist font-body"
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
