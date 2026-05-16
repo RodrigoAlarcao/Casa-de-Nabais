@@ -175,7 +175,7 @@ export default function SectionEnoturismo() {
 
       {/* Carousel + nav + TextReveal — fundo contínuo com -2px overlap */}
       <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
-        <div className="px-6 pt-10 pb-6 text-center">
+        <div className="px-6 pt-4 pb-6 text-center">
           <p className="reveal-eno font-body mb-8"
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
             {t.sectionEnoturismo.body}
