@@ -681,7 +681,7 @@ export default function VinhasPage() {
                   </p>
                   <p
                     className="font-body"
-                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F', fontStyle: 'italic' }}
                   >
                     {t.vinhasPage.vinhaDoPomarP2}
                   </p>
@@ -724,7 +724,7 @@ export default function VinhasPage() {
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
                     >
                       {t.vinhasPage.vinhaDoPomarP2}
                     </p>
@@ -789,7 +789,7 @@ export default function VinhasPage() {
                   </p>
                   <p
                     className="font-body"
-                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F', fontStyle: 'italic' }}
                   >
                     {t.vinhasPage.vinhaAdegaP2}
                   </p>
@@ -832,7 +832,7 @@ export default function VinhasPage() {
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
                     >
                       {t.vinhasPage.vinhaAdegaP2}
                     </p>
@@ -897,7 +897,7 @@ export default function VinhasPage() {
                   </p>
                   <p
                     className="font-body"
-                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F', fontStyle: 'italic' }}
                   >
                     {t.vinhasPage.vinhaIgrejaP2}
                   </p>
@@ -940,7 +940,7 @@ export default function VinhasPage() {
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
                     >
                       {t.vinhasPage.vinhaIgrejaP2}
                     </p>
@@ -1005,7 +1005,7 @@ export default function VinhasPage() {
                   </p>
                   <p
                     className="font-body"
-                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F' }}
+                    style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.7, color: '#3A5B4F', fontStyle: 'italic' }}
                   >
                     {t.vinhasPage.vinhaTalhaoP2}
                   </p>
@@ -1048,7 +1048,7 @@ export default function VinhasPage() {
                     </p>
                     <p
                       className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
                     >
                       {t.vinhasPage.vinhaTalhaoP2}
                     </p>
