@@ -69,7 +69,7 @@ export default function SectionVinificacao() {
     <section ref={sectionRef} style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 57%, #031D1D 100%)' }}>
 
       {/* ── MOBILE ── */}
-      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
+      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ height: 'calc(100svh - 72px)', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div
             ref={mobileImgWrapRef}
@@ -95,26 +95,30 @@ export default function SectionVinificacao() {
         />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
           <h2
-            className="reveal-above font-display uppercase mb-6"
+            className="reveal-above font-display uppercase"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
           >
             {headingLines[0]}<br />{headingLines[1]}
           </h2>
-          <p
-            className="reveal-above font-body mb-8"
-            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-          >
-            {t.sectionVinificacao.body}
-          </p>
-          <Link
-            href="/a-vinificacao"
-            className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
-            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
-          >
-            {t.common.learnMore}
-            <ArrowRight size={11} strokeWidth={1.5} />
-          </Link>
         </div>
+      </div>
+
+      {/* ── MOBILE body text + CTA — dark section below hero ── */}
+      <div className="lg:hidden px-6 pt-4 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-4px' }}>
+        <p
+          className="reveal-above font-body mb-8"
+          style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+        >
+          {t.sectionVinificacao.body}
+        </p>
+        <Link
+          href="/a-vinificacao"
+          className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
+          style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
+        >
+          {t.common.learnMore}
+          <ArrowRight size={11} strokeWidth={1.5} />
+        </Link>
       </div>
 
       {/* ── DESKTOP ── text columns */}
