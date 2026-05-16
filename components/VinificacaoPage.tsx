@@ -974,32 +974,26 @@ export default function VinificacaoPage() {
               />
               <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
                 <p
-                  className="font-display uppercase mb-2"
+                  className="font-display uppercase mb-3"
                   style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.50)' }}
                 >
                   {t.vinificacaoPage.enologoHeading}
                 </p>
                 <h2
-                  className="font-display mb-1"
+                  className="font-display"
                   style={{
-                    fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
+                    fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', lineHeight: 1.05, letterSpacing: '0.04em',
                     color: '#FAE6C1',
                   }}
                 >
                   {t.vinificacaoPage.enologoName}
                 </h2>
-                <p
-                  className="font-display uppercase"
-                  style={{ fontSize: '9px', letterSpacing: '0.16em', color: 'rgba(250,230,193,0.40)' }}
-                >
-                  {t.vinificacaoPage.enologoRole}
-                </p>
               </div>
             </div>
 
             {/* Mobile: parágrafos — fundo contínuo com o gradiente */}
             <div
-              className="lg:hidden px-7 pt-8 pb-12 text-center"
+              className="lg:hidden px-7 pt-2 pb-12 text-center"
               style={{ background: '#031D1D' }}
             >
               {t.vinificacaoPage.enologoParas.map((para, i) => (
@@ -1010,6 +1004,7 @@ export default function VinificacaoPage() {
                     fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
                     lineHeight: 1.65,
                     color: i === 0 ? 'rgba(255,249,237,0.72)' : 'rgba(255,249,237,0.55)',
+                    fontStyle: i > 0 ? 'italic' : 'normal',
                   }}
                 >
                   {para}
