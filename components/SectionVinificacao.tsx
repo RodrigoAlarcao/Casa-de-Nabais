@@ -104,7 +104,7 @@ export default function SectionVinificacao() {
       </div>
 
       {/* ── MOBILE body text + CTA — dark section below hero ── */}
-      <div className="lg:hidden px-6 pt-4 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-2px' }}>
+      <div className="lg:hidden px-6 pt-4 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-4px' }}>
         <p
           className="reveal-above font-body mb-8"
           style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
