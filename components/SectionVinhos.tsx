@@ -44,10 +44,9 @@ export default function SectionVinhos() {
         {/* Header — centered */}
         <div className="text-center mb-14 md:mb-16 max-w-[640px] mx-auto">
           <h2
-            className="reveal-vinhos font-display uppercase text-cn-text mb-6"
+            className="reveal-vinhos font-display uppercase text-cn-text mb-6 md:whitespace-nowrap"
             style={{
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              whiteSpace: 'nowrap',
               lineHeight: 1.0,
               letterSpacing: '0.04em',
             }}
