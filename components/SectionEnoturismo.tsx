@@ -164,7 +164,7 @@ export default function SectionEnoturismo() {
         </div>
         <div className="absolute inset-0 pointer-events-none"
           style={{ zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 45%, rgba(56,103,102,0.14) 56%, rgba(56,103,102,0.50) 64%, rgba(25,79,78,0.80) 71%, rgba(3,29,29,0.93) 80%, #031D1D 90%)' }} />
+            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)' }} />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
           <h2 className="reveal-eno font-display uppercase mb-6"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}>
@@ -174,14 +174,14 @@ export default function SectionEnoturismo() {
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
             {t.sectionEnoturismo.body}
           </p>
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-2">
             <Link href="/o-enoturismo"
-              className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
+              className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
               style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
               {t.common.learnMore} <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
             <Link href="/ficar-na-casa"
-              className="flex-1 flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
+              className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-4 py-3 transition-colors duration-200"
               style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}>
               {t.common.stayAtEstate} <ArrowRight size={11} strokeWidth={1.5} />
             </Link>
