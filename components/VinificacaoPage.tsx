@@ -270,7 +270,7 @@ export default function VinificacaoPage() {
                   textShadow: '0 2px 28px rgba(3,29,29,0.95)',
                 }}
               >
-                {t.vinificacaoPage.title}
+                {t.vinificacaoPage.title.replace(/^A /, '')}
               </h1>
 
               <p
@@ -374,7 +374,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               GRID: imagem ESQ + texto DIR + CARROSSEL
           ══════════════════════════════════════ */}
-          <section ref={sectionRef} className="pt-0 pb-20 md:pb-28">
+          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28">
 
             <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -536,7 +536,7 @@ export default function VinificacaoPage() {
           </section>
 
           {/* TEXTO ANIMADO (TextReveal) */}
-          <section className="py-28 md:py-40">
+          <section className="py-14 md:py-20">
             <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
               <TextReveal
                 text={t.vinificacaoPage.closingText}
@@ -696,7 +696,7 @@ export default function VinificacaoPage() {
           <section className="pt-20 md:pt-28 pb-20 md:pb-28">
 
             <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
                 {/* Retrato ESQUERDA — desktop */}
                 <div className="hidden lg:block">
@@ -974,32 +974,26 @@ export default function VinificacaoPage() {
               />
               <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
                 <p
-                  className="font-display uppercase mb-2"
+                  className="font-display uppercase mb-3"
                   style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.50)' }}
                 >
                   {t.vinificacaoPage.enologoHeading}
                 </p>
                 <h2
-                  className="font-display mb-1"
+                  className="font-display"
                   style={{
-                    fontSize: 'clamp(1.625rem, 6vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '0.04em',
+                    fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', lineHeight: 1.05, letterSpacing: '0.04em',
                     color: '#FAE6C1',
                   }}
                 >
                   {t.vinificacaoPage.enologoName}
                 </h2>
-                <p
-                  className="font-display uppercase"
-                  style={{ fontSize: '9px', letterSpacing: '0.16em', color: 'rgba(250,230,193,0.40)' }}
-                >
-                  {t.vinificacaoPage.enologoRole}
-                </p>
               </div>
             </div>
 
             {/* Mobile: parágrafos — fundo contínuo com o gradiente */}
             <div
-              className="lg:hidden px-7 pt-8 pb-12 text-center"
+              className="lg:hidden px-7 pt-2 pb-12 text-center"
               style={{ background: '#031D1D' }}
             >
               {t.vinificacaoPage.enologoParas.map((para, i) => (
@@ -1010,6 +1004,7 @@ export default function VinificacaoPage() {
                     fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
                     lineHeight: 1.65,
                     color: i === 0 ? 'rgba(255,249,237,0.72)' : 'rgba(255,249,237,0.55)',
+                    fontStyle: i > 0 ? 'italic' : 'normal',
                   }}
                 >
                   {para}
