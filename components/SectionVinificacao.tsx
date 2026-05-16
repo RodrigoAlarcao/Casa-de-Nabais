@@ -90,7 +90,7 @@ export default function SectionVinificacao() {
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 45%, rgba(56,103,102,0.14) 56%, rgba(56,103,102,0.50) 64%, rgba(25,79,78,0.80) 71%, rgba(3,29,29,0.93) 80%, #031D1D 90%)',
+            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)',
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
