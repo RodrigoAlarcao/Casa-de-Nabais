@@ -374,7 +374,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               GRID: imagem ESQ + texto DIR + CARROSSEL
           ══════════════════════════════════════ */}
-          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28">
+          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28" style={{ backgroundColor: '#031D1D', marginTop: '-2px', position: 'relative', zIndex: 1 }}>
 
             <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
