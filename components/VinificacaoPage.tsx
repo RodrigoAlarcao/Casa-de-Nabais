@@ -238,7 +238,7 @@ export default function VinificacaoPage() {
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
+                background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%, #031D1D 100%)',
                 zIndex: 1,
               }}
             />
