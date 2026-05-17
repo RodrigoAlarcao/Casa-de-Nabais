@@ -557,8 +557,8 @@ export default function VinificacaoPage() {
           ══════════════════════════════════════ */}
           <section className="lg:pt-20 lg:pb-28 md:pb-36">
 
-            {/* Mobile: imagem full-bleed + gradient + título + texto */}
-            <div className="lg:hidden relative overflow-hidden" style={{ minHeight: '100svh' }}>
+            {/* Mobile: imagem full-bleed + gradient + título */}
+            <div className="lg:hidden relative overflow-hidden" style={{ height: 'calc(100svh - 72px)' }}>
               <div className="absolute inset-0 overflow-hidden">
                 <Image
                   src="/images/homepage/vinhas/section-01.webp"
@@ -571,13 +571,13 @@ export default function VinificacaoPage() {
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
+                  background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%, #031D1D 100%)',
                   zIndex: 1,
                 }}
               />
-              <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
+              <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
                 <h2
-                  className="font-display mb-5"
+                  className="font-display"
                   style={{
                     fontSize: 'clamp(1.375rem, 5vw, 1.875rem)', lineHeight: 1.1, letterSpacing: '0.03em',
                     color: '#FAE6C1',
@@ -585,6 +585,12 @@ export default function VinificacaoPage() {
                 >
                   {t.vinificacaoPage.experimentalHeading}
                 </h2>
+              </div>
+            </div>
+
+            {/* Mobile: texto — fundo contínuo */}
+            <div className="lg:hidden" style={{ background: '#031D1D', marginTop: '-24px', paddingTop: '24px', paddingBottom: '32px', position: 'relative', zIndex: 2 }}>
+              <div className="px-6 text-center">
                 {t.vinificacaoPage.experimentalParas.map((para, i) => (
                   <p
                     key={i}
