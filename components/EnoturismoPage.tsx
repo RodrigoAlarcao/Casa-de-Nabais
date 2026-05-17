@@ -173,8 +173,8 @@ function MobileSection({
 
   return (
     <div className="lg:hidden">
-      {/* Full-bleed image + parallax + gradient + título + texto */}
-      <div ref={containerRef} className="relative overflow-hidden" style={{ minHeight: '100svh', backgroundColor: '#031D1D' }}>
+      {/* Full-bleed image + parallax + gradient + título */}
+      <div ref={containerRef} className="relative overflow-hidden" style={{ height: 'calc(100svh - 72px)', backgroundColor: '#031D1D' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div
             ref={imgRef}
@@ -191,9 +191,9 @@ function MobileSection({
             background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)',
           }}
         />
-        <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
+        <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
           <h2
-            className="font-display mb-5"
+            className="font-display"
             style={{
               fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '0.02em',
               color: '#FAE6C1',
@@ -201,6 +201,12 @@ function MobileSection({
           >
             {title}
           </h2>
+        </div>
+      </div>
+
+      {/* Texto + swipe carousel — fundo contínuo */}
+      <div style={{ background: '#031D1D', marginTop: '-2px', paddingTop: '24px', paddingBottom: '32px' }}>
+        <div className="px-6 pb-6 text-center">
           {paras.map((para, i) => (
             <p
               key={i}
@@ -215,10 +221,6 @@ function MobileSection({
             </p>
           ))}
         </div>
-      </div>
-
-      {/* Swipe carousel — fundo contínuo */}
-      <div style={{ background: '#031D1D', marginTop: '-2px', paddingTop: '16px', paddingBottom: '32px' }}>
         <div
           className="py-2 select-none"
           style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
