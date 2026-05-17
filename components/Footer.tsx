@@ -29,21 +29,25 @@ export default function Footer() {
           Estate Grown
         </p>
 
-        {/* Morada */}
+        {/* Os Vinhos */}
         <p
           className="font-display uppercase tracking-[0.15em] text-[11px] mb-4"
           style={{ color: 'rgba(250,230,193,0.45)' }}
         >
-          {t.footer.tagline}
+          {t.footer.winesColumn}
         </p>
-        <p
-          className="font-body mb-14"
-          style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'rgba(255,249,237,0.65)' }}
-        >
-          Seara, Ponte de Lima<br />
-          4990 Viana do Castelo<br />
-          Portugal
-        </p>
+        <nav className="flex flex-col gap-3 mb-14">
+          {t.footer.winesLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="font-body transition-opacity duration-200 hover:opacity-100"
+              style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* A Quinta */}
         <p
@@ -65,25 +69,21 @@ export default function Footer() {
           ))}
         </nav>
 
-        {/* Os Vinhos */}
+        {/* Morada */}
         <p
           className="font-display uppercase tracking-[0.15em] text-[11px] mb-4"
           style={{ color: 'rgba(250,230,193,0.45)' }}
         >
-          {t.footer.winesColumn}
+          {t.footer.tagline}
         </p>
-        <nav className="flex flex-col gap-3 mb-14">
-          {t.footer.winesLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="font-body transition-opacity duration-200 hover:opacity-100"
-              style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <p
+          className="font-body mb-14"
+          style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'rgba(255,249,237,0.65)' }}
+        >
+          Seara, Ponte de Lima<br />
+          4990 Viana do Castelo<br />
+          Portugal
+        </p>
 
         {/* Email */}
         <a
@@ -110,7 +110,7 @@ export default function Footer() {
           aria-hidden="true"
           className="font-display uppercase select-none text-center"
           style={{
-            fontSize: '28vw',
+            fontSize: '20vw',
             letterSpacing: '0.04em',
             lineHeight: 0.88,
             backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
