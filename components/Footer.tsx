@@ -14,7 +14,119 @@ export default function Footer() {
       }}
       className="pt-16 md:pt-20"
     >
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+
+      {/* ══ MOBILE LAYOUT ══ */}
+      <div className="lg:hidden flex flex-col items-center text-center px-6">
+
+        {/* Ilustração — substituir o div por <Image> quando o ficheiro estiver disponível */}
+        {/* <Image src="/images/shared/footer-illustration.webp" alt="Casa de Nabais" width={180} height={180} className="mb-3" /> */}
+        <div style={{ height: 180, marginBottom: 12 }} />
+
+        <p
+          className="font-display uppercase tracking-[0.2em] text-[9px] mb-14"
+          style={{ color: 'rgba(250,230,193,0.35)' }}
+        >
+          Estate Grown
+        </p>
+
+        {/* Os Vinhos */}
+        <p
+          className="font-display uppercase tracking-[0.15em] text-[11px] mb-4"
+          style={{ color: 'rgba(250,230,193,0.45)' }}
+        >
+          {t.footer.winesColumn}
+        </p>
+        <nav className="flex flex-col gap-3 mb-14">
+          {t.footer.winesLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="font-body transition-opacity duration-200 hover:opacity-100"
+              style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* A Quinta */}
+        <p
+          className="font-display uppercase tracking-[0.15em] text-[11px] mb-4"
+          style={{ color: 'rgba(250,230,193,0.45)' }}
+        >
+          {t.footer.quintaColumn}
+        </p>
+        <nav className="flex flex-col gap-3 mb-14">
+          {t.footer.quintaLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="font-body transition-opacity duration-200 hover:opacity-100"
+              style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Morada */}
+        <p
+          className="font-display uppercase tracking-[0.15em] text-[11px] mb-4"
+          style={{ color: 'rgba(250,230,193,0.45)' }}
+        >
+          {t.footer.tagline}
+        </p>
+        <p
+          className="font-body mb-14"
+          style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'rgba(255,249,237,0.65)' }}
+        >
+          Seara, Ponte de Lima<br />
+          4990 Viana do Castelo<br />
+          Portugal
+        </p>
+
+        {/* Email */}
+        <a
+          href="mailto:info@casadenabais.pt"
+          className="font-body underline transition-opacity duration-200 hover:opacity-100 mb-14"
+          style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
+        >
+          info@casadenabais.pt
+        </a>
+
+        {/* Copyright */}
+        <p
+          className="font-display tracking-[0.12em] text-[10px] mb-0"
+          style={{ color: 'rgba(250,230,193,0.30)' }}
+        >
+          {t.footer.copyright}
+        </p>
+
+      </div>
+
+      {/* Marca de água — mobile (3 linhas, NABAIS extravasa para fora) */}
+      <div className="lg:hidden">
+        <p
+          aria-hidden="true"
+          className="font-display uppercase select-none text-center"
+          style={{
+            fontSize: '20vw',
+            letterSpacing: '0.04em',
+            lineHeight: 0.88,
+            backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            marginTop: '2.5rem',
+            paddingBottom: '3rem',
+          }}
+        >
+          CASA<br />DE<br />NABAIS
+        </p>
+      </div>
+
+      {/* ══ DESKTOP LAYOUT ══ */}
+      <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 pb-10 md:pb-12">
 
