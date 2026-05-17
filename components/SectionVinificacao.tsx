@@ -90,7 +90,7 @@ export default function SectionVinificacao() {
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)',
+            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%, #031D1D 100%)',
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
@@ -104,7 +104,7 @@ export default function SectionVinificacao() {
       </div>
 
       {/* ── MOBILE body text + CTA — dark section below hero ── */}
-      <div className="lg:hidden px-6 pt-4 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-4px' }}>
+      <div className="lg:hidden px-6 pt-4 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-24px', position: 'relative', zIndex: 2 }}>
         <p
           className="reveal-above font-body mb-8"
           style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
