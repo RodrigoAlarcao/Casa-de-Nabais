@@ -9,34 +9,16 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_O_ENOTURISMO } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const IMG_RATIO = '4/5'
 
-const PROVAS_IMAGES = [
-  { src: '/images/homepage/enoturismo/carousel-02.webp', alt: 'Prova de vinho' },
-  { src: '/images/homepage/enoturismo/carousel-05.webp', alt: 'Vindima' },
-  { src: '/images/homepage/enoturismo/carousel-06.webp', alt: 'Pôr do sol no Vale do Lima' },
-]
-
-const VISITAS_IMAGES = [
-  { src: '/images/homepage/vinhas/section-01.webp',  alt: 'Vinhas da Casa de Nabais' },
-  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Percurso entre as vinhas' },
-  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Detalhe das videiras' },
-]
-
-const ALMOCOS_IMAGES = [
-  { src: '/images/homepage/casa/carousel-01.webp',        alt: 'Interior da Casa de Nabais' },
-  { src: '/images/homepage/casa/carousel-02.webp',        alt: 'Sala de refeições' },
-  { src: '/images/homepage/enoturismo/section-01.webp',   alt: 'Sala de provas' },
-]
-
-const PASSEIOS_IMAGES = [
-  { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Paisagem do Vale do Lima' },
-  { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Vinhas ao entardecer' },
-  { src: '/images/homepage/vinhas/carousel-06.webp', alt: 'Natureza na quinta' },
-]
+const PROVAS_IMAGES = IMG_O_ENOTURISMO.provas
+const VISITAS_IMAGES = IMG_O_ENOTURISMO.visitas
+const ALMOCOS_IMAGES = IMG_O_ENOTURISMO.almocos
+const PASSEIOS_IMAGES = IMG_O_ENOTURISMO.passeios
 
 /* ─── 3-image row ───────────────────────────────────────────────── */
 // Outer grid-cols-2 gap-4 mirrors the portrait+text block above exactly —
@@ -419,7 +401,7 @@ export default function EnoturismoPage() {
               style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
             >
               <Image
-                src="/images/homepage/enoturismo/section-01.webp"
+                src={IMG_O_ENOTURISMO.destaque}
                 alt="O Enoturismo — Casa de Nabais"
                 fill priority
                 className="object-cover"
@@ -509,7 +491,7 @@ export default function EnoturismoPage() {
               style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
             >
               <Image
-                src="/images/homepage/enoturismo/section-01.webp"
+                src={IMG_O_ENOTURISMO.destaque}
                 alt="O Enoturismo — Casa de Nabais"
                 fill priority
                 className="object-cover"
@@ -527,7 +509,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.provasHeading}
           paras={t.enoturismoPage.provasParas}
-          portraitSrc="/images/homepage/enoturismo/carousel-01.webp"
+          portraitSrc={IMG_O_ENOTURISMO.provas[0].src}
           portraitAlt="Prova de vinhos na adega"
           images={PROVAS_IMAGES}
         />
@@ -536,7 +518,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/homepage/enoturismo/carousel-01.webp"
+              src={IMG_O_ENOTURISMO.provas[0].src}
               alt="Prova de vinhos na adega"
               containerRef={p1Ref}
               wrapRef={p1Wrap}
@@ -556,7 +538,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.visitasHeading}
           paras={t.enoturismoPage.visitasParas}
-          portraitSrc="/images/homepage/enoturismo/carousel-02.webp"
+          portraitSrc={IMG_O_ENOTURISMO.visitas[0].src}
           portraitAlt="Visita guiada às vinhas"
           images={VISITAS_IMAGES}
         />
@@ -566,7 +548,7 @@ export default function EnoturismoPage() {
           <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title={t.enoturismoPage.visitasHeading} paras={t.enoturismoPage.visitasParas} pad="left" />
             <PortraitCell
-              src="/images/homepage/enoturismo/carousel-02.webp"
+              src={IMG_O_ENOTURISMO.visitas[0].src}
               alt="Visita guiada às vinhas"
               containerRef={p2Ref}
               wrapRef={p2Wrap}
@@ -585,7 +567,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.almocosHeading}
           paras={t.enoturismoPage.almocosParas}
-          portraitSrc="/images/homepage/enoturismo/carousel-03.webp"
+          portraitSrc={IMG_O_ENOTURISMO.almocos[0].src}
           portraitAlt="Almoço na quinta"
           images={ALMOCOS_IMAGES}
         />
@@ -594,7 +576,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/homepage/enoturismo/carousel-03.webp"
+              src={IMG_O_ENOTURISMO.almocos[0].src}
               alt="Almoço na quinta"
               containerRef={p3Ref}
               wrapRef={p3Wrap}
@@ -614,7 +596,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.passeiosHeading}
           paras={t.enoturismoPage.passeiosParas}
-          portraitSrc="/images/homepage/enoturismo/carousel-04.webp"
+          portraitSrc={IMG_O_ENOTURISMO.passeios[0].src}
           portraitAlt="Passeio na mata"
           images={PASSEIOS_IMAGES}
         />
@@ -624,7 +606,7 @@ export default function EnoturismoPage() {
           <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title={t.enoturismoPage.passeiosHeading} paras={t.enoturismoPage.passeiosParas} pad="left" />
             <PortraitCell
-              src="/images/homepage/enoturismo/carousel-04.webp"
+              src={IMG_O_ENOTURISMO.passeios[0].src}
               alt="Passeio na mata"
               containerRef={p4Ref}
               wrapRef={p4Wrap}

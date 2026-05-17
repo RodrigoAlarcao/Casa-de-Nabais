@@ -16,31 +16,14 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_FICAR_NA_CASA } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
 /* ─── Data ─────────────────────────────────────────────────────── */
 
-const GRID_IMAGES = [
-  { src: '/images/homepage/casa/section-01.webp',  alt: 'Casa de Nabais — fachada' },
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Varanda exterior' },
-]
-
-const ALL_GALLERY = [
-  { src: '/images/homepage/casa/section-01.webp',  alt: 'Casa de Nabais — fachada' },
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Varanda exterior' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
-]
+const GRID_IMAGES = IMG_FICAR_NA_CASA.gridImages
+const ALL_GALLERY = IMG_FICAR_NA_CASA.allGallery
 
 const AMENITIES: { name: string; Icon: LucideIcon }[] = [
   { name: 'Lavandaria',                        Icon: WashingMachine },
@@ -90,10 +73,7 @@ const NEARBY_TRAINS = [
   { name: 'Nine (Vila Nova de Famalicão)', detail: '55 km' },
 ]
 
-const WINES = [
-  { label: 'Casa de Nabais', name: 'Vinha do Pomar', intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.', img: '/images/homepage/vinhos/vinha-do-pomar-context.webp', href: '/os-vinhos/vinha-do-pomar' },
-  { label: 'Casa de Nabais', name: 'Loureiro',       intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.', img: '/images/homepage/vinhos/loureiro-context.webp',       href: '/os-vinhos/loureiro' },
-]
+const WINES = IMG_FICAR_NA_CASA.wines
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
