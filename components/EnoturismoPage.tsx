@@ -188,7 +188,7 @@ function MobileSection({
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)',
+            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%, #031D1D 100%)',
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
@@ -205,7 +205,7 @@ function MobileSection({
       </div>
 
       {/* Texto + swipe carousel — fundo contínuo */}
-      <div style={{ background: '#031D1D', marginTop: '-2px', paddingTop: '24px', paddingBottom: '32px' }}>
+      <div style={{ background: '#031D1D', marginTop: '-24px', paddingTop: '24px', paddingBottom: '32px', position: 'relative', zIndex: 2 }}>
         <div className="px-6 pb-6 text-center">
           {paras.map((para, i) => (
             <p
