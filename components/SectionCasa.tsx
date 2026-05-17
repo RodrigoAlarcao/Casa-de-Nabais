@@ -10,19 +10,11 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_HOMEPAGE } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const carouselImages = [
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suite principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Mesa de refeições' },
-  { src: '/images/homepage/casa/carousel-07.webp', alt: 'Lareira da sala' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
-]
+const carouselImages = IMG_HOMEPAGE.casa.gallery
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
@@ -160,7 +152,7 @@ export default function SectionCasa() {
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
-            <Image src="/images/homepage/casa/section-01.webp" alt="Fachada da Casa de Nabais"
+            <Image src={IMG_HOMEPAGE.casa.section} alt="Fachada da Casa de Nabais"
               fill className="object-cover" sizes="100vw" priority />
           </div>
         </div>
@@ -267,7 +259,7 @@ export default function SectionCasa() {
               style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
               <div ref={imgWrapRef} className="absolute will-change-transform"
                 style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-                <Image src="/images/homepage/casa/section-01.webp" alt="Fachada da Casa de Nabais"
+                <Image src={IMG_HOMEPAGE.casa.section} alt="Fachada da Casa de Nabais"
                   fill className="object-cover" sizes="50vw" />
               </div>
             </div>

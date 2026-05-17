@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_HOMEPAGE } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -84,7 +85,7 @@ export default function Hero() {
         style={{ transformOrigin: 'center center' }}
       >
         <Image
-          src="/images/homepage/hero/homepage_hero.webp"
+          src={IMG_HOMEPAGE.hero}
           alt="Vinhas da Casa de Nabais no Vale do Lima"
           fill
           priority

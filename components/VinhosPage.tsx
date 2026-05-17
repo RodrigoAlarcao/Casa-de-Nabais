@@ -9,12 +9,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
 import SectionExplore from './SectionExplore'
+import { IMG_OS_VINHOS } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const wineImages: Record<string, string> = {
-  'vinha-do-pomar': '/images/homepage/vinhos/vinha-do-pomar-context.webp',
-  'loureiro': '/images/homepage/vinhos/loureiro-context.webp',
+  'vinha-do-pomar': IMG_OS_VINHOS.vinhaDoPomar,
+  'loureiro':       IMG_OS_VINHOS.loureiro,
 }
 
 const wineNames: Record<string, string> = {

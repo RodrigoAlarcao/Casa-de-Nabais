@@ -8,6 +8,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_HOMEPAGE } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -77,7 +78,7 @@ export default function SectionVinificacao() {
             style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/vinificacao/fullbleed-01.webp"
+              src={IMG_HOMEPAGE.vinificacao.fullbleed}
               alt="Adega da Casa de Nabais"
               fill
               className="object-cover"
@@ -172,7 +173,7 @@ export default function SectionVinificacao() {
           style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/vinificacao/fullbleed-01.webp"
+            src={IMG_HOMEPAGE.vinificacao.fullbleed}
             alt="Adega da Casa de Nabais"
             fill
             className="object-cover"

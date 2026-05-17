@@ -9,18 +9,11 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_A_CASA } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const carouselImages = [
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Detalhe arquitectónico' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Interior histórico' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Adegas antigas' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Terreiro da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Vista da quinta' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Vinha histórica' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Detalhe da casa' },
-]
+const carouselImages = IMG_A_CASA.gallery
 
 
 const IMG_RATIO = '4/5'
@@ -200,7 +193,7 @@ export default function CasaHistoriaSection() {
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
-            <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
+            <Image src={IMG_A_CASA.exterior} alt="Fachada histórica da Casa de Nabais"
               fill className="object-cover" sizes="100vw" />
           </div>
         </div>
@@ -300,7 +293,7 @@ export default function CasaHistoriaSection() {
               style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
               <div ref={imgWrapRef} className="absolute will-change-transform"
                 style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-                <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
+                <Image src={IMG_A_CASA.exterior} alt="Fachada histórica da Casa de Nabais"
                   fill className="object-cover" sizes="50vw" />
               </div>
             </div>

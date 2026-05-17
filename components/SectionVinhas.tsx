@@ -9,17 +9,11 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_HOMEPAGE } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const carouselImages = [
-  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Vinha do Pomar em flor' },
-  { src: '/images/homepage/vinhas/carousel-02.webp', alt: 'Vindima à mão' },
-  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Cachos de Loureiro' },
-  { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Vale do Lima' },
-  { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Ramada tradicional minhota' },
-  { src: '/images/homepage/vinhas/carousel-06.webp', alt: 'Adega da Casa de Nabais' },
-]
+const carouselImages = IMG_HOMEPAGE.vinhas.gallery
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12 // px
@@ -161,7 +155,7 @@ export default function SectionVinhas() {
             >
               <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
                 <Image
-                  src="/images/homepage/vinhas/section-01.webp"
+                  src={IMG_HOMEPAGE.vinhas.section}
                   alt="Vinhas da Casa de Nabais"
                   fill
                   className="object-cover"

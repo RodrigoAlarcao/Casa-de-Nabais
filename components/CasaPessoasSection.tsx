@@ -7,17 +7,12 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_A_CASA } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const teamMembers: { name: string; role: string; image: string | null; bg: string }[] = [
-  { name: 'Nome', role: 'Posição na casa', image: null, bg: '#3A5B4F' },
-  { name: 'Nome', role: 'Posição na casa', image: null, bg: '#2A4A3E' },
-  { name: 'Nome', role: 'Posição na casa', image: null, bg: '#4A6B5F' },
-  { name: 'Nome', role: 'Posição na casa', image: null, bg: '#3A5B4F' },
-  { name: 'Nome', role: 'Posição na casa', image: null, bg: '#2A4A3E' },
-  { name: 'Nome', role: 'Posição na casa', image: null, bg: '#4A6B5F' },
-]
+const teamMembers = IMG_A_CASA.equipa
+const EQUIPA_BGS = ['#3A5B4F', '#2A4A3E', '#4A6B5F', '#3A5B4F', '#2A4A3E', '#4A6B5F']
 
 export default function CasaPessoasSection() {
   const { t } = useLang()
@@ -80,7 +75,7 @@ export default function CasaPessoasSection() {
               <div
                 key={i}
                 className="reveal-pessoas relative overflow-hidden"
-                style={{ aspectRatio: '3/4', backgroundColor: member.bg, borderRadius: '8px' }}
+                style={{ aspectRatio: '3/4', backgroundColor: EQUIPA_BGS[i], borderRadius: '8px' }}
               >
                 {member.image && (
                   <div

@@ -12,18 +12,11 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_A_CASA } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const galleryImages = [
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Mesa de refeições' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
-]
+const galleryImages = IMG_A_CASA.gallery
 
 
 const IMG_RATIO = '4/5'
@@ -160,7 +153,7 @@ export default function CasaPage() {
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/casa/section-01.webp"
+              src={IMG_A_CASA.hero}
               alt="A Casa de Nabais"
               fill
               priority
@@ -302,7 +295,7 @@ export default function CasaPage() {
             style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/casa/section-01.webp"
+              src={IMG_A_CASA.panoramica}
               alt="Vista exterior da Casa de Nabais"
               fill
               priority
@@ -335,7 +328,7 @@ export default function CasaPage() {
                   style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                 >
                   <Image
-                    src="/images/homepage/casa/carousel-01.webp"
+                    src={IMG_A_CASA.portrait}
                     alt="Casa de Nabais — interior"
                     fill
                     className="object-cover"
@@ -514,7 +507,7 @@ export default function CasaPage() {
           style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/casa/carousel-01.webp"
+            src={IMG_A_CASA.portrait}
             alt="Casa de Nabais — interior"
             fill
             className="object-cover"

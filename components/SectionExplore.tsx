@@ -7,14 +7,15 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import { IMG_HOMEPAGE } from '@/lib/images'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const itemMeta = [
-  { href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.webp',      bg: '#3A5B4F' },
-  { href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.webp', bg: '#2A4A3E' },
-  { href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.webp',      bg: '#1A3A2E' },
-  { href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
+  { href: '/as-vinhas',      image: IMG_HOMEPAGE.explore.vinhas,      bg: '#3A5B4F' },
+  { href: '/a-vinificacao',  image: IMG_HOMEPAGE.explore.vinificacao, bg: '#2A4A3E' },
+  { href: '/os-vinhos',      image: IMG_HOMEPAGE.explore.vinhos,      bg: '#1A3A2E' },
+  { href: '/ficar-na-casa',  image: IMG_HOMEPAGE.explore.enoturismo,  bg: '#0A2A1E' },
 ]
 
 export default function SectionExplore({ noBg = false, dark = false, excludeHref }: { noBg?: boolean; dark?: boolean; excludeHref?: string }) {
