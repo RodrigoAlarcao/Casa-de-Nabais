@@ -775,6 +775,9 @@ export default function FicarNaCasaPage() {
 
               {/* Turismo histórico */}
               <div className="reveal-section mb-0">
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
+                  {t.ficarNaCasaPage.locationHeading}
+                </p>
                 <p className="reveal-item font-body mb-8" style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}>
                   {t.ficarNaCasaPage.locationIntro}
                 </p>
@@ -818,12 +821,9 @@ export default function FicarNaCasaPage() {
 
               {/* Mapa */}
               <div className="reveal-section pb-4">
-                <h2
-                  className="reveal-item font-display mb-6"
-                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
-                >
+                <p className="reveal-item font-body font-semibold mb-6" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   Mapa
-                </h2>
+                </p>
                 <div
                   className="reveal-item relative w-full overflow-hidden rounded-[6px]"
                   style={{ aspectRatio: '16/9', backgroundColor: '#1A4E4D' }}
