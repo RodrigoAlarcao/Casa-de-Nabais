@@ -477,7 +477,7 @@ export const pt: Translations = {
     winesHeading:   'Os nossos vinhos',
     winesIntro:     'Produzidos exclusivamente com uva própria, em pequena escala, os vinhos da Casa de Nabais são frescos, gastronómicos e pensados para evoluir.',
     winesSubtitle:  'Disponíveis para prova e compra durante a sua estadia.',
-    bookingHeading:    'Reservar',
+    bookingHeading:    'Pedido de reserva',
     bookingSubheading: 'Pedido de disponibilidade',
     bookingButton:     'Verificar disponibilidade',
     formName:     'Nome',

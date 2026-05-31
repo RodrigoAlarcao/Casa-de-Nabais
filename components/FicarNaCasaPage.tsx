@@ -275,11 +275,8 @@ export default function FicarNaCasaPage() {
     return (
       <div className="flex flex-col gap-3">
         <div className="text-center mb-2">
-          <p className="font-display" style={{ fontSize: 'clamp(1.625rem, 2.2vw, 2.25rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-            €1,000 to €2,500/night
-          </p>
-          <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.9375rem', color: 'rgba(255,249,237,0.50)', marginTop: '6px' }}>
-            Enter dates for seasonal pricing
+          <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 2vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            {t.ficarNaCasaPage.bookingHeading}
           </p>
         </div>
 
@@ -302,8 +299,6 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect(t.ficarNaCasaPage.formGuests)}
-
         <button
           onClick={onCTA}
           className="w-full font-display tracking-[0.06em] transition-all duration-200 hover:opacity-90"
@@ -319,10 +314,6 @@ export default function FicarNaCasaPage() {
         >
           {t.ficarNaCasaPage.bookingButton}
         </button>
-
-        <p className="text-center font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.35)', marginTop: '2px' }}>
-          You won&apos;t be charged yet.
-        </p>
       </div>
     )
   }
@@ -355,8 +346,6 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect(t.ficarNaCasaPage.formGuests, '0.9375rem')}
-
         {[
           { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
           { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
@@ -372,15 +361,6 @@ export default function FicarNaCasaPage() {
             />
           </div>
         ))}
-
-        <div style={getPill('mensagem', form.mensagem)}>
-          <span style={labelStyle}>{t.ficarNaCasaPage.formMessage}</span>
-          <textarea rows={3} placeholder="Pedidos especiais…"
-            value={form.mensagem} onChange={setField('mensagem')}
-            style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
-            {...bind('mensagem')}
-          />
-        </div>
 
         <button type="submit" disabled={!canSubmit || formState === 'loading'}
           className="w-full font-display tracking-[0.06em] transition-all duration-200"
@@ -432,11 +412,8 @@ export default function FicarNaCasaPage() {
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="text-center mb-2">
-          <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 5vw, 1.875rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-            €1,000 to €2,500/night
-          </p>
-          <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(255,249,237,0.50)', marginTop: '4px' }}>
-            Enter dates for seasonal pricing
+          <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            {t.ficarNaCasaPage.bookingHeading}
           </p>
         </div>
 
@@ -459,8 +436,6 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect(t.ficarNaCasaPage.formGuests, '0.9375rem')}
-
         {[
           { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
           { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
@@ -476,15 +451,6 @@ export default function FicarNaCasaPage() {
             />
           </div>
         ))}
-
-        <div style={getPill('mensagem', form.mensagem)}>
-          <span style={labelStyle}>{t.ficarNaCasaPage.formMessage}</span>
-          <textarea rows={3} placeholder="Pedidos especiais…"
-            value={form.mensagem} onChange={setField('mensagem')}
-            style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
-            {...bind('mensagem')}
-          />
-        </div>
 
         <button type="submit" disabled={!canSubmit || formState === 'loading'}
           className="w-full font-display tracking-[0.06em] transition-all duration-200"
@@ -696,10 +662,7 @@ export default function FicarNaCasaPage() {
                 style={{ border: '1px solid rgba(250,230,193,0.18)', backgroundColor: 'rgba(255,249,237,0.05)' }}
               >
                 <p className="font-display text-center" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-                  €1,000 to €2,500/night
-                </p>
-                <p className="font-body text-center mt-1" style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(255,249,237,0.45)' }}>
-                  Enter dates for seasonal pricing
+                  {t.ficarNaCasaPage.bookingHeading}
                 </p>
                 <button
                   onClick={() => setMobileOpen(true)}
