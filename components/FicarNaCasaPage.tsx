@@ -646,8 +646,7 @@ export default function FicarNaCasaPage() {
 
           {/* Specs row */}
           <div
-            className="flex flex-wrap items-center justify-center gap-6 md:gap-12 w-full pt-8 md:pt-10"
-            style={{ borderTop: '1px solid rgba(250,230,193,0.18)' }}
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-12 w-full"
           >
             <div className="flex items-center gap-2.5">
               <Bed size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
@@ -718,41 +717,10 @@ export default function FicarNaCasaPage() {
               <div className="reveal-section mb-0">
                 <h2
                   className="reveal-item font-display"
-                  style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: '#FAE6C1', lineHeight: 1.1, marginBottom: '10px' }}
+                  style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: '#FAE6C1', lineHeight: 1.1, marginBottom: '32px' }}
                 >
                   Casa de Nabais
                 </h2>
-                <div className="reveal-item flex items-center gap-2 mb-8">
-                  <MapPin size={13} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.55)', flexShrink: 0 }} />
-                  <a
-                    href="https://maps.google.com/?q=Seara,Ponte+de+Lima,Portugal"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-body underline underline-offset-2 transition-opacity duration-200 hover:opacity-80"
-                    style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.60)' }}
-                  >
-                    Seara, Ponte de Lima
-                  </a>
-                </div>
-
-                {/* Divider */}
-                <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', marginBottom: '32px' }} />
-
-                <h3
-                  className="reveal-item font-display mb-5"
-                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)', lineHeight: 1.3 }}
-                >
-                  {t.ficarNaCasaPage.locationIntro}
-                </h3>
-                {(Array.isArray(t.ficarNaCasaPage.intro) ? t.ficarNaCasaPage.intro : [t.ficarNaCasaPage.intro]).map((para: string, i: number) => (
-                  <p
-                    key={i}
-                    className="reveal-item font-body mb-4 last:mb-0"
-                    style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}
-                  >
-                    {para}
-                  </p>
-                ))}
               </div>
 
               {/* Divider */}
@@ -807,9 +775,6 @@ export default function FicarNaCasaPage() {
                   </a>
                 </p>
               </div>
-
-              {/* Divider */}
-              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
 
               {/* Turismo histórico */}
               <div className="reveal-section mb-0">
