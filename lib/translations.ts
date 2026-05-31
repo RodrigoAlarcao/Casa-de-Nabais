@@ -219,6 +219,26 @@ export type Translations = {
       ageingPotential: string
     }
   }
+  comprarVinho: {
+    heading: string
+    formName: string
+    formEmail: string
+    formWine: string
+    formQuantity: string
+    formAddress: string
+    namePlaceholder: string
+    addressPlaceholder: string
+    box: string
+    boxes: string
+    bottles: string
+    confirmationNote: string
+    formSubmit: string
+    formSuccess: string
+    formSuccessMsg: string
+    formError: string
+    formErrorMsg: string
+    formSending: string
+  }
 }
 
 /* ─── Portuguese ───────────────────────────────────────────────── */
@@ -497,6 +517,26 @@ export const pt: Translations = {
     formError:    'Erro ao enviar',
     formErrorMsg: 'Por favor tente novamente ou contacte-nos directamente.',
     formSending:  'A enviar…',
+  },
+  comprarVinho: {
+    heading:          'Comprar Vinho',
+    formName:         'Nome',
+    formEmail:        'Email',
+    formWine:         'Vinho',
+    formQuantity:     'Quantidade',
+    formAddress:      'Morada de entrega',
+    namePlaceholder:  'O seu nome',
+    addressPlaceholder: 'Rua, código postal, localidade',
+    box:              'caixa',
+    boxes:            'caixas',
+    bottles:          'garrafas',
+    confirmationNote: 'Após submeter o pedido, a equipa da Casa de Nabais entrará em contacto para concluir o pagamento.',
+    formSubmit:       'Enviar pedido',
+    formSuccess:      'Pedido recebido',
+    formSuccessMsg:   'A equipa da Casa de Nabais entrará em contacto consigo para concluir o pagamento e confirmar a entrega.',
+    formError:        'Erro ao enviar',
+    formErrorMsg:     'Por favor tente novamente ou contacte-nos directamente.',
+    formSending:      'A enviar…',
   },
   wineDetail: {
     vintagesLabel:         'Colheitas',
@@ -806,6 +846,26 @@ export const en: Translations = {
     formError:    'Error sending',
     formErrorMsg: 'Please try again or contact us directly.',
     formSending:  'Sending…',
+  },
+  comprarVinho: {
+    heading:          'Buy Wine',
+    formName:         'Name',
+    formEmail:        'Email',
+    formWine:         'Wine',
+    formQuantity:     'Quantity',
+    formAddress:      'Delivery address',
+    namePlaceholder:  'Your name',
+    addressPlaceholder: 'Street, postcode, city',
+    box:              'case',
+    boxes:            'cases',
+    bottles:          'bottles',
+    confirmationNote: 'After submitting your request, the Casa de Nabais team will be in touch to finalise payment.',
+    formSubmit:       'Send request',
+    formSuccess:      'Request received',
+    formSuccessMsg:   'The Casa de Nabais team will contact you to finalise payment and confirm delivery.',
+    formError:        'Error sending',
+    formErrorMsg:     'Please try again or contact us directly.',
+    formSending:      'Sending…',
   },
   wineDetail: {
     vintagesLabel:         'Vintages',

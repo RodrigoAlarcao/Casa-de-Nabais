@@ -14,6 +14,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import SectionExplore from './SectionExplore'
+import ComprarVinhoModal from './ComprarVinhoModal'
 import { wines, type WineData } from '@/lib/wines-data'
 import { useLang } from '@/lib/i18n'
 
@@ -146,6 +147,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   const [activeYear, setActiveYear] = useState(latestVintage?.year ?? '')
   const activeVintage = wine.vintages.find((v) => v.year === activeYear) ?? latestVintage
 
+  const [comprarModalOpen, setComprarModalOpen] = useState(false)
+
   const [isMobile, setIsMobile] = useState(false)
   const [mobileOpen, setMobileOpen] = useState<string | null>(null)
   const [desktopOpen, setDesktopOpen] = useState<Set<string>>(
@@ -242,13 +245,11 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
                 {/* Comprar CTA */}
                 <button
-                  disabled
-                  title={t.common.comingSoon}
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.14em]"
+                  onClick={() => setComprarModalOpen(true)}
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.14em] transition-opacity duration-200 hover:opacity-80"
                   style={{
                     fontSize: '11px', padding: '12px 0', borderRadius: '8px',
                     backgroundColor: 'var(--color-green)', color: '#FAE6C1',
-                    opacity: 0.45, cursor: 'not-allowed',
                   }}
                 >
                   {t.common.buyWine}
@@ -304,7 +305,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
               {/* Vintage tabs + prémios + ficha técnica */}
               {wine.vintages.length > 0 && (
-                <div className="reveal-header mb-10 pt-8" style={{ borderTop: '1px solid var(--color-border)' }}>
+                <div className="reveal-header mb-10">
                   <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
                     {t.wineDetail.vintagesLabel}
                   </p>
@@ -332,8 +333,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   </div>
 
                   {/* Awards */}
-                  <div className="min-h-[40px] mb-6">
-                    {activeVintage && activeVintage.awards.length > 0 ? (
+                  {activeVintage && activeVintage.awards.length > 0 && (
+                    <div className="mb-6">
                       <ul className="flex flex-col gap-2">
                         {activeVintage.awards.map((award, i) => (
                           <li key={i} className="flex items-start gap-2.5">
@@ -344,12 +345,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                           </li>
                         ))}
                       </ul>
-                    ) : (
-                      <p className="font-body text-cn-text-muted" style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.875rem)', opacity: 0.45 }}>
-                        {t.common.noAwards}
-                      </p>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* PDF download */}
                   {activeVintage?.techSheetUrl ? (
@@ -374,22 +371,6 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   )}
                 </div>
               )}
-
-              {/* Accordions narrativos */}
-              <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
-                {t.wineDetail.aboutWineLabel}
-              </p>
-              <div ref={narrativeRef} style={{ borderTop: '1px solid var(--color-border)' }}>
-                {narrativeSections.map((section) => (
-                  <NarrativeAccordion
-                    key={section.heading}
-                    icon={SECTION_ICONS[section.heading] ?? Leaf}
-                    title={section.heading}
-                    text={section.text}
-                    {...getAccordionProps(section.heading)}
-                  />
-                ))}
-              </div>
 
               {/* Informação Técnica + Notas de Prova */}
               <div
@@ -430,12 +411,12 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   </dl>
                 </div>
 
-                {/* Notas de Prova + Sugestão de Serviço */}
+                {/* Notas de Prova */}
                 <div>
                   <p className="reveal-tech font-display uppercase tracking-[0.14em] mb-6" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
                     {t.wineDetail.tastingNotesLabel}
                   </p>
-                  <dl className="flex flex-col gap-6 mb-8">
+                  <dl className="flex flex-col gap-6">
                     {([
                       { Icon: Eye,      label: t.wineDetail.tastingLabels.color,  value: tastingNotes.color  },
                       { Icon: Wind,     label: t.wineDetail.tastingLabels.aroma,  value: tastingNotes.aroma  },
@@ -454,27 +435,46 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                       </div>
                     ))}
                   </dl>
-
-                  <div
-                    className="reveal-tech rounded-[8px] p-5"
-                    style={{
-                      background: 'linear-gradient(135deg, #052625 0%, #0C4544 50%, #052625 100%)',
-                      border: '1px solid rgba(250,230,193,0.08)',
-                      boxShadow: '0 4px 24px rgba(5,38,37,0.18)',
-                    }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
-                      <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
-                        {t.wineDetail.servingSuggestionLabel}
-                      </p>
-                    </div>
-                    <p className="font-body" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65, color: 'rgba(250,230,193,0.85)' }}>
-                      {servingSuggestion}
-                    </p>
-                  </div>
                 </div>
 
+              </div>
+
+              {/* Sugestão de Serviço */}
+              <div
+                className="reveal-tech mt-8 rounded-[8px] p-5 flex flex-col"
+                style={{
+                  background: 'linear-gradient(135deg, #052625 0%, #0C4544 50%, #052625 100%)',
+                  border: '1px solid rgba(250,230,193,0.08)',
+                  boxShadow: '0 4px 24px rgba(5,38,37,0.18)',
+                }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
+                  <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
+                    {t.wineDetail.servingSuggestionLabel}
+                  </p>
+                </div>
+                <p className="font-body" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65, color: 'rgba(250,230,193,0.85)' }}>
+                  {servingSuggestion}
+                </p>
+              </div>
+
+              {/* Accordions narrativos — Sobre o Vinho */}
+              <div className="mt-12 md:mt-16">
+                <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
+                  {t.wineDetail.aboutWineLabel}
+                </p>
+                <div ref={narrativeRef} style={{ borderTop: '1px solid var(--color-border)' }}>
+                  {narrativeSections.filter((s) => s.text && s.text.trim().toLowerCase() !== 'a definir.').map((section) => (
+                    <NarrativeAccordion
+                      key={section.heading}
+                      icon={SECTION_ICONS[section.heading] ?? Leaf}
+                      title={section.heading}
+                      text={section.text}
+                      {...getAccordionProps(section.heading)}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -544,6 +544,13 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
       {/* ── Explore também ── */}
       <SectionExplore />
+
+      {/* ── Comprar Vinho Modal ── */}
+      <ComprarVinhoModal
+        open={comprarModalOpen}
+        onClose={() => setComprarModalOpen(false)}
+        preselectedWine={`Casa de Nabais ${wine.name}`}
+      />
 
     </div>
   )
