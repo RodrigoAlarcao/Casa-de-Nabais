@@ -7,9 +7,10 @@ import {
   MapPin, Bed, Users, Bath,
   ChevronLeft, ChevronRight, ChevronDown,
   Check, Phone, ArrowRight, X,
-  WashingMachine, ChefHat, Smartphone, Droplets, Flame,
-  Utensils, Sparkles, Flower2, Thermometer, Waves,
-  Wine, Compass, TreePine, Heart, Target,
+  ChefHat, Droplets, Flame,
+  Utensils, Flower2, Waves,
+  Dumbbell, BatteryCharging, Church,
+  Wine, Compass, TreePine, Target,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import gsap from 'gsap'
@@ -43,16 +44,14 @@ const ALL_GALLERY = [
 ]
 
 const AMENITIES: { name: string; Icon: LucideIcon }[] = [
-  { name: 'Lavandaria',                        Icon: WashingMachine },
-  { name: 'Cozinha equipada',                  Icon: ChefHat        },
-  { name: 'Carregamento de dispositivos móveis', Icon: Smartphone   },
-  { name: 'Duches',                            Icon: Droplets       },
-  { name: 'Forno de lenha',                    Icon: Flame          },
-  { name: 'Grelhador exterior',                Icon: Utensils       },
-  { name: 'Produtos de beleza',                Icon: Sparkles       },
-  { name: 'Spa',                               Icon: Flower2        },
-  { name: 'Sauna',                             Icon: Thermometer    },
-  { name: 'Piscina',                           Icon: Waves          },
+  { name: 'Spa',                               Icon: Flower2          },
+  { name: 'Banho Turco',                       Icon: Droplets         },
+  { name: 'Ginásio',                           Icon: Dumbbell         },
+  { name: 'Piscina',                           Icon: Waves            },
+  { name: 'Carregador de carros elétricos',    Icon: BatteryCharging  },
+  { name: 'Forno de lenha',                    Icon: Flame            },
+  { name: 'Grelhador exterior',                Icon: Utensils         },
+  { name: 'Capela',                            Icon: Church           },
 ]
 
 const ACTIVITIES: { name: string; Icon: LucideIcon }[] = [
@@ -60,8 +59,6 @@ const ACTIVITIES: { name: string; Icon: LucideIcon }[] = [
   { name: 'Visitas guiadas às vinhas e à adega',         Icon: Compass  },
   { name: 'Almoços e experiências gastronómicas',        Icon: ChefHat  },
   { name: 'Percursos pedestres na mata e nas vinhas',    Icon: TreePine },
-  { name: 'Spa e massagens',                             Icon: Heart    },
-  { name: 'Sauna e piscina',                             Icon: Waves    },
   { name: 'Golfe e ténis (nas proximidades)',            Icon: Target   },
 ]
 
@@ -278,11 +275,8 @@ export default function FicarNaCasaPage() {
     return (
       <div className="flex flex-col gap-3">
         <div className="text-center mb-2">
-          <p className="font-display" style={{ fontSize: 'clamp(1.625rem, 2.2vw, 2.25rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-            €1,000 to €2,500/night
-          </p>
-          <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.9375rem', color: 'rgba(255,249,237,0.50)', marginTop: '6px' }}>
-            Enter dates for seasonal pricing
+          <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 2vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            {t.ficarNaCasaPage.bookingHeading}
           </p>
         </div>
 
@@ -305,8 +299,6 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect(t.ficarNaCasaPage.formGuests)}
-
         <button
           onClick={onCTA}
           className="w-full font-display tracking-[0.06em] transition-all duration-200 hover:opacity-90"
@@ -322,10 +314,6 @@ export default function FicarNaCasaPage() {
         >
           {t.ficarNaCasaPage.bookingButton}
         </button>
-
-        <p className="text-center font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.35)', marginTop: '2px' }}>
-          You won&apos;t be charged yet.
-        </p>
       </div>
     )
   }
@@ -338,6 +326,12 @@ export default function FicarNaCasaPage() {
 
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <div className="text-center mb-2">
+          <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 2vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            {t.ficarNaCasaPage.bookingHeading}
+          </p>
+        </div>
+
         {/* Editable dates */}
         <div className="grid grid-cols-2 gap-2">
           <div style={getPill('checkIn', form.checkIn)}>
@@ -358,8 +352,6 @@ export default function FicarNaCasaPage() {
           </div>
         </div>
 
-        {renderGuestsSelect(t.ficarNaCasaPage.formGuests, '0.9375rem')}
-
         {[
           { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
           { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
@@ -375,15 +367,6 @@ export default function FicarNaCasaPage() {
             />
           </div>
         ))}
-
-        <div style={getPill('mensagem', form.mensagem)}>
-          <span style={labelStyle}>{t.ficarNaCasaPage.formMessage}</span>
-          <textarea rows={3} placeholder="Pedidos especiais…"
-            value={form.mensagem} onChange={setField('mensagem')}
-            style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
-            {...bind('mensagem')}
-          />
-        </div>
 
         <button type="submit" disabled={!canSubmit || formState === 'loading'}
           className="w-full font-display tracking-[0.06em] transition-all duration-200"
@@ -433,62 +416,53 @@ export default function FicarNaCasaPage() {
     const canSubmit = form.nome.trim() !== '' && form.email.trim() !== ''
 
     return (
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="text-center mb-2">
-          <p className="font-display" style={{ fontSize: 'clamp(1.5rem, 5vw, 1.875rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-            €1,000 to €2,500/night
-          </p>
-          <p className="font-body" style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(255,249,237,0.50)', marginTop: '4px' }}>
-            Enter dates for seasonal pricing
-          </p>
+      <form onSubmit={handleSubmit} className="flex flex-col flex-1 h-full">
+        {/* Fields — centrados verticalmente */}
+        <div className="flex flex-col gap-4 flex-1 justify-center">
+          <div className="text-center mb-2">
+            <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+              {t.ficarNaCasaPage.bookingHeading}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div style={getPill('checkIn', form.checkIn)}>
+              <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
+              <input type="date" value={form.checkIn} onChange={setField('checkIn')}
+                min={new Date().toISOString().split('T')[0]}
+                style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+                {...bind('checkIn')}
+              />
+            </div>
+            <div style={getPill('checkOut', form.checkOut)}>
+              <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
+              <input type="date" value={form.checkOut} onChange={setField('checkOut')}
+                min={form.checkIn || new Date().toISOString().split('T')[0]}
+                style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+                {...bind('checkOut')}
+              />
+            </div>
+          </div>
+
+          {[
+            { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
+            { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
+            { key: 'telefone', label: t.ficarNaCasaPage.formPhone,  type: 'tel',   placeholder: '+351 — opcional',   required: false },
+          ].map(({ key, label, type, placeholder, required }) => (
+            <div key={key} style={getPill(key, form[key as keyof typeof form])}>
+              <span style={labelStyle}>{label}</span>
+              <input type={type} required={required} placeholder={placeholder}
+                value={form[key as keyof typeof form]}
+                onChange={setField(key as keyof typeof form)}
+                style={{ ...valueStyle, fontSize: '0.9375rem' }}
+                {...bind(key)}
+              />
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <div style={getPill('checkIn', form.checkIn)}>
-            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
-            <input type="date" value={form.checkIn} onChange={setField('checkIn')}
-              min={new Date().toISOString().split('T')[0]}
-              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
-              {...bind('checkIn')}
-            />
-          </div>
-          <div style={getPill('checkOut', form.checkOut)}>
-            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
-            <input type="date" value={form.checkOut} onChange={setField('checkOut')}
-              min={form.checkIn || new Date().toISOString().split('T')[0]}
-              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
-              {...bind('checkOut')}
-            />
-          </div>
-        </div>
-
-        {renderGuestsSelect(t.ficarNaCasaPage.formGuests, '0.9375rem')}
-
-        {[
-          { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
-          { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
-          { key: 'telefone', label: t.ficarNaCasaPage.formPhone,  type: 'tel',   placeholder: '+351 — opcional',   required: false },
-        ].map(({ key, label, type, placeholder, required }) => (
-          <div key={key} style={getPill(key, form[key as keyof typeof form])}>
-            <span style={labelStyle}>{label}</span>
-            <input type={type} required={required} placeholder={placeholder}
-              value={form[key as keyof typeof form]}
-              onChange={setField(key as keyof typeof form)}
-              style={{ ...valueStyle, fontSize: '0.9375rem' }}
-              {...bind(key)}
-            />
-          </div>
-        ))}
-
-        <div style={getPill('mensagem', form.mensagem)}>
-          <span style={labelStyle}>{t.ficarNaCasaPage.formMessage}</span>
-          <textarea rows={3} placeholder="Pedidos especiais…"
-            value={form.mensagem} onChange={setField('mensagem')}
-            style={{ ...valueStyle, fontSize: '0.9375rem', resize: 'none' }}
-            {...bind('mensagem')}
-          />
-        </div>
-
+        {/* CTA — ancorado ao fundo */}
+        <div className="pt-6 pb-2">
         <button type="submit" disabled={!canSubmit || formState === 'loading'}
           className="w-full font-display tracking-[0.06em] transition-all duration-200"
           style={{
@@ -517,7 +491,7 @@ export default function FicarNaCasaPage() {
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 mt-3">
           <Phone size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.40)' }} />
           <span className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.40)' }}>
             Ou ligue{' '}
@@ -525,6 +499,7 @@ export default function FicarNaCasaPage() {
               +351 258 000 000
             </a>
           </span>
+        </div>
         </div>
       </form>
     )
@@ -619,66 +594,76 @@ export default function FicarNaCasaPage() {
               </div>
             ))}
 
-            {/* Botão "Ver todas as fotos" */}
-            <button
-              onClick={() => setLightboxIdx(0)}
-              className="absolute bottom-4 right-4 font-display uppercase tracking-[0.12em] text-[11px] px-4 py-2 rounded-[4px] transition-all duration-200"
-              style={{
-                zIndex: 10,
-                backgroundColor: 'rgba(255,249,237,0.15)',
-                color: '#FAE6C1',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(250,230,193,0.30)',
-              }}
-            >
-              Ver todas as fotos
-            </button>
           </div>
 
           {/* Mobile: carrossel simples */}
           <MobileGallery images={ALL_GALLERY} onImageClick={setLightboxIdx} />
         </div>
 
-        {/* Intro text + specs — ainda no fundo verde */}
+        {/* CTA "Ver todas as fotografias" + Specs row */}
+        <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-8 md:mt-10 flex flex-col items-center gap-8 md:gap-10">
+
+          {/* CTA primário */}
+          <button
+            onClick={() => setLightboxIdx(0)}
+            className="font-display uppercase tracking-[0.12em] transition-all duration-200 hover:opacity-90"
+            style={{
+              fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)',
+              backgroundColor: '#FAE6C1',
+              color: '#031D1D',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '14px 32px',
+            }}
+          >
+            {t.ficarNaCasaPage.allPhotosLabel}
+          </button>
+
+          {/* Specs row */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-12 w-full"
+          >
+            <div className="flex items-center gap-2.5">
+              <Bed size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
+              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
+                6 {t.ficarNaCasaPage.bedroomsLabel}
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Users size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
+              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
+                12 {t.ficarNaCasaPage.guestsLabel}
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Bath size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
+              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
+                7 {t.ficarNaCasaPage.bathsLabel}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Intro text */}
         <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-10 md:mt-14 text-center">
           {(Array.isArray(t.ficarNaCasaPage.intro) ? t.ficarNaCasaPage.intro : [t.ficarNaCasaPage.intro]).map((para: string, i: number, arr: string[]) => (
             <p
               key={i}
               className={`font-body${i < arr.length - 1 ? ' mb-3' : ''}`}
               style={{
-                fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
-                lineHeight: 1.6,
-                color: 'rgba(250,230,193,0.82)',
+                fontSize: 'clamp(1.0625rem, 1.6vw, 1.25rem)',
+                lineHeight: 1.65,
+                color: 'rgba(250,230,193,0.88)',
               }}
             >
               {para}
             </p>
           ))}
+        </div>
 
-          {/* Specs row */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mt-8 md:mt-10 pt-8 md:pt-10"
-            style={{ borderTop: '1px solid rgba(250,230,193,0.18)' }}
-          >
-            <div className="flex items-center gap-2.5">
-              <Bed size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
-              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                {t.ficarNaCasaPage.bedroomsLabel}
-              </span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <Users size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
-              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                {t.ficarNaCasaPage.guestsLabel}
-              </span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <Bath size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
-              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                {t.ficarNaCasaPage.bathsLabel}
-              </span>
-            </div>
-          </div>
+        {/* Divider after intro text */}
+        <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-10 md:mt-12">
+          <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.18)' }} />
         </div>
 
         {/* ── Two-column content — ainda dentro do wrap verde ── */}
@@ -694,10 +679,7 @@ export default function FicarNaCasaPage() {
                 style={{ border: '1px solid rgba(250,230,193,0.18)', backgroundColor: 'rgba(255,249,237,0.05)' }}
               >
                 <p className="font-display text-center" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-                  €1,000 to €2,500/night
-                </p>
-                <p className="font-body text-center mt-1" style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'rgba(255,249,237,0.45)' }}>
-                  Enter dates for seasonal pricing
+                  {t.ficarNaCasaPage.bookingHeading}
                 </p>
                 <button
                   onClick={() => setMobileOpen(true)}
@@ -712,45 +694,11 @@ export default function FicarNaCasaPage() {
               <div className="reveal-section mb-0">
                 <h2
                   className="reveal-item font-display"
-                  style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: '#FAE6C1', lineHeight: 1.1, marginBottom: '10px' }}
+                  style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: '#FAE6C1', lineHeight: 1.1, marginBottom: '32px' }}
                 >
                   Casa de Nabais
                 </h2>
-                <div className="reveal-item flex items-center gap-2 mb-8">
-                  <MapPin size={13} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.55)', flexShrink: 0 }} />
-                  <a
-                    href="https://maps.google.com/?q=Seara,Ponte+de+Lima,Portugal"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-body underline underline-offset-2 transition-opacity duration-200 hover:opacity-80"
-                    style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.60)' }}
-                  >
-                    Seara, Ponte de Lima
-                  </a>
-                </div>
-
-                {/* Divider */}
-                <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', marginBottom: '32px' }} />
-
-                <h3
-                  className="reveal-item font-display mb-5"
-                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)', lineHeight: 1.3 }}
-                >
-                  {t.ficarNaCasaPage.locationIntro}
-                </h3>
-                {(Array.isArray(t.ficarNaCasaPage.intro) ? t.ficarNaCasaPage.intro : [t.ficarNaCasaPage.intro]).map((para: string, i: number) => (
-                  <p
-                    key={i}
-                    className="reveal-item font-body mb-4 last:mb-0"
-                    style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}
-                  >
-                    {para}
-                  </p>
-                ))}
               </div>
-
-              {/* Divider */}
-              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
 
               {/* Comodidades */}
               <div className="reveal-section mb-0">
@@ -808,30 +756,29 @@ export default function FicarNaCasaPage() {
               {/* Turismo histórico */}
               <div className="reveal-section mb-0">
                 <h2
-                  className="reveal-item font-display mb-2"
+                  className="reveal-item font-display mb-6"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
                   {t.ficarNaCasaPage.locationHeading}
                 </h2>
-                <p className="reveal-item font-display mb-8" style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}>
-                  {t.ficarNaCasaPage.winesSubtitle}
+                <p className="reveal-item font-body mb-8" style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}>
+                  {t.ficarNaCasaPage.locationIntro}
                 </p>
 
                 {/* Cidades */}
-                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   {t.ficarNaCasaPage.nearbyCitiesHeading}
                 </p>
                 <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
                   {NEARBY_CITIES.map(({ name, detail }) => (
                     <li key={name} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
-                      <span style={{ textDecoration: 'underline', textUnderlineOffset: '3px', color: 'rgba(255,249,237,0.75)' }}>{name}</span>
-                      {': '}{detail}
+                      {name}{': '}{detail}
                     </li>
                   ))}
                 </ul>
 
                 {/* Estradas */}
-                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   {t.ficarNaCasaPage.nearbyRoadsHeading}
                 </p>
                 <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
@@ -843,7 +790,7 @@ export default function FicarNaCasaPage() {
                 </ul>
 
                 {/* Comboio */}
-                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   {t.ficarNaCasaPage.nearbyTrainsHeading}
                 </p>
                 <ul className="reveal-item" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
@@ -855,17 +802,11 @@ export default function FicarNaCasaPage() {
                 </ul>
               </div>
 
-              {/* Divider */}
-              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
-
-              {/* Localização */}
-              <div className="reveal-section pb-4">
-                <h2
-                  className="reveal-item font-display mb-6"
-                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
-                >
-                  {t.ficarNaCasaPage.locationHeading}
-                </h2>
+              {/* Mapa */}
+              <div className="reveal-section pb-4 mt-10">
+                <p className="reveal-item font-body font-semibold mb-6" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
+                  {t.ficarNaCasaPage.mapLabel}
+                </p>
                 <div
                   className="reveal-item relative w-full overflow-hidden rounded-[6px]"
                   style={{ aspectRatio: '16/9', backgroundColor: '#1A4E4D' }}
@@ -1044,7 +985,7 @@ export default function FicarNaCasaPage() {
               <X size={16} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-6 pb-8 flex flex-col">
+          <div className="flex-1 overflow-y-auto px-6 pb-8 flex flex-col justify-between">
             {renderMobileForm()}
           </div>
         </div>
@@ -1054,7 +995,7 @@ export default function FicarNaCasaPage() {
           MOBILE STICKY BOTTOM BAR
       ══════════════════════════════════════════════════════ */}
       <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-between"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-center"
         style={{
           background: 'linear-gradient(180deg, rgba(12,69,68,0.97) 0%, rgba(5,38,37,0.97) 100%)',
           backdropFilter: 'blur(22px)',
@@ -1062,15 +1003,9 @@ export default function FicarNaCasaPage() {
           borderTop: '1px solid rgba(250,230,193,0.28)',
         }}
       >
-        <div>
-          <p className="font-display" style={{ fontSize: '0.625rem', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(250,230,193,0.50)', lineHeight: 1.2 }}>A partir de</p>
-          <p className="font-display" style={{ fontSize: '1.125rem', color: '#FAE6C1', lineHeight: 1.1 }}>
-            €1.000 <span style={{ fontSize: '0.8125rem', color: 'rgba(250,230,193,0.55)' }}>/ noite</span>
-          </p>
-        </div>
         <button
           onClick={() => setMobileOpen(true)}
-          className="font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
+          className="w-full font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
           style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '8px' }}
         >
           {t.ficarNaCasaPage.bookingButton}
