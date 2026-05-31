@@ -673,9 +673,9 @@ export default function FicarNaCasaPage() {
               key={i}
               className={`font-body${i < arr.length - 1 ? ' mb-3' : ''}`}
               style={{
-                fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
-                lineHeight: 1.6,
-                color: 'rgba(250,230,193,0.82)',
+                fontSize: 'clamp(1.0625rem, 1.6vw, 1.25rem)',
+                lineHeight: 1.65,
+                color: 'rgba(250,230,193,0.88)',
               }}
             >
               {para}
@@ -775,9 +775,12 @@ export default function FicarNaCasaPage() {
 
               {/* Turismo histórico */}
               <div className="reveal-section mb-0">
-                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
+                <h2
+                  className="reveal-item font-display mb-6"
+                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
+                >
                   {t.ficarNaCasaPage.locationHeading}
-                </p>
+                </h2>
                 <p className="reveal-item font-body mb-8" style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}>
                   {t.ficarNaCasaPage.locationIntro}
                 </p>
@@ -820,7 +823,7 @@ export default function FicarNaCasaPage() {
               </div>
 
               {/* Mapa */}
-              <div className="reveal-section pb-4">
+              <div className="reveal-section pb-4 mt-10">
                 <p className="reveal-item font-body font-semibold mb-6" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   Mapa
                 </p>
