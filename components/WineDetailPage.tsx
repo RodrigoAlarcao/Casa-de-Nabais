@@ -304,7 +304,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
               {/* Vintage tabs + prémios + ficha técnica */}
               {wine.vintages.length > 0 && (
-                <div className="reveal-header mb-10 pt-8" style={{ borderTop: '1px solid var(--color-border)' }}>
+                <div className="reveal-header mb-10">
                   <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
                     {t.wineDetail.vintagesLabel}
                   </p>
@@ -440,14 +440,14 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
               {/* Sugestão de Serviço */}
               <div
-                className="reveal-tech mt-8 rounded-[8px] p-5 flex flex-col md:flex-row md:items-center md:gap-8"
+                className="reveal-tech mt-8 rounded-[8px] p-5 flex flex-col"
                 style={{
                   background: 'linear-gradient(135deg, #052625 0%, #0C4544 50%, #052625 100%)',
                   border: '1px solid rgba(250,230,193,0.08)',
                   boxShadow: '0 4px 24px rgba(5,38,37,0.18)',
                 }}
               >
-                <div className="flex items-center gap-2 mb-2 md:mb-0 md:shrink-0">
+                <div className="flex items-center gap-2 mb-3">
                   <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
                   <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
                     {t.wineDetail.servingSuggestionLabel}
@@ -464,7 +464,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   {t.wineDetail.aboutWineLabel}
                 </p>
                 <div ref={narrativeRef} style={{ borderTop: '1px solid var(--color-border)' }}>
-                  {narrativeSections.map((section) => (
+                  {narrativeSections.filter((s) => s.text && s.text.trim().toLowerCase() !== 'a definir.').map((section) => (
                     <NarrativeAccordion
                       key={section.heading}
                       icon={SECTION_ICONS[section.heading] ?? Leaf}
