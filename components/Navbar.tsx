@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import { Home, Wine, X, Menu } from 'lucide-react'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang, type Lang } from '@/lib/i18n'
+import ComprarVinhoModal from './ComprarVinhoModal'
 
 function LangToggle({ lang, setLang, dark = false, large = false }: { lang: Lang; setLang: (l: Lang) => void; dark?: boolean; large?: boolean }) {
   const base = `font-display uppercase tracking-[0.14em] transition-opacity duration-200 ${large ? 'text-[15px] px-1 py-1' : 'text-[11px]'}`
@@ -38,6 +39,7 @@ export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [comprarModalOpen, setComprarModalOpen] = useState(false)
   const menuTlRef = useRef<gsap.core.Timeline | null>(null)
 
   useIsomorphicLayoutEffect(() => {
@@ -137,9 +139,8 @@ export default function Navbar() {
               {t.nav.stayAtEstate}
             </Link>
             <button
-              disabled
-              title={t.nav.comingSoon}
-              className="flex items-center gap-2 font-display text-[14px] text-[#FFF9ED] opacity-40 cursor-not-allowed"
+              onClick={() => setComprarModalOpen(true)}
+              className="flex items-center gap-2 font-display text-[14px] text-[#FFF9ED] transition-opacity duration-200 hover:opacity-70"
             >
               <Wine size={14} strokeWidth={1.5} />
               {t.nav.buyWine}
@@ -214,10 +215,9 @@ export default function Navbar() {
               {t.nav.stayAtEstate}
             </Link>
             <button
-              disabled
-              title={t.nav.comingSoon}
-              className="mobile-nav-link flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] cursor-not-allowed"
-              style={{ border: '1px solid rgba(250,230,193,0.30)', color: 'rgba(250,230,193,0.35)' }}
+              onClick={() => { setComprarModalOpen(true); setMenuOpen(false) }}
+              className="mobile-nav-link flex items-center justify-center gap-2.5 font-display text-[13px] uppercase tracking-[0.14em] py-4 rounded-[8px] transition-opacity duration-200 hover:opacity-80"
+              style={{ border: '1px solid rgba(250,230,193,0.50)', color: '#FAE6C1' }}
             >
               <Wine size={14} strokeWidth={1.5} />
               {t.nav.buyWine}
@@ -225,6 +225,11 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      <ComprarVinhoModal
+        open={comprarModalOpen}
+        onClose={() => setComprarModalOpen(false)}
+      />
     </>
   )
 }

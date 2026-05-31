@@ -14,6 +14,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import SectionExplore from './SectionExplore'
+import ComprarVinhoModal from './ComprarVinhoModal'
 import { wines, type WineData } from '@/lib/wines-data'
 import { useLang } from '@/lib/i18n'
 
@@ -146,6 +147,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   const [activeYear, setActiveYear] = useState(latestVintage?.year ?? '')
   const activeVintage = wine.vintages.find((v) => v.year === activeYear) ?? latestVintage
 
+  const [comprarModalOpen, setComprarModalOpen] = useState(false)
+
   const [isMobile, setIsMobile] = useState(false)
   const [mobileOpen, setMobileOpen] = useState<string | null>(null)
   const [desktopOpen, setDesktopOpen] = useState<Set<string>>(
@@ -242,13 +245,11 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
                 {/* Comprar CTA */}
                 <button
-                  disabled
-                  title={t.common.comingSoon}
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.14em]"
+                  onClick={() => setComprarModalOpen(true)}
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.14em] transition-opacity duration-200 hover:opacity-80"
                   style={{
                     fontSize: '11px', padding: '12px 0', borderRadius: '8px',
                     backgroundColor: 'var(--color-green)', color: '#FAE6C1',
-                    opacity: 0.45, cursor: 'not-allowed',
                   }}
                 >
                   {t.common.buyWine}
@@ -543,6 +544,13 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
       {/* ── Explore também ── */}
       <SectionExplore />
+
+      {/* ── Comprar Vinho Modal ── */}
+      <ComprarVinhoModal
+        open={comprarModalOpen}
+        onClose={() => setComprarModalOpen(false)}
+        preselectedWine={`Casa de Nabais ${wine.name}`}
+      />
 
     </div>
   )
