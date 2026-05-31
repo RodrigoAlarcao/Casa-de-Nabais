@@ -649,6 +649,11 @@ export default function FicarNaCasaPage() {
           ))}
         </div>
 
+        {/* Divider after intro text */}
+        <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-10 md:mt-12">
+          <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.18)' }} />
+        </div>
+
         {/* ── Two-column content — ainda dentro do wrap verde ── */}
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 mt-14 md:mt-20">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 xl:gap-20">
