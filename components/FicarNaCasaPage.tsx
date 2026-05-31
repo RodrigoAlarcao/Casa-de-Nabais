@@ -983,7 +983,7 @@ export default function FicarNaCasaPage() {
           MOBILE STICKY BOTTOM BAR
       ══════════════════════════════════════════════════════ */}
       <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-between"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-center"
         style={{
           background: 'linear-gradient(180deg, rgba(12,69,68,0.97) 0%, rgba(5,38,37,0.97) 100%)',
           backdropFilter: 'blur(22px)',
@@ -991,15 +991,9 @@ export default function FicarNaCasaPage() {
           borderTop: '1px solid rgba(250,230,193,0.28)',
         }}
       >
-        <div>
-          <p className="font-display" style={{ fontSize: '0.625rem', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(250,230,193,0.50)', lineHeight: 1.2 }}>A partir de</p>
-          <p className="font-display" style={{ fontSize: '1.125rem', color: '#FAE6C1', lineHeight: 1.1 }}>
-            €1.000 <span style={{ fontSize: '0.8125rem', color: 'rgba(250,230,193,0.55)' }}>/ noite</span>
-          </p>
-        </div>
         <button
           onClick={() => setMobileOpen(true)}
-          className="font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
+          className="w-full font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
           style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '8px' }}
         >
           {t.ficarNaCasaPage.bookingButton}
