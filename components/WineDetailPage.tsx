@@ -332,8 +332,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   </div>
 
                   {/* Awards */}
-                  <div className="min-h-[40px] mb-6">
-                    {activeVintage && activeVintage.awards.length > 0 ? (
+                  {activeVintage && activeVintage.awards.length > 0 && (
+                    <div className="mb-6">
                       <ul className="flex flex-col gap-2">
                         {activeVintage.awards.map((award, i) => (
                           <li key={i} className="flex items-start gap-2.5">
@@ -344,12 +344,8 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                           </li>
                         ))}
                       </ul>
-                    ) : (
-                      <p className="font-body text-cn-text-muted" style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.875rem)', opacity: 0.45 }}>
-                        {t.common.noAwards}
-                      </p>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* PDF download */}
                   {activeVintage?.techSheetUrl ? (
@@ -374,22 +370,6 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   )}
                 </div>
               )}
-
-              {/* Accordions narrativos */}
-              <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
-                {t.wineDetail.aboutWineLabel}
-              </p>
-              <div ref={narrativeRef} style={{ borderTop: '1px solid var(--color-border)' }}>
-                {narrativeSections.map((section) => (
-                  <NarrativeAccordion
-                    key={section.heading}
-                    icon={SECTION_ICONS[section.heading] ?? Leaf}
-                    title={section.heading}
-                    text={section.text}
-                    {...getAccordionProps(section.heading)}
-                  />
-                ))}
-              </div>
 
               {/* Informação Técnica + Notas de Prova */}
               <div
@@ -430,12 +410,12 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   </dl>
                 </div>
 
-                {/* Notas de Prova + Sugestão de Serviço */}
+                {/* Notas de Prova */}
                 <div>
                   <p className="reveal-tech font-display uppercase tracking-[0.14em] mb-6" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
                     {t.wineDetail.tastingNotesLabel}
                   </p>
-                  <dl className="flex flex-col gap-6 mb-8">
+                  <dl className="flex flex-col gap-6">
                     {([
                       { Icon: Eye,      label: t.wineDetail.tastingLabels.color,  value: tastingNotes.color  },
                       { Icon: Wind,     label: t.wineDetail.tastingLabels.aroma,  value: tastingNotes.aroma  },
@@ -454,27 +434,46 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                       </div>
                     ))}
                   </dl>
-
-                  <div
-                    className="reveal-tech rounded-[8px] p-5"
-                    style={{
-                      background: 'linear-gradient(135deg, #052625 0%, #0C4544 50%, #052625 100%)',
-                      border: '1px solid rgba(250,230,193,0.08)',
-                      boxShadow: '0 4px 24px rgba(5,38,37,0.18)',
-                    }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
-                      <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
-                        {t.wineDetail.servingSuggestionLabel}
-                      </p>
-                    </div>
-                    <p className="font-body" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65, color: 'rgba(250,230,193,0.85)' }}>
-                      {servingSuggestion}
-                    </p>
-                  </div>
                 </div>
 
+              </div>
+
+              {/* Sugestão de Serviço */}
+              <div
+                className="reveal-tech mt-8 rounded-[8px] p-5 flex flex-col md:flex-row md:items-center md:gap-8"
+                style={{
+                  background: 'linear-gradient(135deg, #052625 0%, #0C4544 50%, #052625 100%)',
+                  border: '1px solid rgba(250,230,193,0.08)',
+                  boxShadow: '0 4px 24px rgba(5,38,37,0.18)',
+                }}
+              >
+                <div className="flex items-center gap-2 mb-2 md:mb-0 md:shrink-0">
+                  <Utensils size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.60)' }} />
+                  <p className="font-display uppercase tracking-[0.12em]" style={{ fontSize: '10px', color: 'rgba(250,230,193,0.60)' }}>
+                    {t.wineDetail.servingSuggestionLabel}
+                  </p>
+                </div>
+                <p className="font-body" style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.65, color: 'rgba(250,230,193,0.85)' }}>
+                  {servingSuggestion}
+                </p>
+              </div>
+
+              {/* Accordions narrativos — Sobre o Vinho */}
+              <div className="mt-12 md:mt-16">
+                <p className="font-display uppercase tracking-[0.14em] mb-4" style={{ fontSize: '11px', color: 'var(--color-green)' }}>
+                  {t.wineDetail.aboutWineLabel}
+                </p>
+                <div ref={narrativeRef} style={{ borderTop: '1px solid var(--color-border)' }}>
+                  {narrativeSections.map((section) => (
+                    <NarrativeAccordion
+                      key={section.heading}
+                      icon={SECTION_ICONS[section.heading] ?? Leaf}
+                      title={section.heading}
+                      text={section.text}
+                      {...getAccordionProps(section.heading)}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
