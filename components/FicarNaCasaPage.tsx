@@ -410,48 +410,53 @@ export default function FicarNaCasaPage() {
     const canSubmit = form.nome.trim() !== '' && form.email.trim() !== ''
 
     return (
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="text-center mb-2">
-          <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
-            {t.ficarNaCasaPage.bookingHeading}
-          </p>
+      <form onSubmit={handleSubmit} className="flex flex-col flex-1 h-full">
+        {/* Fields — centrados verticalmente */}
+        <div className="flex flex-col gap-4 flex-1 justify-center">
+          <div className="text-center mb-2">
+            <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 5vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+              {t.ficarNaCasaPage.bookingHeading}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div style={getPill('checkIn', form.checkIn)}>
+              <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
+              <input type="date" value={form.checkIn} onChange={setField('checkIn')}
+                min={new Date().toISOString().split('T')[0]}
+                style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+                {...bind('checkIn')}
+              />
+            </div>
+            <div style={getPill('checkOut', form.checkOut)}>
+              <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
+              <input type="date" value={form.checkOut} onChange={setField('checkOut')}
+                min={form.checkIn || new Date().toISOString().split('T')[0]}
+                style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
+                {...bind('checkOut')}
+              />
+            </div>
+          </div>
+
+          {[
+            { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
+            { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
+            { key: 'telefone', label: t.ficarNaCasaPage.formPhone,  type: 'tel',   placeholder: '+351 — opcional',   required: false },
+          ].map(({ key, label, type, placeholder, required }) => (
+            <div key={key} style={getPill(key, form[key as keyof typeof form])}>
+              <span style={labelStyle}>{label}</span>
+              <input type={type} required={required} placeholder={placeholder}
+                value={form[key as keyof typeof form]}
+                onChange={setField(key as keyof typeof form)}
+                style={{ ...valueStyle, fontSize: '0.9375rem' }}
+                {...bind(key)}
+              />
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <div style={getPill('checkIn', form.checkIn)}>
-            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckIn}</span>
-            <input type="date" value={form.checkIn} onChange={setField('checkIn')}
-              min={new Date().toISOString().split('T')[0]}
-              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
-              {...bind('checkIn')}
-            />
-          </div>
-          <div style={getPill('checkOut', form.checkOut)}>
-            <span style={labelStyle}>{t.ficarNaCasaPage.formCheckOut}</span>
-            <input type="date" value={form.checkOut} onChange={setField('checkOut')}
-              min={form.checkIn || new Date().toISOString().split('T')[0]}
-              style={{ ...valueStyle, fontSize: '0.9375rem', colorScheme: 'dark' }}
-              {...bind('checkOut')}
-            />
-          </div>
-        </div>
-
-        {[
-          { key: 'nome',     label: t.ficarNaCasaPage.formName,   type: 'text',  placeholder: 'O seu nome',       required: true  },
-          { key: 'email',    label: t.ficarNaCasaPage.formEmail,  type: 'email', placeholder: 'email@exemplo.pt',  required: true  },
-          { key: 'telefone', label: t.ficarNaCasaPage.formPhone,  type: 'tel',   placeholder: '+351 — opcional',   required: false },
-        ].map(({ key, label, type, placeholder, required }) => (
-          <div key={key} style={getPill(key, form[key as keyof typeof form])}>
-            <span style={labelStyle}>{label}</span>
-            <input type={type} required={required} placeholder={placeholder}
-              value={form[key as keyof typeof form]}
-              onChange={setField(key as keyof typeof form)}
-              style={{ ...valueStyle, fontSize: '0.9375rem' }}
-              {...bind(key)}
-            />
-          </div>
-        ))}
-
+        {/* CTA — ancorado ao fundo */}
+        <div className="pt-6 pb-2">
         <button type="submit" disabled={!canSubmit || formState === 'loading'}
           className="w-full font-display tracking-[0.06em] transition-all duration-200"
           style={{
@@ -480,7 +485,7 @@ export default function FicarNaCasaPage() {
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 mt-3">
           <Phone size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.40)' }} />
           <span className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.40)' }}>
             Ou ligue{' '}
@@ -488,6 +493,7 @@ export default function FicarNaCasaPage() {
               +351 258 000 000
             </a>
           </span>
+        </div>
         </div>
       </form>
     )
@@ -973,7 +979,7 @@ export default function FicarNaCasaPage() {
               <X size={16} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-6 pb-8 flex flex-col">
+          <div className="flex-1 overflow-y-auto px-6 pb-8 flex flex-col justify-between">
             {renderMobileForm()}
           </div>
         </div>
