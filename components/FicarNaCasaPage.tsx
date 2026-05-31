@@ -788,6 +788,10 @@ export default function FicarNaCasaPage() {
                   {t.ficarNaCasaPage.winesSubtitle}
                 </p>
 
+                <p className="reveal-item font-body mb-8" style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}>
+                  {t.ficarNaCasaPage.locationIntro}
+                </p>
+
                 {/* Cidades */}
                 <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
                   {t.ficarNaCasaPage.nearbyCitiesHeading}
