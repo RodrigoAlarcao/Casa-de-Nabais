@@ -19,6 +19,7 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
   const cv = t.comprarVinho
 
   const [formState, setFormState] = useState<FormState>('idle')
+  const [errorDetail, setErrorDetail] = useState<string>('')
   const [focusedField, setFocusedField] = useState<string | null>(null)
   const [form, setForm] = useState({
     nome: '',
@@ -80,9 +81,11 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
       Object.entries(form).forEach(([k, v]) => body.append(k, v))
 
       const res = await fetch('/api/comprar-vinho', { method: 'POST', body })
-      if (!res.ok) throw new Error('server error')
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(json.error ?? `HTTP ${res.status}`)
       setFormState('success')
-    } catch {
+    } catch (err) {
+      setErrorDetail(String(err))
       setFormState('error')
     }
   }
@@ -268,8 +271,8 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
                   <p className="font-display" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
                     {cv.formError}
                   </p>
-                  <p className="font-body" style={{ fontSize: '0.875rem', color: 'rgba(255,100,100,0.85)' }}>
-                    {cv.formErrorMsg}
+                  <p className="font-body" style={{ fontSize: '0.8rem', color: 'rgba(255,100,100,0.70)', marginTop: '4px', wordBreak: 'break-all' }}>
+                    {errorDetail}
                   </p>
                 </div>
               )}
