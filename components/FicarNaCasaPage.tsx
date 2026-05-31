@@ -720,9 +720,6 @@ export default function FicarNaCasaPage() {
                 </h2>
               </div>
 
-              {/* Divider */}
-              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
-
               {/* Comodidades */}
               <div className="reveal-section mb-0">
                 <h2
@@ -773,37 +770,29 @@ export default function FicarNaCasaPage() {
                 </p>
               </div>
 
+              {/* Divider */}
+              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
+
               {/* Turismo histórico */}
               <div className="reveal-section mb-0">
-                <h2
-                  className="reveal-item font-display mb-2"
-                  style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
-                >
-                  {t.ficarNaCasaPage.locationHeading}
-                </h2>
-                <p className="reveal-item font-display mb-8" style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}>
-                  {t.ficarNaCasaPage.winesSubtitle}
-                </p>
-
                 <p className="reveal-item font-body mb-8" style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.7, color: 'rgba(255,249,237,0.72)' }}>
                   {t.ficarNaCasaPage.locationIntro}
                 </p>
 
                 {/* Cidades */}
-                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   {t.ficarNaCasaPage.nearbyCitiesHeading}
                 </p>
                 <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
                   {NEARBY_CITIES.map(({ name, detail }) => (
                     <li key={name} className="font-body mb-1.5" style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.68)' }}>
-                      <span style={{ textDecoration: 'underline', textUnderlineOffset: '3px', color: 'rgba(255,249,237,0.75)' }}>{name}</span>
-                      {': '}{detail}
+                      {name}{': '}{detail}
                     </li>
                   ))}
                 </ul>
 
                 {/* Estradas */}
-                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   {t.ficarNaCasaPage.nearbyRoadsHeading}
                 </p>
                 <ul className="reveal-item mb-8" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
@@ -815,7 +804,7 @@ export default function FicarNaCasaPage() {
                 </ul>
 
                 {/* Comboio */}
-                <p className="reveal-item font-body mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.55)' }}>
+                <p className="reveal-item font-body font-semibold mb-3" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
                   {t.ficarNaCasaPage.nearbyTrainsHeading}
                 </p>
                 <ul className="reveal-item" style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
@@ -827,16 +816,13 @@ export default function FicarNaCasaPage() {
                 </ul>
               </div>
 
-              {/* Divider */}
-              <div style={{ height: '1px', backgroundColor: 'rgba(250,230,193,0.14)', margin: '40px 0' }} />
-
-              {/* Localização */}
+              {/* Mapa */}
               <div className="reveal-section pb-4">
                 <h2
                   className="reveal-item font-display mb-6"
                   style={{ fontSize: 'clamp(1.125rem, 1.8vw, 1.375rem)', color: 'rgba(250,230,193,0.90)' }}
                 >
-                  {t.ficarNaCasaPage.locationHeading}
+                  Mapa
                 </h2>
                 <div
                   className="reveal-item relative w-full overflow-hidden rounded-[6px]"
