@@ -7,9 +7,10 @@ import {
   MapPin, Bed, Users, Bath,
   ChevronLeft, ChevronRight, ChevronDown,
   Check, Phone, ArrowRight, X,
-  WashingMachine, ChefHat, Smartphone, Droplets, Flame,
-  Utensils, Sparkles, Flower2, Thermometer, Waves,
-  Wine, Compass, TreePine, Heart, Target,
+  ChefHat, Droplets, Flame,
+  Utensils, Flower2, Waves,
+  Dumbbell, BatteryCharging, Church,
+  Wine, Compass, TreePine, Target,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import gsap from 'gsap'
@@ -43,16 +44,14 @@ const ALL_GALLERY = [
 ]
 
 const AMENITIES: { name: string; Icon: LucideIcon }[] = [
-  { name: 'Lavandaria',                        Icon: WashingMachine },
-  { name: 'Cozinha equipada',                  Icon: ChefHat        },
-  { name: 'Carregamento de dispositivos móveis', Icon: Smartphone   },
-  { name: 'Duches',                            Icon: Droplets       },
-  { name: 'Forno de lenha',                    Icon: Flame          },
-  { name: 'Grelhador exterior',                Icon: Utensils       },
-  { name: 'Produtos de beleza',                Icon: Sparkles       },
-  { name: 'Spa',                               Icon: Flower2        },
-  { name: 'Sauna',                             Icon: Thermometer    },
-  { name: 'Piscina',                           Icon: Waves          },
+  { name: 'Spa',                               Icon: Flower2          },
+  { name: 'Banho Turco',                       Icon: Droplets         },
+  { name: 'Ginásio',                           Icon: Dumbbell         },
+  { name: 'Piscina',                           Icon: Waves            },
+  { name: 'Carregador de carros elétricos',    Icon: BatteryCharging  },
+  { name: 'Forno de lenha',                    Icon: Flame            },
+  { name: 'Grelhador exterior',                Icon: Utensils         },
+  { name: 'Capela',                            Icon: Church           },
 ]
 
 const ACTIVITIES: { name: string; Icon: LucideIcon }[] = [
@@ -60,8 +59,6 @@ const ACTIVITIES: { name: string; Icon: LucideIcon }[] = [
   { name: 'Visitas guiadas às vinhas e à adega',         Icon: Compass  },
   { name: 'Almoços e experiências gastronómicas',        Icon: ChefHat  },
   { name: 'Percursos pedestres na mata e nas vinhas',    Icon: TreePine },
-  { name: 'Spa e massagens',                             Icon: Heart    },
-  { name: 'Sauna e piscina',                             Icon: Waves    },
   { name: 'Golfe e ténis (nas proximidades)',            Icon: Target   },
 ]
 
