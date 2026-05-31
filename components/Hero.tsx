@@ -101,14 +101,6 @@ export default function Hero() {
         }}
       />
 
-      <div
-        className="absolute left-0 right-0 z-10"
-        style={{
-          bottom: '-2px',
-          height: '40%',
-          background: 'linear-gradient(to bottom, transparent 0%, #FFF3DE 100%)',
-        }}
-      />
 
       <div ref={contentRef} className="relative z-20 w-full max-w-[1100px] mx-auto px-6 md:px-10 text-center">
         <h1
