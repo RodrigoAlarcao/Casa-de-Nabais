@@ -326,6 +326,12 @@ export default function FicarNaCasaPage() {
 
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <div className="text-center mb-2">
+          <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 2vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
+            {t.ficarNaCasaPage.bookingHeading}
+          </p>
+        </div>
+
         {/* Editable dates */}
         <div className="grid grid-cols-2 gap-2">
           <div style={getPill('checkIn', form.checkIn)}>
