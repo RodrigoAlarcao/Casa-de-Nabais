@@ -619,27 +619,58 @@ export default function FicarNaCasaPage() {
               </div>
             ))}
 
-            {/* Botão "Ver todas as fotos" */}
-            <button
-              onClick={() => setLightboxIdx(0)}
-              className="absolute bottom-4 right-4 font-display uppercase tracking-[0.12em] text-[11px] px-4 py-2 rounded-[4px] transition-all duration-200"
-              style={{
-                zIndex: 10,
-                backgroundColor: 'rgba(255,249,237,0.15)',
-                color: '#FAE6C1',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(250,230,193,0.30)',
-              }}
-            >
-              Ver todas as fotos
-            </button>
           </div>
 
           {/* Mobile: carrossel simples */}
           <MobileGallery images={ALL_GALLERY} onImageClick={setLightboxIdx} />
         </div>
 
-        {/* Intro text + specs — ainda no fundo verde */}
+        {/* CTA "Ver todas as fotografias" + Specs row */}
+        <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-8 md:mt-10 flex flex-col items-center gap-8 md:gap-10">
+
+          {/* CTA primário */}
+          <button
+            onClick={() => setLightboxIdx(0)}
+            className="font-display uppercase tracking-[0.12em] transition-all duration-200 hover:opacity-90"
+            style={{
+              fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)',
+              backgroundColor: '#FAE6C1',
+              color: '#031D1D',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '14px 32px',
+            }}
+          >
+            Ver todas as fotografias
+          </button>
+
+          {/* Specs row */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-12 w-full pt-8 md:pt-10"
+            style={{ borderTop: '1px solid rgba(250,230,193,0.18)' }}
+          >
+            <div className="flex items-center gap-2.5">
+              <Bed size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
+              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
+                6 {t.ficarNaCasaPage.bedroomsLabel}
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Users size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
+              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
+                12 {t.ficarNaCasaPage.guestsLabel}
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Bath size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
+              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
+                7 {t.ficarNaCasaPage.bathsLabel}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Intro text */}
         <div className="max-w-[820px] mx-auto px-6 md:px-10 mt-10 md:mt-14 text-center">
           {(Array.isArray(t.ficarNaCasaPage.intro) ? t.ficarNaCasaPage.intro : [t.ficarNaCasaPage.intro]).map((para: string, i: number, arr: string[]) => (
             <p
@@ -654,31 +685,6 @@ export default function FicarNaCasaPage() {
               {para}
             </p>
           ))}
-
-          {/* Specs row */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mt-8 md:mt-10 pt-8 md:pt-10"
-            style={{ borderTop: '1px solid rgba(250,230,193,0.18)' }}
-          >
-            <div className="flex items-center gap-2.5">
-              <Bed size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
-              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                {t.ficarNaCasaPage.bedroomsLabel}
-              </span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <Users size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
-              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                {t.ficarNaCasaPage.guestsLabel}
-              </span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <Bath size={18} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.70)' }} />
-              <span className="font-body" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.70)' }}>
-                {t.ficarNaCasaPage.bathsLabel}
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* ── Two-column content — ainda dentro do wrap verde ── */}
