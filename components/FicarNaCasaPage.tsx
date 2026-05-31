@@ -616,7 +616,7 @@ export default function FicarNaCasaPage() {
               padding: '14px 32px',
             }}
           >
-            Ver todas as fotografias
+            {t.ficarNaCasaPage.allPhotosLabel}
           </button>
 
           {/* Specs row */}
@@ -805,7 +805,7 @@ export default function FicarNaCasaPage() {
               {/* Mapa */}
               <div className="reveal-section pb-4 mt-10">
                 <p className="reveal-item font-body font-semibold mb-6" style={{ fontSize: '0.9375rem', color: 'rgba(250,230,193,0.80)' }}>
-                  Mapa
+                  {t.ficarNaCasaPage.mapLabel}
                 </p>
                 <div
                   className="reveal-item relative w-full overflow-hidden rounded-[6px]"

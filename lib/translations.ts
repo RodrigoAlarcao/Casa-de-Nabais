@@ -173,6 +173,8 @@ export type Translations = {
     bookingHeading: string
     bookingSubheading: string
     bookingButton: string
+    allPhotosLabel: string
+    mapLabel: string
     formName: string
     formEmail: string
     formPhone: string
@@ -480,6 +482,8 @@ export const pt: Translations = {
     bookingHeading:    'Pedido de reserva',
     bookingSubheading: 'Pedido de disponibilidade',
     bookingButton:     'Verificar disponibilidade',
+    allPhotosLabel:    'Ver todas as fotografias',
+    mapLabel:          'Mapa',
     formName:     'Nome',
     formEmail:    'Email',
     formPhone:    'Telefone',
@@ -787,6 +791,8 @@ export const en: Translations = {
     bookingHeading:    'Book',
     bookingSubheading: 'Availability request',
     bookingButton:     'Check availability',
+    allPhotosLabel:    'View all photographs',
+    mapLabel:          'Map',
     formName:     'Name',
     formEmail:    'Email',
     formPhone:    'Phone',
