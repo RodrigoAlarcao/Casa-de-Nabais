@@ -78,7 +78,7 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
     setFormState('loading')
     try {
       const url = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL_VINHOS
-      if (!url) throw new Error('NEXT_PUBLIC_APPS_SCRIPT_URL_VINHOS not configured')
+        || 'https://script.google.com/macros/s/AKfycbyi7JHsWzAbO0UMvX38cVj3tnCtWChxLeXoZgBJnJGcfVshN4ldFhYC-U3uhMUxJyA/exec'
       const params = new URLSearchParams(form as Record<string, string>)
       await fetch(url, {
         method: 'POST',
