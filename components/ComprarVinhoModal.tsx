@@ -77,10 +77,11 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
     e.preventDefault()
     setFormState('loading')
     try {
-      const body = new FormData()
-      Object.entries(form).forEach(([k, v]) => body.append(k, v))
-
-      const res = await fetch('/api/comprar-vinho', { method: 'POST', body })
+      const res = await fetch('/api/comprar-vinho', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
       const json = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(json.error ?? `HTTP ${res.status}`)
       setFormState('success')
