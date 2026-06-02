@@ -77,13 +77,14 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
     e.preventDefault()
     setFormState('loading')
     try {
-      const res = await fetch('/api/comprar-vinho', {
+      const url = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL_VINHOS
+      if (!url) throw new Error('NEXT_PUBLIC_APPS_SCRIPT_URL_VINHOS not configured')
+      const params = new URLSearchParams(form as Record<string, string>)
+      await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        mode: 'no-cors',
+        body: params,
       })
-      const json = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(json.error ?? `HTTP ${res.status}`)
       setFormState('success')
     } catch (err) {
       setErrorDetail(String(err))
