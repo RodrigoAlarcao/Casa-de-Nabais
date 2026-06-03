@@ -18,6 +18,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
 import ComprarVinhoModal from './ComprarVinhoModal'
+import GalleryLightbox from './GalleryLightbox'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -1033,7 +1034,7 @@ export default function FicarNaCasaPage() {
           LIGHTBOX
       ══════════════════════════════════════════════════════ */}
       {lightboxIdx !== null && (
-        <Lightbox
+        <GalleryLightbox
           images={ALL_GALLERY}
           index={lightboxIdx}
           onClose={() => setLightboxIdx(null)}
@@ -1123,64 +1124,3 @@ function MobileGallery({
   )
 }
 
-/* ─── Lightbox ──────────────────────────────────────────────────── */
-
-function Lightbox({
-  images,
-  index,
-  onClose,
-  onPrev,
-  onNext,
-}: {
-  images: typeof ALL_GALLERY
-  index: number
-  onClose: () => void
-  onPrev: () => void
-  onNext: () => void
-}) {
-  const { t } = useLang()
-  return (
-    <div
-      className="fixed inset-0 z-[400] flex items-center justify-center"
-      style={{ backgroundColor: 'rgba(3,13,13,0.95)', backdropFilter: 'blur(12px)' }}
-      onClick={onClose}
-    >
-      <div className="relative w-full max-w-[90vw] max-h-[90vh]" style={{ aspectRatio: '4/3' }} onClick={e => e.stopPropagation()}>
-        <Image
-          src={images[index].src}
-          alt={images[index].alt}
-          fill
-          className="object-contain"
-          sizes="90vw"
-        />
-      </div>
-
-      <button onClick={onClose} aria-label={t.common.close}
-        className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center"
-        style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
-        <X size={18} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-      </button>
-
-      {index > 0 && (
-        <button onClick={e => { e.stopPropagation(); onPrev() }} aria-label={t.common.previous}
-          className="absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
-          style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
-          <ChevronLeft size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-        </button>
-      )}
-
-      {index < images.length - 1 && (
-        <button onClick={e => { e.stopPropagation(); onNext() }} aria-label={t.common.next}
-          className="absolute right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
-          style={{ backgroundColor: 'rgba(255,249,237,0.12)', border: '1px solid rgba(250,230,193,0.20)' }}>
-          <ChevronRight size={20} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-        </button>
-      )}
-
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 font-display uppercase tracking-[0.12em] text-[11px]"
-        style={{ color: 'rgba(250,230,193,0.50)' }}>
-        {index + 1} / {images.length}
-      </div>
-    </div>
-  )
-}

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
-import ImageLightbox from './ImageLightbox'
+import GalleryLightbox from './GalleryLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -63,9 +63,11 @@ export default function SectionEnoturismo() {
     setGrabbing(false)
     const diff = dragStartX.current - e.clientX
     if (Math.abs(diff) < 8) {
-      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
-      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
-      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      if (!isMobile) {
+        const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+        const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+        if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      }
       return
     }
     if (diff > 50 && canNext) next()
@@ -300,7 +302,7 @@ export default function SectionEnoturismo() {
     </section>
 
     {lightboxIndex !== null && (
-      <ImageLightbox
+      <GalleryLightbox
         images={carouselImages}
         index={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
