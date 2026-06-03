@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import ImageLightbox from './ImageLightbox'
+import GalleryLightbox from './GalleryLightbox'
 import TextReveal from './TextReveal'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -63,9 +63,11 @@ export default function CasaHistoriaSection() {
     setGrabbing(false)
     const diff = dragStartX.current - e.clientX
     if (Math.abs(diff) < 8) {
-      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
-      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
-      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      if (!isMobile) {
+        const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+        const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+        if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      }
       return
     }
     if (diff > 50 && canNext) next()
@@ -350,7 +352,7 @@ export default function CasaHistoriaSection() {
     </section>
 
     {lightboxIndex !== null && (
-      <ImageLightbox
+      <GalleryLightbox
         images={carouselImages}
         index={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
