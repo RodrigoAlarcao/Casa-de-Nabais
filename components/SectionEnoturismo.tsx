@@ -63,11 +63,9 @@ export default function SectionEnoturismo() {
     setGrabbing(false)
     const diff = dragStartX.current - e.clientX
     if (Math.abs(diff) < 8) {
-      if (!isMobile) {
-        const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
-        const slide = el?.closest('[data-slide-index]') as HTMLElement | null
-        if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
-      }
+      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
       return
     }
     if (diff > 50 && canNext) next()

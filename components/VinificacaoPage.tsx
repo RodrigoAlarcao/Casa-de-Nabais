@@ -68,7 +68,6 @@ export default function VinificacaoPage() {
 
   const [carouselLeft, setCarouselLeft] = useState('40px')
   const [slideWidth, setSlideWidth] = useState(380)
-  const [isMobile, setIsMobile] = useState(true)
   const [index, setIndex] = useState(0)
   const dragStartX = useRef(0)
   const dragStartY = useRef(0)
@@ -118,11 +117,9 @@ export default function VinificacaoPage() {
     setGrabbing(false)
     const diff = dragStartX.current - e.clientX
     if (Math.abs(diff) < 8) {
-      if (!isMobile) {
-        const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
-        const slide = el?.closest('[data-slide-index]') as HTMLElement | null
-        if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
-      }
+      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
       return
     }
     if (diff > 50 && canNext) next()
@@ -133,7 +130,6 @@ export default function VinificacaoPage() {
     function measure() {
       if (!containerRef.current) return
       const isLg = window.innerWidth >= 1024
-      setIsMobile(!isLg)
       if (isLg && portraitRef.current) {
         const portraitRect = portraitRef.current.getBoundingClientRect()
         setCarouselLeft(`${portraitRect.left}px`)
@@ -462,13 +458,14 @@ export default function VinificacaoPage() {
                   <div
                     key={i}
                     className="relative flex-shrink-0 overflow-hidden"
+                    data-slide-index={i}
                     style={{
                       width: `${slideWidth}px`,
                       aspectRatio: IMG_RATIO,
                       backgroundColor: '#0A3A39',
                       borderRadius: '4px',
                       boxShadow: '0 8px 28px rgba(0,0,0,0.25)',
-                      cursor: grabbing ? 'grabbing' : 'grab',
+                      cursor: grabbing ? 'grabbing' : 'zoom-in',
                     }}
                   >
                     <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="90vw" />

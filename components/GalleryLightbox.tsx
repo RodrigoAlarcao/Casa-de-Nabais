@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -17,6 +17,7 @@ interface Props {
 export default function GalleryLightbox({ images, index, onClose, onPrev, onNext }: Props) {
   const { t } = useLang()
   const [mounted, setMounted] = useState(false)
+  const dragStartX = useRef(0)
   const canPrev = index > 0
   const canNext = index < images.length - 1
 
@@ -46,9 +47,15 @@ export default function GalleryLightbox({ images, index, onClose, onPrev, onNext
       onClick={onClose}
     >
       <div
-        className="relative"
-        style={{ width: 'min(80vw, 1200px)', height: '80vh' }}
+        className="relative w-screen h-[100svh] md:w-[min(80vw,1200px)] md:h-[80vh]"
         onClick={(e) => e.stopPropagation()}
+        onPointerDown={(e) => { dragStartX.current = e.clientX }}
+        onPointerUp={(e) => {
+          const diff = dragStartX.current - e.clientX
+          if (Math.abs(diff) < 40) return
+          if (diff > 40 && canNext) onNext()
+          else if (diff < -40 && canPrev) onPrev()
+        }}
       >
         <Image
           key={images[index].src}
@@ -56,7 +63,7 @@ export default function GalleryLightbox({ images, index, onClose, onPrev, onNext
           alt={images[index].alt}
           fill
           className="object-contain"
-          sizes="80vw"
+          sizes="(max-width: 768px) 100vw, 80vw"
           priority
         />
       </div>
