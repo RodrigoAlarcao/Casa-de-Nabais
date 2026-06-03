@@ -203,7 +203,7 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
   }, [])
 
   return (
-    <div ref={pageRef} className="bg-cn-bg">
+    <div ref={pageRef} className="bg-cn-bg pb-[76px] md:pb-0">
 
       {/* ── Voltar ── */}
       <div className="max-w-[1100px] mx-auto px-6 md:px-10 pt-8 md:pt-10">
@@ -544,6 +544,25 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
 
       {/* ── Explore também ── */}
       <SectionExplore />
+
+      {/* ── Mobile sticky bottom bar — Comprar ── */}
+      <div
+        className="md:hidden fixed bottom-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(180deg, rgba(12,69,68,0.97) 0%, rgba(5,38,37,0.97) 100%)',
+          backdropFilter: 'blur(22px)',
+          WebkitBackdropFilter: 'blur(22px)',
+          borderTop: '1px solid rgba(250,230,193,0.28)',
+        }}
+      >
+        <button
+          onClick={() => setComprarModalOpen(true)}
+          className="w-full font-display uppercase tracking-[0.12em] text-[12px] px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
+          style={{ backgroundColor: '#FAE6C1', color: '#031D1D', borderRadius: '8px' }}
+        >
+          {t.common.buyWine}
+        </button>
+      </div>
 
       {/* ── Comprar Vinho Modal ── */}
       <ComprarVinhoModal
