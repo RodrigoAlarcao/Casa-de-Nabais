@@ -40,6 +40,11 @@ export type WineEnContent = {
   servingSuggestion: string
 }
 
+export type WineTechSheets = {
+  pt: string | null
+  en: string | null
+}
+
 export type WineData = {
   slug: string
   brand: string
@@ -53,6 +58,7 @@ export type WineData = {
   tastingNotes: TastingNotes
   keyPoints: string
   servingSuggestion: string
+  techSheets?: WineTechSheets
   vintages: WineVintage[]
   en?: WineEnContent
 }
@@ -108,6 +114,10 @@ export const wines: WineData[] = [
     keyPoints:
       'Produzido exclusivamente com uva própria, em pequena escala, a partir de vinhas nos solos graníticos do Vale do Lima. Um vinho fresco, gastronómico e pensado para evoluir.',
     servingSuggestion: 'Peixes grelhados, marisco, saladas ou como aperitivo.',
+    techSheets: {
+      pt: '/tech-sheets/loureiro-pt.pdf',
+      en: '/tech-sheets/loureiro-en.pdf',
+    },
     vintages: [
       {
         year: '2023',
@@ -215,6 +225,10 @@ export const wines: WineData[] = [
     },
     keyPoints: 'Produzido a partir de uma parcela selecionada nos solos graníticos do Vale do Lima, com estágio em cimento para maior textura e complexidade. Um Loureiro com estrutura, profundidade e longa capacidade de evolução.',
     servingSuggestion: 'Peixe estruturado (bacalhau, arroz de tamboril, polvo); aves (frango do campo, perdiz), cozinha vegetariana (risotto de legumes), queijos de meia cura.',
+    techSheets: {
+      pt: '/tech-sheets/vinha-do-pomar-pt.pdf',
+      en: '/tech-sheets/vinha-do-pomar-en.pdf',
+    },
     vintages: [
       {
         year: '2023',

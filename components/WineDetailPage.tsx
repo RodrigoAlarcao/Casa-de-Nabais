@@ -349,26 +349,29 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   )}
 
                   {/* PDF download */}
-                  {activeVintage?.techSheetUrl ? (
-                    <a
-                      href={activeVintage.techSheetUrl}
-                      download
-                      className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3 transition-colors duration-200"
-                      style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
-                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-text)'; e.currentTarget.style.color = 'var(--color-bg)' }}
-                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-text)' }}
-                    >
-                      {t.common.techSheet} <Download size={11} strokeWidth={1.5} />
-                    </a>
-                  ) : (
-                    <button
-                      disabled title={t.common.comingSoon}
-                      className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3"
-                      style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)', opacity: 0.35, cursor: 'not-allowed' }}
-                    >
-                      {t.common.techSheet} <Download size={11} strokeWidth={1.5} />
-                    </button>
-                  )}
+                  {(() => {
+                    const pdfUrl = wine.techSheets?.[lang] ?? null
+                    return pdfUrl ? (
+                      <a
+                        href={pdfUrl}
+                        download
+                        className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3 transition-colors duration-200"
+                        style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-text)'; e.currentTarget.style.color = 'var(--color-bg)' }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-text)' }}
+                      >
+                        {t.common.techSheet} <Download size={11} strokeWidth={1.5} />
+                      </a>
+                    ) : (
+                      <button
+                        disabled title={t.common.comingSoon}
+                        className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.14em] px-5 py-3"
+                        style={{ border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)', opacity: 0.35, cursor: 'not-allowed' }}
+                      >
+                        {t.common.techSheet} <Download size={11} strokeWidth={1.5} />
+                      </button>
+                    )
+                  })()}
                 </div>
               )}
 
