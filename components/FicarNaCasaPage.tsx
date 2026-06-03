@@ -17,6 +17,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import ComprarVinhoModal from './ComprarVinhoModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -108,6 +109,9 @@ export default function FicarNaCasaPage() {
 
   /* desktop booking modal */
   const [bookingModalOpen, setBookingModalOpen] = useState(false)
+
+  /* comprar vinho modal */
+  const [buyWine, setBuyWine] = useState<string | null>(null)
 
   /* input focus tracking */
   const [focusedField, setFocusedField] = useState<string | null>(null)
@@ -875,6 +879,17 @@ export default function FicarNaCasaPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {WINES.map(wine => (
               <div key={wine.name} className="flex flex-col">
+                {/* Name block — 1.º em mobile e desktop */}
+                <div className="text-center pt-6 md:pt-8 pb-7 md:pb-5">
+                  <p className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1" style={{ fontSize: '11px' }}>
+                    {wine.label}
+                  </p>
+                  <h3 className="font-display uppercase text-cn-text"
+                    style={{ fontSize: 'clamp(1.625rem, 3vw, 2.5rem)', letterSpacing: '0.04em', lineHeight: 1.05 }}>
+                    {wine.name}
+                  </h3>
+                </div>
+
                 {/* Image — white card, contained */}
                 <div
                   className="relative w-full overflow-hidden"
@@ -891,15 +906,8 @@ export default function FicarNaCasaPage() {
                   </div>
                 </div>
 
-                {/* Name block */}
-                <div className="text-center pt-8 pb-5">
-                  <p className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1" style={{ fontSize: '11px' }}>
-                    {wine.label}
-                  </p>
-                  <h3 className="font-display uppercase text-cn-text mb-4"
-                    style={{ fontSize: 'clamp(1.625rem, 3vw, 2.5rem)', letterSpacing: '0.04em', lineHeight: 1.05 }}>
-                    {wine.name}
-                  </h3>
+                {/* Description */}
+                <div className="text-center pt-5 pb-5">
                   <p className="font-body text-cn-text-muted mx-auto" style={{ fontSize: 'clamp(0.875rem, 1vw, 0.9375rem)', lineHeight: 1.6 }}>
                     {wine.intro}
                   </p>
@@ -917,10 +925,9 @@ export default function FicarNaCasaPage() {
                     {t.common.details} <ArrowRight size={10} strokeWidth={1.5} />
                   </Link>
                   <button
-                    disabled
-                    title={t.common.comingSoon}
-                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4"
-                    style={{ backgroundColor: 'var(--color-green)', color: '#FAE6C1', opacity: 0.55, cursor: 'not-allowed', borderRadius: '8px' }}
+                    onClick={() => setBuyWine(`${wine.label} ${wine.name}`)}
+                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-opacity duration-200 hover:opacity-80"
+                    style={{ backgroundColor: 'var(--color-green)', color: '#FAE6C1', cursor: 'pointer', borderRadius: '8px' }}
                   >
                     {t.common.buy} <ArrowRight size={10} strokeWidth={1.5} />
                   </button>
@@ -1011,6 +1018,16 @@ export default function FicarNaCasaPage() {
           {t.ficarNaCasaPage.bookingButton}
         </button>
       </div>
+
+      {/* ══════════════════════════════════════════════════════
+          COMPRAR VINHO MODAL
+      ══════════════════════════════════════════════════════ */}
+      <ComprarVinhoModal
+        key={buyWine ?? 'closed'}
+        open={buyWine !== null}
+        onClose={() => setBuyWine(null)}
+        preselectedWine={buyWine ?? undefined}
+      />
 
       {/* ══════════════════════════════════════════════════════
           LIGHTBOX
