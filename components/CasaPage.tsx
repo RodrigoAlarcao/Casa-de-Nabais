@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, ArrowDown } from 'lucide-react'
 import TextReveal from './TextReveal'
-import ImageLightbox from './ImageLightbox'
+import GalleryLightbox from './GalleryLightbox'
 import CasaHistoriaSection from './CasaHistoriaSection'
 import CasaPessoasSection from './CasaPessoasSection'
 import gsap from 'gsap'
@@ -553,7 +553,7 @@ export default function CasaPage() {
       </section>
 
       {lightboxIndex !== null && (
-        <ImageLightbox
+        <GalleryLightbox
           images={galleryImages}
           index={lightboxIndex}
           onClose={() => setLightboxIndex(null)}

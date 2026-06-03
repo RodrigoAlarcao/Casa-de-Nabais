@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowLeft, ArrowDown } from 'lucide-react'
 import TextReveal from './TextReveal'
 import SectionExplore from './SectionExplore'
+import GalleryLightbox from './GalleryLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -71,6 +72,7 @@ export default function VinificacaoPage() {
   const dragStartX = useRef(0)
   const dragStartY = useRef(0)
   const [grabbing, setGrabbing] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const canPrev = index > 0
   const canNext = index < galleryImages.length - 1
@@ -114,7 +116,12 @@ export default function VinificacaoPage() {
   function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
     setGrabbing(false)
     const diff = dragStartX.current - e.clientX
-    if (Math.abs(diff) < 8) return
+    if (Math.abs(diff) < 8) {
+      const el = document.elementFromPoint(dragStartX.current, dragStartY.current)
+      const slide = el?.closest('[data-slide-index]') as HTMLElement | null
+      if (slide?.dataset.slideIndex !== undefined) setLightboxIndex(Number(slide.dataset.slideIndex))
+      return
+    }
     if (diff > 50 && canNext) next()
     else if (diff < -50 && canPrev) prev()
   }
@@ -451,13 +458,14 @@ export default function VinificacaoPage() {
                   <div
                     key={i}
                     className="relative flex-shrink-0 overflow-hidden"
+                    data-slide-index={i}
                     style={{
                       width: `${slideWidth}px`,
                       aspectRatio: IMG_RATIO,
                       backgroundColor: '#0A3A39',
                       borderRadius: '4px',
                       boxShadow: '0 8px 28px rgba(0,0,0,0.25)',
-                      cursor: grabbing ? 'grabbing' : 'grab',
+                      cursor: grabbing ? 'grabbing' : 'zoom-in',
                     }}
                   >
                     <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="90vw" />
@@ -497,13 +505,14 @@ export default function VinificacaoPage() {
                   <div
                     key={i}
                     className="relative flex-shrink-0 overflow-hidden"
+                    data-slide-index={i}
                     style={{
                       width: `${slideWidth}px`,
                       aspectRatio: IMG_RATIO,
                       backgroundColor: '#0A3A39',
                       borderRadius: '4px',
                       boxShadow: '0 8px 28px rgba(0,0,0,0.25)',
-                      cursor: grabbing ? 'grabbing' : 'grab',
+                      cursor: grabbing ? 'grabbing' : 'zoom-in',
                     }}
                   >
                     <Image
@@ -1122,6 +1131,16 @@ export default function VinificacaoPage() {
           EXPLORE TAMBÉM — fundo claro
       ══════════════════════════════════════ */}
       <SectionExplore />
+
+      {lightboxIndex !== null && (
+        <GalleryLightbox
+          images={galleryImages}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() => setLightboxIndex(i => Math.max(0, (i ?? 0) - 1))}
+          onNext={() => setLightboxIndex(i => Math.min(galleryImages.length - 1, (i ?? 0) + 1))}
+        />
+      )}
     </>
   )
 }

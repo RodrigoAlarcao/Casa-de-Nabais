@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
-import ImageLightbox from './ImageLightbox'
+import GalleryLightbox from './GalleryLightbox'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
@@ -310,7 +310,7 @@ export default function SectionCasa() {
     </section>
 
     {lightboxIndex !== null && (
-      <ImageLightbox
+      <GalleryLightbox
         images={carouselImages}
         index={lightboxIndex}
         onClose={() => setLightboxIndex(null)}

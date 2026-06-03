@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import ImageLightbox from './ImageLightbox'
+import GalleryLightbox from './GalleryLightbox'
 import TextReveal from './TextReveal'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -350,7 +350,7 @@ export default function CasaHistoriaSection() {
     </section>
 
     {lightboxIndex !== null && (
-      <ImageLightbox
+      <GalleryLightbox
         images={carouselImages}
         index={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
