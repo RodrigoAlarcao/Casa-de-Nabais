@@ -66,8 +66,8 @@ export default function SectionVinhos() {
           {t.sectionVinhos.wines.map((wine) => (
             <div key={wine.slug} className="reveal-vinhos flex flex-col">
 
-              {/* Título — mobile: 1.º, desktop: 2.º */}
-              <div className="order-1 md:order-2 text-center pt-6 md:pt-8 pb-7 md:pb-5">
+              {/* Título — 1.º em mobile e desktop */}
+              <div className="order-1 text-center pt-6 md:pt-8 pb-7 md:pb-5">
                 <p
                   className="font-display uppercase tracking-[0.18em] text-cn-text-muted mb-1"
                   style={{ fontSize: '11px' }}
@@ -86,9 +86,9 @@ export default function SectionVinhos() {
                 </h3>
               </div>
 
-              {/* Imagem — mobile: 2.º, desktop: 1.º */}
+              {/* Imagem — 2.º em mobile e desktop */}
               <div
-                className="order-2 md:order-1 relative w-full overflow-hidden"
+                className="order-2 relative w-full overflow-hidden"
                 style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
               >
                 <div className="absolute inset-6">
