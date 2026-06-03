@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
 import SectionExplore from './SectionExplore'
+import ComprarVinhoModal from './ComprarVinhoModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -22,15 +23,11 @@ const wineNames: Record<string, string> = {
   'loureiro': 'Loureiro',
 }
 
-const wineBuyUrls: Record<string, string | null> = {
-  'vinha-do-pomar': null,
-  'loureiro': null,
-}
-
 export default function VinhosPage() {
   const pageRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const { t } = useLang()
+  const [buyWine, setBuyWine] = useState<string | null>(null)
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -100,7 +97,6 @@ export default function VinhosPage() {
             {t.vinhosPage.wines.map((wine) => {
               const image = wineImages[wine.slug]
               const name = wineNames[wine.slug]
-              const buyUrl = wineBuyUrls[wine.slug] ?? null
               return (
               <div key={wine.slug} className="reveal-vinhos-page flex flex-col">
 
@@ -170,14 +166,12 @@ export default function VinhosPage() {
                     <ArrowRight size={10} strokeWidth={1.5} />
                   </Link>
                   <button
-                    disabled={!buyUrl}
-                    title={buyUrl ? undefined : t.common.comingSoon}
-                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-colors duration-200"
+                    onClick={() => setBuyWine(`Casa de Nabais ${name}`)}
+                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-opacity duration-200 hover:opacity-80"
                     style={{
                       backgroundColor: 'var(--color-green)',
                       color: '#FAE6C1',
-                      opacity: buyUrl ? 1 : 0.55,
-                      cursor: buyUrl ? 'pointer' : 'not-allowed',
+                      cursor: 'pointer',
                       borderRadius: '8px',
                     }}
                   >
@@ -196,6 +190,14 @@ export default function VinhosPage() {
 
       {/* ── EXPLORE TAMBÉM ── */}
       <SectionExplore excludeHref="/os-vinhos" />
+
+      {/* ── Comprar Vinho Modal ── */}
+      <ComprarVinhoModal
+        key={buyWine ?? 'closed'}
+        open={buyWine !== null}
+        onClose={() => setBuyWine(null)}
+        preselectedWine={buyWine ?? undefined}
+      />
 
     </div>
   )

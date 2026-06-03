@@ -17,6 +17,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang } from '@/lib/i18n'
+import ComprarVinhoModal from './ComprarVinhoModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -108,6 +109,9 @@ export default function FicarNaCasaPage() {
 
   /* desktop booking modal */
   const [bookingModalOpen, setBookingModalOpen] = useState(false)
+
+  /* comprar vinho modal */
+  const [buyWine, setBuyWine] = useState<string | null>(null)
 
   /* input focus tracking */
   const [focusedField, setFocusedField] = useState<string | null>(null)
@@ -921,10 +925,9 @@ export default function FicarNaCasaPage() {
                     {t.common.details} <ArrowRight size={10} strokeWidth={1.5} />
                   </Link>
                   <button
-                    disabled
-                    title={t.common.comingSoon}
-                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4"
-                    style={{ backgroundColor: 'var(--color-green)', color: '#FAE6C1', opacity: 0.55, cursor: 'not-allowed', borderRadius: '8px' }}
+                    onClick={() => setBuyWine(`${wine.label} ${wine.name}`)}
+                    className="flex items-center justify-center gap-1.5 font-display text-[11px] uppercase tracking-[0.14em] py-4 transition-opacity duration-200 hover:opacity-80"
+                    style={{ backgroundColor: 'var(--color-green)', color: '#FAE6C1', cursor: 'pointer', borderRadius: '8px' }}
                   >
                     {t.common.buy} <ArrowRight size={10} strokeWidth={1.5} />
                   </button>
@@ -1015,6 +1018,16 @@ export default function FicarNaCasaPage() {
           {t.ficarNaCasaPage.bookingButton}
         </button>
       </div>
+
+      {/* ══════════════════════════════════════════════════════
+          COMPRAR VINHO MODAL
+      ══════════════════════════════════════════════════════ */}
+      <ComprarVinhoModal
+        key={buyWine ?? 'closed'}
+        open={buyWine !== null}
+        onClose={() => setBuyWine(null)}
+        preselectedWine={buyWine ?? undefined}
+      />
 
       {/* ══════════════════════════════════════════════════════
           LIGHTBOX
