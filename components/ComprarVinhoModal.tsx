@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { X, Check, ShoppingBag, ChevronDown } from 'lucide-react'
+import { X, Check, ChevronDown } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
@@ -160,9 +160,6 @@ export default function ComprarVinhoModal({ open, onClose, preselectedWine }: Pr
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               {/* Title */}
               <div className="text-center mb-2">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <ShoppingBag size={14} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.55)' }} />
-                </div>
                 <p className="font-display" style={{ fontSize: 'clamp(1.375rem, 2vw, 1.75rem)', color: '#FAE6C1', lineHeight: 1.1 }}>
                   {cv.heading}
                 </p>
