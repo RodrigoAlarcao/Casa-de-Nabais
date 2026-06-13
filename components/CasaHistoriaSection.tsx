@@ -13,13 +13,28 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Detalhe arquitectónico' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Interior histórico' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Adegas antigas' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Terreiro da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Vista da quinta' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Vinha histórica' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Detalhe da casa' },
+  { src: '/images/1. A casa/31.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/32.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/33.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/34.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/35.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/36.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/37.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/38.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/39.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/40.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/41.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/42.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/43.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/44.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/45.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/46.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/47.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/48.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/49.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/50.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/51.webp', alt: 'História da Casa de Nabais' },
+  { src: '/images/1. A casa/52.webp', alt: 'História da Casa de Nabais' },
 ]
 
 
@@ -200,7 +215,7 @@ export default function CasaHistoriaSection() {
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
-            <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
+            <Image src="/images/1. A casa/30.webp" alt="Fachada histórica da Casa de Nabais"
               fill className="object-cover" sizes="100vw" />
           </div>
         </div>
@@ -300,7 +315,7 @@ export default function CasaHistoriaSection() {
               style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
               <div ref={imgWrapRef} className="absolute will-change-transform"
                 style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-                <Image src="/images/homepage/casa/section-01.webp" alt="Fachada histórica da Casa de Nabais"
+                <Image src="/images/1. A casa/30.webp" alt="Fachada histórica da Casa de Nabais"
                   fill className="object-cover" sizes="50vw" />
               </div>
             </div>

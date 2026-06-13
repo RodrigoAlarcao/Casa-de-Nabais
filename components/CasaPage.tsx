@@ -16,13 +16,30 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const galleryImages = [
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Mesa de refeições' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
+  { src: '/images/1. A casa/4.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/5.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/6.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/7.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/8.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/9.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/10.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/11.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/12.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/13.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/14.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/16.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/17.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/18.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/19.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/20.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/21.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/23.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/24.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/25.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/26.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/27.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/28.webp', alt: 'A Casa de Nabais' },
+  { src: '/images/1. A casa/29.webp', alt: 'A Casa de Nabais' },
 ]
 
 
@@ -160,7 +177,7 @@ export default function CasaPage() {
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/casa/section-01.webp"
+              src="/images/1. A casa/1.webp"
               alt="A Casa de Nabais"
               fill
               priority
@@ -302,7 +319,7 @@ export default function CasaPage() {
             style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/casa/section-01.webp"
+              src="/images/1. A casa/1a.webp"
               alt="Vista exterior da Casa de Nabais"
               fill
               priority
@@ -335,7 +352,7 @@ export default function CasaPage() {
                   style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                 >
                   <Image
-                    src="/images/homepage/casa/carousel-01.webp"
+                    src="/images/1. A casa/3.webp"
                     alt="Casa de Nabais — interior"
                     fill
                     className="object-cover"
@@ -514,7 +531,7 @@ export default function CasaPage() {
           style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/casa/carousel-01.webp"
+            src="/images/1. A casa/3.webp"
             alt="Casa de Nabais — interior"
             fill
             className="object-cover"
