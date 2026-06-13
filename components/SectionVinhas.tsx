@@ -13,12 +13,12 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Vinha do Pomar em flor' },
-  { src: '/images/homepage/vinhas/carousel-02.webp', alt: 'Vindima à mão' },
-  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Cachos de Loureiro' },
-  { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Vale do Lima' },
-  { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Ramada tradicional minhota' },
-  { src: '/images/homepage/vinhas/carousel-06.webp', alt: 'Adega da Casa de Nabais' },
+  { src: '/images/0. Mainpage/3.webp', alt: 'Vinha do Pomar em flor' },
+  { src: '/images/0. Mainpage/4.webp', alt: 'Vindima à mão' },
+  { src: '/images/0. Mainpage/5.webp', alt: 'Cachos de Loureiro' },
+  { src: '/images/0. Mainpage/6.webp', alt: 'Vale do Lima' },
+  { src: '/images/0. Mainpage/7.webp', alt: 'Ramada tradicional minhota' },
+  { src: '/images/0. Mainpage/8.webp', alt: 'Adega da Casa de Nabais' },
 ]
 
 const IMG_RATIO = '4/5'
@@ -161,7 +161,7 @@ export default function SectionVinhas() {
             >
               <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
                 <Image
-                  src="/images/homepage/vinhas/section-01.webp"
+                  src="/images/0. Mainpage/2.webp"
                   alt="Vinhas da Casa de Nabais"
                   fill
                   className="object-cover"

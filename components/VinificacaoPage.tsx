@@ -15,21 +15,22 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const galleryImages = [
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Adega — tanques de inox' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Fermentação do Loureiro' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Controlo de temperatura' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Análise de mosto' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Prova de barrica' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Engarrafamento' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Rotulagem' },
-  { src: '/images/homepage/casa/section-01.webp',  alt: 'Expedição' },
+  { src: '/images/3. A vinificacao/3.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/5.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/6.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/7.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/8.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/9.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/12.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/10.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/11.webp', alt: 'A Vinificação' },
 ]
 
 
 const RIGOR_IMAGES = [
-  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Controlo de temperatura — adega' },
-  { src: '/images/homepage/vinhas/carousel-02.webp', alt: 'Análise de mosto' },
-  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Registo de dados — vinificação' },
+  { src: '/images/3. A vinificacao/15.webp', alt: 'Rigor, dados e tempo' },
+  { src: '/images/3. A vinificacao/Casa Nabais086.webp', alt: 'Rigor, dados e tempo' },
+  { src: '/images/3. A vinificacao/16.webp', alt: 'Rigor, dados e tempo' },
 ]
 
 
@@ -231,7 +232,7 @@ export default function VinificacaoPage() {
                 style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
               >
                 <Image
-                  src="/images/homepage/vinificacao/fullbleed-01.webp"
+                  src="/images/3. A vinificacao/1.webp"
                   alt="A Vinificação — adega"
                   fill
                   priority
@@ -367,7 +368,7 @@ export default function VinificacaoPage() {
                 style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
               >
                 <Image
-                  src="/images/homepage/vinificacao/fullbleed-01.webp"
+                  src="/images/3. A vinificacao/1.webp"
                   alt="Adega da Casa de Nabais"
                   fill
                   priority
@@ -398,7 +399,7 @@ export default function VinificacaoPage() {
                       style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                     >
                       <Image
-                        src="/images/homepage/casa/carousel-01.webp"
+                        src="/images/3. A vinificacao/4.webp"
                         alt="A casta Loureiro — vinificação"
                         fill
                         className="object-cover"
@@ -570,7 +571,7 @@ export default function VinificacaoPage() {
             <div className="lg:hidden relative overflow-hidden" style={{ height: 'calc(100svh - 72px)' }}>
               <div className="absolute inset-0 overflow-hidden">
                 <Image
-                  src="/images/homepage/vinhas/section-01.webp"
+                  src="/images/3. A vinificacao/2.webp"
                   alt="Abordagem experimental — microvinificações"
                   fill
                   className="object-cover"
@@ -659,7 +660,7 @@ export default function VinificacaoPage() {
                       style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                     >
                       <Image
-                        src="/images/homepage/vinhas/section-01.webp"
+                        src="/images/3. A vinificacao/2.webp"
                         alt="Abordagem experimental — microvinificações"
                         fill
                         className="object-cover"
@@ -685,7 +686,7 @@ export default function VinificacaoPage() {
                   style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                 >
                   <Image
-                    src="/images/homepage/vinhas/carousel-04.webp"
+                    src="/images/3. A vinificacao/13.webp"
                     alt="Adega da Casa de Nabais — vista exterior"
                     fill
                     className="object-cover"
@@ -726,7 +727,7 @@ export default function VinificacaoPage() {
                       style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                     >
                       <Image
-                        src="/images/homepage/casa/section-01.webp"
+                        src="/images/3. A vinificacao/Casa Nabais075.webp"
                         alt="Adega — interior"
                         fill
                         className="object-cover"
@@ -810,7 +811,7 @@ export default function VinificacaoPage() {
                   style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                 >
                   <Image
-                    src="/images/homepage/casa/carousel-03.webp"
+                    src="/images/3. A vinificacao/Casa Nabais081.webp"
                     alt="Adega da Casa de Nabais — construção"
                     fill
                     className="object-cover"
@@ -826,7 +827,7 @@ export default function VinificacaoPage() {
               style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#3A5B4F' }}
             >
               <Image
-                src="/images/homepage/casa/section-01.webp"
+                src="/images/3. A vinificacao/Casa Nabais075.webp"
                 alt="Adega — interior"
                 fill
                 className="object-cover"
@@ -973,7 +974,7 @@ export default function VinificacaoPage() {
             <div className="lg:hidden relative overflow-hidden" style={{ minHeight: '100svh' }}>
               <div className="absolute inset-0 overflow-hidden">
                 <Image
-                  src="/images/homepage/enoturismo/section-01.webp"
+                  src="/images/3. A vinificacao/19.webp"
                   alt="Perfil do enólogo — Casa de Nabais"
                   fill
                   className="object-cover"
@@ -1056,7 +1057,7 @@ export default function VinificacaoPage() {
                     style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
                     <Image
-                      src="/images/homepage/enoturismo/section-01.webp"
+                      src="/images/3. A vinificacao/19.webp"
                       alt="Perfil do enólogo — Casa de Nabais"
                       fill
                       className="object-cover"
@@ -1130,7 +1131,7 @@ export default function VinificacaoPage() {
       {/* ══════════════════════════════════════
           EXPLORE TAMBÉM — fundo claro
       ══════════════════════════════════════ */}
-      <SectionExplore />
+      <SectionExplore excludeHref="/a-vinificacao" />
 
       {lightboxIndex !== null && (
         <GalleryLightbox

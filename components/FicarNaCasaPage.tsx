@@ -25,24 +25,56 @@ gsap.registerPlugin(ScrollTrigger)
 /* ─── Data ─────────────────────────────────────────────────────── */
 
 const GRID_IMAGES = [
-  { src: '/images/homepage/casa/section-01.webp',  alt: 'Casa de Nabais — fachada' },
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Varanda exterior' },
+  { src: '/images/6. Ficar na casa/1.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/2.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/3.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/4.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/5.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/6.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/7.webp', alt: 'Ficar na Casa de Nabais' },
 ]
 
 const ALL_GALLERY = [
-  { src: '/images/homepage/casa/section-01.webp',  alt: 'Casa de Nabais — fachada' },
-  { src: '/images/homepage/casa/carousel-01.webp', alt: 'Hall de entrada' },
-  { src: '/images/homepage/casa/carousel-02.webp', alt: 'Sala de estar' },
-  { src: '/images/homepage/casa/carousel-03.webp', alt: 'Suíte principal' },
-  { src: '/images/homepage/casa/carousel-04.webp', alt: 'Piscina da quinta' },
-  { src: '/images/homepage/casa/carousel-05.webp', alt: 'Jardim histórico' },
-  { src: '/images/homepage/casa/carousel-06.webp', alt: 'Varanda exterior' },
-  { src: '/images/homepage/casa/carousel-08.webp', alt: 'Vista da varanda' },
+  { src: '/images/6. Ficar na casa/1.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/2.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/3.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/4.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/5.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/6.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/7.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/8.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/9.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/10.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/11.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/12.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/13.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/14.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/15.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/16.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/17.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/18.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/19.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/20.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/21.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/22.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/23.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/24.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/25.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/26.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/27.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/28.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/29.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/30.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/31.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/32.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/33.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/34.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/35.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/36.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/37.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/38.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/39.webp', alt: 'Ficar na Casa de Nabais' },
+  { src: '/images/6. Ficar na casa/40.webp', alt: 'Ficar na Casa de Nabais' },
 ]
 
 const AMENITIES: { name: string; Icon: LucideIcon }[] = [
@@ -90,8 +122,8 @@ const NEARBY_TRAINS = [
 ]
 
 const WINES = [
-  { label: 'Casa de Nabais', name: 'Vinha do Pomar', intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.', img: '/images/homepage/vinhos/vinha-do-pomar-context.webp', href: '/os-vinhos/vinha-do-pomar' },
-  { label: 'Casa de Nabais', name: 'Loureiro',       intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.', img: '/images/homepage/vinhos/loureiro-context.webp',       href: '/os-vinhos/loureiro' },
+  { label: 'Casa de Nabais', name: 'Vinha do Pomar', intro: 'Provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Maior estrutura, textura e capacidade de evolução.', img: '/images/4. Os vinhos/vinha-do-pomar.webp', href: '/os-vinhos/vinha-do-pomar' },
+  { label: 'Casa de Nabais', name: 'Loureiro',       intro: 'Nasce num contexto atlântico onde a frescura e a precisão definem o estilo. Uma interpretação direta da casta, focada na pureza aromática e tensão.', img: '/images/4. Os vinhos/loureiro.webp',       href: '/os-vinhos/loureiro' },
 ]
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'

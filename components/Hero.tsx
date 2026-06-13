@@ -84,7 +84,7 @@ export default function Hero() {
         style={{ transformOrigin: 'center center' }}
       >
         <Image
-          src="/images/homepage/hero/homepage_hero.webp"
+          src="/images/0. Mainpage/1.webp"
           alt="Vinhas da Casa de Nabais no Vale do Lima"
           fill
           priority
