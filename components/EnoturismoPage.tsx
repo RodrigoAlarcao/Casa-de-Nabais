@@ -15,15 +15,15 @@ gsap.registerPlugin(ScrollTrigger)
 const IMG_RATIO = '4/5'
 
 const PROVAS_IMAGES = [
-  { src: '/images/5. O enoturismo/2.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/6.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/3.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/4.webp', alt: 'O Enoturismo' },
 ]
 
 const VISITAS_IMAGES = [
-  { src: '/images/5. O enoturismo/6.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/2.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/7.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/8.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/13.webp', alt: 'O Enoturismo' },
 ]
 
 const ALMOCOS_IMAGES = [
@@ -33,9 +33,9 @@ const ALMOCOS_IMAGES = [
 ]
 
 const PASSEIOS_IMAGES = [
-  { src: '/images/5. O enoturismo/13.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/8.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/14.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/15.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/12.webp', alt: 'O Enoturismo' },
 ]
 
 /* ─── 3-image row ───────────────────────────────────────────────── */
@@ -419,7 +419,7 @@ export default function EnoturismoPage() {
               style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
             >
               <Image
-                src="/images/5. O enoturismo/1.webp"
+                src="/images/5. O enoturismo/9.webp"
                 alt="O Enoturismo — Casa de Nabais"
                 fill priority
                 className="object-cover"
@@ -509,7 +509,7 @@ export default function EnoturismoPage() {
               style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
             >
               <Image
-                src="/images/5. O enoturismo/1.webp"
+                src="/images/5. O enoturismo/9.webp"
                 alt="O Enoturismo — Casa de Nabais"
                 fill priority
                 className="object-cover"
@@ -585,7 +585,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.almocosHeading}
           paras={t.enoturismoPage.almocosParas}
-          portraitSrc="/images/5. O enoturismo/9.webp"
+          portraitSrc="/images/5. O enoturismo/1.webp"
           portraitAlt="Almoço na quinta"
           images={ALMOCOS_IMAGES}
         />
@@ -594,7 +594,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/5. O enoturismo/9.webp"
+              src="/images/5. O enoturismo/1.webp"
               alt="Almoço na quinta"
               containerRef={p3Ref}
               wrapRef={p3Wrap}
@@ -614,7 +614,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.passeiosHeading}
           paras={t.enoturismoPage.passeiosParas}
-          portraitSrc="/images/5. O enoturismo/12.webp"
+          portraitSrc="/images/5. O enoturismo/15.webp"
           portraitAlt="Passeio na mata"
           images={PASSEIOS_IMAGES}
         />
@@ -624,7 +624,7 @@ export default function EnoturismoPage() {
           <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title={t.enoturismoPage.passeiosHeading} paras={t.enoturismoPage.passeiosParas} pad="left" />
             <PortraitCell
-              src="/images/5. O enoturismo/12.webp"
+              src="/images/5. O enoturismo/15.webp"
               alt="Passeio na mata"
               containerRef={p4Ref}
               wrapRef={p4Wrap}
