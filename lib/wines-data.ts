@@ -72,7 +72,7 @@ export const wines: WineData[] = [
     introText: [
       'Casa de Nabais Loureiro nasce no Vale do Lima, num contexto atlântico onde a frescura e a precisão definem o estilo. É uma interpretação direta da casta, focada na pureza aromática, tensão e expressão do lugar.',
     ],
-    mainImage: '/images/homepage/vinhos/loureiro-context.webp',
+    mainImage: '/images/4. Os vinhos/loureiro.webp',
     sectionImage: '/images/homepage/enoturismo/carousel-01.webp',
     narrativeSections: [
       {
@@ -184,7 +184,7 @@ export const wines: WineData[] = [
     introText: [
       'Casa de Nabais Vinha do Pomar provém da seleção de uma parcela que procura uma leitura mais profunda do Loureiro. Mantém a matriz atlântica, mas com maior estrutura, textura e capacidade de evolução.',
     ],
-    mainImage: '/images/homepage/vinhos/vinha-do-pomar-context.webp',
+    mainImage: '/images/4. Os vinhos/vinha-do-pomar.webp',
     sectionImage: '/images/homepage/enoturismo/carousel-02.webp',
     narrativeSections: [
       {

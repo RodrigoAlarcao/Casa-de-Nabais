@@ -13,8 +13,8 @@ import ComprarVinhoModal from './ComprarVinhoModal'
 gsap.registerPlugin(ScrollTrigger)
 
 const wineImages: Record<string, string> = {
-  'vinha-do-pomar': '/images/homepage/vinhos/vinha-do-pomar-context.webp',
-  'loureiro':       '/images/homepage/vinhos/loureiro-context.webp',
+  'vinha-do-pomar': '/images/4. Os vinhos/vinha-do-pomar.webp',
+  'loureiro':       '/images/4. Os vinhos/loureiro.webp',
 }
 
 const wineNames: Record<string, string> = {
