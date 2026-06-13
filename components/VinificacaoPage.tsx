@@ -15,13 +15,13 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const galleryImages = [
-  { src: '/images/3. A vinificacao/3.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/4.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/5.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/6.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/7.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/8.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/9.webp', alt: 'A Vinificação' },
+  { src: '/images/3. A vinificacao/12.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/10.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/11.webp', alt: 'A Vinificação' },
 ]
@@ -399,7 +399,7 @@ export default function VinificacaoPage() {
                       style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                     >
                       <Image
-                        src="/images/3. A vinificacao/2.webp"
+                        src="/images/3. A vinificacao/3.webp"
                         alt="A casta Loureiro — vinificação"
                         fill
                         className="object-cover"
@@ -571,7 +571,7 @@ export default function VinificacaoPage() {
             <div className="lg:hidden relative overflow-hidden" style={{ height: 'calc(100svh - 72px)' }}>
               <div className="absolute inset-0 overflow-hidden">
                 <Image
-                  src="/images/3. A vinificacao/12.webp"
+                  src="/images/3. A vinificacao/2.webp"
                   alt="Abordagem experimental — microvinificações"
                   fill
                   className="object-cover"
@@ -660,7 +660,7 @@ export default function VinificacaoPage() {
                       style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                     >
                       <Image
-                        src="/images/3. A vinificacao/12.webp"
+                        src="/images/3. A vinificacao/2.webp"
                         alt="Abordagem experimental — microvinificações"
                         fill
                         className="object-cover"
