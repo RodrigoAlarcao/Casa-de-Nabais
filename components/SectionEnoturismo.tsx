@@ -14,14 +14,15 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/enoturismo/carousel-01.webp', alt: 'Prova de vinhos na adega' },
-  { src: '/images/homepage/enoturismo/carousel-02.webp', alt: 'Visita guiada às vinhas' },
-  { src: '/images/homepage/enoturismo/carousel-03.webp', alt: 'Almoço na quinta' },
-  { src: '/images/homepage/enoturismo/carousel-04.webp', alt: 'Passeio na mata' },
-  { src: '/images/homepage/enoturismo/carousel-05.webp', alt: 'Vindima' },
-  { src: '/images/homepage/enoturismo/carousel-06.webp', alt: 'Pôr do sol no Vale do Lima' },
-  { src: '/images/homepage/enoturismo/carousel-07.webp', alt: 'Terraço da casa' },
-  { src: '/images/homepage/enoturismo/carousel-08.webp', alt: 'Cesta de produtos locais' },
+  { src: '/images/0. Mainpage/20.webp', alt: 'Prova de vinhos na adega' },
+  { src: '/images/0. Mainpage/21.webp', alt: 'Visita guiada às vinhas' },
+  { src: '/images/0. Mainpage/22.webp', alt: 'Almoço na quinta' },
+  { src: '/images/0. Mainpage/23.webp', alt: 'Passeio na mata' },
+  { src: '/images/0. Mainpage/24.webp', alt: 'Vindima' },
+  { src: '/images/0. Mainpage/25.webp', alt: 'Pôr do sol no Vale do Lima' },
+  { src: '/images/0. Mainpage/26.webp', alt: 'Terraço da casa' },
+  { src: '/images/0. Mainpage/27.webp', alt: 'Cesta de produtos locais' },
+  { src: '/images/0. Mainpage/28.webp', alt: 'Enoturismo na Casa de Nabais' },
 ]
 
 const IMG_RATIO = '4/5'
@@ -158,7 +159,7 @@ export default function SectionEnoturismo() {
         <div className="absolute inset-0 overflow-hidden">
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
-            <Image src="/images/homepage/enoturismo/section-01.webp" alt="Enoturismo na Casa de Nabais"
+            <Image src="/images/0. Mainpage/19.webp" alt="Enoturismo na Casa de Nabais"
               fill className="object-cover" sizes="100vw" priority />
           </div>
         </div>
@@ -232,7 +233,7 @@ export default function SectionEnoturismo() {
             <div ref={portraitRef} className="relative overflow-hidden w-full"
               style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39', borderRadius: '4px' }}>
               <div ref={imgWrapRef} className="absolute will-change-transform" style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}>
-                <Image src="/images/homepage/enoturismo/section-01.webp" alt="Enoturismo na Casa de Nabais"
+                <Image src="/images/0. Mainpage/19.webp" alt="Enoturismo na Casa de Nabais"
                   fill className="object-cover" sizes="50vw" />
               </div>
             </div>

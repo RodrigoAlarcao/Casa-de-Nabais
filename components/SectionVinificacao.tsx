@@ -77,7 +77,7 @@ export default function SectionVinificacao() {
             style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/vinificacao/fullbleed-01.webp"
+              src="/images/0. Mainpage/9.webp"
               alt="Adega da Casa de Nabais"
               fill
               className="object-cover"
@@ -165,14 +165,14 @@ export default function SectionVinificacao() {
       </div>
 
       {/* ── DESKTOP ── full-bleed image with parallax */}
-      <div ref={imgContainerRef} className="relative overflow-hidden hidden lg:block" style={{ height: '66vh' }}>
+      <div ref={imgContainerRef} className="relative overflow-hidden hidden lg:block" style={{ height: '80vh' }}>
         <div
           ref={imgWrapRef}
           className="absolute will-change-transform"
           style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
         >
           <Image
-            src="/images/homepage/vinificacao/fullbleed-01.webp"
+            src="/images/0. Mainpage/9.webp"
             alt="Adega da Casa de Nabais"
             fill
             className="object-cover"
