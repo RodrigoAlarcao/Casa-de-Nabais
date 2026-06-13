@@ -11,10 +11,10 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const itemMeta = [
-  { href: '/as-vinhas',      image: '/images/homepage/explore/explore-vinhas.webp',      bg: '#3A5B4F' },
-  { href: '/a-vinificacao',  image: '/images/homepage/explore/explore-vinificacao.webp', bg: '#2A4A3E' },
-  { href: '/os-vinhos',      image: '/images/homepage/explore/explore-vinhos.webp',      bg: '#1A3A2E' },
-  { href: '/ficar-na-casa',  image: '/images/homepage/explore/explore-enoturismo.webp',  bg: '#0A2A1E' },
+  { href: '/as-vinhas',      image: '/images/2. As vinhas/4.webp',                  bg: '#3A5B4F' },
+  { href: '/a-vinificacao',  image: '/images/3. A vinificacao/Casa Nabais081.webp', bg: '#2A4A3E' },
+  { href: '/os-vinhos',      image: '/images/3. A vinificacao/16.webp',             bg: '#1A3A2E' },
+  { href: '/ficar-na-casa',  image: '/images/0. Mainpage/10.webp',                  bg: '#0A2A1E' },
 ]
 
 export default function SectionExplore({ noBg = false, dark = false, excludeHref }: { noBg?: boolean; dark?: boolean; excludeHref?: string }) {

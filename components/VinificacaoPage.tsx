@@ -1131,7 +1131,7 @@ export default function VinificacaoPage() {
       {/* ══════════════════════════════════════
           EXPLORE TAMBÉM — fundo claro
       ══════════════════════════════════════ */}
-      <SectionExplore />
+      <SectionExplore excludeHref="/a-vinificacao" />
 
       {lightboxIndex !== null && (
         <GalleryLightbox
