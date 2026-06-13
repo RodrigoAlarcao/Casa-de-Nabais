@@ -14,12 +14,12 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/homepage/vinhas/carousel-01.webp', alt: 'Vinha do Pomar em flor' },
-  { src: '/images/homepage/vinhas/carousel-02.webp', alt: 'Vindima à mão' },
-  { src: '/images/homepage/vinhas/carousel-03.webp', alt: 'Cachos de Loureiro' },
-  { src: '/images/homepage/vinhas/carousel-04.webp', alt: 'Vale do Lima' },
-  { src: '/images/homepage/vinhas/carousel-05.webp', alt: 'Ramada tradicional minhota' },
-  { src: '/images/homepage/vinhas/carousel-06.webp', alt: 'Adega da Casa de Nabais' },
+  { src: '/images/2. As vinhas/2.webp', alt: 'Vinha do Pomar em flor' },
+  { src: '/images/2. As vinhas/3.webp', alt: 'Vindima à mão' },
+  { src: '/images/2. As vinhas/4.webp', alt: 'Cachos de Loureiro' },
+  { src: '/images/2. As vinhas/5.webp', alt: 'Vale do Lima' },
+  { src: '/images/2. As vinhas/6.webp', alt: 'Ramada tradicional minhota' },
+  { src: '/images/2. As vinhas/7.webp', alt: 'Adega da Casa de Nabais' },
 ]
 
 const SLIDE_GAP = 12
@@ -135,7 +135,7 @@ export default function VinhasPage() {
             style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/vinhas/section-01.webp"
+              src="/images/2. As vinhas/1.webp"
               alt="As Vinhas da Casa de Nabais"
               fill
               priority
@@ -270,7 +270,7 @@ export default function VinhasPage() {
             style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
           >
             <Image
-              src="/images/homepage/vinhas/section-01.webp"
+              src="/images/2. As vinhas/1.webp"
               alt="Vinhas da Casa de Nabais — vista panorâmica"
               fill
               priority
@@ -387,7 +387,7 @@ export default function VinhasPage() {
           style={{ minHeight: '100svh' }}
         >
           <Image
-            src="/images/homepage/vinhas/carousel-05.webp"
+            src="/images/2. As vinhas/7.webp"
             alt="Viticultura integrada"
             fill
             className="object-cover"
@@ -440,7 +440,7 @@ export default function VinhasPage() {
                 style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
                 <Image
-                  src="/images/homepage/vinhas/carousel-01.webp"
+                  src="/images/2. As vinhas/2.webp"
                   alt="Solo da vinha"
                   fill
                   className="object-cover"
@@ -473,7 +473,7 @@ export default function VinhasPage() {
                 style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
                 <Image
-                  src="/images/homepage/vinhas/carousel-02.webp"
+                  src="/images/2. As vinhas/3.webp"
                   alt="Trabalho na vinha"
                   fill
                   className="object-cover"
@@ -485,7 +485,7 @@ export default function VinhasPage() {
                 style={{ aspectRatio: '3/4', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
                 <Image
-                  src="/images/homepage/vinhas/carousel-03.webp"
+                  src="/images/2. As vinhas/4.webp"
                   alt="Detalhe na vinha"
                   fill
                   className="object-cover"
@@ -497,7 +497,7 @@ export default function VinhasPage() {
                 style={{ aspectRatio: '2/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
                 <Image
-                  src="/images/homepage/vinhas/carousel-04.webp"
+                  src="/images/2. As vinhas/5.webp"
                   alt="Paisagem da vinha"
                   fill
                   className="object-cover"
@@ -534,7 +534,7 @@ export default function VinhasPage() {
                 style={{ aspectRatio: '3/5', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
                 <Image
-                  src="/images/homepage/vinhas/carousel-04.webp"
+                  src="/images/2. As vinhas/6.webp"
                   alt="Vinhas como campo de estudo"
                   fill
                   className="object-cover"
@@ -552,7 +552,7 @@ export default function VinhasPage() {
                 style={{ aspectRatio: '4/3', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
               >
                 <Image
-                  src="/images/homepage/vinhas/carousel-05.webp"
+                  src="/images/2. As vinhas/7.webp"
                   alt="Viticultura integrada"
                   fill
                   className="object-cover"
@@ -632,7 +632,7 @@ export default function VinhasPage() {
                     style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
                     <Image
-                      src="/images/homepage/vinhas/carousel-01.webp"
+                      src="/images/2. As vinhas/8.webp"
                       alt="Vinha do Pomar"
                       fill
                       className="object-cover"
@@ -684,7 +684,7 @@ export default function VinhasPage() {
               <div className="lg:hidden">
                 <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
-                    src="/images/homepage/vinhas/carousel-01.webp"
+                    src="/images/2. As vinhas/8.webp"
                     alt="Vinha do Pomar"
                     fill
                     className="object-cover"
@@ -740,7 +740,7 @@ export default function VinhasPage() {
                     style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
                     <Image
-                      src="/images/homepage/vinhas/carousel-02.webp"
+                      src="/images/2. As vinhas/9.webp"
                       alt="Vinha da Adega"
                       fill
                       className="object-cover"
@@ -792,7 +792,7 @@ export default function VinhasPage() {
               <div className="lg:hidden">
                 <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
-                    src="/images/homepage/vinhas/carousel-02.webp"
+                    src="/images/2. As vinhas/9.webp"
                     alt="Vinha da Adega"
                     fill
                     className="object-cover"
@@ -848,7 +848,7 @@ export default function VinhasPage() {
                     style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
                     <Image
-                      src="/images/homepage/vinhas/carousel-04.webp"
+                      src="/images/2. As vinhas/10.webp"
                       alt="Vinha da Igreja"
                       fill
                       className="object-cover"
@@ -900,7 +900,7 @@ export default function VinhasPage() {
               <div className="lg:hidden">
                 <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
-                    src="/images/homepage/vinhas/carousel-04.webp"
+                    src="/images/2. As vinhas/10.webp"
                     alt="Vinha da Igreja"
                     fill
                     className="object-cover"
@@ -956,7 +956,7 @@ export default function VinhasPage() {
                     style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
                   >
                     <Image
-                      src="/images/homepage/vinhas/carousel-05.webp"
+                      src="/images/2. As vinhas/11.webp"
                       alt="Vinha Talhão de Xisto"
                       fill
                       className="object-cover"
@@ -1008,7 +1008,7 @@ export default function VinhasPage() {
               <div className="lg:hidden">
                 <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
                   <Image
-                    src="/images/homepage/vinhas/carousel-05.webp"
+                    src="/images/2. As vinhas/11.webp"
                     alt="Vinha Talhão de Xisto"
                     fill
                     className="object-cover"
