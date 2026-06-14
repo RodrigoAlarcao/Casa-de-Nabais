@@ -173,7 +173,7 @@ function MobileSection({
 
   return (
     <div className="lg:hidden">
-      {/* Texto primeiro */}
+      {/* Heading + 1º parágrafo */}
       <div className="px-6 pt-12 pb-8 text-center">
         <h2
           className="font-display mb-6"
@@ -184,19 +184,16 @@ function MobileSection({
         >
           {title}
         </h2>
-        {paras.map((para, i) => (
-          <p
-            key={i}
-            className="font-body mb-4 last:mb-0"
-            style={{
-              fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
-              lineHeight: 1.6,
-              color: i === 0 ? 'rgba(255,249,237,0.90)' : 'rgba(255,249,237,0.72)',
-            }}
-          >
-            {para}
-          </p>
-        ))}
+        <p
+          className="font-body"
+          style={{
+            fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
+            lineHeight: 1.6,
+            color: 'rgba(255,249,237,0.90)',
+          }}
+        >
+          {paras[0]}
+        </p>
       </div>
 
       {/* Imagem editorial (retrato) com parallax */}
@@ -208,6 +205,23 @@ function MobileSection({
         >
           <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="calc(100vw - 3rem)" />
         </div>
+      </div>
+
+      {/* Restantes parágrafos — bloco de texto antes do carrossel */}
+      <div className="px-6 pt-8 pb-2 text-center">
+        {paras.slice(1).map((para, i) => (
+          <p
+            key={i}
+            className="font-body mb-4 last:mb-0"
+            style={{
+              fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
+              lineHeight: 1.6,
+              color: 'rgba(255,249,237,0.72)',
+            }}
+          >
+            {para}
+          </p>
+        ))}
       </div>
 
       {/* Carrossel das 3 imagens */}
