@@ -93,15 +93,13 @@ export default function SectionVinhos() {
                 className="order-2 relative w-full overflow-hidden"
                 style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
               >
-                <div className="absolute inset-6">
-                  <Image
-                    src={wineImages[wine.slug]}
-                    alt={wineNames[wine.slug]}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
+                <Image
+                  src={wineImages[wine.slug]}
+                  alt={wineNames[wine.slug]}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
 
               {/* Descrição — mobile: 3.º, desktop: 3.º */}

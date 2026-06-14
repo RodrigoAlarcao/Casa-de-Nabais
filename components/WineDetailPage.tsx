@@ -231,16 +231,14 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                   className="relative w-full overflow-hidden"
                   style={{ aspectRatio: '3/4', backgroundColor: '#FFFFFF', borderRadius: '8px', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}
                 >
-                  <div className="absolute inset-5">
-                    <Image
-                      src={wine.mainImage}
-                      alt={wine.name}
-                      fill
-                      priority
-                      className="object-contain"
-                      sizes="340px"
-                    />
-                  </div>
+                  <Image
+                    src={wine.mainImage}
+                    alt={wine.name}
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="340px"
+                  />
                 </div>
 
                 {/* Comprar CTA */}
@@ -278,16 +276,14 @@ export default function WineDetailPage({ wine }: { wine: WineData }) {
                 className="reveal-header block md:hidden relative w-full overflow-hidden mb-8"
                 style={{ aspectRatio: '3/4', backgroundColor: '#FFFFFF', borderRadius: '8px', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}
               >
-                <div className="absolute inset-5">
-                  <Image
-                    src={wine.mainImage}
-                    alt={wine.name}
-                    fill
-                    priority
-                    className="object-contain"
-                    sizes="100vw"
-                  />
-                </div>
+                <Image
+                  src={wine.mainImage}
+                  alt={wine.name}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="100vw"
+                />
               </div>
 
               {/* Introdução */}
