@@ -351,15 +351,6 @@ export default function VinhasPage() {
           </button>
         </div>
 
-        {/* Animated quote */}
-        <div className="mobile-quote px-8 py-16 text-center">
-          <TextReveal
-            text={t.vinhasPage.closingQuote}
-            className="font-display"
-            style={{ fontSize: 'clamp(1.25rem, 5.5vw, 1.5rem)', lineHeight: 1.45, fontWeight: 400, color: '#0C4544' }}
-            ghostOpacity={0.15}
-          />
-        </div>
       </section>
 
       {/* ══════════════════════════════════════
@@ -402,6 +393,16 @@ export default function VinhasPage() {
               sizes="calc(100vw - 3rem)"
             />
           </div>
+        </div>
+
+        {/* Frase animada — depois da fotografia da viticultura */}
+        <div className="mobile-quote px-8 py-16 text-center">
+          <TextReveal
+            text={t.vinhasPage.closingQuote}
+            className="font-display"
+            style={{ fontSize: 'clamp(1.25rem, 5.5vw, 1.5rem)', lineHeight: 1.45, fontWeight: 400, color: '#0C4544' }}
+            ghostOpacity={0.15}
+          />
         </div>
       </section>
 
@@ -593,7 +594,9 @@ export default function VinhasPage() {
               color: '#FAE6C1',
             }}
           >
-            {t.vinhasPage.ourVineyardsHeading}
+            {t.vinhasPage.ourVineyardsHeading.split('\n').map((line, i, arr) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}
           </h2>
 
           <h2
@@ -672,8 +675,8 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: texto + imagem editorial */}
-              <div className="lg:hidden">
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
@@ -682,16 +685,10 @@ export default function VinhasPage() {
                     {t.vinhasPage.vinhaDoPomarH}
                   </h3>
                   <p
-                    className="reveal-vinha-item font-body mb-4"
+                    className="reveal-vinha-item font-body"
                     style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                   >
                     {t.vinhasPage.vinhaDoPomarP1}
-                  </p>
-                  <p
-                    className="reveal-vinha-item font-body"
-                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                  >
-                    {t.vinhasPage.vinhaDoPomarP2}
                   </p>
                 </div>
                 <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
@@ -704,6 +701,14 @@ export default function VinhasPage() {
                       sizes="calc(100vw - 3rem)"
                     />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaDoPomarP2}
+                  </p>
                 </div>
               </div>
 
@@ -771,8 +776,8 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: texto + imagem editorial */}
-              <div className="lg:hidden">
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
@@ -781,16 +786,10 @@ export default function VinhasPage() {
                     {t.vinhasPage.vinhaAdegaH}
                   </h3>
                   <p
-                    className="reveal-vinha-item font-body mb-4"
+                    className="reveal-vinha-item font-body"
                     style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                   >
                     {t.vinhasPage.vinhaAdegaP1}
-                  </p>
-                  <p
-                    className="reveal-vinha-item font-body"
-                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                  >
-                    {t.vinhasPage.vinhaAdegaP2}
                   </p>
                 </div>
                 <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
@@ -803,6 +802,14 @@ export default function VinhasPage() {
                       sizes="calc(100vw - 3rem)"
                     />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaAdegaP2}
+                  </p>
                 </div>
               </div>
 
@@ -870,8 +877,8 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: texto + imagem editorial */}
-              <div className="lg:hidden">
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
@@ -880,16 +887,10 @@ export default function VinhasPage() {
                     {t.vinhasPage.vinhaIgrejaH}
                   </h3>
                   <p
-                    className="reveal-vinha-item font-body mb-4"
+                    className="reveal-vinha-item font-body"
                     style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                   >
                     {t.vinhasPage.vinhaIgrejaP1}
-                  </p>
-                  <p
-                    className="reveal-vinha-item font-body"
-                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                  >
-                    {t.vinhasPage.vinhaIgrejaP2}
                   </p>
                 </div>
                 <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
@@ -902,6 +903,14 @@ export default function VinhasPage() {
                       sizes="calc(100vw - 3rem)"
                     />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaIgrejaP2}
+                  </p>
                 </div>
               </div>
 
@@ -969,26 +978,22 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: texto + imagem editorial */}
-              <div className="lg:hidden">
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
-                    style={{ fontSize: 'clamp(1.5rem, 6.5vw, 2rem)', lineHeight: 1.0, letterSpacing: '0.06em', color: '#FAE6C1' }}
+                    style={{ fontSize: 'clamp(1.5rem, 6.5vw, 2rem)', lineHeight: 1.05, letterSpacing: '0.06em', color: '#FAE6C1' }}
                   >
-                    {t.vinhasPage.vinhaTalhaoH}
+                    {t.vinhasPage.vinhaTalhaoH.split('\n').map((line, i, arr) => (
+                      <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                    ))}
                   </h3>
                   <p
-                    className="reveal-vinha-item font-body mb-4"
+                    className="reveal-vinha-item font-body"
                     style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
                   >
                     {t.vinhasPage.vinhaTalhaoP1}
-                  </p>
-                  <p
-                    className="reveal-vinha-item font-body"
-                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                  >
-                    {t.vinhasPage.vinhaTalhaoP2}
                   </p>
                 </div>
                 <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
@@ -1001,6 +1006,14 @@ export default function VinhasPage() {
                       sizes="calc(100vw - 3rem)"
                     />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaTalhaoP2}
+                  </p>
                 </div>
               </div>
 

@@ -15,6 +15,7 @@ const itemMeta = [
   { href: '/a-vinificacao',  image: '/images/3. A vinificacao/Casa Nabais081.webp', bg: '#2A4A3E' },
   { href: '/os-vinhos',      image: '/images/3. A vinificacao/16.webp',             bg: '#1A3A2E' },
   { href: '/ficar-na-casa',  image: '/images/0. Mainpage/10.webp',                  bg: '#0A2A1E' },
+  { href: '/a-casa',         image: '/images/1. A casa/1.webp',                     bg: '#24433A' },
 ]
 
 export default function SectionExplore({ noBg = false, dark = false, excludeHref }: { noBg?: boolean; dark?: boolean; excludeHref?: string }) {
@@ -22,7 +23,8 @@ export default function SectionExplore({ noBg = false, dark = false, excludeHref
   const sectionRef = useRef<HTMLElement>(null)
   const [hovered, setHovered] = useState<number | null>(null)
   const items = t.sectionExplore.items.map((item, i) => ({ ...itemMeta[i], label: item.label }))
-  const filteredItems = excludeHref ? items.filter((item) => item.href !== excludeHref) : items
+  // Mostra sempre 4 cards: exclui a página atual (se aplicável) e limita a 4
+  const filteredItems = (excludeHref ? items.filter((item) => item.href !== excludeHref) : items).slice(0, 4)
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
