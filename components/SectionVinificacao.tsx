@@ -68,9 +68,35 @@ export default function SectionVinificacao() {
   return (
     <section ref={sectionRef} style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 57%, #031D1D 100%)' }}>
 
-      {/* ── MOBILE ── */}
-      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ height: 'calc(100svh - 72px)', backgroundColor: '#031D1D' }}>
-        <div className="absolute inset-0 overflow-hidden">
+      {/* ── MOBILE ── follows the same flow as desktop: text → image → destaque */}
+      <div className="lg:hidden">
+
+        {/* Text: heading + body + CTA over the section gradient */}
+        <div className="px-6 pt-20 pb-12 text-center">
+          <h2
+            className="reveal-above font-display uppercase"
+            style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
+          >
+            {headingLines[0]}<br />{headingLines[1]}
+          </h2>
+          <p
+            className="reveal-above font-body mt-6 mb-8"
+            style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+          >
+            {t.sectionVinificacao.body}
+          </p>
+          <Link
+            href="/a-vinificacao"
+            className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
+            style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
+          >
+            {t.common.learnMore}
+            <ArrowRight size={11} strokeWidth={1.5} />
+          </Link>
+        </div>
+
+        {/* Image with subtle parallax */}
+        <div ref={mobileOuterRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
           <div
             ref={mobileImgWrapRef}
             className="absolute will-change-transform"
@@ -86,39 +112,16 @@ export default function SectionVinificacao() {
             />
           </div>
         </div>
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%, #031D1D 100%)',
-          }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
-          <h2
-            className="reveal-above font-display uppercase"
-            style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
-          >
-            {headingLines[0]}<br />{headingLines[1]}
-          </h2>
-        </div>
-      </div>
 
-      {/* ── MOBILE body text + CTA — dark section below hero ── */}
-      <div className="lg:hidden px-6 pt-4 pb-10 text-center" style={{ background: '#031D1D', marginTop: '-24px', position: 'relative', zIndex: 2 }}>
-        <p
-          className="reveal-above font-body mb-8"
-          style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-        >
-          {t.sectionVinificacao.body}
-        </p>
-        <Link
-          href="/a-vinificacao"
-          className="reveal-above inline-flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] px-5 py-3 w-full transition-colors duration-200"
-          style={{ color: '#FAE6C1', border: '1px solid rgba(250,230,193,0.40)', borderRadius: '8px' }}
-        >
-          {t.common.learnMore}
-          <ArrowRight size={11} strokeWidth={1.5} />
-        </Link>
+        {/* Destaque — text again below the image */}
+        <div className="px-6 pt-14 pb-16 text-center">
+          <p
+            className="reveal-above font-display"
+            style={{ fontSize: 'clamp(1.375rem, 6vw, 1.75rem)', lineHeight: 1.3, fontWeight: 400, color: '#FAE6C1' }}
+          >
+            {t.sectionVinificacao.destaque}
+          </p>
+        </div>
       </div>
 
       {/* ── DESKTOP ── text columns */}
