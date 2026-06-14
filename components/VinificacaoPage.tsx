@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, ArrowLeft, ArrowDown } from 'lucide-react'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
 import SectionExplore from './SectionExplore'
 import GalleryLightbox from './GalleryLightbox'
@@ -204,8 +204,18 @@ export default function VinificacaoPage() {
 
       if (mobileHeroImgRef.current && mobileHeroRef.current && window.innerWidth < 1024) {
         gsap.to(mobileHeroImgRef.current, {
-          yPercent: 20, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
+
+      // Parallax para as imagens editoriais em mobile
+      if (window.innerWidth < 1024) {
+        gsap.utils.toArray<HTMLElement>('.mobile-parallax-img').forEach((inner) => {
+          gsap.to(inner, {
+            yPercent: -16, ease: 'none',
+            scrollTrigger: { trigger: inner.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
+          })
         })
       }
     }, pageRef)
@@ -223,51 +233,23 @@ export default function VinificacaoPage() {
         ══════════════════════════════════════ */}
         <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #031D1D 35%, #0C4544 62%, #031D1D 100%)' }}>
 
-          {/* ── MOBILE HERO ── */}
-          <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(100svh - 72px)' }}>
-            <div className="absolute inset-0 overflow-hidden">
-              <div
-                ref={mobileHeroImgRef}
-                className="absolute will-change-transform"
-                style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+          {/* ── MOBILE HERO — texto primeiro, depois imagem ── */}
+          <div className="lg:hidden">
+
+            {/* ← Voltar */}
+            <div className="px-6 pt-8">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+                style={{ color: 'rgba(250,230,193,0.80)' }}
               >
-                <Image
-                  src="/images/3. A vinificacao/1.webp"
-                  alt="A Vinificação — adega"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="100vw"
-                />
-              </div>
+                <ArrowLeft size={11} strokeWidth={1.5} />
+                {t.common.back}
+              </Link>
             </div>
 
-            {/* Gradiente reforçado para cobrir título + texto */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%, #031D1D 100%)',
-                zIndex: 1,
-              }}
-            />
-
-            <Link
-              href="/"
-              className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
-              style={{
-                zIndex: 10,
-                color: 'rgba(250,230,193,0.80)',
-              }}
-            >
-              <ArrowLeft size={11} strokeWidth={1.5} />
-              {t.common.back}
-            </Link>
-
-            {/* Título + texto + scroll indicator */}
-            <div
-              className="absolute left-0 right-0 bottom-0 px-6 pb-6 flex flex-col items-center text-center"
-              style={{ zIndex: 2 }}
-            >
+            {/* Título + intro */}
+            <div className="px-6 pt-8 pb-10 text-center">
               <h1
                 className="font-display uppercase mb-7"
                 style={{
@@ -275,14 +257,12 @@ export default function VinificacaoPage() {
                   lineHeight: 1.0,
                   letterSpacing: '0.05em',
                   color: '#FAE6C1',
-                  textShadow: '0 2px 28px rgba(3,29,29,0.95)',
                 }}
               >
                 {t.vinificacaoPage.title.replace(/^A /, '')}
               </h1>
-
               <p
-                className="font-body mb-8 w-full"
+                className="font-body"
                 style={{
                   fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
                   lineHeight: 1.6,
@@ -291,24 +271,22 @@ export default function VinificacaoPage() {
               >
                 {t.vinificacaoPage.intro}
               </p>
+            </div>
 
-              {/* Scroll indicator */}
-              <div className="flex flex-col items-center gap-2">
-                <span
-                  className="font-display uppercase"
-                  style={{
-                    fontSize: '9px',
-                    letterSpacing: '0.2em',
-                    color: 'rgba(250,230,193,0.40)',
-                  }}
-                >
-                  {t.common.scroll}
-                </span>
-                <ArrowDown
-                  size={13}
-                  strokeWidth={1.5}
-                  className="animate-bounce"
-                  style={{ color: 'rgba(250,230,193,0.40)' }}
+            {/* Imagem editorial com parallax */}
+            <div ref={mobileHeroRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+              <div
+                ref={mobileHeroImgRef}
+                className="absolute will-change-transform"
+                style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}
+              >
+                <Image
+                  src="/images/3. A vinificacao/1.webp"
+                  alt="A Vinificação — adega"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
                 />
               </div>
             </div>
@@ -382,7 +360,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               GRID: imagem ESQ + texto DIR + CARROSSEL
           ══════════════════════════════════════ */}
-          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28" style={{ backgroundColor: '#031D1D', marginTop: '-2px', position: 'relative', zIndex: 1 }}>
+          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
 
             <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -421,7 +399,31 @@ export default function VinificacaoPage() {
                     {t.vinificacaoPage.loureiroHeading}
                   </h2>
 
-                  {t.vinificacaoPage.loureiroParas.map((para, i) => (
+                  <p
+                    className="reveal-vinif font-body mb-5 text-center lg:text-left"
+                    style={{
+                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      lineHeight: 1.65,
+                      color: 'rgba(255,249,237,0.72)',
+                    }}
+                  >
+                    {t.vinificacaoPage.loureiroParas[0]}
+                  </p>
+
+                  {/* Mobile: retrato Loureiro entre os dois parágrafos */}
+                  <div className="lg:hidden relative overflow-hidden rounded-[4px] my-6" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
+                    <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                      <Image
+                        src="/images/3. A vinificacao/4.webp"
+                        alt="A casta Loureiro — vinificação"
+                        fill
+                        className="object-cover"
+                        sizes="calc(100vw - 3rem)"
+                      />
+                    </div>
+                  </div>
+
+                  {t.vinificacaoPage.loureiroParas.slice(1).map((para, i) => (
                     <p
                       key={i}
                       className="reveal-vinif font-body mb-5 last:mb-0 text-center lg:text-left"
@@ -546,7 +548,7 @@ export default function VinificacaoPage() {
           </section>
 
           {/* TEXTO ANIMADO (TextReveal) */}
-          <section className="py-14 md:py-20" style={{ backgroundColor: '#031D1D', position: 'relative', zIndex: 1 }}>
+          <section className="py-14 md:py-20 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
             <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
               <TextReveal
                 text={t.vinificacaoPage.closingText}
@@ -567,53 +569,69 @@ export default function VinificacaoPage() {
           ══════════════════════════════════════ */}
           <section className="lg:pt-20 lg:pb-28 md:pb-36">
 
-            {/* Mobile: imagem full-bleed + gradient + título */}
-            <div className="lg:hidden relative overflow-hidden" style={{ height: 'calc(100svh - 72px)' }}>
-              <div className="absolute inset-0 overflow-hidden">
-                <Image
-                  src="/images/3. A vinificacao/2.webp"
-                  alt="Abordagem experimental — microvinificações"
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                />
-              </div>
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%, #031D1D 100%)',
-                  zIndex: 1,
-                }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
+            {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
+            <div className="lg:hidden pb-16">
+              <div className="px-6 pt-12 pb-8 text-center">
                 <h2
-                  className="font-display"
+                  className="font-display mb-6"
                   style={{
-                    fontSize: 'clamp(1.375rem, 5vw, 1.875rem)', lineHeight: 1.1, letterSpacing: '0.03em',
+                    fontSize: 'clamp(1.75rem, 7vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '0.03em',
                     color: '#FAE6C1',
                   }}
                 >
                   {t.vinificacaoPage.experimentalHeading}
                 </h2>
+                <p
+                  className="font-body"
+                  style={{
+                    fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
+                    lineHeight: 1.6,
+                    color: 'rgba(255,249,237,0.90)',
+                  }}
+                >
+                  {t.vinificacaoPage.experimentalParas[0]}
+                </p>
               </div>
-            </div>
 
-            {/* Mobile: texto — fundo contínuo */}
-            <div className="lg:hidden" style={{ background: '#031D1D', marginTop: '-24px', paddingTop: '24px', paddingBottom: '32px', position: 'relative', zIndex: 2 }}>
-              <div className="px-6 text-center">
-                {t.vinificacaoPage.experimentalParas.map((para, i) => (
+              <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+                <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                  <Image
+                    src="/images/3. A vinificacao/2.webp"
+                    alt="Abordagem experimental — microvinificações"
+                    fill
+                    className="object-cover"
+                    sizes="calc(100vw - 3rem)"
+                  />
+                </div>
+              </div>
+
+              <div className="px-6 pt-8 pb-4 text-center">
+                {t.vinificacaoPage.experimentalParas.slice(1).map((para, i) => (
                   <p
                     key={i}
                     className="font-body mb-4 last:mb-0"
                     style={{
                       fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
                       lineHeight: 1.6,
-                      color: i === 0 ? 'rgba(255,249,237,0.90)' : 'rgba(255,249,237,0.72)',
+                      color: 'rgba(255,249,237,0.72)',
                     }}
                   >
                     {para}
                   </p>
                 ))}
+              </div>
+
+              {/* Panorâmica (presente no desktop) */}
+              <div className="mt-6 mx-6 relative overflow-hidden rounded-[4px]" style={{ aspectRatio: '3/2', backgroundColor: '#0A3A39' }}>
+                <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                  <Image
+                    src="/images/3. A vinificacao/13.webp"
+                    alt="Adega da Casa de Nabais — vista exterior"
+                    fill
+                    className="object-cover"
+                    sizes="calc(100vw - 3rem)"
+                  />
+                </div>
               </div>
             </div>
 
@@ -762,6 +780,19 @@ export default function VinificacaoPage() {
                     {t.vinificacaoPage.adegaParas[0]}
                   </p>
 
+                  {/* Mobile: 1ª foto da adega — após a frase de intro, antes da lista */}
+                  <div className="lg:hidden relative overflow-hidden rounded-[4px] mb-6" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F' }}>
+                    <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                      <Image
+                        src="/images/3. A vinificacao/Casa Nabais075.webp"
+                        alt="Adega — interior"
+                        fill
+                        className="object-cover"
+                        sizes="calc(100vw - 3rem)"
+                      />
+                    </div>
+                  </div>
+
                   <ul
                     className="mb-5 flex flex-col gap-2 text-center lg:text-left"
                     style={{
@@ -821,18 +852,20 @@ export default function VinificacaoPage() {
               </div>
             </div>
 
-            {/* Mobile: portrait */}
+            {/* Mobile: panorâmica da adega (presente no desktop) */}
             <div
-              className="relative lg:hidden mt-10 mx-6"
-              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#3A5B4F' }}
+              className="relative lg:hidden mt-10 mx-6 overflow-hidden"
+              style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
             >
-              <Image
-                src="/images/3. A vinificacao/Casa Nabais075.webp"
-                alt="Adega — interior"
-                fill
-                className="object-cover"
-                sizes="calc(100vw - 3rem)"
-              />
+              <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                <Image
+                  src="/images/3. A vinificacao/Casa Nabais081.webp"
+                  alt="Adega da Casa de Nabais — construção"
+                  fill
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
+                />
+              </div>
             </div>
 
           </section>
@@ -970,25 +1003,9 @@ export default function VinificacaoPage() {
 
           <section className="lg:pt-20 lg:pb-28">
 
-            {/* Mobile: imagem full-bleed + gradient + identidade */}
-            <div className="lg:hidden relative overflow-hidden" style={{ minHeight: '100svh' }}>
-              <div className="absolute inset-0 overflow-hidden">
-                <Image
-                  src="/images/3. A vinificacao/19.webp"
-                  alt="Perfil do enólogo — Casa de Nabais"
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                />
-              </div>
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-                  zIndex: 1,
-                }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center" style={{ zIndex: 2 }}>
+            {/* Mobile: identidade → imagem editorial → parágrafos */}
+            <div className="lg:hidden">
+              <div className="px-7 pt-12 pb-8 text-center">
                 <p
                   className="font-display uppercase mb-3"
                   style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.50)' }}
@@ -1005,27 +1022,45 @@ export default function VinificacaoPage() {
                   {t.vinificacaoPage.enologoName}
                 </h2>
               </div>
+
+              <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+                <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                  <Image
+                    src="/images/3. A vinificacao/19.webp"
+                    alt="Perfil do enólogo — Casa de Nabais"
+                    fill
+                    className="object-cover"
+                    sizes="calc(100vw - 3rem)"
+                  />
+                </div>
+              </div>
+
+              <div className="px-7 pt-8 pb-12 text-center">
+                {t.vinificacaoPage.enologoParas.map((para, i) => (
+                  <p
+                    key={i}
+                    className="font-body mb-5 last:mb-0"
+                    style={{
+                      fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
+                      lineHeight: 1.65,
+                      color: i === 0 ? 'rgba(255,249,237,0.72)' : 'rgba(255,249,237,0.55)',
+                      fontStyle: i > 0 ? 'italic' : 'normal',
+                    }}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
             </div>
 
-            {/* Mobile: parágrafos — fundo contínuo com o gradiente */}
-            <div
-              className="lg:hidden px-7 pt-2 pb-12 text-center"
-              style={{ background: '#031D1D' }}
-            >
-              {t.vinificacaoPage.enologoParas.map((para, i) => (
-                <p
-                  key={i}
-                  className="font-body mb-5 last:mb-0"
-                  style={{
-                    fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
-                    lineHeight: 1.65,
-                    color: i === 0 ? 'rgba(255,249,237,0.72)' : 'rgba(255,249,237,0.55)',
-                    fontStyle: i > 0 ? 'italic' : 'normal',
-                  }}
-                >
-                  {para}
-                </p>
-              ))}
+            {/* Frase de fecho — mobile */}
+            <div className="lg:hidden px-7 pb-16 text-center">
+              <TextReveal
+                text={t.vinificacaoPage.enologoClosing}
+                className="font-display"
+                style={{ fontSize: 'clamp(1.25rem, 5.5vw, 1.5rem)', lineHeight: 1.35, fontWeight: 400, color: '#FAE6C1' }}
+                ghostOpacity={0.15}
+              />
             </div>
 
             {/* Título da secção — desktop */}

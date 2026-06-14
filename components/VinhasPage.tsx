@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowDown, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import SectionExplore from './SectionExplore'
 import TextReveal from './TextReveal'
 import gsap from 'gsap'
@@ -60,8 +60,18 @@ export default function VinhasPage() {
 
       if (mobileHeroImgRef.current && mobileHeroRef.current && window.innerWidth < 1024) {
         gsap.to(mobileHeroImgRef.current, {
-          yPercent: 20, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
+        })
+      }
+
+      // Parallax para as imagens editoriais em mobile
+      if (window.innerWidth < 1024) {
+        gsap.utils.toArray<HTMLElement>('.mobile-parallax-img').forEach((inner) => {
+          gsap.to(inner, {
+            yPercent: -16, ease: 'none',
+            scrollTrigger: { trigger: inner.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 },
+          })
         })
       }
 
@@ -125,14 +135,53 @@ export default function VinhasPage() {
     <div ref={pageRef} style={{ backgroundColor: 'var(--color-bg)' }}>
 
       {/* ══════════════════════════════════════
-          MOBILE HERO
+          MOBILE HERO — texto primeiro, depois imagem (igual ao desktop)
       ══════════════════════════════════════ */}
-      <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(100svh - 72px)' }}>
-        <div className="absolute inset-0 overflow-hidden">
+      <div className="lg:hidden">
+
+        {/* ← Voltar */}
+        <div className="px-6 pt-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+            style={{ color: '#3A5B4F' }}
+          >
+            <ArrowLeft size={11} strokeWidth={1.5} />
+            {t.common.back}
+          </Link>
+        </div>
+
+        {/* Título + intro */}
+        <div className="px-6 pt-8 pb-10 text-center">
+          <h1
+            className="font-display uppercase mb-6"
+            style={{
+              fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
+              lineHeight: 1.0,
+              letterSpacing: '0.05em',
+              color: '#0C4544',
+            }}
+          >
+            {t.vinhasPage.title}
+          </h1>
+          <p
+            className="font-body"
+            style={{
+              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+              lineHeight: 1.6,
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            {t.vinhasPage.intro}
+          </p>
+        </div>
+
+        {/* Imagem hero com parallax — editorial */}
+        <div ref={mobileHeroRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F' }}>
           <div
             ref={mobileHeroImgRef}
             className="absolute will-change-transform"
-            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+            style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}
           >
             <Image
               src="/images/2. As vinhas/1.webp"
@@ -140,71 +189,7 @@ export default function VinhasPage() {
               fill
               priority
               className="object-cover"
-              sizes="100vw"
-            />
-          </div>
-        </div>
-
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-            zIndex: 1,
-          }}
-        />
-
-        <Link
-          href="/"
-          className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
-          style={{
-            zIndex: 10,
-            color: 'rgba(250,230,193,0.80)',
-          }}
-        >
-          <ArrowLeft size={11} strokeWidth={1.5} />
-          {t.common.back}
-        </Link>
-
-        <div
-          className="absolute left-0 right-0 bottom-0 px-6 pb-8 flex flex-col items-center text-center"
-          style={{ zIndex: 2 }}
-        >
-          <h1
-            className="font-display uppercase mb-6"
-            style={{
-              fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
-              lineHeight: 1.0,
-              letterSpacing: '0.05em',
-              color: '#FAE6C1',
-              textShadow: '0 2px 28px rgba(3,29,29,0.95)',
-            }}
-          >
-            {t.vinhasPage.title}
-          </h1>
-
-          <p
-            className="font-body mb-8 w-full"
-            style={{
-              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
-              lineHeight: 1.6,
-              color: 'rgba(255,249,237,0.90)',
-            }}
-          >
-            {t.vinhasPage.intro}
-          </p>
-
-          <div className="flex flex-col items-center gap-2">
-            <span
-              className="font-display uppercase"
-              style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.40)' }}
-            >
-              {t.common.scroll}
-            </span>
-            <ArrowDown
-              size={13}
-              strokeWidth={1.5}
-              className="animate-bounce"
-              style={{ color: 'rgba(250,230,193,0.40)' }}
+              sizes="calc(100vw - 3rem)"
             />
           </div>
         </div>
@@ -366,7 +351,51 @@ export default function VinhasPage() {
           </button>
         </div>
 
-        {/* Animated quote */}
+      </section>
+
+      {/* ══════════════════════════════════════
+          MOBILE — VITICULTURA INTEGRADA
+      ══════════════════════════════════════ */}
+      <section className="lg:hidden" style={{ backgroundColor: 'var(--color-bg)' }}>
+        {/* Texto primeiro */}
+        <div className="px-6 pt-4 pb-8 text-center">
+          <h2
+            className="font-display mb-5"
+            style={{
+              fontSize: 'clamp(1.5rem, 7vw, 2rem)',
+              lineHeight: 1.1,
+              letterSpacing: '0.02em',
+              color: 'var(--color-text)',
+            }}
+          >
+            {t.vinhasPage.viticulturaMobileHeading}
+          </h2>
+          <p
+            className="font-body"
+            style={{
+              fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
+              lineHeight: 1.65,
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            {t.vinhasPage.viticulturaText}
+          </p>
+        </div>
+
+        {/* Imagem editorial com parallax */}
+        <div className="relative overflow-hidden mx-6 mb-4 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F' }}>
+          <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+            <Image
+              src="/images/2. As vinhas/7.webp"
+              alt="Viticultura integrada"
+              fill
+              className="object-cover"
+              sizes="calc(100vw - 3rem)"
+            />
+          </div>
+        </div>
+
+        {/* Frase animada — depois da fotografia da viticultura */}
         <div className="mobile-quote px-8 py-16 text-center">
           <TextReveal
             text={t.vinhasPage.closingQuote}
@@ -375,55 +404,6 @@ export default function VinhasPage() {
             ghostOpacity={0.15}
           />
         </div>
-      </section>
-
-      {/* ══════════════════════════════════════
-          MOBILE — VITICULTURA INTEGRADA
-      ══════════════════════════════════════ */}
-      <section className="lg:hidden">
-        {/* Full bleed image with gradient + title + text overlaid */}
-        <div
-          className="relative overflow-hidden"
-          style={{ minHeight: '100svh' }}
-        >
-          <Image
-            src="/images/2. As vinhas/7.webp"
-            alt="Viticultura integrada"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-            }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
-            <h2
-              className="font-display uppercase mb-5"
-              style={{
-                fontSize: 'clamp(1.625rem, 7vw, 2.125rem)',
-                lineHeight: 1.05,
-                letterSpacing: '0.06em',
-                color: '#FAE6C1',
-              }}
-            >
-              {t.vinhasPage.viticulturaMobileHeading}
-            </h2>
-            <p
-              className="font-body"
-              style={{
-                fontSize: 'clamp(0.875rem, 3.8vw, 0.9375rem)',
-                lineHeight: 1.6,
-                color: 'rgba(255,249,237,0.75)',
-              }}
-            >
-              {t.vinhasPage.viticulturaText}
-            </p>
-          </div>
-        </div>
-
       </section>
 
       {/* ══════════════════════════════════════
@@ -600,9 +580,24 @@ export default function VinhasPage() {
       <section
         ref={vinhasSecRef}
         style={{ background: 'linear-gradient(to bottom, #0C4544, #031D1D)' }}
-        className="lg:py-28"
+        className="pb-16 lg:py-28"
       >
         <div className="max-w-[1200px] mx-auto lg:px-10">
+
+          {/* Heading mobile */}
+          <h2
+            className="reveal-vinhas-sec lg:hidden font-display uppercase text-center px-6 pt-16 pb-2"
+            style={{
+              fontSize: 'clamp(1.75rem, 8vw, 2.25rem)',
+              lineHeight: 1.05,
+              letterSpacing: '0.04em',
+              color: '#FAE6C1',
+            }}
+          >
+            {t.vinhasPage.ourVineyardsHeading.split('\n').map((line, i, arr) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}
+          </h2>
 
           <h2
             className="reveal-vinhas-sec hidden lg:block font-display uppercase text-center mb-16 md:mb-20"
@@ -680,47 +675,40 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: full bleed */}
-              <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
-                  <Image
-                    src="/images/2. As vinhas/8.webp"
-                    alt="Vinha do Pomar"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
-                    <h3
-                      className="font-display uppercase mb-5"
-                      style={{
-                        fontSize: 'clamp(1.5rem, 6.5vw, 2rem)',
-                        lineHeight: 1.0,
-                        letterSpacing: '0.06em',
-                        color: '#FAE6C1',
-                      }}
-                    >
-                      {t.vinhasPage.vinhaDoPomarH}
-                    </h3>
-                    <p
-                      className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-                    >
-                      {t.vinhasPage.vinhaDoPomarP1}
-                    </p>
-                    <p
-                      className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                    >
-                      {t.vinhasPage.vinhaDoPomarP2}
-                    </p>
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
+                <div className="px-6 pt-12 pb-6 text-center">
+                  <h3
+                    className="reveal-vinha-item font-display uppercase mb-5"
+                    style={{ fontSize: 'clamp(1.5rem, 6.5vw, 2rem)', lineHeight: 1.0, letterSpacing: '0.06em', color: '#FAE6C1' }}
+                  >
+                    {t.vinhasPage.vinhaDoPomarH}
+                  </h3>
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+                  >
+                    {t.vinhasPage.vinhaDoPomarP1}
+                  </p>
+                </div>
+                <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+                  <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                    <Image
+                      src="/images/2. As vinhas/8.webp"
+                      alt="Vinha do Pomar"
+                      fill
+                      className="object-cover"
+                      sizes="calc(100vw - 3rem)"
+                    />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaDoPomarP2}
+                  </p>
                 </div>
               </div>
 
@@ -788,47 +776,40 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: full bleed */}
-              <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
-                  <Image
-                    src="/images/2. As vinhas/9.webp"
-                    alt="Vinha da Adega"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
-                    <h3
-                      className="font-display uppercase mb-5"
-                      style={{
-                        fontSize: 'clamp(1.5rem, 6.5vw, 2rem)',
-                        lineHeight: 1.0,
-                        letterSpacing: '0.06em',
-                        color: '#FAE6C1',
-                      }}
-                    >
-                      {t.vinhasPage.vinhaAdegaH}
-                    </h3>
-                    <p
-                      className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-                    >
-                      {t.vinhasPage.vinhaAdegaP1}
-                    </p>
-                    <p
-                      className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                    >
-                      {t.vinhasPage.vinhaAdegaP2}
-                    </p>
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
+                <div className="px-6 pt-12 pb-6 text-center">
+                  <h3
+                    className="reveal-vinha-item font-display uppercase mb-5"
+                    style={{ fontSize: 'clamp(1.5rem, 6.5vw, 2rem)', lineHeight: 1.0, letterSpacing: '0.06em', color: '#FAE6C1' }}
+                  >
+                    {t.vinhasPage.vinhaAdegaH}
+                  </h3>
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+                  >
+                    {t.vinhasPage.vinhaAdegaP1}
+                  </p>
+                </div>
+                <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+                  <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                    <Image
+                      src="/images/2. As vinhas/9.webp"
+                      alt="Vinha da Adega"
+                      fill
+                      className="object-cover"
+                      sizes="calc(100vw - 3rem)"
+                    />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaAdegaP2}
+                  </p>
                 </div>
               </div>
 
@@ -896,47 +877,40 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: full bleed */}
-              <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
-                  <Image
-                    src="/images/2. As vinhas/10.webp"
-                    alt="Vinha da Igreja"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
-                    <h3
-                      className="font-display uppercase mb-5"
-                      style={{
-                        fontSize: 'clamp(1.5rem, 6.5vw, 2rem)',
-                        lineHeight: 1.0,
-                        letterSpacing: '0.06em',
-                        color: '#FAE6C1',
-                      }}
-                    >
-                      {t.vinhasPage.vinhaIgrejaH}
-                    </h3>
-                    <p
-                      className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-                    >
-                      {t.vinhasPage.vinhaIgrejaP1}
-                    </p>
-                    <p
-                      className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                    >
-                      {t.vinhasPage.vinhaIgrejaP2}
-                    </p>
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
+                <div className="px-6 pt-12 pb-6 text-center">
+                  <h3
+                    className="reveal-vinha-item font-display uppercase mb-5"
+                    style={{ fontSize: 'clamp(1.5rem, 6.5vw, 2rem)', lineHeight: 1.0, letterSpacing: '0.06em', color: '#FAE6C1' }}
+                  >
+                    {t.vinhasPage.vinhaIgrejaH}
+                  </h3>
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+                  >
+                    {t.vinhasPage.vinhaIgrejaP1}
+                  </p>
+                </div>
+                <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+                  <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                    <Image
+                      src="/images/2. As vinhas/10.webp"
+                      alt="Vinha da Igreja"
+                      fill
+                      className="object-cover"
+                      sizes="calc(100vw - 3rem)"
+                    />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaIgrejaP2}
+                  </p>
                 </div>
               </div>
 
@@ -1004,47 +978,42 @@ export default function VinhasPage() {
                 </div>
               </div>
 
-              {/* Mobile: full bleed */}
-              <div className="lg:hidden">
-                <div className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
-                  <Image
-                    src="/images/2. As vinhas/11.webp"
-                    alt="Vinha Talhão de Xisto"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 px-7 pb-10 text-center">
-                    <h3
-                      className="font-display uppercase mb-5"
-                      style={{
-                        fontSize: 'clamp(1.5rem, 6.5vw, 2rem)',
-                        lineHeight: 1.0,
-                        letterSpacing: '0.06em',
-                        color: '#FAE6C1',
-                      }}
-                    >
-                      {t.vinhasPage.vinhaTalhaoH}
-                    </h3>
-                    <p
-                      className="font-body mb-4"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-                    >
-                      {t.vinhasPage.vinhaTalhaoP1}
-                    </p>
-                    <p
-                      className="font-body"
-                      style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
-                    >
-                      {t.vinhasPage.vinhaTalhaoP2}
-                    </p>
+              {/* Mobile: texto + imagem + frase em itálico */}
+              <div className="lg:hidden pb-16">
+                <div className="px-6 pt-12 pb-6 text-center">
+                  <h3
+                    className="reveal-vinha-item font-display uppercase mb-5"
+                    style={{ fontSize: 'clamp(1.5rem, 6.5vw, 2rem)', lineHeight: 1.05, letterSpacing: '0.06em', color: '#FAE6C1' }}
+                  >
+                    {t.vinhasPage.vinhaTalhaoH.split('\n').map((line, i, arr) => (
+                      <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                    ))}
+                  </h3>
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+                  >
+                    {t.vinhasPage.vinhaTalhaoP1}
+                  </p>
+                </div>
+                <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
+                  <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                    <Image
+                      src="/images/2. As vinhas/11.webp"
+                      alt="Vinha Talhão de Xisto"
+                      fill
+                      className="object-cover"
+                      sizes="calc(100vw - 3rem)"
+                    />
                   </div>
+                </div>
+                <div className="px-6 pt-6 text-center">
+                  <p
+                    className="reveal-vinha-item font-body"
+                    style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)', fontStyle: 'italic' }}
+                  >
+                    {t.vinhasPage.vinhaTalhaoP2}
+                  </p>
                 </div>
               </div>
 

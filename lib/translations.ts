@@ -317,7 +317,7 @@ export const pt: Translations = {
     ],
   },
   sectionCasa: {
-    headingMobile:   'Conheça a Casa\nde Nabais',
+    headingMobile:   'Conheça a\nCasa de Nabais',
     headingDesktop:  'Conheça\na Casa\nde Nabais',
     body:            'Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.',
     textRevealMobile:  'A Casa de Nabais é também um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo.',
@@ -336,6 +336,7 @@ export const pt: Translations = {
       { label: 'A Vinificação', href: '/a-vinificacao'  },
       { label: 'Os Vinhos',     href: '/os-vinhos'     },
       { label: 'Ficar na Casa', href: '/ficar-na-casa' },
+      { label: 'A Casa de Nabais', href: '/a-casa'     },
     ],
   },
   casaPage: {
@@ -352,7 +353,7 @@ export const pt: Translations = {
   },
   casaHistoria: {
     heading:       'História da\nCasa de Nabais',
-    headingMobile: 'História da Casa\nde Nabais',
+    headingMobile: 'História da\nCasa de Nabais',
     intro: 'A Casa de Nabais nasceu da paisagem fértil da freguesia da Seara, em pleno Vale do Lima, e da longa história das grandes casas do Minho.',
     bodyParagraphs: [
       'As primeiras referências à quinta remontam ao século XVII, quando pertencia aos Jácome do Lago, poderosa família de Viana do Castelo, cujo brasão ainda hoje marca a fachada. Habitada apenas de forma sazonal, Nabais foi sempre uma casa de rendimento, trabalhada por caseiros e ligada à lógica dos morgados.',
@@ -383,7 +384,7 @@ export const pt: Translations = {
     viticulturaMobileHeading: 'Viticultura\nIntegrada',
     viticulturaDesktopHeading: 'Viticultura integrada',
     viticulturaText: 'Seguimos um regime de produção integrada, sem herbicidas, caminhando para práticas regenerativas. O enrelvamento da vinha com espécies autóctones controla infestantes, promove biodiversidade e ajuda a regular o vigor das plantas.',
-    ourVineyardsHeading: 'As Nossas Vinhas',
+    ourVineyardsHeading: 'As nossas\nVinhas',
     vinhaDoPomarH: 'Vinha do Pomar',
     vinhaDoPomarP1: 'Com o clássico solo da região — terra preta, muita matéria orgânica e argila — apresenta um terreno fértil, com muito vigor, onde agimos para criar as melhores condições para a vinha.',
     vinhaDoPomarP2: 'Aqui o foco é reduzir a produção natural do solo para alcançar mais qualidade, complexidade e identidade no vinho feito a partir da casta Loureiro.',
@@ -393,7 +394,7 @@ export const pt: Translations = {
     vinhaIgrejaH:  'Vinha da Igreja',
     vinhaIgrejaP1: 'Localizada na freguesia da Seara, a poucos quilómetros da Casa de Nabais, apresenta solo granítico com fertilidade e uma exposição solar durante praticamente todo o dia, graças à sua posição num ligeiro planalto.',
     vinhaIgrejaP2: 'Foi a escolhida para plantar as castas Alvarinho e Vinhão, explorando esta luz privilegiada para obter maturações mais completas num clima marcadamente atlântico.',
-    vinhaTalhaoH:  'Vinha Talhão de Xisto',
+    vinhaTalhaoH:  'Vinha\nTalhão de Xisto',
     vinhaTalhaoP1: 'Situada na freguesia da Feitosa, também na margem esquerda do Rio Lima, esta parcela singulariza-se pelo substrato xistoso que contrasta com o granito dominante na região.',
     vinhaTalhaoP2: 'Aqui a vinha produz menos, as raízes vão a maior profundidade em busca de água e nutrição, e as uvas expressam uma concentração e mineralidade que se transferem directamente para o copo.',
   },
@@ -665,6 +666,7 @@ export const en: Translations = {
       { label: 'Winemaking',        href: '/a-vinificacao'  },
       { label: 'The Wines',         href: '/os-vinhos'     },
       { label: 'Stay at the Estate',href: '/ficar-na-casa' },
+      { label: 'The House',         href: '/a-casa'        },
     ],
   },
   casaPage: {
@@ -722,7 +724,7 @@ export const en: Translations = {
     vinhaIgrejaH:  'Vinha da Igreja',
     vinhaIgrejaP1: 'Located in the Seara parish, a few kilometres from Casa de Nabais, it features fertile granite soil and sun exposure for practically the entire day, thanks to its position on a gentle plateau.',
     vinhaIgrejaP2: 'It was chosen to plant the Alvarinho and Vinhão varieties, making the most of this privileged light to achieve fuller ripening in a markedly Atlantic climate.',
-    vinhaTalhaoH:  'Vinha Talhão de Xisto',
+    vinhaTalhaoH:  'Vinha\nTalhão de Xisto',
     vinhaTalhaoP1: 'Located in the Feitosa parish, also on the left bank of the Lima River, this plot stands out for its schist substrate, which contrasts with the granite dominant in the region.',
     vinhaTalhaoP2: 'Here the vine yields less, the roots go deeper in search of water and nutrition, and the grapes express a concentration and minerality that transfer directly to the glass.',
   },

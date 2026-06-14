@@ -923,20 +923,18 @@ export default function FicarNaCasaPage() {
                   </h3>
                 </div>
 
-                {/* Image — white card, contained */}
+                {/* Image — white card, full */}
                 <div
                   className="relative w-full overflow-hidden"
                   style={{ aspectRatio: '4/5', backgroundColor: '#FFFFFF', borderRadius: '4px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
                 >
-                  <div className="absolute inset-6">
-                    <Image
-                      src={wine.img}
-                      alt={wine.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
+                  <Image
+                    src={wine.img}
+                    alt={wine.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
 
                 {/* Description */}
