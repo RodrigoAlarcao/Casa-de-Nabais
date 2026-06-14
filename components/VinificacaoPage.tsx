@@ -399,7 +399,31 @@ export default function VinificacaoPage() {
                     {t.vinificacaoPage.loureiroHeading}
                   </h2>
 
-                  {t.vinificacaoPage.loureiroParas.map((para, i) => (
+                  <p
+                    className="reveal-vinif font-body mb-5 text-center lg:text-left"
+                    style={{
+                      fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)',
+                      lineHeight: 1.65,
+                      color: 'rgba(255,249,237,0.72)',
+                    }}
+                  >
+                    {t.vinificacaoPage.loureiroParas[0]}
+                  </p>
+
+                  {/* Mobile: retrato Loureiro entre os dois parágrafos */}
+                  <div className="lg:hidden relative overflow-hidden rounded-[4px] my-6" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
+                    <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                      <Image
+                        src="/images/3. A vinificacao/4.webp"
+                        alt="A casta Loureiro — vinificação"
+                        fill
+                        className="object-cover"
+                        sizes="calc(100vw - 3rem)"
+                      />
+                    </div>
+                  </div>
+
+                  {t.vinificacaoPage.loureiroParas.slice(1).map((para, i) => (
                     <p
                       key={i}
                       className="reveal-vinif font-body mb-5 last:mb-0 text-center lg:text-left"
@@ -414,19 +438,6 @@ export default function VinificacaoPage() {
                   ))}
                 </div>
 
-              </div>
-            </div>
-
-            {/* Mobile: retrato Loureiro (presente no desktop) */}
-            <div className="lg:hidden mt-10 mx-6 relative overflow-hidden rounded-[4px]" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
-              <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
-                <Image
-                  src="/images/3. A vinificacao/4.webp"
-                  alt="A casta Loureiro — vinificação"
-                  fill
-                  className="object-cover"
-                  sizes="calc(100vw - 3rem)"
-                />
               </div>
             </div>
 
@@ -559,7 +570,7 @@ export default function VinificacaoPage() {
           <section className="lg:pt-20 lg:pb-28 md:pb-36">
 
             {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
-            <div className="lg:hidden">
+            <div className="lg:hidden pb-16">
               <div className="px-6 pt-12 pb-8 text-center">
                 <h2
                   className="font-display mb-6"
@@ -769,6 +780,19 @@ export default function VinificacaoPage() {
                     {t.vinificacaoPage.adegaParas[0]}
                   </p>
 
+                  {/* Mobile: 1ª foto da adega — após a frase de intro, antes da lista */}
+                  <div className="lg:hidden relative overflow-hidden rounded-[4px] mb-6" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F' }}>
+                    <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                      <Image
+                        src="/images/3. A vinificacao/Casa Nabais075.webp"
+                        alt="Adega — interior"
+                        fill
+                        className="object-cover"
+                        sizes="calc(100vw - 3rem)"
+                      />
+                    </div>
+                  </div>
+
                   <ul
                     className="mb-5 flex flex-col gap-2 text-center lg:text-left"
                     style={{
@@ -828,25 +852,9 @@ export default function VinificacaoPage() {
               </div>
             </div>
 
-            {/* Mobile: portrait editorial com parallax */}
-            <div
-              className="relative lg:hidden mt-10 mx-6"
-              style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#3A5B4F' }}
-            >
-              <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
-                <Image
-                  src="/images/3. A vinificacao/Casa Nabais075.webp"
-                  alt="Adega — interior"
-                  fill
-                  className="object-cover"
-                  sizes="calc(100vw - 3rem)"
-                />
-              </div>
-            </div>
-
             {/* Mobile: panorâmica da adega (presente no desktop) */}
             <div
-              className="relative lg:hidden mt-4 mx-6 overflow-hidden"
+              className="relative lg:hidden mt-10 mx-6 overflow-hidden"
               style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
             >
               <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
