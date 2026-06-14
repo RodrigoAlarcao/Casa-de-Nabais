@@ -43,7 +43,7 @@ export default function SectionVinificacao() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: -10, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: {
             trigger: mobileOuterRef.current,
             start: 'top bottom',
@@ -100,7 +100,7 @@ export default function SectionVinificacao() {
           <div
             ref={mobileImgWrapRef}
             className="absolute will-change-transform"
-            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
+            style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}
           >
             <Image
               src="/images/0. Mainpage/9.webp"

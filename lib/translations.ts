@@ -317,7 +317,7 @@ export const pt: Translations = {
     ],
   },
   sectionCasa: {
-    headingMobile:   'Conheça a Casa\nde Nabais',
+    headingMobile:   'Conheça a\nCasa de Nabais',
     headingDesktop:  'Conheça\na Casa\nde Nabais',
     body:            'Solar minhoto de séculos, recuperado com respeito pela história e pelo lugar. Cinco suítes e um apartamento, piscina, spa e uma mesa com produtos da quinta. Um sítio para ficar, não para passar.',
     textRevealMobile:  'A Casa de Nabais é também um lugar para ficar, provar e aprender. Casa, vinha, vinho e mesa unem-se num ritmo sereno, para que o visitante seja recebido com verdade. Mais do que vinho, oferece-se origem, coerência e uma ligação profunda entre lugar, pessoas e tempo.',

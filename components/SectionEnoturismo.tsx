@@ -109,7 +109,7 @@ export default function SectionEnoturismo() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: -10, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: { trigger: mobileOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
@@ -179,22 +179,32 @@ export default function SectionEnoturismo() {
           </div>
         </div>
 
-        {/* Hero image with subtle parallax */}
+        {/* Hero image with parallax */}
         <div ref={mobileOuterRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
-            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
+            style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
             <Image src="/images/0. Mainpage/19.webp" alt="Enoturismo na Casa de Nabais"
               fill className="object-cover" sizes="100vw" priority />
           </div>
         </div>
 
+        {/* TextReveal — mobile */}
+        <div className="px-6 pt-12 pb-12 text-center">
+          <TextReveal
+            text={t.sectionEnoturismo.textReveal}
+            className="font-display"
+            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+            ghostOpacity={0.18}
+          />
+        </div>
+
         {/* Carousel */}
-        <div className="pt-8">
+        <div className="pt-2">
           <CarouselStrip />
         </div>
 
         {/* Navigation */}
-        <div className="mt-5 flex items-center gap-5 justify-center">
+        <div className="mt-5 pb-20 flex items-center gap-5 justify-center">
           <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
             <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -207,16 +217,6 @@ export default function SectionEnoturismo() {
             className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
             <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
-        </div>
-
-        {/* TextReveal — mobile */}
-        <div className="px-6 pt-10 pb-20 text-center">
-          <TextReveal
-            text={t.sectionEnoturismo.textReveal}
-            className="font-display"
-            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
-            ghostOpacity={0.18}
-          />
         </div>
       </div>
 
