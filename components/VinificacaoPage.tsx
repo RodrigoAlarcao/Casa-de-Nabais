@@ -417,6 +417,19 @@ export default function VinificacaoPage() {
               </div>
             </div>
 
+            {/* Mobile: retrato Loureiro (presente no desktop) */}
+            <div className="lg:hidden mt-10 mx-6 relative overflow-hidden rounded-[4px]" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
+              <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                <Image
+                  src="/images/3. A vinificacao/4.webp"
+                  alt="A casta Loureiro — vinificação"
+                  fill
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
+                />
+              </div>
+            </div>
+
             {/* Mobile: carrossel */}
             <div
               className="lg:hidden mt-10 py-2 select-none"
@@ -595,6 +608,19 @@ export default function VinificacaoPage() {
                     {para}
                   </p>
                 ))}
+              </div>
+
+              {/* Panorâmica (presente no desktop) */}
+              <div className="mt-6 mx-6 relative overflow-hidden rounded-[4px]" style={{ aspectRatio: '3/2', backgroundColor: '#0A3A39' }}>
+                <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                  <Image
+                    src="/images/3. A vinificacao/13.webp"
+                    alt="Adega da Casa de Nabais — vista exterior"
+                    fill
+                    className="object-cover"
+                    sizes="calc(100vw - 3rem)"
+                  />
+                </div>
               </div>
             </div>
 
@@ -811,6 +837,22 @@ export default function VinificacaoPage() {
                 <Image
                   src="/images/3. A vinificacao/Casa Nabais075.webp"
                   alt="Adega — interior"
+                  fill
+                  className="object-cover"
+                  sizes="calc(100vw - 3rem)"
+                />
+              </div>
+            </div>
+
+            {/* Mobile: panorâmica da adega (presente no desktop) */}
+            <div
+              className="relative lg:hidden mt-4 mx-6 overflow-hidden"
+              style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
+            >
+              <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+                <Image
+                  src="/images/3. A vinificacao/Casa Nabais081.webp"
+                  alt="Adega da Casa de Nabais — construção"
                   fill
                   className="object-cover"
                   sizes="calc(100vw - 3rem)"
