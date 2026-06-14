@@ -360,7 +360,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               GRID: imagem ESQ + texto DIR + CARROSSEL
           ══════════════════════════════════════ */}
-          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28" style={{ backgroundColor: '#031D1D', marginTop: '-2px', position: 'relative', zIndex: 1 }}>
+          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
 
             <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -524,7 +524,7 @@ export default function VinificacaoPage() {
           </section>
 
           {/* TEXTO ANIMADO (TextReveal) */}
-          <section className="py-14 md:py-20" style={{ backgroundColor: '#031D1D', position: 'relative', zIndex: 1 }}>
+          <section className="py-14 md:py-20 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
             <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
               <TextReveal
                 text={t.vinificacaoPage.closingText}
@@ -545,7 +545,7 @@ export default function VinificacaoPage() {
           ══════════════════════════════════════ */}
           <section className="lg:pt-20 lg:pb-28 md:pb-36">
 
-            {/* Mobile: texto primeiro, depois imagem editorial */}
+            {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
             <div className="lg:hidden">
               <div className="px-6 pt-12 pb-8 text-center">
                 <h2
@@ -557,19 +557,16 @@ export default function VinificacaoPage() {
                 >
                   {t.vinificacaoPage.experimentalHeading}
                 </h2>
-                {t.vinificacaoPage.experimentalParas.map((para, i) => (
-                  <p
-                    key={i}
-                    className="font-body mb-4 last:mb-0"
-                    style={{
-                      fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
-                      lineHeight: 1.6,
-                      color: i === 0 ? 'rgba(255,249,237,0.90)' : 'rgba(255,249,237,0.72)',
-                    }}
-                  >
-                    {para}
-                  </p>
-                ))}
+                <p
+                  className="font-body"
+                  style={{
+                    fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
+                    lineHeight: 1.6,
+                    color: 'rgba(255,249,237,0.90)',
+                  }}
+                >
+                  {t.vinificacaoPage.experimentalParas[0]}
+                </p>
               </div>
 
               <div className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
@@ -582,6 +579,22 @@ export default function VinificacaoPage() {
                     sizes="calc(100vw - 3rem)"
                   />
                 </div>
+              </div>
+
+              <div className="px-6 pt-8 pb-4 text-center">
+                {t.vinificacaoPage.experimentalParas.slice(1).map((para, i) => (
+                  <p
+                    key={i}
+                    className="font-body mb-4 last:mb-0"
+                    style={{
+                      fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
+                      lineHeight: 1.6,
+                      color: 'rgba(255,249,237,0.72)',
+                    }}
+                  >
+                    {para}
+                  </p>
+                ))}
               </div>
             </div>
 
