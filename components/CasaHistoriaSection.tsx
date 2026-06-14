@@ -123,7 +123,7 @@ export default function CasaHistoriaSection() {
 
       if (mobileImgWrapRef.current && mobileOuterRef.current && window.innerWidth < 1024) {
         gsap.to(mobileImgWrapRef.current, {
-          yPercent: -10, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: { trigger: mobileOuterRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
@@ -208,40 +208,21 @@ export default function CasaHistoriaSection() {
       </div>
 
       {/* ══════════════════════════════════════════
-          MOBILE: imagem hero + bloco de texto
+          MOBILE: texto → imagem → texto → carrossel
       ══════════════════════════════════════════ */}
 
-      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ height: 'calc(100svh - 72px)', background: '#031D1D' }}>
-        <div className="absolute inset-0 overflow-hidden">
-          <div ref={mobileImgWrapRef} className="absolute will-change-transform"
-            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
-            <Image src="/images/1. A casa/30.webp" alt="Fachada histórica da Casa de Nabais"
-              fill className="object-cover" sizes="100vw" />
-          </div>
-        </div>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{
-            zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)',
-          }}
-        />
-        <div className="absolute left-0 right-0 bottom-0 px-6 pb-4 text-center" style={{ zIndex: 2 }}>
-          <h2
-            className="reveal-hist font-display uppercase"
-            style={{
-              fontSize: 'clamp(1.875rem, 6vw, 2.5rem)',
-              lineHeight: 1.05,
-              letterSpacing: '0.04em',
-              color: '#FAE6C1',
-            }}
-          >
-            {t.casaHistoria.headingMobile}
-          </h2>
-        </div>
-      </div>
+      <div className="lg:hidden">
 
-      <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
-        <div className="px-6 pt-0 pb-6 text-center">
+        {/* Heading + intro over the section gradient */}
+        <div className="px-6 pt-20 pb-10 text-center">
+          <h2
+            className="reveal-hist font-display uppercase mb-6"
+            style={{ fontSize: 'clamp(1.875rem, 7vw, 2.5rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}
+          >
+            {t.casaHistoria.headingMobile.split('\n').map((line, i, arr) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}
+          </h2>
           <p
             className="reveal-hist font-body"
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
@@ -249,11 +230,47 @@ export default function CasaHistoriaSection() {
             {t.casaHistoria.intro}
           </p>
         </div>
+
+        {/* Hero image with parallax */}
+        <div ref={mobileOuterRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
+          <div ref={mobileImgWrapRef} className="absolute will-change-transform"
+            style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
+            <Image src="/images/1. A casa/30.webp" alt="Fachada histórica da Casa de Nabais"
+              fill className="object-cover" sizes="100vw" />
+          </div>
+        </div>
+
+        {/* Body paragraphs */}
+        <div className="px-6 pt-12 pb-2 text-center">
+          {t.casaHistoria.bodyParagraphs.map((para: string, i: number) => (
+            <p
+              key={i}
+              className="reveal-hist font-body mb-5 last:mb-0"
+              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
+            >
+              {para}
+            </p>
+          ))}
+        </div>
+
+        {/* Closing animated text */}
+        <div className="px-6 pt-10 pb-12 text-center">
+          <TextReveal
+            text={t.casaHistoria.closingText}
+            className="font-display"
+            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+            triggerStart="top 85%"
+            triggerEnd="bottom 55%"
+          />
+        </div>
+
+        {/* Carousel — after the animated text */}
         <div className="pt-2">
           <CarouselStrip />
         </div>
 
-        <div className="mt-5 flex items-center gap-5 justify-center">
+        {/* Navigation */}
+        <div className="mt-5 pb-20 flex items-center gap-5 justify-center">
           <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
             <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -266,28 +283,6 @@ export default function CasaHistoriaSection() {
             className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
             <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
-        </div>
-
-        <div className="px-6 pt-10 pb-4 text-center">
-          {t.casaHistoria.bodyParagraphs.map((para: string, i: number) => (
-            <p
-              key={i}
-              className="reveal-hist font-body mb-5 last:mb-0"
-              style={{ fontSize: 'clamp(0.9375rem, 1.2vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.72)' }}
-            >
-              {para}
-            </p>
-          ))}
-        </div>
-
-        <div className="px-6 py-16 text-center">
-          <TextReveal
-            text={t.casaHistoria.closingText}
-            className="font-display"
-            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
-            triggerStart="top 85%"
-            triggerEnd="bottom 55%"
-          />
         </div>
       </div>
 

@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, ArrowLeft, ArrowDown } from 'lucide-react'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 import TextReveal from './TextReveal'
 import GalleryLightbox from './GalleryLightbox'
 import CasaHistoriaSection from './CasaHistoriaSection'
@@ -146,7 +146,7 @@ export default function CasaPage() {
 
       if (mobileHeroImgRef.current && mobileHeroRef.current && window.innerWidth < 1024) {
         gsap.to(mobileHeroImgRef.current, {
-          yPercent: 20, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
@@ -166,15 +166,56 @@ export default function CasaPage() {
     <div ref={pageRef} style={{ backgroundColor: 'var(--color-bg)' }}>
 
       {/* ══════════════════════════════════════
-          MOBILE HERO — foto + gradiente
+          MOBILE HERO — texto primeiro, depois imagem (igual ao desktop)
       ══════════════════════════════════════ */}
-      <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(100svh - 72px)' }}>
+      <div className="lg:hidden">
 
-        <div className="absolute inset-0 overflow-hidden">
+        {/* ← Voltar */}
+        <div className="px-6 pt-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+            style={{ color: '#3A5B4F' }}
+          >
+            <ArrowLeft size={11} strokeWidth={1.5} />
+            {t.common.back}
+          </Link>
+        </div>
+
+        {/* Título + intro */}
+        <div className="px-6 pt-8 pb-10 text-center">
+          <h1
+            className="font-display uppercase mb-7"
+            style={{
+              fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
+              lineHeight: 1.0,
+              letterSpacing: '0.05em',
+              color: '#0C4544',
+            }}
+          >
+            {t.casaPage.titleMobile.split('\n').map((line, i, arr) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}
+          </h1>
+
+          <p
+            className="font-body"
+            style={{
+              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+              lineHeight: 1.6,
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            {t.casaPage.intro}
+          </p>
+        </div>
+
+        {/* Imagem hero com parallax */}
+        <div ref={mobileHeroRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
           <div
             ref={mobileHeroImgRef}
             className="absolute will-change-transform"
-            style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+            style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}
           >
             <Image
               src="/images/1. A casa/1.webp"
@@ -183,77 +224,6 @@ export default function CasaPage() {
               priority
               className="object-cover"
               sizes="100vw"
-            />
-          </div>
-        </div>
-
-        {/* Gradiente reforçado para cobrir título + texto */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-            zIndex: 1,
-          }}
-        />
-
-        <Link
-          href="/"
-          className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
-          style={{
-            zIndex: 10,
-            color: 'rgba(250,230,193,0.80)',
-          }}
-        >
-          <ArrowLeft size={11} strokeWidth={1.5} />
-          {t.common.back}
-        </Link>
-
-        {/* Título + texto + scroll indicator */}
-        <div
-          className="absolute left-0 right-0 bottom-0 px-6 pb-6 flex flex-col items-center text-center"
-          style={{ zIndex: 2 }}
-        >
-          <h1
-            className="font-display uppercase mb-7"
-            style={{
-              fontSize: 'clamp(2.5rem, 10vw, 3.5rem)',
-              lineHeight: 1.0,
-              letterSpacing: '0.05em',
-              color: '#FAE6C1',
-              textShadow: '0 2px 28px rgba(3,29,29,0.95)',
-            }}
-          >
-            {t.casaPage.titleMobile}
-          </h1>
-
-          <p
-            className="font-body mb-8 w-full"
-            style={{
-              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
-              lineHeight: 1.6,
-              color: 'rgba(255,249,237,0.90)',
-            }}
-          >
-            {t.casaPage.intro}
-          </p>
-
-          {/* Scroll indicator */}
-          <div className="flex flex-col items-center gap-2">
-            <span
-              className="font-display uppercase"
-              style={{
-                fontSize: '9px',
-                letterSpacing: '0.2em',
-                color: 'rgba(250,230,193,0.40)',
-              }}
-            >
-              {t.common.scroll}
-            </span>
-            <ArrowDown
-              size={13}
-              strokeWidth={1.5}
-              className="animate-bounce"
-              style={{ color: 'rgba(250,230,193,0.40)' }}
             />
           </div>
         </div>

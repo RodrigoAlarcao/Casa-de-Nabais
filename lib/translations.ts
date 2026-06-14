@@ -352,7 +352,7 @@ export const pt: Translations = {
   },
   casaHistoria: {
     heading:       'História da\nCasa de Nabais',
-    headingMobile: 'História da Casa\nde Nabais',
+    headingMobile: 'História da\nCasa de Nabais',
     intro: 'A Casa de Nabais nasceu da paisagem fértil da freguesia da Seara, em pleno Vale do Lima, e da longa história das grandes casas do Minho.',
     bodyParagraphs: [
       'As primeiras referências à quinta remontam ao século XVII, quando pertencia aos Jácome do Lago, poderosa família de Viana do Castelo, cujo brasão ainda hoje marca a fachada. Habitada apenas de forma sazonal, Nabais foi sempre uma casa de rendimento, trabalhada por caseiros e ligada à lógica dos morgados.',
