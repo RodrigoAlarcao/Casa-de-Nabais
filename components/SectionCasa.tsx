@@ -153,33 +153,17 @@ export default function SectionCasa() {
     <>
     <section ref={sectionRef} className="md:pt-28 pb-0">
 
-      {/* ══ MOBILE: one seamless dark block (text + carousel + nav + CTAs) ══ */}
+      {/* ══ MOBILE: text → image → carousel → textReveal (mirrors desktop) ══ */}
+      <div className="lg:hidden">
 
-      {/* Hero image */}
-      <div ref={mobileOuterRef} className="relative lg:hidden overflow-hidden" style={{ height: 'calc(100svh - 72px)', backgroundColor: '#031D1D' }}>
-        <div className="absolute inset-0 overflow-hidden">
-          <div ref={mobileImgWrapRef} className="absolute will-change-transform"
-            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
-            <Image src="/images/0. Mainpage/10.webp" alt="Fachada da Casa de Nabais"
-              fill className="object-cover" sizes="100vw" priority />
-          </div>
-        </div>
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%)' }} />
-        <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
-          <h2 className="reveal-casa font-display uppercase"
+        {/* Text: heading + body + CTAs over the section gradient */}
+        <div className="px-6 pt-20 pb-10 text-center">
+          <h2 className="reveal-casa font-display uppercase mb-6"
             style={{ fontSize: 'clamp(2rem, 8vw, 2.75rem)', lineHeight: 1.05, letterSpacing: '0.04em', color: '#FAE6C1' }}>
             {t.sectionCasa.headingMobile.split('\n').map((line, i, arr) => (
               <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
             ))}
           </h2>
-        </div>
-      </div>
-
-      {/* Carousel + nav + TextReveal — fundo contínuo com -2px overlap */}
-      <div className="relative lg:hidden" style={{ marginTop: '-2px', background: '#031D1D', zIndex: 2 }}>
-        <div className="px-6 pt-4 pb-6 text-center">
           <p className="reveal-casa font-body mb-8"
             style={{ fontSize: 'clamp(0.9375rem, 4vw, 1rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}>
             {t.sectionCasa.body}
@@ -197,7 +181,18 @@ export default function SectionCasa() {
             </Link>
           </div>
         </div>
-        <div className="pt-2">
+
+        {/* Hero image with subtle parallax */}
+        <div ref={mobileOuterRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
+          <div ref={mobileImgWrapRef} className="absolute will-change-transform"
+            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}>
+            <Image src="/images/0. Mainpage/10.webp" alt="Fachada da Casa de Nabais"
+              fill className="object-cover" sizes="100vw" priority />
+          </div>
+        </div>
+
+        {/* Carousel */}
+        <div className="pt-8">
           <CarouselStrip />
         </div>
 
@@ -216,8 +211,6 @@ export default function SectionCasa() {
             <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
         </div>
-
-
 
         {/* TextReveal — mobile */}
         <div className="px-6 pt-10 pb-20 text-center">
