@@ -211,7 +211,7 @@ export default function CasaPage() {
         </div>
 
         {/* Imagem hero com parallax */}
-        <div ref={mobileHeroRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
+        <div ref={mobileHeroRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#3A5B4F' }}>
           <div
             ref={mobileHeroImgRef}
             className="absolute will-change-transform"

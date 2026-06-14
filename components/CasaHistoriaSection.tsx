@@ -232,7 +232,7 @@ export default function CasaHistoriaSection() {
         </div>
 
         {/* Hero image with parallax */}
-        <div ref={mobileOuterRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
+        <div ref={mobileOuterRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
           <div ref={mobileImgWrapRef} className="absolute will-change-transform"
             style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
             <Image src="/images/1. A casa/30.webp" alt="Fachada histórica da Casa de Nabais"
@@ -253,24 +253,13 @@ export default function CasaHistoriaSection() {
           ))}
         </div>
 
-        {/* Closing animated text */}
-        <div className="px-6 pt-10 pb-12 text-center">
-          <TextReveal
-            text={t.casaHistoria.closingText}
-            className="font-display"
-            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
-            triggerStart="top 85%"
-            triggerEnd="bottom 55%"
-          />
-        </div>
-
-        {/* Carousel — after the animated text */}
-        <div className="pt-2">
+        {/* Carousel — before the animated text */}
+        <div className="pt-8">
           <CarouselStrip />
         </div>
 
         {/* Navigation */}
-        <div className="mt-5 pb-20 flex items-center gap-5 justify-center">
+        <div className="mt-5 flex items-center gap-5 justify-center">
           <button onClick={prev} disabled={!canPrev} aria-label={t.common.previous}
             className="p-1 transition-opacity duration-200" style={{ opacity: canPrev ? 1 : 0.25 }}>
             <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
@@ -283,6 +272,17 @@ export default function CasaHistoriaSection() {
             className="p-1 transition-opacity duration-200" style={{ opacity: canNext ? 1 : 0.25 }}>
             <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
           </button>
+        </div>
+
+        {/* Closing animated text */}
+        <div className="px-6 pt-12 pb-20 text-center">
+          <TextReveal
+            text={t.casaHistoria.closingText}
+            className="font-display"
+            style={{ fontSize: 'clamp(1.125rem, 4.5vw, 1.375rem)', lineHeight: 1.2, fontWeight: 400, color: '#FAE6C1' }}
+            triggerStart="top 85%"
+            triggerEnd="bottom 55%"
+          />
         </div>
       </div>
 

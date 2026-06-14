@@ -96,7 +96,7 @@ export default function SectionVinificacao() {
         </div>
 
         {/* Image with subtle parallax */}
-        <div ref={mobileOuterRef} className="relative overflow-hidden" style={{ height: '58vh' }}>
+        <div ref={mobileOuterRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
           <div
             ref={mobileImgWrapRef}
             className="absolute will-change-transform"
