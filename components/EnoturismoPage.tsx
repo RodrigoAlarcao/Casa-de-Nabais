@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, ArrowDown } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import SectionExplore from './SectionExplore'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -152,7 +152,7 @@ function MobileSection({
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        yPercent: -15, ease: 'none',
+        yPercent: -16, ease: 'none',
         scrollTrigger: { trigger: containerRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
       })
     })
@@ -173,105 +173,94 @@ function MobileSection({
 
   return (
     <div className="lg:hidden">
-      {/* Full-bleed image + parallax + gradient + título */}
-      <div ref={containerRef} className="relative overflow-hidden" style={{ height: 'calc(100svh - 72px)', backgroundColor: '#031D1D' }}>
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            ref={imgRef}
-            className="absolute will-change-transform"
-            style={{ top: '-20%', bottom: '-20%', left: 0, right: 0 }}
-          >
-            <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="100vw" />
-          </div>
-        </div>
-        <div
-          className="absolute inset-0 pointer-events-none"
+      {/* Texto primeiro */}
+      <div className="px-6 pt-12 pb-8 text-center">
+        <h2
+          className="font-display mb-6"
           style={{
-            zIndex: 1,
-            background: 'linear-gradient(to bottom, transparent 62%, rgba(25,79,78,0.72) 74%, rgba(3,29,29,0.96) 84%, #031D1D 93%, #031D1D 100%)',
+            fontSize: 'clamp(1.75rem, 7vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '0.02em',
+            color: '#FAE6C1',
           }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 text-center" style={{ zIndex: 2 }}>
-          <h2
-            className="font-display"
+        >
+          {title}
+        </h2>
+        {paras.map((para, i) => (
+          <p
+            key={i}
+            className="font-body mb-4 last:mb-0"
             style={{
-              fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '0.02em',
-              color: '#FAE6C1',
+              fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
+              lineHeight: 1.6,
+              color: i === 0 ? 'rgba(255,249,237,0.90)' : 'rgba(255,249,237,0.72)',
             }}
           >
-            {title}
-          </h2>
+            {para}
+          </p>
+        ))}
+      </div>
+
+      {/* Imagem editorial (retrato) com parallax */}
+      <div ref={containerRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#0A3A39' }}>
+        <div
+          ref={imgRef}
+          className="absolute will-change-transform"
+          style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}
+        >
+          <Image src={portraitSrc} alt={portraitAlt} fill className="object-cover" sizes="calc(100vw - 3rem)" />
         </div>
       </div>
 
-      {/* Texto + swipe carousel — fundo contínuo */}
-      <div style={{ background: '#031D1D', marginTop: '-24px', paddingTop: '24px', paddingBottom: '32px', position: 'relative', zIndex: 2 }}>
-        <div className="px-6 pb-6 text-center">
-          {paras.map((para, i) => (
-            <p
+      {/* Carrossel das 3 imagens */}
+      <div
+        className="mt-6 py-2 select-none"
+        style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => setGrabbing(false)}
+      >
+        <div
+          className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+          style={{
+            gap: `${GAP}px`,
+            paddingLeft: '24px',
+            transform: `translateX(calc(-${index} * (85vw + ${GAP}px)))`,
+          }}
+        >
+          {images.map((img, i) => (
+            <div
               key={i}
-              className="font-body mb-4 last:mb-0"
-              style={{
-                fontSize: 'clamp(0.9375rem, 4vw, 1rem)',
-                lineHeight: 1.6,
-                color: i === 0 ? 'rgba(255,249,237,0.90)' : 'rgba(255,249,237,0.72)',
-              }}
+              className="relative flex-shrink-0 overflow-hidden"
+              style={{ width: '85vw', aspectRatio: '3/2', backgroundColor: '#0A3A39', borderRadius: '4px' }}
             >
-              {para}
-            </p>
+              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="85vw" />
+            </div>
           ))}
         </div>
-        <div
-          className="py-2 select-none"
-          style={{ overflowX: 'clip', cursor: grabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
-          onPointerDown={onPointerDown}
-          onPointerUp={onPointerUp}
-          onPointerCancel={() => setGrabbing(false)}
-        >
-          <div
-            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-            style={{
-              gap: `${GAP}px`,
-              paddingLeft: '16px',
-              transform: `translateX(calc(-${index} * (85vw + ${GAP}px)))`,
-            }}
-          >
-            {images.map((img, i) => (
-              <div
-                key={i}
-                className="relative flex-shrink-0 overflow-hidden"
-                style={{ width: '85vw', aspectRatio: '3/2', backgroundColor: '#0A3A39', borderRadius: '4px' }}
-              >
-                <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="85vw" />
-              </div>
-            ))}
-          </div>
-        </div>
+      </div>
 
-        {/* Carousel nav */}
-        <div className="mt-4 flex items-center gap-5 justify-center">
-          <button
-            onClick={() => setIndex((i) => i - 1)}
-            disabled={!canPrev}
-            aria-label={t.common.previous}
-            className="p-1 transition-opacity duration-200"
-            style={{ opacity: canPrev ? 1 : 0.25 }}
-          >
-            <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-          </button>
-          <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(250,230,193,0.55)' }}>
-            {index + 1} {t.common.of} {images.length}
-          </span>
-          <button
-            onClick={() => setIndex((i) => i + 1)}
-            disabled={!canNext}
-            aria-label={t.common.next}
-            className="p-1 transition-opacity duration-200"
-            style={{ opacity: canNext ? 1 : 0.25 }}
-          >
-            <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
-          </button>
-        </div>
+      {/* Carousel nav */}
+      <div className="mt-4 pb-14 flex items-center gap-5 justify-center">
+        <button
+          onClick={() => setIndex((i) => i - 1)}
+          disabled={!canPrev}
+          aria-label={t.common.previous}
+          className="p-1 transition-opacity duration-200"
+          style={{ opacity: canPrev ? 1 : 0.25 }}
+        >
+          <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+        </button>
+        <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(250,230,193,0.55)' }}>
+          {index + 1} {t.common.of} {images.length}
+        </span>
+        <button
+          onClick={() => setIndex((i) => i + 1)}
+          disabled={!canNext}
+          aria-label={t.common.next}
+          className="p-1 transition-opacity duration-200"
+          style={{ opacity: canNext ? 1 : 0.25 }}
+        >
+          <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#FAE6C1' }} />
+        </button>
       </div>
     </div>
   )
@@ -315,7 +304,7 @@ export default function EnoturismoPage() {
 
       if (mobileHeroImgRef.current && mobileHeroRef.current && window.innerWidth < 1024) {
         gsap.to(mobileHeroImgRef.current, {
-          yPercent: 20, ease: 'none',
+          yPercent: -16, ease: 'none',
           scrollTrigger: { trigger: mobileHeroRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
@@ -410,57 +399,51 @@ export default function EnoturismoPage() {
       ══════════════════════════════════════════════════════ */}
       <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #031D1D 35%, #0C4544 62%, #031D1D 100%)' }}>
 
-        {/* ── MOBILE HERO ── */}
-        <div ref={mobileHeroRef} className="relative lg:hidden" style={{ height: 'calc(100svh - 72px)' }}>
-          <div className="absolute inset-0 overflow-hidden">
+        {/* ── MOBILE HERO — texto primeiro, depois imagem ── */}
+        <div className="lg:hidden">
+
+          {/* ← Voltar */}
+          <div className="px-6 pt-8">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
+              style={{ color: 'rgba(250,230,193,0.80)' }}
+            >
+              <ArrowLeft size={11} strokeWidth={1.5} />
+              {t.common.back}
+            </Link>
+          </div>
+
+          {/* Título + intro */}
+          <div className="px-6 pt-8 pb-10 text-center">
+            <h1
+              className="font-display uppercase mb-7"
+              style={{ fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.05em', color: '#FAE6C1' }}
+            >
+              {t.enoturismoPage.title}
+            </h1>
+            <p
+              className="font-body"
+              style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
+            >
+              {t.enoturismoPage.intro}
+            </p>
+          </div>
+
+          {/* Imagem editorial com parallax */}
+          <div ref={mobileHeroRef} className="relative overflow-hidden mx-6 rounded-[4px]" style={{ aspectRatio: '4/5', backgroundColor: '#0A3A39' }}>
             <div
               ref={mobileHeroImgRef}
               className="absolute will-change-transform"
-              style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
+              style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}
             >
               <Image
                 src="/images/5. O enoturismo/9.webp"
                 alt="O Enoturismo — Casa de Nabais"
                 fill priority
                 className="object-cover"
-                sizes="100vw"
+                sizes="calc(100vw - 3rem)"
               />
-            </div>
-          </div>
-
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'linear-gradient(to bottom, transparent 34%, rgba(56,103,102,0.82) 63%, rgba(25,79,78,0.95) 78%, #031D1D 92%)',
-              zIndex: 1,
-            }}
-          />
-
-          <Link
-            href="/"
-            className="absolute top-8 left-6 inline-flex items-center gap-1.5 font-display text-[11px] uppercase tracking-[0.1em] transition-opacity duration-200 hover:opacity-50"
-            style={{ zIndex: 10, color: 'rgba(250,230,193,0.80)' }}
-          >
-            <ArrowLeft size={11} strokeWidth={1.5} />
-            {t.common.back}
-          </Link>
-
-          <div className="absolute left-0 right-0 bottom-0 px-6 pb-6 flex flex-col items-center text-center" style={{ zIndex: 2 }}>
-            <h1
-              className="font-display uppercase mb-7"
-              style={{ fontSize: 'clamp(2.5rem, 10vw, 3.5rem)', lineHeight: 1.0, letterSpacing: '0.05em', color: '#FAE6C1', textShadow: '0 2px 28px rgba(3,29,29,0.95)' }}
-            >
-              {t.enoturismoPage.title}
-            </h1>
-            <p
-              className="font-body mb-8 w-full"
-              style={{ fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)', lineHeight: 1.6, color: 'rgba(255,249,237,0.90)' }}
-            >
-              {t.enoturismoPage.intro}
-            </p>
-            <div className="flex flex-col items-center gap-2">
-              <span className="font-display uppercase" style={{ fontSize: '9px', letterSpacing: '0.2em', color: 'rgba(250,230,193,0.40)' }}>{t.common.scroll}</span>
-              <ArrowDown size={13} strokeWidth={1.5} className="animate-bounce" style={{ color: 'rgba(250,230,193,0.40)' }} />
             </div>
           </div>
         </div>
