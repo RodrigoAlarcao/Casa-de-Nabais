@@ -21,7 +21,7 @@ const PROVAS_IMAGES = [
 
 const VISITAS_IMAGES = [
   { src: '/images/5. O enoturismo/7.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/1a.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/5.webp', alt: 'O Enoturismo' },
 ]
 
 const ALMOCOS_IMAGES = [
