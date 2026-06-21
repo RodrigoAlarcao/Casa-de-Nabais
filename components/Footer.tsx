@@ -99,23 +99,6 @@ export default function Footer() {
           Portugal
         </p>
 
-        {/* Email */}
-        <a
-          href="mailto:info@casadenabais.pt"
-          className="font-body underline transition-opacity duration-200 hover:opacity-100 mb-14"
-          style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
-        >
-          info@casadenabais.pt
-        </a>
-
-        {/* Copyright */}
-        <p
-          className="font-display tracking-[0.12em] text-[10px] mb-0"
-          style={{ color: 'rgba(250,230,193,0.30)' }}
-        >
-          {t.footer.copyright}
-        </p>
-
       </div>
 
       {/* Marca de água — mobile (3 linhas, NABAIS extravasa para fora) */}
@@ -132,10 +115,27 @@ export default function Footer() {
             backgroundClip: 'text',
             color: 'transparent',
             marginTop: '2.5rem',
-            paddingBottom: '3rem',
+            paddingBottom: '1.5rem',
           }}
         >
           CASA<br />DE<br />NABAIS
+        </p>
+      </div>
+
+      {/* Divider + Copyright — mobile (última coisa do footer) */}
+      <div className="lg:hidden px-6">
+        <div
+          className="mb-8"
+          style={{
+            height: '1px',
+            background: 'linear-gradient(to right, rgba(250,230,193,0) 0%, rgba(250,230,193,0) 2%, #FAE6C1 52%, rgba(250,230,193,0) 100%)',
+          }}
+        />
+        <p
+          className="font-display tracking-[0.12em] text-[10px] text-center pb-10 mb-0"
+          style={{ color: 'rgba(250,230,193,0.30)' }}
+        >
+          {t.footer.copyright}
         </p>
       </div>
 
@@ -209,15 +209,24 @@ export default function Footer() {
 
         </div>
 
-        <div className="pb-10 md:pb-12">
-          <a
-            href="mailto:info@casadenabais.pt"
-            className="font-body transition-opacity duration-200 hover:opacity-100"
-            style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
-          >
-            info@casadenabais.pt
-          </a>
-        </div>
+        <p
+          className="font-display uppercase text-center w-full select-none"
+          aria-hidden="true"
+          style={{
+            fontSize: 'min(10.3vw, 124px)',
+            letterSpacing: '0.04em',
+            backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            lineHeight: 0.85,
+            marginTop: '0.5rem',
+            paddingBottom: '1.5rem',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Casa de Nabais
+        </p>
 
         <div
           className="mb-8"
@@ -232,25 +241,6 @@ export default function Footer() {
           style={{ color: 'rgba(250,230,193,0.30)' }}
         >
           {t.footer.copyright}
-        </p>
-
-        <p
-          className="font-display uppercase text-center w-full select-none"
-          aria-hidden="true"
-          style={{
-            fontSize: 'min(10.3vw, 124px)',
-            letterSpacing: '0.04em',
-            backgroundImage: 'linear-gradient(to bottom, #3A5B4F 0%, #031312 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-            lineHeight: 0.85,
-            marginTop: '0.5rem',
-            paddingBottom: '3rem',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          Casa de Nabais
         </p>
 
       </div>
