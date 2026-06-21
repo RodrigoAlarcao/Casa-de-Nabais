@@ -231,7 +231,7 @@ export default function VinificacaoPage() {
             ZONA ESCURA 1
             Hero → TextReveal → Abordagem experimental
         ══════════════════════════════════════ */}
-        <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #031D1D 35%, #0C4544 62%, #031D1D 100%)' }}>
+        <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
 
           {/* ── MOBILE HERO — texto primeiro, depois imagem ── */}
           <div className="lg:hidden">
@@ -360,7 +360,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               GRID: imagem ESQ + texto DIR + CARROSSEL
           ══════════════════════════════════════ */}
-          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
+          <section ref={sectionRef} className="pt-0 pb-4 md:pb-28" style={{ position: 'relative', zIndex: 1 }}>
 
             <div ref={containerRef} className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 lg:pt-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -548,7 +548,7 @@ export default function VinificacaoPage() {
           </section>
 
           {/* TEXTO ANIMADO (TextReveal) */}
-          <section className="py-14 md:py-20 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
+          <section className="py-14 md:py-20" style={{ position: 'relative', zIndex: 1 }}>
             <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
               <TextReveal
                 text={t.vinificacaoPage.closingText}
@@ -567,7 +567,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               ABORDAGEM EXPERIMENTAL
           ══════════════════════════════════════ */}
-          <section className="lg:pt-20 lg:pb-28 md:pb-36" style={{ position: 'relative', zIndex: 1, background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
+          <section className="lg:pt-20 lg:pb-28 md:pb-36" style={{ position: 'relative', zIndex: 1 }}>
 
             {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
             <div className="lg:hidden pb-16">
