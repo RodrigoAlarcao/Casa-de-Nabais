@@ -25,7 +25,7 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       if (prefersReduced) {
         gsap.set([linesRef.current, subRef.current], { opacity: 1, y: 0 })
-        gsap.set(watermarkRef.current, { opacity: 0.25, y: 0 })
+        gsap.set(watermarkRef.current, { opacity: 1, y: 0 })
         return
       }
 
@@ -122,7 +122,7 @@ export default function Hero() {
             width: 'clamp(96px, 13vw, 168px)',
             aspectRatio: '322 / 216',
             backgroundColor: '#FAE6C1',
-            opacity: 0.25,
+            opacity: 1,
             WebkitMaskImage: 'url(/images/logo_1.svg)',
             maskImage: 'url(/images/logo_1.svg)',
             WebkitMaskRepeat: 'no-repeat',

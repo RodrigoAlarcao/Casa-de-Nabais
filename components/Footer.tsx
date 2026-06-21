@@ -3,6 +3,29 @@
 import Link from 'next/link'
 import { useLang } from '@/lib/i18n'
 
+function FooterLogo({ width, className = '' }: { width: string; className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={className}
+      style={{
+        display: 'block',
+        width,
+        aspectRatio: '322 / 216',
+        backgroundColor: '#6E9484',
+        WebkitMaskImage: 'url(/images/logo_1.svg)',
+        maskImage: 'url(/images/logo_1.svg)',
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        maskPosition: 'center',
+        WebkitMaskSize: 'contain',
+        maskSize: 'contain',
+      }}
+    />
+  )
+}
+
 export default function Footer() {
   const { t } = useLang()
 
@@ -22,12 +45,7 @@ export default function Footer() {
         {/* <Image src="/images/shared/footer-illustration.webp" alt="Casa de Nabais" width={180} height={180} className="mb-3" /> */}
         <div style={{ height: 180, marginBottom: 12 }} />
 
-        <p
-          className="font-display uppercase tracking-[0.2em] text-[9px] mb-14"
-          style={{ color: 'rgba(250,230,193,0.35)' }}
-        >
-          Estate Grown
-        </p>
+        <FooterLogo width="clamp(72px, 20vw, 110px)" className="mb-14" />
 
         {/* Os Vinhos */}
         <p
@@ -190,12 +208,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col items-start md:items-end justify-end">
-            <p
-              className="font-display uppercase tracking-[0.2em] text-[9px]"
-              style={{ color: 'rgba(250,230,193,0.35)' }}
-            >
-              Estate Grown
-            </p>
+            <FooterLogo width="max(56px, 5vw)" />
           </div>
 
         </div>
