@@ -20,10 +20,7 @@ const galleryImages = [
   { src: '/images/3. A vinificacao/6.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/7.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/8.webp', alt: 'A Vinificação' },
-  { src: '/images/3. A vinificacao/9.webp', alt: 'A Vinificação' },
-  { src: '/images/3. A vinificacao/12.webp', alt: 'A Vinificação' },
   { src: '/images/3. A vinificacao/10.webp', alt: 'A Vinificação' },
-  { src: '/images/3. A vinificacao/11.webp', alt: 'A Vinificação' },
 ]
 
 
