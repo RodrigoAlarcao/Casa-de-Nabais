@@ -81,7 +81,8 @@ export default function SectionVinhas() {
           const leftOffset = isLg ? rect.left : 16
           setCarouselLeft(`${leftOffset}px`)
           // Reserve space so the next slide peeks ~40px on the right
-          setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
+          const w = window.innerWidth - leftOffset - SLIDE_GAP - 40
+          setSlideWidth(Math.round(window.innerWidth >= 768 ? Math.min(w, 440) : w))
         }
       }
     }
@@ -114,7 +115,7 @@ export default function SectionVinhas() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Text block */}
-          <div className="flex flex-col px-0 lg:px-[4.5rem]">
+          <div className="flex flex-col px-0 lg:px-[4.5rem] cn-tab-narrow">
             <h2
               className="reveal-vinhas font-display text-cn-text uppercase mb-8 text-center lg:text-left"
               style={{
@@ -246,7 +247,7 @@ export default function SectionVinhas() {
       </div>
 
       {/* CTA — mobile only, after carousel */}
-      <div className="mt-6 px-6 lg:hidden">
+      <div className="mt-6 px-6 lg:hidden cn-tab-narrow">
         <Link
           href="/as-vinhas"
           className="flex items-center justify-center gap-2 font-display text-[11px] uppercase tracking-[0.16em] text-cn-text border border-cn-text px-5 py-3 w-full hover:bg-cn-text hover:text-cn-bg transition-colors duration-200 rounded-[8px]"

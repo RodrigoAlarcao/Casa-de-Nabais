@@ -99,7 +99,8 @@ export default function CasaHistoriaSection() {
         setCarouselLeft(`${portraitRect.left - slideW - SLIDE_GAP}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
-        setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
+        const w = window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK
+        setSlideWidth(Math.round(window.innerWidth >= 768 ? Math.min(w, 440) : w))
       }
     }
     measure()
@@ -210,7 +211,7 @@ export default function CasaHistoriaSection() {
           MOBILE: texto → imagem → texto → carrossel
       ══════════════════════════════════════════ */}
 
-      <div className="lg:hidden">
+      <div className="lg:hidden cn-tab-narrow">
 
         {/* Heading + intro over the section gradient */}
         <div className="px-6 pt-20 pb-10 text-center">

@@ -74,7 +74,8 @@ export default function CasaPessoasSection() {
         setCarouselLeft(`${rect.left}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
-        setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
+        const w = window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK
+        setSlideWidth(Math.round(window.innerWidth >= 768 ? Math.min(w, 440) : w))
       }
     }
     measure()

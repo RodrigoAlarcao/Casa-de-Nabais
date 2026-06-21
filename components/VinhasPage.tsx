@@ -137,7 +137,7 @@ export default function VinhasPage() {
       {/* ══════════════════════════════════════
           MOBILE HERO — texto primeiro, depois imagem (igual ao desktop)
       ══════════════════════════════════════ */}
-      <div className="lg:hidden">
+      <div className="lg:hidden cn-tab-narrow">
 
         {/* ← Voltar */}
         <div className="px-6 pt-8">
@@ -269,7 +269,7 @@ export default function VinhasPage() {
       {/* ══════════════════════════════════════
           MOBILE — O SOLO COMO ORIGEM
       ══════════════════════════════════════ */}
-      <section className="lg:hidden" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section className="lg:hidden cn-tab-narrow" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="px-6 pt-12 pb-8 text-center">
           <h2
             className="font-display mb-5"
@@ -302,11 +302,11 @@ export default function VinhasPage() {
           onPointerCancel={() => setGrabbing(false)}
         >
           <div
-            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] cn-car-vinhas"
             style={{
               gap: `${SLIDE_GAP}px`,
               paddingLeft: '24px',
-              transform: `translateX(calc(-${carouselIndex} * (calc(100vw - 64px) + ${SLIDE_GAP}px)))`,
+              transform: `translateX(calc(-${carouselIndex} * (var(--cn-slide) + ${SLIDE_GAP}px)))`,
             }}
           >
             {carouselImages.map((img, i) => (
@@ -314,7 +314,7 @@ export default function VinhasPage() {
                 key={i}
                 className="flex-shrink-0 relative overflow-hidden"
                 style={{
-                  width: 'calc(100vw - 64px)',
+                  width: 'var(--cn-slide)',
                   aspectRatio: '4/5',
                   borderRadius: '4px',
                   backgroundColor: '#3A5B4F',
@@ -356,7 +356,7 @@ export default function VinhasPage() {
       {/* ══════════════════════════════════════
           MOBILE — VITICULTURA INTEGRADA
       ══════════════════════════════════════ */}
-      <section className="lg:hidden" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section className="lg:hidden cn-tab-narrow" style={{ backgroundColor: 'var(--color-bg)' }}>
         {/* Texto primeiro */}
         <div className="px-6 pt-4 pb-8 text-center">
           <h2
@@ -676,7 +676,7 @@ export default function VinhasPage() {
               </div>
 
               {/* Mobile: texto + imagem + frase em itálico */}
-              <div className="lg:hidden pb-16">
+              <div className="lg:hidden pb-16 cn-tab-narrow">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
@@ -777,7 +777,7 @@ export default function VinhasPage() {
               </div>
 
               {/* Mobile: texto + imagem + frase em itálico */}
-              <div className="lg:hidden pb-16">
+              <div className="lg:hidden pb-16 cn-tab-narrow">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
@@ -878,7 +878,7 @@ export default function VinhasPage() {
               </div>
 
               {/* Mobile: texto + imagem + frase em itálico */}
-              <div className="lg:hidden pb-16">
+              <div className="lg:hidden pb-16 cn-tab-narrow">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"
@@ -979,7 +979,7 @@ export default function VinhasPage() {
               </div>
 
               {/* Mobile: texto + imagem + frase em itálico */}
-              <div className="lg:hidden pb-16">
+              <div className="lg:hidden pb-16 cn-tab-narrow">
                 <div className="px-6 pt-12 pb-6 text-center">
                   <h3
                     className="reveal-vinha-item font-display uppercase mb-5"

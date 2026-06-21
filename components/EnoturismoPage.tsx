@@ -114,7 +114,7 @@ function MobileSection({
   }
 
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden cn-tab-narrow">
       {/* Heading + 1º parágrafo */}
       <div className="px-6 pt-12 pb-8 text-center">
         <h2
@@ -175,18 +175,18 @@ function MobileSection({
         onPointerCancel={() => setGrabbing(false)}
       >
         <div
-          className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+          className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] cn-car-eno"
           style={{
             gap: `${GAP}px`,
             paddingLeft: '24px',
-            transform: `translateX(calc(-${index} * (85vw + ${GAP}px)))`,
+            transform: `translateX(calc(-${index} * (var(--cn-slide) + ${GAP}px)))`,
           }}
         >
           {images.map((img, i) => (
             <div
               key={i}
               className="relative flex-shrink-0 overflow-hidden"
-              style={{ width: '85vw', aspectRatio: '3/2', backgroundColor: '#0A3A39', borderRadius: '4px' }}
+              style={{ width: 'var(--cn-slide)', aspectRatio: '3/2', backgroundColor: '#0A3A39', borderRadius: '4px' }}
             >
               <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="85vw" />
             </div>
@@ -356,7 +356,7 @@ export default function EnoturismoPage() {
       <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #031D1D 35%, #0C4544 62%, #031D1D 100%)' }}>
 
         {/* ── MOBILE HERO — texto primeiro, depois imagem ── */}
-        <div className="lg:hidden">
+        <div className="lg:hidden cn-tab-narrow">
 
           {/* ← Voltar */}
           <div className="px-6 pt-8">

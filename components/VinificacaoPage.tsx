@@ -169,8 +169,11 @@ export default function VinificacaoPage() {
       } else {
         const leftOffset = 16
         setCarouselLeft(`${leftOffset}px`)
-        setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
-        setRigorSlideWidth(Math.round(window.innerWidth - 24 - SLIDE_GAP - 40))
+        const isTablet = window.innerWidth >= 768
+        const w = window.innerWidth - leftOffset - SLIDE_GAP - 40
+        setSlideWidth(Math.round(isTablet ? Math.min(w, 440) : w))
+        const rw = window.innerWidth - 24 - SLIDE_GAP - 40
+        setRigorSlideWidth(Math.round(isTablet ? Math.min(rw, 440) : rw))
       }
 
       if (isLg && adegaPortraitRef.current) {
@@ -179,7 +182,8 @@ export default function VinificacaoPage() {
         setAdegaSlideWidth(adegaRect.width)
       } else {
         setAdegaCarouselLeft('16px')
-        setAdegaSlideWidth(Math.round(window.innerWidth - 16 - SLIDE_GAP - 40))
+        const aw = window.innerWidth - 16 - SLIDE_GAP - 40
+        setAdegaSlideWidth(Math.round(window.innerWidth >= 768 ? Math.min(aw, 440) : aw))
       }
     }
     measure()
@@ -274,7 +278,7 @@ export default function VinificacaoPage() {
         <div style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
 
           {/* ── MOBILE HERO — texto primeiro, depois imagem ── */}
-          <div className="lg:hidden">
+          <div className="lg:hidden cn-tab-narrow">
 
             {/* ← Voltar */}
             <div className="px-6 pt-8">
@@ -427,7 +431,7 @@ export default function VinificacaoPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col px-0 lg:pl-10">
+                <div className="flex flex-col px-0 lg:pl-10 cn-tab-narrow">
                   <h2
                     className="reveal-vinif font-display mb-8 lg:mb-10 text-center lg:text-left"
                     style={{
@@ -610,7 +614,7 @@ export default function VinificacaoPage() {
           <section className="lg:pt-20 lg:pb-28 md:pb-36" style={{ position: 'relative', zIndex: 1 }}>
 
             {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
-            <div className="lg:hidden pb-16">
+            <div className="lg:hidden pb-16 cn-tab-narrow">
               <div className="px-6 pt-12 pb-8 text-center">
                 <h2
                   className="font-display mb-6"
@@ -796,7 +800,7 @@ export default function VinificacaoPage() {
                 </div>
 
                 {/* Texto DIREITA */}
-                <div className="flex flex-col lg:pl-10">
+                <div className="flex flex-col lg:pl-10 cn-tab-narrow">
                   <h2
                     className="font-display uppercase mb-8 lg:mb-10 text-center lg:text-left"
                     style={{
@@ -959,7 +963,7 @@ export default function VinificacaoPage() {
               </div>
 
               {/* Título + Texto — mobile */}
-              <div className="lg:hidden mb-10 text-center">
+              <div className="lg:hidden mb-10 text-center cn-tab-narrow">
                 <h2
                   className="font-display mb-6"
                   style={{
@@ -1061,7 +1065,7 @@ export default function VinificacaoPage() {
           <section className="lg:pt-20 lg:pb-28">
 
             {/* Mobile: identidade → imagem editorial → parágrafos */}
-            <div className="lg:hidden">
+            <div className="lg:hidden cn-tab-narrow">
               <div className="px-7 pt-12 pb-8 text-center">
                 <p
                   className="font-display uppercase mb-3"
@@ -1111,7 +1115,7 @@ export default function VinificacaoPage() {
             </div>
 
             {/* Frase de fecho — mobile */}
-            <div className="lg:hidden px-7 pb-16 text-center">
+            <div className="lg:hidden px-7 pb-16 text-center cn-tab-narrow">
               <TextReveal
                 text={t.vinificacaoPage.enologoClosing}
                 className="font-display"
