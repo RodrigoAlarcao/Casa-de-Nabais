@@ -27,7 +27,7 @@ const VISITAS_IMAGES = [
 ]
 
 const ALMOCOS_IMAGES = [
-  { src: '/images/5. O enoturismo/9a.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/1.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/10.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/11.webp', alt: 'O Enoturismo' },
 ]
@@ -582,7 +582,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.almocosHeading}
           paras={t.enoturismoPage.almocosParas}
-          portraitSrc="/images/5. O enoturismo/1.webp"
+          portraitSrc="/images/5. O enoturismo/9a.webp"
           portraitAlt="Almoço na quinta"
           images={ALMOCOS_IMAGES}
         />
@@ -591,7 +591,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/5. O enoturismo/1.webp"
+              src="/images/5. O enoturismo/9a.webp"
               alt="Almoço na quinta"
               containerRef={p3Ref}
               wrapRef={p3Wrap}
