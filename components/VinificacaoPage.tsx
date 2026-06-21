@@ -567,7 +567,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               ABORDAGEM EXPERIMENTAL
           ══════════════════════════════════════ */}
-          <section className="lg:pt-20 lg:pb-28 md:pb-36">
+          <section className="lg:pt-20 lg:pb-28 md:pb-36 lg:bg-[#031D1D]" style={{ position: 'relative', zIndex: 1 }}>
 
             {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
             <div className="lg:hidden pb-16">
