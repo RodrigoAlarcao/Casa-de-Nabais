@@ -30,6 +30,13 @@ const RIGOR_IMAGES = [
   { src: '/images/3. A vinificacao/16.webp', alt: 'Rigor, dados e tempo' },
 ]
 
+const ADEGA_IMAGES = [
+  { src: '/images/3. A vinificacao/9.webp', alt: 'A Adega' },
+  { src: '/images/3. A vinificacao/11.webp', alt: 'A Adega' },
+  { src: '/images/3. A vinificacao/12.webp', alt: 'A Adega' },
+  { src: '/images/3. A vinificacao/Casa Nabais081.webp', alt: 'A Adega' },
+]
+
 
 const IMG_RATIO = '4/5'
 const SLIDE_GAP = 12
@@ -104,6 +111,33 @@ export default function VinificacaoPage() {
     else if (diff < -50 && rigorCanPrev) rigorPrev()
   }
 
+  // Carousel Adega images — mobile + desktop
+  const [adegaIndex, setAdegaIndex] = useState(0)
+  const [adegaSlideWidth, setAdegaSlideWidth] = useState(380)
+  const [adegaCarouselLeft, setAdegaCarouselLeft] = useState('40px')
+  const adegaDragStartX = useRef(0)
+  const [adegaGrabbing, setAdegaGrabbing] = useState(false)
+
+  const adegaCanPrev = adegaIndex > 0
+  const adegaCanNext = adegaIndex < ADEGA_IMAGES.length - 1
+
+  function adegaPrev() { if (adegaCanPrev) setAdegaIndex(i => i - 1) }
+  function adegaNext() { if (adegaCanNext) setAdegaIndex(i => i + 1) }
+
+  function onAdegaPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    adegaDragStartX.current = e.clientX
+    setAdegaGrabbing(true)
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+
+  function onAdegaPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    setAdegaGrabbing(false)
+    const diff = adegaDragStartX.current - e.clientX
+    if (Math.abs(diff) < 8) return
+    if (diff > 50 && adegaCanNext) adegaNext()
+    else if (diff < -50 && adegaCanPrev) adegaPrev()
+  }
+
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     dragStartX.current = e.clientX
     dragStartY.current = e.clientY
@@ -137,6 +171,15 @@ export default function VinificacaoPage() {
         setCarouselLeft(`${leftOffset}px`)
         setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
         setRigorSlideWidth(Math.round(window.innerWidth - 24 - SLIDE_GAP - 40))
+      }
+
+      if (isLg && adegaPortraitRef.current) {
+        const adegaRect = adegaPortraitRef.current.getBoundingClientRect()
+        setAdegaCarouselLeft(`${adegaRect.left}px`)
+        setAdegaSlideWidth(adegaRect.width)
+      } else {
+        setAdegaCarouselLeft('16px')
+        setAdegaSlideWidth(Math.round(window.innerWidth - 16 - SLIDE_GAP - 40))
       }
     }
     measure()
@@ -863,6 +906,62 @@ export default function VinificacaoPage() {
                   sizes="calc(100vw - 3rem)"
                 />
               </div>
+            </div>
+
+            {/* Carrossel da adega */}
+            <div
+              className="mt-10 lg:mt-12 py-2 select-none"
+              style={{ overflowX: 'clip', cursor: adegaGrabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
+              onPointerDown={onAdegaPointerDown}
+              onPointerUp={onAdegaPointerUp}
+              onPointerCancel={() => setAdegaGrabbing(false)}
+            >
+              <div
+                className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                style={{
+                  gap: `${SLIDE_GAP}px`,
+                  paddingLeft: adegaCarouselLeft,
+                  transform: `translateX(calc(-${adegaIndex} * (${adegaSlideWidth}px + ${SLIDE_GAP}px)))`,
+                }}
+              >
+                {ADEGA_IMAGES.map((img, i) => (
+                  <div
+                    key={i}
+                    className="relative flex-shrink-0 overflow-hidden"
+                    style={{
+                      width: `${adegaSlideWidth}px`,
+                      aspectRatio: IMG_RATIO,
+                      backgroundColor: '#3A5B4F',
+                      borderRadius: '4px',
+                      boxShadow: '0 8px 28px rgba(0,0,0,0.12)',
+                      cursor: adegaGrabbing ? 'grabbing' : 'grab',
+                    }}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 90vw, 50vw"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="mt-5 flex items-center gap-5 justify-center lg:justify-start"
+              style={{ paddingLeft: adegaCarouselLeft }}
+            >
+              <button onClick={adegaPrev} disabled={!adegaCanPrev} aria-label={t.common.previous} className="p-1 transition-opacity duration-200" style={{ opacity: adegaCanPrev ? 1 : 0.25 }}>
+                <ArrowLeft size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
+              </button>
+              <span className="font-display text-[10px] uppercase tracking-[0.16em]" style={{ color: 'rgba(3,29,29,0.45)' }}>
+                {adegaIndex + 1} {t.common.of} {ADEGA_IMAGES.length}
+              </span>
+              <button onClick={adegaNext} disabled={!adegaCanNext} aria-label={t.common.next} className="p-1 transition-opacity duration-200" style={{ opacity: adegaCanNext ? 1 : 0.25 }}>
+                <ArrowRight size={15} strokeWidth={1.5} style={{ color: '#031D1D' }} />
+              </button>
             </div>
 
           </section>
