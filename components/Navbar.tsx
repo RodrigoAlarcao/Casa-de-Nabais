@@ -8,6 +8,29 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useLang, type Lang } from '@/lib/i18n'
 import ComprarVinhoModal from './ComprarVinhoModal'
 
+function LogoMark({ height = 26 }: { height?: number }) {
+  return (
+    <span
+      aria-hidden
+      style={{
+        display: 'inline-block',
+        height: `${height}px`,
+        aspectRatio: '321 / 154',
+        flexShrink: 0,
+        backgroundColor: '#FAE6C1',
+        WebkitMaskImage: 'url(/images/logo_2.svg)',
+        maskImage: 'url(/images/logo_2.svg)',
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        maskPosition: 'center',
+        WebkitMaskSize: 'contain',
+        maskSize: 'contain',
+      }}
+    />
+  )
+}
+
 function LangToggle({ lang, setLang, dark = false, large = false }: { lang: Lang; setLang: (l: Lang) => void; dark?: boolean; large?: boolean }) {
   const base = `font-display uppercase tracking-[0.14em] transition-opacity duration-200 ${large ? 'text-[15px] px-1 py-1' : 'text-[11px]'}`
   const activeColor = dark ? '#FAE6C1' : '#FAE6C1'
@@ -111,8 +134,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-display text-[16px] font-semibold uppercase tracking-[0.15em] text-[#FAE6C1] hover:opacity-80 transition-opacity duration-200"
+            className="inline-flex items-center gap-2.5 font-display text-[16px] font-semibold uppercase tracking-[0.15em] text-[#FAE6C1] hover:opacity-80 transition-opacity duration-200"
           >
+            <LogoMark height={28} />
             Casa de Nabais
           </Link>
 
@@ -173,7 +197,8 @@ export default function Navbar() {
         >
           {/* Botão fechar */}
           <div className="flex justify-between items-center mb-16">
-            <span className="font-display text-[16px] font-semibold uppercase tracking-[0.15em] text-[#FAE6C1]">
+            <span className="inline-flex items-center gap-2.5 font-display text-[16px] font-semibold uppercase tracking-[0.15em] text-[#FAE6C1]">
+              <LogoMark height={26} />
               Casa de Nabais
             </span>
             <button
