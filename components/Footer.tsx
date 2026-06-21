@@ -45,7 +45,7 @@ export default function Footer() {
         {/* <Image src="/images/shared/footer-illustration.webp" alt="Casa de Nabais" width={180} height={180} className="mb-3" /> */}
         <div style={{ height: 180, marginBottom: 12 }} />
 
-        <FooterLogo width="clamp(72px, 20vw, 110px)" className="mb-14" />
+        <FooterLogo width="clamp(160px, 50vw, 280px)" className="mb-14" />
 
         {/* Os Vinhos */}
         <p
@@ -146,7 +146,7 @@ export default function Footer() {
       {/* ══ DESKTOP LAYOUT ══ */}
       <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 pb-10 md:pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_3fr] gap-10 md:gap-8 pb-10 md:pb-12">
 
           <div>
             <p
@@ -207,8 +207,8 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="flex flex-col items-start md:items-end justify-end">
-            <FooterLogo width="max(56px, 5vw)" />
+          <div className="flex items-start justify-end">
+            <FooterLogo width="100%" />
           </div>
 
         </div>
