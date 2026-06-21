@@ -24,6 +24,13 @@ export type Translations = {
     rnalLabel: string
     complaintsBook: string
     ralIntro: string
+    cookieSettings: string
+  }
+  cookies: {
+    title: string
+    message: string
+    accept: string
+    reject: string
   }
   common: {
     back: string
@@ -289,6 +296,13 @@ export const pt: Translations = {
     rnalLabel:      'RNAL',
     complaintsBook: 'Livro de Reclamações',
     ralIntro:       'Em caso de litígio de consumo, o consumidor pode recorrer à entidade de Resolução Alternativa de Litígios (RAL):',
+    cookieSettings: 'Definições de cookies',
+  },
+  cookies: {
+    title:   'Cookies',
+    message: 'Usamos cookies de análise para perceber como o site é utilizado. Só são ativados com o teu consentimento. Podes aceitar ou rejeitar — a tua escolha é respeitada de igual forma e pode ser alterada a qualquer momento.',
+    accept:  'Aceitar',
+    reject:  'Rejeitar',
   },
   common: {
     back:         'Voltar',
@@ -627,6 +641,13 @@ export const en: Translations = {
     rnalLabel:      'RNAL',
     complaintsBook: 'Complaints Book',
     ralIntro:       'In the event of a consumer dispute, the consumer may refer the matter to the Alternative Dispute Resolution (ADR) entity:',
+    cookieSettings: 'Cookie settings',
+  },
+  cookies: {
+    title:   'Cookies',
+    message: 'We use analytics cookies to understand how the site is used. They are only enabled with your consent. You can accept or reject — your choice is respected equally and can be changed at any time.',
+    accept:  'Accept',
+    reject:  'Reject',
   },
   common: {
     back:         'Back',

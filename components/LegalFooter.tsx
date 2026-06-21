@@ -1,12 +1,14 @@
 'use client'
 
 import { useLang } from '@/lib/i18n'
+import { useConsent } from '@/lib/consent'
 import { legal } from '@/lib/legal'
 
 const LIVRO_RECLAMACOES_URL = 'https://www.livroreclamacoes.pt'
 
 export default function LegalFooter() {
   const { t } = useLang()
+  const { openPreferences } = useConsent()
   const l = t.legalFooter
   const copyrightColor = 'rgba(250,230,193,0.30)'
 
@@ -73,6 +75,16 @@ export default function LegalFooter() {
               >
                 {legal.ral.nome}
               </a>
+            </p>
+            <p className="mt-4">
+              <button
+                type="button"
+                onClick={openPreferences}
+                className="underline transition-opacity duration-200 hover:opacity-100"
+                style={{ color: textColor, background: 'none', padding: 0, cursor: 'pointer' }}
+              >
+                {l.cookieSettings}
+              </button>
             </p>
           </div>
         </div>
