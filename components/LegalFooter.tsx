@@ -8,6 +8,7 @@ const LIVRO_RECLAMACOES_URL = 'https://www.livroreclamacoes.pt'
 export default function LegalFooter() {
   const { t } = useLang()
   const l = t.legalFooter
+  const copyrightColor = 'rgba(250,230,193,0.30)'
 
   const labelColor = 'rgba(250,230,193,0.45)'
   const textColor = 'rgba(255,249,237,0.65)'
@@ -75,6 +76,13 @@ export default function LegalFooter() {
             </p>
           </div>
         </div>
+
+        <p
+          className="font-display tracking-[0.12em] text-[10px] text-center mt-12 mb-0"
+          style={{ color: copyrightColor }}
+        >
+          {t.footer.copyright}
+        </p>
       </div>
     </section>
   )

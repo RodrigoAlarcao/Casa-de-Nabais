@@ -115,28 +115,21 @@ export default function Footer() {
             backgroundClip: 'text',
             color: 'transparent',
             marginTop: '2.5rem',
-            paddingBottom: '1.5rem',
+            paddingBottom: '3.5rem',
           }}
         >
           CASA<br />DE<br />NABAIS
         </p>
       </div>
 
-      {/* Divider + Copyright — mobile (última coisa do footer) */}
-      <div className="lg:hidden px-6">
+      {/* Divider — mobile (fecha o footer; copyright vai para o fim da página) */}
+      <div className="lg:hidden px-6 pb-2">
         <div
-          className="mb-8"
           style={{
             height: '1px',
             background: 'linear-gradient(to right, rgba(250,230,193,0) 0%, rgba(250,230,193,0) 2%, #FAE6C1 52%, rgba(250,230,193,0) 100%)',
           }}
         />
-        <p
-          className="font-display tracking-[0.12em] text-[10px] text-center pb-10 mb-0"
-          style={{ color: 'rgba(250,230,193,0.30)' }}
-        >
-          {t.footer.copyright}
-        </p>
       </div>
 
       {/* ══ DESKTOP LAYOUT ══ */}
@@ -204,7 +197,8 @@ export default function Footer() {
           </div>
 
           <div className="flex items-start justify-end">
-            <FooterLogo width="100%" />
+            {/* ~1/4 da largura do footer (80% da coluna 3fr) */}
+            <FooterLogo width="80%" />
           </div>
 
         </div>
@@ -221,7 +215,7 @@ export default function Footer() {
             color: 'transparent',
             lineHeight: 0.85,
             marginTop: '0.5rem',
-            paddingBottom: '1.5rem',
+            paddingBottom: '4rem',
             whiteSpace: 'nowrap',
           }}
         >
@@ -229,19 +223,12 @@ export default function Footer() {
         </p>
 
         <div
-          className="mb-8"
+          className="mb-10"
           style={{
             height: '1px',
             background: 'linear-gradient(to right, rgba(250,230,193,0) 0%, rgba(250,230,193,0) 2%, #FAE6C1 52%, rgba(250,230,193,0) 100%)',
           }}
         />
-
-        <p
-          className="font-display tracking-[0.12em] text-[10px] text-center pb-10"
-          style={{ color: 'rgba(250,230,193,0.30)' }}
-        >
-          {t.footer.copyright}
-        </p>
 
       </div>
     </footer>
