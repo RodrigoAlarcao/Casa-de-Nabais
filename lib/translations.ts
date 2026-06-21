@@ -25,6 +25,8 @@ export type Translations = {
     complaintsBook: string
     ralIntro: string
     cookieSettings: string
+    privacyPolicy: string
+    terms: string
   }
   cookies: {
     title: string
@@ -297,6 +299,8 @@ export const pt: Translations = {
     complaintsBook: 'Livro de Reclamações',
     ralIntro:       'Em caso de litígio de consumo, o consumidor pode recorrer à entidade de Resolução Alternativa de Litígios (RAL):',
     cookieSettings: 'Definições de cookies',
+    privacyPolicy:  'Política de Privacidade',
+    terms:          'Termos e Condições',
   },
   cookies: {
     title:   'Cookies',
@@ -642,6 +646,8 @@ export const en: Translations = {
     complaintsBook: 'Complaints Book',
     ralIntro:       'In the event of a consumer dispute, the consumer may refer the matter to the Alternative Dispute Resolution (ADR) entity:',
     cookieSettings: 'Cookie settings',
+    privacyPolicy:  'Privacy Policy',
+    terms:          'Terms & Conditions',
   },
   cookies: {
     title:   'Cookies',

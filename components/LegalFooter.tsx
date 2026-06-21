@@ -76,7 +76,23 @@ export default function LegalFooter() {
                 {legal.ral.nome}
               </a>
             </p>
-            <p className="mt-4">
+            <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <a
+                href="/politica-de-privacidade"
+                className="underline transition-opacity duration-200 hover:opacity-100"
+                style={{ color: textColor }}
+              >
+                {l.privacyPolicy}
+              </a>
+              <span aria-hidden style={{ color: textColor, opacity: 0.4 }}>·</span>
+              <a
+                href="/termos"
+                className="underline transition-opacity duration-200 hover:opacity-100"
+                style={{ color: textColor }}
+              >
+                {l.terms}
+              </a>
+              <span aria-hidden style={{ color: textColor, opacity: 0.4 }}>·</span>
               <button
                 type="button"
                 onClick={openPreferences}
