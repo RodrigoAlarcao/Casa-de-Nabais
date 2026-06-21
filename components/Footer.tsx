@@ -3,6 +3,29 @@
 import Link from 'next/link'
 import { useLang } from '@/lib/i18n'
 
+function FooterLogo({ width, className = '' }: { width: string; className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={className}
+      style={{
+        display: 'block',
+        width,
+        aspectRatio: '322 / 216',
+        backgroundColor: '#6E9484',
+        WebkitMaskImage: 'url(/images/logo_1.svg)',
+        maskImage: 'url(/images/logo_1.svg)',
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        maskPosition: 'center',
+        WebkitMaskSize: 'contain',
+        maskSize: 'contain',
+      }}
+    />
+  )
+}
+
 export default function Footer() {
   const { t } = useLang()
 
@@ -18,16 +41,7 @@ export default function Footer() {
       {/* ══ MOBILE LAYOUT ══ */}
       <div className="lg:hidden flex flex-col items-center text-center px-6">
 
-        {/* Ilustração — substituir o div por <Image> quando o ficheiro estiver disponível */}
-        {/* <Image src="/images/shared/footer-illustration.webp" alt="Casa de Nabais" width={180} height={180} className="mb-3" /> */}
-        <div style={{ height: 180, marginBottom: 12 }} />
-
-        <p
-          className="font-display uppercase tracking-[0.2em] text-[9px] mb-14"
-          style={{ color: 'rgba(250,230,193,0.35)' }}
-        >
-          Estate Grown
-        </p>
+        <FooterLogo width="clamp(160px, 50vw, 280px)" className="mb-14" />
 
         {/* Os Vinhos */}
         <p
@@ -128,7 +142,7 @@ export default function Footer() {
       {/* ══ DESKTOP LAYOUT ══ */}
       <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 pb-10 md:pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_2fr_2fr_3fr] gap-10 md:gap-8 pb-10 md:pb-12">
 
           <div>
             <p
@@ -189,13 +203,8 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="flex flex-col items-start md:items-end justify-end">
-            <p
-              className="font-display uppercase tracking-[0.2em] text-[9px]"
-              style={{ color: 'rgba(250,230,193,0.35)' }}
-            >
-              Estate Grown
-            </p>
+          <div className="flex items-start justify-end">
+            <FooterLogo width="100%" />
           </div>
 
         </div>

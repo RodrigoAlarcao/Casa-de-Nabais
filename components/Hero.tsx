@@ -15,6 +15,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const imgWrapRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const watermarkRef = useRef<HTMLDivElement>(null)
   const linesRef = useRef<HTMLSpanElement[]>([])
   const subRef = useRef<HTMLParagraphElement>(null)
 
@@ -24,6 +25,7 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       if (prefersReduced) {
         gsap.set([linesRef.current, subRef.current], { opacity: 1, y: 0 })
+        gsap.set(watermarkRef.current, { opacity: 1, y: 0 })
         return
       }
 
@@ -57,13 +59,22 @@ export default function Hero() {
       })
 
       const tl = gsap.timeline({ delay: 0.2 })
-      tl.from(linesRef.current, {
-        y: 40,
+      tl.from(watermarkRef.current, {
+        y: 24,
         opacity: 0,
-        stagger: 0.08,
         duration: 1.0,
         ease: 'power2.out',
       }).from(
+        linesRef.current,
+        {
+          y: 40,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.0,
+          ease: 'power2.out',
+        },
+        '-=0.55'
+      ).from(
         subRef.current,
         { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' },
         '-=0.4'
@@ -103,6 +114,26 @@ export default function Hero() {
 
 
       <div ref={contentRef} className="relative z-20 w-full max-w-[1100px] mx-auto px-6 md:px-10 text-center">
+        <div
+          ref={watermarkRef}
+          aria-hidden
+          className="mx-auto mb-6 md:mb-8"
+          style={{
+            width: 'clamp(96px, 13vw, 168px)',
+            aspectRatio: '322 / 216',
+            backgroundColor: '#FAE6C1',
+            opacity: 1,
+            WebkitMaskImage: 'url(/images/logo_1.svg)',
+            maskImage: 'url(/images/logo_1.svg)',
+            WebkitMaskRepeat: 'no-repeat',
+            maskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center',
+            maskPosition: 'center',
+            WebkitMaskSize: 'contain',
+            maskSize: 'contain',
+            filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.45))',
+          }}
+        />
         <h1
           className="font-display uppercase mb-6 md:mb-8"
           style={{

@@ -16,109 +16,51 @@ const IMG_RATIO = '4/5'
 
 const PROVAS_IMAGES = [
   { src: '/images/5. O enoturismo/6.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/3.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/4.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/2.webp', alt: 'O Enoturismo' },
 ]
 
 const VISITAS_IMAGES = [
-  { src: '/images/5. O enoturismo/2.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/7.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/13.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/5.webp', alt: 'O Enoturismo' },
 ]
 
 const ALMOCOS_IMAGES = [
-  { src: '/images/5. O enoturismo/9a.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/10.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/11.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/1.webp', alt: 'O Enoturismo' },
 ]
 
 const PASSEIOS_IMAGES = [
   { src: '/images/5. O enoturismo/8.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/14.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/12.webp', alt: 'O Enoturismo' },
 ]
 
-/* ─── 3-image row ───────────────────────────────────────────────── */
+/* ─── 2-image row ───────────────────────────────────────────────── */
 // Outer grid-cols-2 gap-4 mirrors the portrait+text block above exactly —
-// the large image occupies the portrait column, the nested grid of 2 smalls
-// occupies the text column. Column edges align pixel-perfectly.
+// two equal-width landscape images, column edges align pixel-perfectly.
 
-function ThreeImages({
+function TwoImages({
   images,
-  largeSide,
 }: {
   images: { src: string; alt: string }[]
-  largeSide: 'left' | 'right'
 }) {
-  const ROW_H = 'clamp(260px, 28vw, 400px)'
-
-  const largeImg = (
-    <div
-      className="relative overflow-hidden"
-      style={{ borderRadius: '4px', backgroundColor: '#0A3A39', height: '100%' }}
-    >
-      <Image
-        src={images[0].src}
-        alt={images[0].alt}
-        fill
-        className="object-cover"
-        sizes="(max-width: 1024px) 90vw, 50vw"
-      />
-    </div>
-  )
-
-  const smallsGrid = (
-    <div className="grid grid-cols-2 gap-4" style={{ height: '100%' }}>
-      {images.slice(1).map((img, i) => (
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {images.map((img, i) => (
         <div
           key={i}
           className="relative overflow-hidden"
-          style={{ borderRadius: '4px', backgroundColor: '#0A3A39', height: '100%' }}
+          style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#0A3A39' }}
         >
           <Image
             src={img.src}
             alt={img.alt}
             fill
             className="object-cover"
-            sizes="(max-width: 1024px) 45vw, 25vw"
+            sizes="(max-width: 1024px) 45vw, 50vw"
           />
         </div>
       ))}
     </div>
-  )
-
-  return (
-    <>
-      {/* Desktop: outer grid-cols-2 = same structure as portrait+text → perfect alignment */}
-      <div className="hidden md:grid grid-cols-2 gap-4" style={{ height: ROW_H }}>
-        {largeSide === 'left' ? (
-          <>{largeImg}{smallsGrid}</>
-        ) : (
-          <>{smallsGrid}{largeImg}</>
-        )}
-      </div>
-
-      {/* Mobile: large full-width + 2 smalls side by side */}
-      <div className="md:hidden flex flex-col gap-4">
-        <div
-          className="relative overflow-hidden w-full"
-          style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#0A3A39' }}
-        >
-          <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" sizes="100vw" />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {images.slice(1).map((img, i) => (
-            <div
-              key={i}
-              className="relative overflow-hidden"
-              style={{ aspectRatio: '1/1', borderRadius: '4px', backgroundColor: '#0A3A39' }}
-            >
-              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="50vw" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
   )
 }
 
@@ -524,7 +466,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.provasHeading}
           paras={t.enoturismoPage.provasParas}
-          portraitSrc="/images/5. O enoturismo/1a.webp"
+          portraitSrc="/images/5. O enoturismo/3.webp"
           portraitAlt="Prova de vinhos na adega"
           images={PROVAS_IMAGES}
         />
@@ -533,7 +475,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/5. O enoturismo/1a.webp"
+              src="/images/5. O enoturismo/3.webp"
               alt="Prova de vinhos na adega"
               containerRef={p1Ref}
               wrapRef={p1Wrap}
@@ -541,7 +483,7 @@ export default function EnoturismoPage() {
             <TextColumn title={t.enoturismoPage.provasHeading} paras={t.enoturismoPage.provasParas} pad="right" />
           </div>
           <div className="mt-4">
-            <ThreeImages images={PROVAS_IMAGES} largeSide="left" />
+            <TwoImages images={PROVAS_IMAGES} />
           </div>
         </section>
 
@@ -553,7 +495,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.visitasHeading}
           paras={t.enoturismoPage.visitasParas}
-          portraitSrc="/images/5. O enoturismo/5.webp"
+          portraitSrc="/images/5. O enoturismo/17.webp"
           portraitAlt="Visita guiada às vinhas"
           images={VISITAS_IMAGES}
         />
@@ -563,14 +505,14 @@ export default function EnoturismoPage() {
           <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title={t.enoturismoPage.visitasHeading} paras={t.enoturismoPage.visitasParas} pad="left" />
             <PortraitCell
-              src="/images/5. O enoturismo/5.webp"
+              src="/images/5. O enoturismo/17.webp"
               alt="Visita guiada às vinhas"
               containerRef={p2Ref}
               wrapRef={p2Wrap}
             />
           </div>
           <div className="mt-4">
-            <ThreeImages images={VISITAS_IMAGES} largeSide="right" />
+            <TwoImages images={VISITAS_IMAGES} />
           </div>
         </section>
 
@@ -582,7 +524,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.almocosHeading}
           paras={t.enoturismoPage.almocosParas}
-          portraitSrc="/images/5. O enoturismo/1.webp"
+          portraitSrc="/images/5. O enoturismo/9a.webp"
           portraitAlt="Almoço na quinta"
           images={ALMOCOS_IMAGES}
         />
@@ -591,7 +533,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/5. O enoturismo/1.webp"
+              src="/images/5. O enoturismo/9a.webp"
               alt="Almoço na quinta"
               containerRef={p3Ref}
               wrapRef={p3Wrap}
@@ -599,7 +541,7 @@ export default function EnoturismoPage() {
             <TextColumn title={t.enoturismoPage.almocosHeading} paras={t.enoturismoPage.almocosParas} pad="right" />
           </div>
           <div className="mt-4">
-            <ThreeImages images={ALMOCOS_IMAGES} largeSide="left" />
+            <TwoImages images={ALMOCOS_IMAGES} />
           </div>
         </section>
 
@@ -628,7 +570,7 @@ export default function EnoturismoPage() {
             />
           </div>
           <div className="mt-4">
-            <ThreeImages images={PASSEIOS_IMAGES} largeSide="right" />
+            <TwoImages images={PASSEIOS_IMAGES} />
           </div>
         </section>
 

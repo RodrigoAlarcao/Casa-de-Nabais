@@ -13,7 +13,6 @@ import { useLang } from '@/lib/i18n'
 gsap.registerPlugin(ScrollTrigger)
 
 const carouselImages = [
-  { src: '/images/1. A casa/31.webp', alt: 'História da Casa de Nabais' },
   { src: '/images/1. A casa/32.webp', alt: 'História da Casa de Nabais' },
   { src: '/images/1. A casa/33.webp', alt: 'História da Casa de Nabais' },
   { src: '/images/1. A casa/34.webp', alt: 'História da Casa de Nabais' },
