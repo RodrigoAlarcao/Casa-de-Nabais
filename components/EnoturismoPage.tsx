@@ -27,9 +27,9 @@ const VISITAS_IMAGES = [
 ]
 
 const ALMOCOS_IMAGES = [
-  { src: '/images/5. O enoturismo/1.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/10.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/11.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/10.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/1.webp', alt: 'O Enoturismo' },
 ]
 
 const PASSEIOS_IMAGES = [
