@@ -16,7 +16,7 @@ const IMG_RATIO = '4/5'
 
 const PROVAS_IMAGES = [
   { src: '/images/5. O enoturismo/6.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/3.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/1a.webp', alt: 'O Enoturismo' },
 ]
 
 const VISITAS_IMAGES = [
@@ -466,7 +466,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.provasHeading}
           paras={t.enoturismoPage.provasParas}
-          portraitSrc="/images/5. O enoturismo/1a.webp"
+          portraitSrc="/images/5. O enoturismo/3.webp"
           portraitAlt="Prova de vinhos na adega"
           images={PROVAS_IMAGES}
         />
@@ -475,7 +475,7 @@ export default function EnoturismoPage() {
         <section className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
           <div className="grid grid-cols-2 gap-4 items-center">
             <PortraitCell
-              src="/images/5. O enoturismo/1a.webp"
+              src="/images/5. O enoturismo/3.webp"
               alt="Prova de vinhos na adega"
               containerRef={p1Ref}
               wrapRef={p1Wrap}
