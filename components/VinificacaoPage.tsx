@@ -31,10 +31,10 @@ const RIGOR_IMAGES = [
 ]
 
 const ADEGA_IMAGES = [
-  { src: '/images/3. A vinificacao/9.webp', alt: 'A Adega' },
-  { src: '/images/3. A vinificacao/Casa Nabais075.webp', alt: 'A Adega' },
   { src: '/images/3. A vinificacao/12.webp', alt: 'A Adega' },
   { src: '/images/3. A vinificacao/Casa Nabais081.webp', alt: 'A Adega' },
+  { src: '/images/3. A vinificacao/9.webp', alt: 'A Adega' },
+  { src: '/images/3. A vinificacao/Casa Nabais075.webp', alt: 'A Adega' },
 ]
 
 
