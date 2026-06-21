@@ -32,7 +32,7 @@ const RIGOR_IMAGES = [
 
 const ADEGA_IMAGES = [
   { src: '/images/3. A vinificacao/9.webp', alt: 'A Adega' },
-  { src: '/images/3. A vinificacao/11.webp', alt: 'A Adega' },
+  { src: '/images/3. A vinificacao/Casa Nabais075.webp', alt: 'A Adega' },
   { src: '/images/3. A vinificacao/12.webp', alt: 'A Adega' },
   { src: '/images/3. A vinificacao/Casa Nabais081.webp', alt: 'A Adega' },
 ]
@@ -785,7 +785,7 @@ export default function VinificacaoPage() {
                       style={{ top: '-40%', bottom: '-40%', left: 0, right: 0 }}
                     >
                       <Image
-                        src="/images/3. A vinificacao/Casa Nabais075.webp"
+                        src="/images/3. A vinificacao/11.webp"
                         alt="Adega — interior"
                         fill
                         className="object-cover"
@@ -824,7 +824,7 @@ export default function VinificacaoPage() {
                   <div className="lg:hidden relative overflow-hidden rounded-[4px] mb-6" style={{ aspectRatio: IMG_RATIO, backgroundColor: '#3A5B4F' }}>
                     <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
                       <Image
-                        src="/images/3. A vinificacao/Casa Nabais075.webp"
+                        src="/images/3. A vinificacao/11.webp"
                         alt="Adega — interior"
                         fill
                         className="object-cover"
@@ -869,48 +869,9 @@ export default function VinificacaoPage() {
               </div>
             </div>
 
-            {/* Panorâmica full-width — desktop */}
-            <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10 mt-4">
-              <div
-                ref={adegaFullbleedContainerRef}
-                className="relative overflow-hidden w-full"
-                style={{ aspectRatio: '16/7', backgroundColor: '#3A5B4F', borderRadius: '4px' }}
-              >
-                <div
-                  ref={adegaFullbleedImgRef}
-                  className="absolute will-change-transform"
-                  style={{ top: '-15%', bottom: '-15%', left: 0, right: 0 }}
-                >
-                  <Image
-                    src="/images/3. A vinificacao/Casa Nabais081.webp"
-                    alt="Adega da Casa de Nabais — construção"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1200px) 100vw, 1200px"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile: panorâmica da adega (presente no desktop) */}
-            <div
-              className="relative lg:hidden mt-10 mx-6 overflow-hidden"
-              style={{ aspectRatio: '3/2', borderRadius: '4px', backgroundColor: '#3A5B4F' }}
-            >
-              <div className="mobile-parallax-img absolute will-change-transform" style={{ top: '-28%', bottom: '-28%', left: 0, right: 0 }}>
-                <Image
-                  src="/images/3. A vinificacao/Casa Nabais081.webp"
-                  alt="Adega da Casa de Nabais — construção"
-                  fill
-                  className="object-cover"
-                  sizes="calc(100vw - 3rem)"
-                />
-              </div>
-            </div>
-
             {/* Carrossel da adega */}
             <div
-              className="mt-10 lg:mt-12 py-2 select-none"
+              className="mt-10 lg:mt-4 py-2 select-none"
               style={{ overflowX: 'clip', cursor: adegaGrabbing ? 'grabbing' : 'grab', touchAction: 'pan-y' }}
               onPointerDown={onAdegaPointerDown}
               onPointerUp={onAdegaPointerUp}
