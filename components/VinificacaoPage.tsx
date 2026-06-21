@@ -567,7 +567,7 @@ export default function VinificacaoPage() {
           {/* ══════════════════════════════════════
               ABORDAGEM EXPERIMENTAL
           ══════════════════════════════════════ */}
-          <section className="lg:pt-20 lg:pb-28 md:pb-36" style={{ position: 'relative', zIndex: 1, background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 25%, #031D1D 100%)' }}>
+          <section className="lg:pt-20 lg:pb-28 md:pb-36" style={{ position: 'relative', zIndex: 1, background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 50%, #031D1D 100%)' }}>
 
             {/* Mobile: heading + 1º parágrafo → imagem → restantes parágrafos */}
             <div className="lg:hidden pb-16">
