@@ -17,6 +17,14 @@ export type Translations = {
     quintaLinks: NavLink[]
     winesLinks: NavLink[]
   }
+  legalFooter: {
+    heading: string
+    nifLabel: string
+    certidaoLabel: string
+    rnalLabel: string
+    complaintsBook: string
+    ralIntro: string
+  }
   common: {
     back: string
     learnMore: string
@@ -273,6 +281,14 @@ export const pt: Translations = {
       { label: 'Loureiro',       href: '/os-vinhos' },
       { label: 'Vinha do Pomar', href: '/os-vinhos' },
     ],
+  },
+  legalFooter: {
+    heading:        'Informação legal',
+    nifLabel:       'NIF',
+    certidaoLabel:  'Certidão permanente',
+    rnalLabel:      'RNAL',
+    complaintsBook: 'Livro de Reclamações',
+    ralIntro:       'Em caso de litígio de consumo, o consumidor pode recorrer à entidade de Resolução Alternativa de Litígios (RAL):',
   },
   common: {
     back:         'Voltar',
@@ -603,6 +619,14 @@ export const en: Translations = {
       { label: 'Loureiro',       href: '/os-vinhos' },
       { label: 'Vinha do Pomar', href: '/os-vinhos' },
     ],
+  },
+  legalFooter: {
+    heading:        'Legal information',
+    nifLabel:       'Tax ID',
+    certidaoLabel:  'Commercial registry',
+    rnalLabel:      'RNAL',
+    complaintsBook: 'Complaints Book',
+    ralIntro:       'In the event of a consumer dispute, the consumer may refer the matter to the Alternative Dispute Resolution (ADR) entity:',
   },
   common: {
     back:         'Back',
