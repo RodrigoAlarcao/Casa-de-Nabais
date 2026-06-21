@@ -16,11 +16,11 @@ const IMG_RATIO = '4/5'
 
 const PROVAS_IMAGES = [
   { src: '/images/5. O enoturismo/6.webp', alt: 'O Enoturismo' },
-  { src: '/images/5. O enoturismo/1a.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/2.webp', alt: 'O Enoturismo' },
 ]
 
 const VISITAS_IMAGES = [
-  { src: '/images/5. O enoturismo/2.webp', alt: 'O Enoturismo' },
+  { src: '/images/5. O enoturismo/1a.webp', alt: 'O Enoturismo' },
   { src: '/images/5. O enoturismo/7.webp', alt: 'O Enoturismo' },
 ]
 
