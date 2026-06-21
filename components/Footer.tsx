@@ -99,23 +99,6 @@ export default function Footer() {
           Portugal
         </p>
 
-        {/* Email */}
-        <a
-          href="mailto:info@casadenabais.pt"
-          className="font-body underline transition-opacity duration-200 hover:opacity-100 mb-14"
-          style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
-        >
-          info@casadenabais.pt
-        </a>
-
-        {/* Copyright */}
-        <p
-          className="font-display tracking-[0.12em] text-[10px] mb-0"
-          style={{ color: 'rgba(250,230,193,0.30)' }}
-        >
-          {t.footer.copyright}
-        </p>
-
       </div>
 
       {/* Marca de água — mobile (3 linhas, NABAIS extravasa para fora) */}
@@ -132,7 +115,7 @@ export default function Footer() {
             backgroundClip: 'text',
             color: 'transparent',
             marginTop: '2.5rem',
-            paddingBottom: '3rem',
+            paddingBottom: '3.5rem',
           }}
         >
           CASA<br />DE<br />NABAIS
@@ -204,35 +187,11 @@ export default function Footer() {
           </div>
 
           <div className="flex items-start justify-end">
-            <FooterLogo width="100%" />
+            {/* ~1/4 da largura do footer (80% da coluna 3fr) */}
+            <FooterLogo width="80%" />
           </div>
 
         </div>
-
-        <div className="pb-10 md:pb-12">
-          <a
-            href="mailto:info@casadenabais.pt"
-            className="font-body transition-opacity duration-200 hover:opacity-100"
-            style={{ fontSize: '0.9375rem', color: 'rgba(255,249,237,0.65)' }}
-          >
-            info@casadenabais.pt
-          </a>
-        </div>
-
-        <div
-          className="mb-8"
-          style={{
-            height: '1px',
-            background: 'linear-gradient(to right, rgba(250,230,193,0) 0%, rgba(250,230,193,0) 2%, #FAE6C1 52%, rgba(250,230,193,0) 100%)',
-          }}
-        />
-
-        <p
-          className="font-display tracking-[0.12em] text-[10px] text-center pb-10"
-          style={{ color: 'rgba(250,230,193,0.30)' }}
-        >
-          {t.footer.copyright}
-        </p>
 
         <p
           className="font-display uppercase text-center w-full select-none"
@@ -246,7 +205,7 @@ export default function Footer() {
             color: 'transparent',
             lineHeight: 0.85,
             marginTop: '0.5rem',
-            paddingBottom: '3rem',
+            paddingBottom: '4rem',
             whiteSpace: 'nowrap',
           }}
         >

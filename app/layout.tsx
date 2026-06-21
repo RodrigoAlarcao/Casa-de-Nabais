@@ -4,6 +4,7 @@ import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import LegalFooter from '@/components/LegalFooter'
 import ClientProviders from '@/components/ClientProviders'
 
 const joan = Joan({
@@ -40,6 +41,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <LegalFooter />
           </SmoothScroll>
         </ClientProviders>
       </body>
