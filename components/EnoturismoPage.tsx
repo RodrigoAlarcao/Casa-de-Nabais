@@ -495,7 +495,7 @@ export default function EnoturismoPage() {
         <MobileSection
           title={t.enoturismoPage.visitasHeading}
           paras={t.enoturismoPage.visitasParas}
-          portraitSrc="/images/5. O enoturismo/5.webp"
+          portraitSrc="/images/5. O enoturismo/17.webp"
           portraitAlt="Visita guiada às vinhas"
           images={VISITAS_IMAGES}
         />
@@ -505,7 +505,7 @@ export default function EnoturismoPage() {
           <div className="grid grid-cols-2 gap-4 items-center">
             <TextColumn title={t.enoturismoPage.visitasHeading} paras={t.enoturismoPage.visitasParas} pad="left" />
             <PortraitCell
-              src="/images/5. O enoturismo/5.webp"
+              src="/images/5. O enoturismo/17.webp"
               alt="Visita guiada às vinhas"
               containerRef={p2Ref}
               wrapRef={p2Wrap}
