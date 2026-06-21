@@ -122,16 +122,6 @@ export default function Footer() {
         </p>
       </div>
 
-      {/* Divider — mobile (fecha o footer; copyright vai para o fim da página) */}
-      <div className="lg:hidden px-6 pb-2">
-        <div
-          style={{
-            height: '1px',
-            background: 'linear-gradient(to right, rgba(250,230,193,0) 0%, rgba(250,230,193,0) 2%, #FAE6C1 52%, rgba(250,230,193,0) 100%)',
-          }}
-        />
-      </div>
-
       {/* ══ DESKTOP LAYOUT ══ */}
       <div className="hidden lg:block max-w-[1200px] mx-auto px-6 md:px-10">
 
@@ -221,14 +211,6 @@ export default function Footer() {
         >
           Casa de Nabais
         </p>
-
-        <div
-          className="mb-10"
-          style={{
-            height: '1px',
-            background: 'linear-gradient(to right, rgba(250,230,193,0) 0%, rgba(250,230,193,0) 2%, #FAE6C1 52%, rgba(250,230,193,0) 100%)',
-          }}
-        />
 
       </div>
     </footer>
