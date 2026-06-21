@@ -15,7 +15,7 @@ const itemMeta = [
   { href: '/a-vinificacao',  image: '/images/3. A vinificacao/2.webp',              bg: '#2A4A3E' },
   { href: '/os-vinhos',      image: '/images/4. Os vinhos/os-vinhos.webp',          bg: '#1A3A2E' },
   { href: '/ficar-na-casa',  image: '/images/6. Ficar na casa/1.webp',              bg: '#0A2A1E' },
-  { href: '/a-casa',         image: '/images/1. A casa/1.webp',                     bg: '#24433A' },
+  { href: '/a-casa',         image: '/images/1. A casa/31.webp',                    bg: '#24433A' },
 ]
 
 export default function SectionExplore({ noBg = false, dark = false, excludeHref }: { noBg?: boolean; dark?: boolean; excludeHref?: string }) {
