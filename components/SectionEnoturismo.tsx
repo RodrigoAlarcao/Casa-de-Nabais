@@ -86,7 +86,8 @@ export default function SectionEnoturismo() {
         setCarouselLeft(`${portraitRect.left}px`)
       } else {
         setCarouselLeft(`${MOBILE_LEFT}px`)
-        setSlideWidth(Math.round(window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK))
+        const w = window.innerWidth - MOBILE_LEFT - SLIDE_GAP - MOBILE_PEEK
+        setSlideWidth(Math.round(window.innerWidth >= 768 ? Math.min(w, 440) : w))
       }
     }
     measure()
@@ -153,7 +154,7 @@ export default function SectionEnoturismo() {
     <section ref={sectionRef} className="pt-0 pb-0">
 
       {/* ══ MOBILE: text → image → carousel → textReveal (mirrors desktop) ══ */}
-      <div className="lg:hidden">
+      <div className="lg:hidden cn-tab-narrow">
 
         {/* Text: heading + body + CTAs over the section gradient */}
         <div className="px-6 pt-20 pb-10 text-center">

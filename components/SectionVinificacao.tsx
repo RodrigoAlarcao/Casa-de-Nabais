@@ -69,7 +69,7 @@ export default function SectionVinificacao() {
     <section ref={sectionRef} style={{ background: 'linear-gradient(180deg, #031D1D 0%, #0C4544 57%, #031D1D 100%)' }}>
 
       {/* ── MOBILE ── follows the same flow as desktop: text → image → destaque */}
-      <div className="lg:hidden">
+      <div className="lg:hidden cn-tab-narrow">
 
         {/* Text: heading + body + CTA over the section gradient */}
         <div className="px-6 pt-20 pb-12 text-center">

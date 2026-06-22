@@ -116,7 +116,8 @@ export default function CasaPage() {
       } else {
         const leftOffset = 16
         setCarouselLeft(`${leftOffset}px`)
-        setSlideWidth(Math.round(window.innerWidth - leftOffset - SLIDE_GAP - 40))
+        const w = window.innerWidth - leftOffset - SLIDE_GAP - 40
+        setSlideWidth(Math.round(window.innerWidth >= 768 ? Math.min(w, 440) : w))
       }
     }
     measure()
@@ -168,7 +169,7 @@ export default function CasaPage() {
       {/* ══════════════════════════════════════
           MOBILE HERO — texto primeiro, depois imagem (igual ao desktop)
       ══════════════════════════════════════ */}
-      <div className="lg:hidden">
+      <div className="lg:hidden cn-tab-narrow">
 
         {/* ← Voltar */}
         <div className="px-6 pt-8">
@@ -333,7 +334,7 @@ export default function CasaPage() {
             </div>
 
             {/* Texto DIREITA */}
-            <div className="flex flex-col px-0 lg:pl-10">
+            <div className="flex flex-col px-0 lg:pl-10 cn-tab-narrow">
               {/* Parágrafos 1–2: sempre visíveis */}
               {t.casaPage.bodyParagraphs.slice(0, 2).map((para: string, i: number) => (
                 <p
@@ -405,7 +406,7 @@ export default function CasaPage() {
             <ArrowRight size={15} strokeWidth={1.5} className="text-cn-text" />
           </button>
         </div>
-        <div className="lg:hidden max-w-[1200px] mx-auto px-6 mt-8">
+        <div className="lg:hidden max-w-[1200px] mx-auto px-6 mt-8 cn-tab-narrow">
           {t.casaPage.bodyParagraphs.slice(2).map((para: string, i: number) => (
             <p
               key={i + 2}
@@ -492,7 +493,7 @@ export default function CasaPage() {
       {/* ── Mobile portrait image — carousel-02.webp, antes do TextReveal ── */}
       <div
         ref={mobilePortraitOuterRef}
-        className="relative lg:hidden mx-6 mt-10"
+        className="relative lg:hidden mx-6 mt-10 cn-tab-narrow"
         style={{ aspectRatio: IMG_RATIO, borderRadius: '4px', overflow: 'hidden', backgroundColor: '#3A5B4F' }}
       >
         <div

@@ -61,6 +61,34 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ───────────────────────────────────────────────────────────────
+   TABLET (768–1023px)
+   O site tem dois layouts: telemóvel (<1024) e desktop (≥1024 / lg).
+   No tablet renderiza o layout de telemóvel — aqui apenas o
+   contemos para não esticar a coluna única nem deixar os carrosséis
+   crescerem até à largura total do ecrã. Telemóvel (<768) e desktop
+   (≥1024) ficam exactamente como estavam.
+   ─────────────────────────────────────────────────────────────── */
+
+/* Largura base dos carrosséis baseados em vw (telemóvel) */
+.cn-car-eno    { --cn-slide: 85vw; }
+.cn-car-vinhas { --cn-slide: calc(100vw - 64px); }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Centra a coluna única numa largura editorial confortável,
+     deixando margens laterais discretas (não uma faixa estreita) */
+  .cn-tab-narrow {
+    max-width: min(90vw, 820px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Limita a largura dos slides para mostrar mais do que um de cada vez */
+  .cn-car-eno,
+  .cn-car-vinhas {
+    --cn-slide: 440px;
+  }
+}
+
 /* Desactivar animações para prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
