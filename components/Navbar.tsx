@@ -141,7 +141,7 @@ export default function Navbar() {
           </Link>
 
           {/* Links de navegação — desktop */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {t.nav.links.map((link) => (
               <Link
                 key={link.href}
@@ -154,7 +154,7 @@ export default function Navbar() {
           </nav>
 
           {/* CTAs + toggle — desktop */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             <Link
               href="/ficar-na-casa"
               className="flex items-center gap-2 font-display text-[14px] text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
@@ -172,11 +172,11 @@ export default function Navbar() {
             <LangToggle lang={lang} setLang={setLang} />
           </div>
 
-          {/* Hamburger — mobile */}
+          {/* Hamburger — mobile + tablet */}
           <button
             onClick={openMenu}
             aria-label={t.nav.openMenu}
-            className="md:hidden text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
+            className="lg:hidden text-[#FFF9ED] hover:text-[#FAE6C1] transition-colors duration-200"
           >
             <Menu size={22} strokeWidth={1.5} />
           </button>
@@ -193,7 +193,7 @@ export default function Navbar() {
             WebkitBackdropFilter: 'blur(28px) saturate(160%)',
             borderRight: '0.5px solid rgba(250,230,193,0.08)',
           }}
-          className="fixed inset-0 z-[200] flex flex-col px-8 pt-8 pb-12 md:hidden"
+          className="fixed inset-0 z-[200] flex flex-col px-8 pt-8 pb-12 lg:hidden"
         >
           {/* Botão fechar */}
           <div className="flex justify-between items-center mb-16">
