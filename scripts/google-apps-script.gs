@@ -13,7 +13,7 @@
 
 var SHEET_ID = 'COLE_AQUI_O_ID_DA_GOOGLE_SHEET';
 var SHEET_NAME = 'Leads';
-var EMAIL_NOTIFICACAO = 'SEU_EMAIL@gmail.com';
+var EMAIL_NOTIFICACAO = 'reservasnabais@gmail.com';
 
 function doPost(e) {
   try {
