@@ -11,9 +11,9 @@
 //    - Who has access: Anyone
 // 5. Copia o URL e adiciona no Vercel como NEXT_PUBLIC_APPS_SCRIPT_URL
 
-var SHEET_ID = 'COLE_AQUI_O_ID_DA_GOOGLE_SHEET';
+var SHEET_ID = '1x22OZ5Nz_7kDjk8dJkSsdozfrh4zsby5hr_S43e3mTo';
 var SHEET_NAME = 'Leads';
-var EMAIL_NOTIFICACAO = 'reservasnabais@gmail.com';
+var EMAIL_NOTIFICACAO = 'reservasnabais@gmail.com'
 
 function doPost(e) {
   try {
