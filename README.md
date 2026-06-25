@@ -48,7 +48,7 @@ Tarefas a cargo de quem monta o ambiente de produção (o cliente):
 
 ### 1. Domínio e alojamento
 - [ ] Publicar a pasta `/out` (ou ligar o repositório ao Vercel/Netlify, que correm `npm run build` automaticamente).
-- [ ] Apontar o domínio `casadenabais.pt` para o alojamento e ativar HTTPS.
+- [ ] Apontar o domínio `casadenabais.com` para o alojamento e ativar HTTPS.
 
 ### 2. Formulários (Google Apps Script)
 - [ ] Fazer *deploy* dos scripts em `scripts/google-apps-script.gs` e `scripts/google-apps-script-vinhos.gs` (ver instruções nos próprios ficheiros).
