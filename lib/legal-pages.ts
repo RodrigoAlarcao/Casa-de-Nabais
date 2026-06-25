@@ -24,7 +24,7 @@ export interface LegalDoc {
 }
 
 const UPDATED = { pt: 'Junho de 2026', en: 'June 2026' }
-const CONTACT_EMAIL = 'info@casadenabais.pt'
+const CONTACT_EMAIL = 'info@casadenabais.com'
 const { denominacao, morada, nif } = legal.empresa
 const { rnal } = legal.alojamento
 

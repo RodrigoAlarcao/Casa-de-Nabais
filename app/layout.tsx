@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: 'Casa de Nabais — Vinho e Enoturismo no Vale do Lima',
   description:
     'Quinta histórica em Ponte de Lima. Produção própria de vinho Loureiro, enoturismo intimista e estadias em solar minhoto com séculos de história.',
-  metadataBase: new URL('https://casadenabais.pt'),
+  metadataBase: new URL('https://casadenabais.com'),
   openGraph: {
     title: 'Casa de Nabais — Vinho e Enoturismo no Vale do Lima',
     description:
