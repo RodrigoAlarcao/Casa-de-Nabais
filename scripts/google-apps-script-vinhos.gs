@@ -11,8 +11,8 @@
 //    - Who has access: Anyone
 // 5. Copia o URL e adiciona no Vercel como NEXT_PUBLIC_APPS_SCRIPT_URL_VINHOS
 
-var SHEET_ID = 'COLE_AQUI_O_ID_DA_GOOGLE_SHEET';
-var SHEET_NAME = 'Compras Vinho';
+var SHEET_ID = '1mE3SlDRzSq2jvnOdkMXp5Y_BGpj0jKvsVmmOyadeKYo';
+var SHEET_NAME = 'Leads_compras de vinhos';
 var EMAIL_NOTIFICACAO = 'reservasnabais@gmail.com';
 
 function doPost(e) {
