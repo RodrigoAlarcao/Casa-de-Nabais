@@ -41,9 +41,6 @@ export default function LegalFooter() {
               {l.nifLabel}: {legal.empresa.nif}
             </p>
             <p>
-              {l.certidaoLabel}: {legal.empresa.registoComercial}
-            </p>
-            <p>
               {l.rnalLabel}: {legal.alojamento.rnal}
             </p>
           </div>

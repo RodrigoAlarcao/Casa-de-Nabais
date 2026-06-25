@@ -25,7 +25,7 @@ export interface LegalDoc {
 
 const UPDATED = { pt: 'Junho de 2026', en: 'June 2026' }
 const CONTACT_EMAIL = 'info@casadenabais.pt'
-const { denominacao, morada, nif, registoComercial } = legal.empresa
+const { denominacao, morada, nif } = legal.empresa
 const { rnal } = legal.alojamento
 
 /* ────────────────────────────  PRIVACIDADE  ──────────────────────────── */
@@ -219,7 +219,7 @@ export function getTermsDoc(lang: Lang): LegalDoc {
         {
           heading: 'Identification',
           paragraphs: [
-            `${denominacao}, tax number ${nif}, registered office at ${morada}. Commercial registry permanent certificate code ${registoComercial}. National Local Accommodation Register (RNAL) no. ${rnal}.`,
+            `${denominacao}, tax number ${nif}, registered office at ${morada}. National Local Accommodation Register (RNAL) no. ${rnal}.`,
           ],
         },
         {
@@ -277,7 +277,7 @@ export function getTermsDoc(lang: Lang): LegalDoc {
       {
         heading: 'Identificação',
         paragraphs: [
-          `${denominacao}, NIF ${nif}, com sede em ${morada}. Código de acesso à certidão permanente ${registoComercial}. Registo Nacional de Alojamento Local (RNAL) n.º ${rnal}.`,
+          `${denominacao}, NIF ${nif}, com sede em ${morada}. Registo Nacional de Alojamento Local (RNAL) n.º ${rnal}.`,
         ],
       },
       {

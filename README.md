@@ -64,7 +64,6 @@ Os dados legais estão centralizados em **`lib/legal.ts`** e aparecem no rodapé
 de todas as páginas. Validar que estão corretos:
 
 - [ ] Denominação social, morada e **NIF** (`517375443`).
-- [ ] **Código de acesso à certidão permanente** (`4650-7856-5038`) — atenção: este código dá acesso à certidão da empresa, confirmar se deve ser público.
 - [ ] **RNAL** do alojamento (`47231/AL`).
 - [ ] Entidade RAL (CNIACC) — já preenchida, não depende do cliente.
 

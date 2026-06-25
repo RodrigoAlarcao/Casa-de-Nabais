@@ -4,7 +4,6 @@ export const legal = {
     denominacao: "Casa de Nabais Unipessoal, Lda.",
     morada: "Rua de Nabais 190, 4990-755 Seara",
     nif: "517375443",
-    registoComercial: "4650-7856-5038", // código de acesso à certidão permanente
   },
   alojamento: {
     rnal: "47231/AL",
