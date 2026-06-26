@@ -6,7 +6,7 @@ import Link from 'next/link'
 import {
   MapPin, Bed, Users, Bath,
   ChevronLeft, ChevronRight, ChevronDown,
-  Check, Phone, ArrowRight, X,
+  Check, ArrowRight, X,
   ChefHat, Droplets, Flame,
   Utensils, Flower2, Waves,
   Dumbbell, BatteryCharging, Church,
@@ -433,15 +433,6 @@ export default function FicarNaCasaPage() {
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2">
-          <Phone size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.40)' }} />
-          <span className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.40)' }}>
-            Ou ligue{' '}
-            <a href="tel:+351258000000" className="underline underline-offset-2" style={{ color: 'rgba(250,230,193,0.60)' }}>
-              +351 258 000 000
-            </a>
-          </span>
-        </div>
       </form>
     )
   }
@@ -528,15 +519,6 @@ export default function FicarNaCasaPage() {
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2 mt-3">
-          <Phone size={11} strokeWidth={1.5} style={{ color: 'rgba(250,230,193,0.40)' }} />
-          <span className="font-body" style={{ fontSize: '0.8125rem', color: 'rgba(255,249,237,0.40)' }}>
-            Ou ligue{' '}
-            <a href="tel:+351258000000" className="underline underline-offset-2" style={{ color: 'rgba(250,230,193,0.60)' }}>
-              +351 258 000 000
-            </a>
-          </span>
-        </div>
         </div>
       </form>
     )
