@@ -120,24 +120,9 @@ export const wines: WineData[] = [
     },
     vintages: [
       {
-        year: '2023',
+        year: '2025',
         techSheetUrl: null,
         awards: [],
-      },
-      {
-        year: '2022',
-        techSheetUrl: null,
-        awards: [
-          { label: 'Medalha de Ouro — Concours Mondial de Bruxelles', type: 'gold' },
-          { label: 'Medalha de Prata — Decanter World Wine Awards', type: 'silver' },
-        ],
-      },
-      {
-        year: '2021',
-        techSheetUrl: null,
-        awards: [
-          { label: 'Medalha de Ouro — Vinalies Internationales', type: 'gold' },
-        ],
       },
     ],
     en: {
@@ -231,16 +216,9 @@ export const wines: WineData[] = [
     },
     vintages: [
       {
-        year: '2023',
+        year: '2025',
         techSheetUrl: null,
         awards: [],
-      },
-      {
-        year: '2022',
-        techSheetUrl: null,
-        awards: [
-          { label: 'Medalha de Ouro — Concours Mondial de Bruxelles', type: 'gold' },
-        ],
       },
     ],
     en: {
